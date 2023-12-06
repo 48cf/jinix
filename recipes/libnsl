@@ -1,0 +1,19 @@
+name=libnsl
+from_source=libnsl
+revision=1
+hostdeps="gcc autoconf automake libtool pkg-config"
+deps="core-libs libtirpc"
+
+build() {
+    ${source_dir}/configure \
+        --prefix=${prefix} \
+        --host=${OS_TRIPLET} \
+        --sysconfdir=/etc \
+        --disable-static
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR=${dest_dir} make install
+}
