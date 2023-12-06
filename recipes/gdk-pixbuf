@@ -1,0 +1,27 @@
+name=gdk-pixbuf
+from_source=gdk-pixbuf
+revision=1
+imagedeps="meson ninja"
+hostdeps="gcc pkg-config"
+deps="core-libs glib libjpeg-turbo libpng libx11 libtiff"
+
+build() {
+    meson setup \
+        --cross-file ${base_dir}/build-support/cross_file.txt \
+        --prefix=${prefix} \
+        --libdir=lib \
+        --buildtype=release \
+        -Dgio_sniffing=false \
+        -Dman=false \
+        ${source_dir}
+
+    ninja
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/lib/gdk-pixbuf-2.0/2.10.0/loaders/*
+    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/lib/libgdk_pixbuf-2.0.so.0.4200.10
+    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/bin/*
+}

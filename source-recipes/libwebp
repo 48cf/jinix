@@ -1,0 +1,9 @@
+name=libwebp
+version=1.3.0
+tarball_url="https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-${version}.tar.gz"
+tarball_blake2b="91ca9a2db3a80416a39ae81b47918e6c8b718eafba677b6976e344817a847e0ed55ffe1492d723decfa052a0f63f057f61fb24918b31f94d58835b50a4c3acf8"
+hostdeps="automake autoconf libtool pkg-config"
+
+regenerate() {
+    libtoolize -cfvi && autoreconf -fvi
+}

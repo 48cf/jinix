@@ -1,0 +1,8 @@
+name=pango
+version=1.50.12
+tarball_url="https://download.gnome.org/sources/pango/1.50/pango-${version}.tar.xz"
+tarball_blake2b="60a06416f82e8e5419bca7c89cae17bcd60605b944f483bc7a4ce4405710f00dd40c78abfbe9fdbf8d4786780540f92adfde45e615be4175450e608ba618df08"
+
+regenerate() {
+    true
+}

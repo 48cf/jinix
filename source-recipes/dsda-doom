@@ -1,0 +1,8 @@
+name=dsda-doom
+version=0.22.1
+tarball_url="https://github.com/kraflab/dsda-doom/archive/refs/tags/v${version}.tar.gz"
+tarball_blake2b="0fa950c050df84eec67faba43c0cb054e1529607954bd8c55624becb07aeed0852eab729872c4528eac201abd95540899a957214372520574fb5248220fa4586"
+
+regenerate() {
+    true
+}

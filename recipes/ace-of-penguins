@@ -1,0 +1,21 @@
+name=ace-of-penguins
+from_source=ace-of-penguins
+revision=1
+imagedeps="gcc libpng"
+hostdeps="gcc autoconf automake pkg-config libtool"
+deps="core-libs libx11 libxpm libpng zlib"
+
+build() {
+    ${source_dir}/configure \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --prefix=${prefix} \
+        --host=${OS_TRIPLET} \
+        --disable-static
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install-strip
+}

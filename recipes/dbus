@@ -1,0 +1,34 @@
+name=dbus
+from_source=dbus
+revision=1
+hostdeps="gcc autoconf automake libtool pkg-config"
+deps="core-libs glib libexpat"
+
+build() {
+    ${source_dir}/configure \
+        --host=${OS_TRIPLET} \
+        --prefix=${prefix} \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --disable-static \
+        --enable-shared \
+        --disable-doxygen-docs \
+        --disable-xml-docs \
+        --with-systemdsystemunitdir=no \
+        --with-systemduserunitdir=no \
+        --with-system-pid-file=/run/dbus/pid \
+        --with-system-socket=/run/dbus/system_bus_socket \
+        --disable-selinux \
+        --disable-apparmor \
+        --disable-libaudit \
+        --disable-kqueue \
+        --disable-launchd \
+        --disable-systemd \
+        --disable-tests
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install-strip
+}

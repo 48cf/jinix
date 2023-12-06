@@ -1,0 +1,8 @@
+name=atk
+version=2.38.0
+tarball_url="https://download.gnome.org/sources/atk/2.38/atk-${version}.tar.xz"
+tarball_blake2b="c89e13e413ea46667d94a3555a1764ee22be353b90b0940735fceaad823403026503c463b3ad200fa176ee4faee6dd3cf421542bf1e1a9dbc9a4844ae2963874"
+
+regenerate() {
+    true
+}

@@ -1,0 +1,20 @@
+name=xcb-proto
+from_source=xcb-proto
+revision=1
+hostdeps="gcc autoconf automake libtool pkg-config"
+deps="core-libs xorg-util-macros xorg-proto libxau libxdmcp"
+imagedeps="python"
+
+build() {
+    ${source_dir}/configure           \
+        --host=${OS_TRIPLET}           \
+        --prefix=${prefix}            \
+        --sysconfdir=/etc             \
+        --localstatedir=/var
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install-strip
+}

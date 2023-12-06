@@ -1,0 +1,22 @@
+name=libgpg-error
+from_source=libgpg-error
+revision=1
+imagedeps="gcc"
+hostdeps="gcc automake autoconf libtool pkg-config"
+deps="core-libs"
+
+build() {
+    ${source_dir}/configure \
+        --host=${OS_TRIPLET} \
+        --prefix=${prefix} \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --disable-nls \
+        --disable-doc
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install-strip
+}

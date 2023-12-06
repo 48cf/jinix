@@ -1,0 +1,35 @@
+name=gcc
+from_source=gcc-host
+revision=1
+imagedeps="gcc"
+hostdeps="autoconf automake libtool pkg-config"
+hostrundeps="binutils"
+deps="glibc-headers"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    mkdir build && cd build
+
+        CXXFLAGS_FOR_TARGET="$CFLAGS" \
+        CFLAGS_FOR_TARGET="$CFLAGS" \
+    ../configure \
+        --prefix="${prefix}" \
+        --target=${OS_TRIPLET} \
+        --with-sysroot="${sysroot_dir}" \
+        --with-glibc-version=2.38 \
+        --disable-multilib \
+        --enable-default-pie \
+        --enable-default-ssp \
+        --enable-initfini-array \
+        --enable-languages=c,c++ \
+        --enable-shared \
+        --enable-host-shared
+
+    make -j${parallelism} all-gcc
+}
+
+package() {
+    cd build
+    DESTDIR="${dest_dir}" make install-gcc
+}

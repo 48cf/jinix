@@ -1,0 +1,21 @@
+name=graphite2
+from_source=graphite2
+revision=1
+imagedeps="ninja python"
+hostdeps="gcc cmake pkg-config"
+deps="core-libs"
+
+build() {
+    cmake \
+        -GNinja \
+        -DCMAKE_TOOLCHAIN_FILE=${base_dir}/build-support/CMakeToolchain.txt \
+        -DCMAKE_INSTALL_PREFIX=${prefix} \
+        -DCMAKE_BUILD_TYPE=Release \
+        ${source_dir}
+
+    ninja
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install/strip
+}

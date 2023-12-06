@@ -1,0 +1,25 @@
+name=pango
+from_source=pango
+revision=1
+imagedeps="meson ninja"
+hostdeps="gcc pkg-config"
+deps="core-libs glib fontconfig freetype fribidi cairo xorg-proto libx11 libxtrans libxext harfbuzz libxft"
+
+build() {
+    meson setup \
+        --cross-file ${base_dir}/build-support/cross_file.txt \
+        --prefix=${prefix} \
+        --libdir=lib \
+        --buildtype=release \
+        -Dintrospection=disabled \
+        ${source_dir}
+
+    ninja
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/bin/*
+    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/lib/*.so.0.5000.12
+}

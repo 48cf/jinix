@@ -1,0 +1,35 @@
+name=gtk+-3
+from_source=gtk+-3
+revision=1
+imagedeps="meson ninja gdk-pixbuf2"
+hostdeps="gcc pkg-config"
+deps="core-libs atk at-spi2-atk cairo glib gdk-pixbuf libx11 libxext libxcb libxrender libxrandr libxfixes libxdamage pango fribidi libepoxy libxkbcommon fontconfig freetype libxi harfbuzz libxcursor gsettings-desktop-schemas dbus"
+
+build() {
+    meson setup \
+        --cross-file ${base_dir}/build-support/cross_file.txt \
+        --prefix=${prefix} \
+        --libdir=lib \
+        --buildtype=release \
+        -Dprint_backends=file \
+        -Dintrospection=false \
+        -Dx11_backend=true \
+        -Dbroadway_backend=true \
+        -Dwayland_backend=false \
+        -Dgtk_doc=false \
+        -Dcolord=no \
+        ${source_dir}
+
+    ninja
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/bin/*
+    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/lib/{libgailutil-3.so.0.0.0,libgdk-3.so.0.2405.32,libgtk-3.so.0.2405.32}
+    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/lib/gtk-3.0/3.0.0/immodules/*
+    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/lib/gtk-3.0/3.0.0/printbackends/*
+
+    glib-compile-schemas "${dest_dir}${prefix}"/share/glib-2.0/schemas
+}

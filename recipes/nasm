@@ -1,0 +1,22 @@
+name=nasm
+from_source=nasm
+revision=1
+hostdeps="gcc automake autoconf libtool pkg-config"
+deps="core-libs"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    ./configure \
+        --host=${OS_TRIPLET} \
+        --prefix=${prefix} \
+        --sysconfdir=/etc \
+        --localstatedir=/var
+
+    make
+}
+
+package() {
+    make strip
+    DESTDIR="${dest_dir}" make install
+}

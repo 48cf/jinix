@@ -1,0 +1,8 @@
+name=gsettings-desktop-schemas
+version=44.0
+tarball_url="https://download.gnome.org/sources/gsettings-desktop-schemas/44/gsettings-desktop-schemas-${version}.tar.xz"
+tarball_blake2b="01a5ca9fb73dc9768f5bb42192f282cc06348f0532b19648aa6b4c33f87e0a9febf0d50047de6cb4c9e921df2df6b45cdde9514d4c0be322b04553f525f84311"
+
+regenerate() {
+    sed -i -r 's:"(/system):"/org/gnome\1:g' schemas/*.in
+}

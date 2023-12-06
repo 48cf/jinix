@@ -1,0 +1,8 @@
+name=libzip
+version=1.9.2
+tarball_url="https://github.com/nih-at/libzip/releases/download/v${version}/libzip-${version}.tar.xz"
+tarball_blake2b="ceeca4dccbe7552f7f545b00ea44b342398d18eb996e39045b9d6efafe50f8890333ddf220c86b59f5ab2849420eb76761c42b16de8b174629f53e327f9e83e7"
+
+regenerate() {
+    true
+}

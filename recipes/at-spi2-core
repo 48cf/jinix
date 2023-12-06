@@ -1,0 +1,27 @@
+name=at-spi2-core
+from_source=at-spi2-core
+revision=1
+imagedeps="meson ninja"
+hostdeps="gcc pkg-config"
+deps="core-libs dbus glib libxml"
+
+build() {
+    meson setup \
+        --cross-file ${base_dir}/build-support/cross_file.txt \
+        --prefix=${prefix} \
+        --sysconfdir=/etc \
+        --libdir=lib \
+        --buildtype=release \
+        -Dsystemd_user_dir=/tmp \
+        -Dintrospection=disabled \
+        ${source_dir}
+
+    ninja
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/lib/{gtk-2.0/modules/libatk-bridge.so,libatk-1.0.so.0.24811.1,libatk-bridge-2.0.so.0.0.0,libatspi.so.0.0.1}
+    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/libexec/*
+}

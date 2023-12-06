@@ -1,0 +1,8 @@
+name=vim
+version=8.2.3704
+tarball_url="https://github.com/vim/vim/archive/refs/tags/v${version}.tar.gz"
+tarball_blake2b="4688a80b9b7982efd4dc47ed39b510c704ccb604ae3d3bb8037d2b4668cc8cff514ae3247682066470d03beef716d3e5bc2ea1f5e2d7da6b84c568d49c4f6595"
+
+regenerate() {
+    true
+}

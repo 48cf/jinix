@@ -1,0 +1,8 @@
+name=at-spi2-atk
+version=2.38.0
+tarball_url="https://download.gnome.org/sources/at-spi2-atk/2.38/at-spi2-atk-${version}.tar.xz"
+tarball_blake2b="c5a62bd157ac6dcbf19495eb8f92bd6346651b8df64e15acf4d25c1ab35790f154bead1e012714da36c700e58e164527755137a33812f3a1844aa34f0293ebf5"
+
+regenerate() {
+    true
+}

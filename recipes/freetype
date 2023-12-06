@@ -1,0 +1,23 @@
+name=freetype
+from_source=freetype
+revision=1
+hostdeps="gcc autoconf automake libtool pkg-config"
+deps="core-libs bzip2 libpng zlib"
+imagedeps="gcc"
+
+build() {
+    ${source_dir}/configure \
+        --host=${OS_TRIPLET} \
+        --prefix=${prefix} \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --disable-static \
+        --with-harfbuzz=no
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+    ${OS_TRIPLET}-strip "${dest_dir}${prefix}/lib/libfreetype.so.6.20.1"
+}

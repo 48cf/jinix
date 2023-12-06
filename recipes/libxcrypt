@@ -1,0 +1,23 @@
+name=libxcrypt
+from_source=libxcrypt
+revision=1
+hostdeps="gcc automake autoconf libtool pkg-config"
+deps="glibc libgcc libstdc++"
+imagedeps="python-passlib"
+
+build() {
+    ${source_dir}/configure \
+        --host=${OS_TRIPLET} \
+        --prefix=${prefix} \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --enable-obsolete-api=yes \
+        --disable-xcrypt-compat-files \
+        --disable-static
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install-strip
+}

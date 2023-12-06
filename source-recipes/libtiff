@@ -1,0 +1,9 @@
+name=libtiff
+version=4.5.0
+tarball_url="https://download.osgeo.org/libtiff/tiff-${version}.tar.xz"
+tarball_blake2b="c69801ba9d55b1ed27a92d31d8cd16937fe69299fbf5450efb4a6caa60245b72ddade110daae78f2198613640383623f76ec2265ba785375d0a85c7909b73fe9"
+hostdeps="automake autoconf libtool pkg-config"
+
+regenerate() {
+    libtoolize -cfvi && autoreconf -fvi
+}

@@ -1,0 +1,25 @@
+name=libjpeg-turbo
+from_source=libjpeg-turbo
+revision=1
+imagedeps="gcc ninja python git"
+hostdeps="gcc cmake pkg-config"
+deps="core-libs"
+
+build() {
+    cmake \
+        -GNinja \
+        -DCMAKE_TOOLCHAIN_FILE=${base_dir}/build-support/CMakeToolchain.txt \
+        -DCMAKE_INSTALL_PREFIX=${prefix} \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DENABLE_STATIC=FALSE \
+        -DCMAKE_INSTALL_DEFAULT_LIBDIR=lib \
+        -DWITH_JPEGS=ON \
+        -DCMAKE_SYSTEM_PROCESSOR=x86_64 \
+        ${source_dir}
+
+    ninja
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install/strip
+}

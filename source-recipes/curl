@@ -1,0 +1,9 @@
+name=curl
+version=8.0.1
+tarball_url="https://github.com/curl/curl/releases/download/curl-$(echo ${version} | sed 's/\./_/g')/curl-${version}.tar.xz"
+tarball_blake2b="67d82e9d71f0a351b5c2ed3ad5eab02e367ded872658a295179b935729d5105015f8c29569c396e11cd14036656af894ded85c8838cba260d9f6f1a8dcb5e22b"
+hostdeps="automake autoconf libtool pkg-config"
+
+regenerate() {
+    libtoolize -cfvi && autoreconf -fvi
+}

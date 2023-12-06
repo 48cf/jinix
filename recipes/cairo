@@ -1,0 +1,26 @@
+name=cairo
+from_source=cairo
+revision=1
+imagedeps="binutils"
+hostdeps="gcc autoconf automake libtool pkg-config"
+deps="core-libs freetype fontconfig libpng pixman libxcb libx11 libxext mesa libxrender glib"
+
+build() {
+    ${source_dir}/configure \
+        --host=${OS_TRIPLET} \
+        --prefix=${prefix} \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --disable-static \
+        --with-sysroot=${sysroot_dir} \
+        --enable-xlib-xcb \
+        --enable-xml \
+        --enable-tee \
+        --enable-gl
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install-strip
+}

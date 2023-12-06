@@ -1,0 +1,23 @@
+name=less
+from_source=less
+revision=1
+hostdeps="gcc autoconf automake libtool pkg-config"
+deps="core-libs ncurses"
+
+build() {
+    ${source_dir}/configure \
+        --host=${OS_TRIPLET} \
+        --prefix="${prefix}" \
+        --sysconfdir=/etc \
+        --localstatedir=/var
+
+    make -j${parallelism}
+}
+
+package() {
+    make install DESTDIR="${dest_dir}"
+    # We strip it manually because install-strip is broken.
+    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/bin/less
+    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/bin/lessecho
+    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/bin/lesskey
+}

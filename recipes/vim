@@ -1,0 +1,50 @@
+name=vim
+from_source=vim
+revision=1
+hostdeps="gcc autoconf automake libtool pkg-config"
+deps="core-libs ncurses"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+        STRIP=${OS_TRIPLET}-strip \
+        ac_cv_small_wchar_t=no \
+        ac_cv_func_sigsetjmp=no \
+        vim_cv_toupper_broken=no \
+        vim_cv_terminfo=yes \
+        vim_cv_tgetent=zero \
+        vim_cv_tty_group="" \
+        vim_cv_tty_mode=0620 \
+        vim_cv_getcwd_broken=no \
+        vim_cv_stat_ignores_slash=no \
+        vim_cv_memmove_handles_overlap=yes \
+        vim_cv_bcopy_handles_overlap=yes \
+        vim_cv_memcpy_handles_overlap=yes \
+    ./configure \
+        --host=${OS_TRIPLET} \
+        --prefix=${prefix} \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --disable-gtktest \
+        --disable-icon-cache-update \
+        --disable-desktop-database-update \
+        --disable-canberra \
+        --disable-selinux \
+        --disable-xsmp \
+        --disable-channel \
+        --disable-netbeans \
+        --enable-multibyte \
+        --disable-acl \
+        --disable-gpm \
+        --disable-sysmouse \
+        --disable-nls \
+        --with-tlib=tinfo \
+        --enable-gui=no \
+        --without-x
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+}

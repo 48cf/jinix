@@ -1,0 +1,12 @@
+name=core-libs
+from_source=glibc
+revision=1
+deps="glibc libgcc libstdc++ libintl libiconv libxcrypt"
+
+build() {
+    true
+}
+
+package() {
+    true
+}

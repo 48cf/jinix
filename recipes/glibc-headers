@@ -1,0 +1,16 @@
+name=glibc-headers
+from_source=glibc
+revision=1
+imagedeps="gcc"
+deps="linux-headers"
+
+build() {
+    ${source_dir}/configure \
+        --host=${OS_TRIPLET} \
+        --prefix=${prefix} \
+        --with-headers=${sysroot}${prefix}/include
+}
+
+package() {
+    DESTDIR=${dest_dir} make cross-compiling=yes install-headers
+}

@@ -1,0 +1,37 @@
+name=harfbuzz
+from_source=harfbuzz
+revision=1
+imagedeps="meson ninja"
+hostdeps="gcc pkg-config"
+deps="core-libs graphite2 glib zlib freetype cairo icu"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    mkdir build && cd build
+    meson setup \
+        --cross-file ${base_dir}/build-support/cross_file.txt \
+        --prefix=${prefix} \
+        --libdir=lib \
+        --buildtype=release \
+        -Dgraphite2=enabled \
+        -Dglib=enabled \
+        -Dgobject=disabled \
+        -Dicu=enabled \
+        -Dfreetype=enabled \
+        -Dcairo=enabled \
+        -Dintrospection=disabled \
+        -Ddocs=disabled \
+        -Dtests=disabled \
+        ..
+    cd ..
+
+    ( cd build && ninja )
+}
+
+package() {
+    ( cd build && DESTDIR="${dest_dir}" ninja install )
+
+    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/bin/*
+    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/lib/*.so.0.60730.0
+}

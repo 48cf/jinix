@@ -1,0 +1,8 @@
+name=glibc
+version=2.38
+tarball_url="https://ftp.gnu.org/gnu/glibc/glibc-${version}.tar.xz"
+tarball_blake2b="f9b039f0ef98a7dd8e1cba228ed10286b9e4fbe4dd89af4d26fa5c4e4cf266f19c2746b44d797ce54739d86499e74cf334aaf311bcf6e30120fd7748453e653f"
+
+regenerate() {
+    true
+}

@@ -1,0 +1,43 @@
+name=bootstrap-gcc
+from_source=gcc-host
+revision=1
+imagedeps="gcc"
+hostdeps="autoconf automake libtool pkg-config"
+hostrundeps="binutils"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    mkdir build && cd build
+
+        CXXFLAGS_FOR_TARGET="$CFLAGS" \
+        CFLAGS_FOR_TARGET="$CFLAGS" \
+    ../configure \
+        --prefix="${prefix}" \
+        --target=${OS_TRIPLET} \
+        --with-sysroot="${sysroot_dir}" \
+        --with-glibc-version=2.38 \
+        --with-newlib \
+        --without-headers \
+        --disable-libatomic \
+        --disable-libgomp \
+        --disable-libquadmath \
+        --disable-libssp \
+        --disable-libstdcxx \
+        --disable-libvtv \
+        --disable-multilib \
+        --disable-nls \
+        --disable-shared \
+        --disable-threads \
+        --enable-default-pie \
+        --enable-default-ssp \
+        --enable-initfini-array \
+        --enable-languages=c,c++
+
+    make -j${parallelism}
+}
+
+package() {
+    cd build
+    DESTDIR="${dest_dir}" make install
+}

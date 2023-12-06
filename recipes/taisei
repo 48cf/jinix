@@ -1,0 +1,25 @@
+name=taisei
+from_source=taisei
+revision=1
+hostdeps="gcc pkg-config"
+deps="core-libs freetype libpng sdl2 libwebp zlib cglm openssl libzip"
+imagedeps="meson ninja"
+
+build() {
+    meson setup \
+        --cross-file ${base_dir}/build-support/cross_file.txt \
+        --prefix=${prefix} \
+        --libdir=lib \
+        --buildtype=release \
+        -Ddocs=false \
+        -Da_sdl2mixer=false \
+        -Da_default=null \
+        -Db_lto=false \
+        ${source_dir}
+
+    ninja
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+}

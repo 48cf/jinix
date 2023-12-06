@@ -1,0 +1,38 @@
+name=icu
+from_source=icu
+revision=1
+imagedeps="gcc"
+hostdeps="gcc autoconf automake libtool pkg-config"
+deps="core-libs"
+
+build() {
+    mkdir cross-build
+    cd cross-build
+    ${source_dir}/source/configure \
+        --prefix=/usr/local
+    make -j${parallelism}
+    cd ..
+
+    ${source_dir}/source/configure \
+        --host=${OS_TRIPLET} \
+        --prefix=${prefix} \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --disable-static \
+        --with-cross-build=$(realpath cross-build)
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    mv "${dest_dir}${prefix}"/sbin/* "${dest_dir}${prefix}"/bin/
+    rmdir "${dest_dir}${prefix}"/sbin
+
+    mv "${dest_dir}${prefix}"/bin/icu-config ./icu-config.bak
+    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/bin/*
+    mv ./icu-config.bak "${dest_dir}${prefix}"/bin/icu-config
+
+    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/lib/*so.73.1
+}

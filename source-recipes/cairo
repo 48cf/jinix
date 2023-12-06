@@ -1,0 +1,9 @@
+name=cairo
+version=1.16.0
+tarball_url="https://cairographics.org/releases/cairo-${version}.tar.xz"
+tarball_blake2b="aa37edf7fdf0c952484fd0adc9281724227db93958d6e4919216b30e9017fab670bc2340e3b975737080f1f67dec24025fe0e4680e275ab7703cfb9235eb1fe0"
+hostdeps="automake autoconf libtool pkg-config"
+
+regenerate() {
+    libtoolize -cfvi && autoreconf -fvi
+}
