@@ -1,0 +1,28 @@
+name=pam
+from_source=pam
+revision=1
+imagedeps="byacc flex gettext"
+hostdeps="gcc autoconf automake libtool pkg-config"
+deps="core-libs libtirpc libnsl"
+
+build() {
+    ${source_dir}/configure \
+        --prefix=${prefix} \
+        --host=${OS_TRIPLET} \
+        --sbindir=${prefix}/sbin \
+        --libdir=${prefix}/lib \
+        --sysconfdir=/etc \
+        --enable-securedir=${prefix}/lib/security \
+        --docdir=${prefix}/share/doc/Linux-PAM-${version}
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR=${dest_dir} make install
+
+    # Move files installed in /usr/sbin to /usr/bin
+    mkdir -pv ${dest_dir}${prefix}/bin
+    mv -v ${dest_dir}${prefix}/sbin/* ${dest_dir}${prefix}/bin
+    rm -rvf ${dest_dir}${prefix}/sbin
+}
