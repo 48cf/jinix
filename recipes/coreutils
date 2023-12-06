@@ -8,7 +8,6 @@ imagedeps="gcc gperf"
 build() {
     cp -rp "${source_dir}"/. ./
 
-        CFLAGS="-DSLOW_BUT_NO_HACKS $CFLAGS" \
     ./configure    \
         --host=${OS_TRIPLET}    \
         --prefix=${prefix}     \

@@ -4,7 +4,7 @@ revision=1
 imagedeps="gcc"
 hostdeps="autoconf automake libtool pkg-config"
 hostrundeps="binutils"
-deps="glibc-headers"
+deps="glibc"
 
 build() {
     cp -rp "${source_dir}"/. ./
@@ -22,7 +22,7 @@ build() {
         --enable-default-pie \
         --enable-default-ssp \
         --enable-initfini-array \
-        --enable-languages=c,c++ \
+        --enable-languages=c,c++,lto \
         --enable-shared \
         --enable-host-shared
 

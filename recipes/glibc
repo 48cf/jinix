@@ -2,7 +2,7 @@ name=glibc
 from_source=glibc
 revision=1
 hostdeps="bootstrap-gcc"
-deps="glibc-headers"
+deps="linux-headers"
 
 build() {
     echo "slibdir=${prefix}/lib" >> configparms
@@ -27,5 +27,4 @@ build() {
 
 package() {
     DESTDIR=${dest_dir} make install
-    rm -rf ${dest_dir}${prefix}/include
 }
