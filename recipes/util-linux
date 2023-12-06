@@ -9,7 +9,9 @@ build() {
         ADJTIME_PATH=/var/lib/hwclock/adjtime \
         --prefix=${prefix} \
         --host=${OS_TRIPLET} \
+        --bindir=${prefix}/bin \
         --sbindir=${prefix}/bin \
+        --libdir=${prefix}/lib \
         --libexecdir=${prefix}/lib \
         --localstatedir=/var \
         --sysconfdir=/etc \
