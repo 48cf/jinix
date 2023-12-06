@@ -1,0 +1,9 @@
+name=util-linux
+version=2.39.3
+tarball_url="https://cdn.kernel.org/pub/linux/utils/util-linux/v${version%.*}/util-linux-${version}.tar.xz"
+tarball_blake2b="cd7b2b3c820e920d4a6ecd46fd807e018fc8e54439292f5e62c5f6863dd0f2505df3ec02c470d9be255a437c6ee8e4077908ac78d19a0d1273854d99eb571df0"
+hostdeps="automake autoconf libtool pkg-config"
+
+regenerate() {
+    libtoolize -cfvi && autoreconf -fvi
+}
