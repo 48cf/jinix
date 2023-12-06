@@ -1,0 +1,8 @@
+name=openrc
+version=0.52.1
+tarball_url="https://github.com/OpenRC/openrc/archive/refs/tags/${version}.tar.gz"
+tarball_blake2b="abecc2ef7e23b4142f97a97fcbf99f5991571feea8aaffab6acaae0f82a9717481343aa9f158638b74f28ab4a7eb67d12f587dc91e0a375b9a06f23b6b4bf109"
+
+regenerate() {
+    true
+}
