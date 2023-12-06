@@ -1,0 +1,23 @@
+name=procps-ng
+from_source=procps-ng
+revision=1
+hostdeps="gcc autoconf automake libtool pkg-config"
+deps="core-libs ncurses"
+
+build() {
+    ${source_dir}/configure \
+        --prefix=${prefix} \
+        --host=${OS_TRIPLET} \
+        --sbindir=${prefix}/bin \
+        --libexecdir=${prefix}/lib \
+        --localstatedir=/var \
+        --sysconfdir=/etc \
+        --disable-static \
+        --disable-kill
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR=${dest_dir} make install-strip
+}

@@ -1,0 +1,9 @@
+name=procps-ng
+version=4.0.4
+tarball_url="https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-${version}.tar.xz"
+tarball_blake2b="63b972666ef9e92042be96739ffa15c787d0346b2d3ffcb0d240b0a4e999dc90024b2c5b058df683dd9d2c436ceb812abd0b115cc877a6ca1023988b86de443f"
+hostdeps="automake autoconf libtool pkg-config"
+
+regenerate() {
+    libtoolize -cfvi && autoreconf -fvi
+}
