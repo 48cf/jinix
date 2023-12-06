@@ -6,13 +6,9 @@ hostdeps="autoconf automake libtool pkg-config"
 hostrundeps="binutils"
 
 build() {
-    cp -rp "${source_dir}"/. ./
-
-    mkdir build && cd build
-
         CXXFLAGS_FOR_TARGET="$CFLAGS" \
         CFLAGS_FOR_TARGET="$CFLAGS" \
-    ../configure \
+    ${source_dir}/configure \
         --prefix="${prefix}" \
         --target=${OS_TRIPLET} \
         --with-sysroot="${sysroot_dir}" \
@@ -38,6 +34,5 @@ build() {
 }
 
 package() {
-    cd build
-    DESTDIR="${dest_dir}" make install
+    DESTDIR="${dest_dir}" make install-strip
 }

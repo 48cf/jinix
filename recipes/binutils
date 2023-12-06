@@ -6,18 +6,17 @@ deps="core-libs zlib gmp"
 imagedeps="gcc"
 
 build() {
-    ${source_dir}/configure           \
-        --host=${OS_TRIPLET}           \
-        --prefix=${prefix}            \
-        --target=${OS_TRIPLET}         \
+    ${source_dir}/configure \
+        --host=${OS_TRIPLET} \
+        --prefix=${prefix} \
+        --target=${OS_TRIPLET} \
         --with-sysroot=${sysroot_dir} \
-        --disable-nls                 \
-        --disable-werror              \
+        --disable-werror \
         --disable-dependency-tracking \
         --enable-colored-disassembly \
-        --with-system-zlib            \
+        --with-system-zlib \
         --with-gmp=${sysroot_dir}/usr \
-        --enable-shared               \
+        --enable-shared \
         --enable-host-shared
 
         SFRAME_LIB_PATH="-L$(pwd -P)/libsframe/.libs" \

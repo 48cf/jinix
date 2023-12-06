@@ -4,6 +4,7 @@ set -ex
 
 ./jinx host-build limine
 
+rm -f image.hdd
 dd if=/dev/zero bs=1G count=0 seek=100 of=image.hdd
 parted -s image.hdd mklabel gpt
 parted -s image.hdd mkpart ESP fat32 2048s 1%

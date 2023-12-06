@@ -8,20 +8,22 @@ imagedeps="gcc"
 build() {
         CXXFLAGS_FOR_TARGET="$CFLAGS" \
         CFLAGS_FOR_TARGET="$CFLAGS" \
-    ${source_dir}/configure                 \
-        --host=${OS_TRIPLET}                 \
-        --prefix=${prefix}                  \
+    ${source_dir}/configure \
+        --host=${OS_TRIPLET} \
+        --prefix=${prefix} \
         --sysconfdir=/etc \
         --localstatedir=/var \
-        --target=${OS_TRIPLET}               \
-        --with-sysroot=/                    \
+        --target=${OS_TRIPLET} \
+        --with-sysroot=/ \
         --with-build-sysroot=${sysroot_dir} \
-        --enable-languages=c,c++,lto            \
-        --enable-initfini-array             \
-        --disable-multilib                  \
-        --disable-nls                       \
-        --with-system-zlib                  \
-        --enable-shared                     \
+        --with-glibc-version=2.38 \
+        --disable-multilib \
+        --enable-default-pie \
+        --enable-default-ssp \
+        --enable-initfini-array \
+        --enable-languages=c,c++,lto \
+        --with-system-zlib \
+        --enable-shared \
         --enable-host-shared
 
     make -j${parallelism} all-gcc
