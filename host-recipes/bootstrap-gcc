@@ -6,9 +6,13 @@ hostdeps="autoconf automake libtool pkg-config"
 hostrundeps="binutils"
 
 build() {
+    cp -rp "${source_dir}"/. ./
+
+    mkdir build && cd build
+
         CXXFLAGS_FOR_TARGET="$CFLAGS" \
         CFLAGS_FOR_TARGET="$CFLAGS" \
-    ${source_dir}/configure \
+    ../configure \
         --prefix="${prefix}" \
         --target=${OS_TRIPLET} \
         --with-sysroot="${sysroot_dir}" \
@@ -30,9 +34,12 @@ build() {
         --enable-initfini-array \
         --enable-languages=c,c++,lto
 
-    make -j${parallelism}
+    make all-gcc -j${parallelism}
+    make all-target-libgcc -j${parallelism}
 }
 
 package() {
-    DESTDIR="${dest_dir}" make install-strip
+    cd build
+    DESTDIR="${dest_dir}" make install-strip-gcc
+    DESTDIR="${dest_dir}" make install-strip-target-libgcc
 }
