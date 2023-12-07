@@ -21,7 +21,5 @@ build() {
 package() {
     DESTDIR="${dest_dir}" ninja install
 
-    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/lib/gdk-pixbuf-2.0/2.10.0/loaders/*
-    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/lib/libgdk_pixbuf-2.0.so.0.4200.10
-    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/bin/*
+    post_package_strip
 }

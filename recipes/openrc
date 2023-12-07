@@ -25,4 +25,6 @@ package() {
 	# Move files installed in /usr/sbin to /usr/bin
     mv -v ${dest_dir}${prefix}/sbin/* ${dest_dir}${prefix}/bin
     rm -rvf ${dest_dir}${prefix}/sbin
+
+    post_package_strip
 }

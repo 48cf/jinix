@@ -23,9 +23,11 @@ build() {
 }
 
 package() {
-    DESTDIR="${dest_dir}" make install-strip
+    DESTDIR="${dest_dir}" make install
 
     # util-linux has no way to customize usrsbin_execdir
     mv -v ${dest_dir}${prefix}/sbin/* ${dest_dir}${prefix}/bin/
     rm -rvf ${dest_dir}${prefix}/sbin
+
+    post_package_strip
 }

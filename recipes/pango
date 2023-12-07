@@ -20,6 +20,5 @@ build() {
 package() {
     DESTDIR="${dest_dir}" ninja install
 
-    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/bin/*
-    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/lib/*.so.0.5000.12
+    post_package_strip
 }

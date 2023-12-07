@@ -6,6 +6,14 @@ export CXXFLAGS="${CFLAGS}"
 OS_TRIPLET=x86_64-jinux-linux-gnu
 BUILD_MACHINE="$(${base_dir}/build-support/config.guess)"
 
+post_package_strip() {
+    for f in $(find "${dest_dir}"); do
+        if file "$f" | grep 'not stripped' >/dev/null; then
+            ${OS_TRIPLET}-strip "$f"
+        fi
+    done
+}
+
 autotools_configure() {
     if [ -z "${configure_script_path}" ]; then
         configure_script_path="${source_dir}/configure"

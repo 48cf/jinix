@@ -26,10 +26,7 @@ build() {
 package() {
     DESTDIR="${dest_dir}" ninja install
 
-    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/bin/*
-    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/lib/{libgailutil-3.so.0.0.0,libgdk-3.so.0.2405.32,libgtk-3.so.0.2405.32}
-    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/lib/gtk-3.0/3.0.0/immodules/*
-    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/lib/gtk-3.0/3.0.0/printbackends/*
+    post_package_strip
 
     glib-compile-schemas "${dest_dir}${prefix}"/share/glib-2.0/schemas
 }

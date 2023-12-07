@@ -23,6 +23,7 @@ build() {
 package() {
     DESTDIR="${dest_dir}" make install
 
+    # figure out if we can call post_package_strip instead
     mv "${dest_dir}${prefix}"/bin/icu-config ./icu-config.bak
     ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/bin/*
     mv ./icu-config.bak "${dest_dir}${prefix}"/bin/icu-config

@@ -51,7 +51,9 @@ build() {
 }
 
 package() {
-    DESTDIR="${dest_dir}" ninja install/strip
+    DESTDIR="${dest_dir}" ninja install
 
     rm "${dest_dir}${prefix}"/lib/{libSDL2_test.a,libSDL2main.a}
+
+    post_package_strip
 }

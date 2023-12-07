@@ -5,11 +5,12 @@ hostdeps="gcc pkg-config"
 deps="core-libs xorg-server xsetroot"
 
 build() {
-    STRIP=${OS_TRIPLET}-strip autotools_configure
-
+    autotools_configure
     make -j${parallelism}
 }
 
 package() {
-    make DESTDIR=${dest_dir} install-strip
+    make DESTDIR=${dest_dir} install
+
+    post_package_strip
 }

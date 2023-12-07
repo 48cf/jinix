@@ -19,7 +19,7 @@ package() {
     rm -rf tmp_libstdc++_dir
     mkdir tmp_libstdc++_dir
 
-    DESTDIR="$(realpath tmp_libstdc++_dir)" make install-strip-target-libstdc++-v3
+    DESTDIR="$(realpath tmp_libstdc++_dir)" make install-target-libstdc++-v3
 
     mkdir -p "${dest_dir}${prefix}"
 
@@ -31,4 +31,6 @@ package() {
     # Copy libstdc++ and headers into GCC's tree else it will complain.
     mkdir -p "${base_dir}"/host-pkgs/gcc/usr/local/${OS_TRIPLET}
     cp -r tmp_libstdc++_dir/usr/local/${OS_TRIPLET}/* "${base_dir}"/host-pkgs/gcc/usr/local/${OS_TRIPLET}/
+
+    post_package_strip
 }

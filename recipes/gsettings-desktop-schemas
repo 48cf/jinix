@@ -21,4 +21,6 @@ package() {
     DESTDIR="${dest_dir}" ninja install
 
     glib-compile-schemas "${dest_dir}${prefix}"/share/glib-2.0/schemas
+
+    post_package_strip
 }

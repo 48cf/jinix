@@ -7,7 +7,6 @@ deps="core-libs ncurses"
 build() {
     cp -rp "${source_dir}"/. ./
 
-        STRIP=${OS_TRIPLET}-strip \
         ac_cv_small_wchar_t=no \
         ac_cv_func_sigsetjmp=no \
         vim_cv_toupper_broken=no \
@@ -44,4 +43,6 @@ build() {
 
 package() {
     DESTDIR="${dest_dir}" make install
+
+    post_package_strip
 }

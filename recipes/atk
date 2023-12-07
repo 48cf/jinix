@@ -20,5 +20,5 @@ build() {
 package() {
     DESTDIR="${dest_dir}" ninja install
 
-    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/lib/libatk-1.0.so.0.23809.1
+    post_package_strip
 }
