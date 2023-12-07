@@ -15,7 +15,7 @@ jinx:
 
 .PHONY: distro-base
 distro-base: jinx
-	./jinx build base-files linux bash coreutils nano less
+	./jinx build base-files linux bash bzip2 coreutils findutils gawk grep gzip less nano procps-ng psmisc sed tar util-linux xz
 
 .PHONY: distro-full
 distro-full: jinx
