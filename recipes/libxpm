@@ -5,6 +5,7 @@ hostdeps="gcc autoconf automake libtool pkg-config"
 deps="core-libs xorg-util-macros xorg-proto libx11 libxext libxt"
 
 build() {
+        LIBS="-lintl" \
     ${source_dir}/configure           \
         --host=${OS_TRIPLET}           \
         --prefix=${prefix}            \

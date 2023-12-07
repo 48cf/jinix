@@ -22,6 +22,7 @@ build() {
         vim_cv_memcpy_handles_overlap=yes \
     ./configure \
         --host=${OS_TRIPLET} \
+        --build=${BUILD_MACHINE} \
         --prefix=${prefix} \
         --sysconfdir=/etc \
         --localstatedir=/var \

@@ -7,6 +7,7 @@ deps="core-libs zlib xz-utils zstd libexpat libxml"
 build() {
     ${source_dir}/configure \
         --host=${OS_TRIPLET} \
+        --build=${BUILD_MACHINE} \
         --prefix=${prefix} \
         --sysconfdir=/etc \
         --localstatedir=/var \

@@ -1,0 +1,17 @@
+diff --git openssl-clean/Configurations/10-main.conf openssl-workdir/Configurations/10-main.conf
+index f815a09..cae12c8 100644
+--- openssl-clean/Configurations/10-main.conf
++++ openssl-workdir/Configurations/10-main.conf
+@@ -659,6 +659,12 @@ my %targets = (
+         inherit_from     => [ "linux-generic32" ],
+         bn_ops           => "SIXTY_FOUR_BIT_LONG RC4_CHAR",
+     },
++    "x86_64-jinux-linux-gnu" => {
++        inherit_from     => [ "linux-generic64" ],
++
++        CC               => "x86_64-jinux-linux-gnu-gcc",
++        CXX              => "x86_64-jinux-linux-gnu-g++",
++    },
+ 
+     "linux-ppc" => {
+         inherit_from     => [ "linux-generic32", asm("ppc32_asm") ],

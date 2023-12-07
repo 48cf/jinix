@@ -5,6 +5,12 @@ export CXXFLAGS="${CFLAGS}"
 
 OS_TRIPLET=x86_64-jinux-linux-gnu
 
+config_guess="${base_dir}/host-pkgs/automake/usr/local/share/automake-1.16/config.guess"
+if [ -f "${config_guess}" ]; then
+    BUILD_MACHINE="$(${config_guess})"
+fi
+unset config_guess
+
 autotools_recursive_regen() {
     for f in $(find . -name configure.ac); do
         echo "* autotools regen in '$(dirname $f)'..."

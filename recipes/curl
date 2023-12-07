@@ -7,10 +7,12 @@ deps="core-libs openssl zlib zstd"
 build() {
     ${source_dir}/configure \
         --host=${OS_TRIPLET} \
+        --build=$(${source_dir}/config.guess) \
         --prefix=${prefix} \
         --sysconfdir=/etc \
         --localstatedir=/var \
         --disable-static \
+        --with-sysroot=${sysroot_dir} \
         --enable-threaded-resolver \
         --with-openssl
 
