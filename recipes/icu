@@ -2,7 +2,7 @@ name=icu
 from_source=icu
 revision=1
 imagedeps="gcc"
-hostdeps="gcc autoconf automake libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs"
 
 build() {
@@ -13,12 +13,8 @@ build() {
     make -j${parallelism}
     cd ..
 
-    ${source_dir}/source/configure \
-        --host=${OS_TRIPLET} \
-        --prefix=${prefix} \
-        --sysconfdir=/etc \
-        --localstatedir=/var \
-        --disable-static \
+        configure_script_path=${source_dir}/source/configure \
+    autotools_configure_lib \
         --with-cross-build=$(realpath cross-build)
 
     make -j${parallelism}
@@ -26,9 +22,6 @@ build() {
 
 package() {
     DESTDIR="${dest_dir}" make install
-
-    mv "${dest_dir}${prefix}"/sbin/* "${dest_dir}${prefix}"/bin/
-    rmdir "${dest_dir}${prefix}"/sbin
 
     mv "${dest_dir}${prefix}"/bin/icu-config ./icu-config.bak
     ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/bin/*

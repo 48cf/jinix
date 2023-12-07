@@ -2,17 +2,14 @@ name=mpfr
 from_source=mpfr
 revision=1
 imagedeps="gcc"
-hostdeps="gcc autoconf autoconf-archive automake libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs gmp"
 
 build() {
     cp -rp "${source_dir}"/. ./
 
-    ./configure \
-        --host=${OS_TRIPLET} \
-        --prefix=${prefix} \
-        --sysconfdir=/etc \
-        --localstatedir=/var \
+        configure_script_path=./configure \
+    autotools_configure \
         --enable-static=no \
         --enable-shared=yes \
         --with-pic

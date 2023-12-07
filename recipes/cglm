@@ -1,20 +1,22 @@
 name=cglm
 from_source=cglm
 revision=1
-hostdeps="gcc autoconf automake libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs"
+imagedeps="meson ninja"
 
 build() {
-    ${source_dir}/configure \
-        --host=${OS_TRIPLET} \
+    meson setup \
+        --cross-file ${base_dir}/build-support/cross_file.txt \
         --prefix=${prefix} \
-        --sysconfdir=/etc \
-        --localstatedir=/var \
-        --disable-static
+        --libdir=lib \
+        --buildtype=release \
+        -Dbuild_tests=false \
+        ${source_dir}
 
-    make -j${parallelism}
+    ninja
 }
 
 package() {
-    DESTDIR="${dest_dir}" make install-strip
+    DESTDIR="${dest_dir}" ninja install
 }

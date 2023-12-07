@@ -1,7 +1,7 @@
 name=gcc
 from_source=gcc
 revision=1
-hostdeps="gcc autoconf automake libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs binutils zlib gmp mpfr mpc"
 imagedeps="gcc"
 
@@ -16,15 +16,13 @@ build() {
         --target=${OS_TRIPLET} \
         --with-sysroot=/ \
         --with-build-sysroot=${sysroot_dir} \
-        --with-glibc-version=2.38 \
-        --disable-multilib \
+        --enable-languages=c,c++,lto \
         --enable-default-pie \
         --enable-default-ssp \
-        --enable-initfini-array \
-        --enable-languages=c,c++,lto \
-        --with-system-zlib \
-        --enable-shared \
-        --enable-host-shared
+        --disable-multilib \
+        --disable-bootstrap \
+        --disable-fixincludes \
+        --with-system-zlib
 
     make -j${parallelism} all-gcc
 }

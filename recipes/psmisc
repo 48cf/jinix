@@ -1,13 +1,11 @@
 name=psmisc
 from_source=psmisc
 revision=1
-hostdeps="gcc autoconf automake libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs ncurses"
 
 build() {
-    ${source_dir}/configure \
-        --prefix=${prefix} \
-        --host=${OS_TRIPLET} \
+    autotools_configure \
         --enable-nls \
         --disable-static
 

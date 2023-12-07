@@ -1,7 +1,7 @@
 name=vim
 from_source=vim
 revision=1
-hostdeps="gcc autoconf automake libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs ncurses"
 
 build() {
@@ -20,12 +20,8 @@ build() {
         vim_cv_memmove_handles_overlap=yes \
         vim_cv_bcopy_handles_overlap=yes \
         vim_cv_memcpy_handles_overlap=yes \
-    ./configure \
-        --host=${OS_TRIPLET} \
-        --build=${BUILD_MACHINE} \
-        --prefix=${prefix} \
-        --sysconfdir=/etc \
-        --localstatedir=/var \
+        configure_script_path=./configure \
+    autotools_configure \
         --disable-gtktest \
         --disable-icon-cache-update \
         --disable-desktop-database-update \

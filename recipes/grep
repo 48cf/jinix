@@ -1,18 +1,15 @@
 name=grep
 from_source=grep
 revision=1
-hostdeps="gcc autoconf automake libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs pcre2"
 imagedeps="gperf"
 
 build() {
     cp -rp "${source_dir}"/. ./
 
-    ./configure \
-        --host=${OS_TRIPLET} \
-        --prefix=${prefix} \
-        --sysconfdir=/etc \
-        --localstatedir=/var \
+        configure_script_path=./configure \
+    autotools_configure \
         --disable-nls
 
     make -j${parallelism}

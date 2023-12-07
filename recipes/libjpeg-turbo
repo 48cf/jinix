@@ -1,8 +1,8 @@
 name=libjpeg-turbo
 from_source=libjpeg-turbo
 revision=1
-imagedeps="gcc ninja python git"
-hostdeps="gcc cmake pkg-config"
+imagedeps="cmake gcc ninja python git"
+hostdeps="gcc pkg-config"
 deps="core-libs"
 
 build() {

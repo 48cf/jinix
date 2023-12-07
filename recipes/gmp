@@ -2,18 +2,12 @@ name=gmp
 from_source=gmp
 revision=1
 imagedeps="gcc"
-hostdeps="gcc autoconf automake libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs"
 
 build() {
-    ${source_dir}/configure           \
-        --host=${OS_TRIPLET}           \
-        --prefix=${prefix}            \
-        --sysconfdir=/etc \
-        --localstatedir=/var \
-        --enable-cxx                  \
-        --disable-static              \
-        --with-sysroot=${sysroot_dir}
+    autotools_configure_lib \
+        --enable-cxx
 
     make -j${parallelism}
 }

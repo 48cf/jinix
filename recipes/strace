@@ -2,13 +2,11 @@ name=strace
 from_source=strace
 revision=1
 imagedeps="gcc"
-hostdeps="gcc autoconf automake libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs"
 
 build() {
-    ${source_dir}/configure \
-        --prefix=${prefix} \
-        --host=${OS_TRIPLET} \
+    autotools_configure \
         --disable-gcc-Werror \
         --disable-static
 

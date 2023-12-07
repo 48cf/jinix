@@ -2,15 +2,11 @@ name=libgpg-error
 from_source=libgpg-error
 revision=1
 imagedeps="gcc"
-hostdeps="gcc automake autoconf libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs"
 
 build() {
-    ${source_dir}/configure \
-        --host=${OS_TRIPLET} \
-        --prefix=${prefix} \
-        --sysconfdir=/etc \
-        --localstatedir=/var \
+    autotools_configure_lib  \
         --disable-nls \
         --disable-doc
 

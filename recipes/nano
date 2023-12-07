@@ -1,15 +1,11 @@
 name=nano
 from_source=nano
 revision=1
-hostdeps="gcc automake autoconf libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs ncurses"
 
 build() {
-    ${source_dir}/configure    \
-        --host=${OS_TRIPLET}    \
-        --prefix=${prefix}     \
-        --sysconfdir=/etc \
-        --localstatedir=/var \
+    autotools_configure \
         --disable-nls
 
     make -j${parallelism}

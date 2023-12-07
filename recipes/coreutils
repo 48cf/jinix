@@ -1,18 +1,15 @@
 name=coreutils
 from_source=coreutils
 revision=1
-hostdeps="gcc automake autoconf libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs tzdata"
 imagedeps="gcc gperf"
 
 build() {
     cp -rp "${source_dir}"/. ./
 
-    ./configure    \
-        --host=${OS_TRIPLET}    \
-        --prefix=${prefix}     \
-        --sysconfdir=/etc \
-        --localstatedir=/var \
+        configure_script_path=./configure \
+    autotools_configure \
         --disable-nls
 
     make -j${parallelism}

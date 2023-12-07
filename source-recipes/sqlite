@@ -2,8 +2,7 @@ name=sqlite
 version=3.40.1
 tarball_url="https://sqlite.org/2022/sqlite-autoconf-3400100.tar.gz"
 tarball_blake2b="495ffa185598b11e8258d2bfed88516753c0a13b3a67850f3464a112f225a13db3b75e4f977ed549305e05a995074a8c5ef12d65c2b353306e58c098c89b36b6"
-hostdeps="automake autoconf libtool pkg-config"
 
 regenerate() {
-    autotools_recursive_regen
+    true
 }

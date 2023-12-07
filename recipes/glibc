@@ -10,14 +10,9 @@ build() {
     echo "sbindir=${prefix}/bin" >> configparms
     echo "rootsbindir=${prefix}/bin" >> configparms
 
-    ${source_dir}/configure \
-        --prefix=${prefix} \
-        --sysconfdir=/etc \
-        --localstatedir=/var \
+    autotools_configure_lib \
         --libdir=${prefix}/lib \
         --libexecdir=${prefix}/lib \
-        --host=${OS_TRIPLET} \
-        --build=$(${source_dir}/scripts/config.guess) \
         --enable-kernel=4.4 \
         --with-headers=${sysroot}${prefix}/include \
         --disable-nscd

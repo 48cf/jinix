@@ -1,9 +1,8 @@
 name=pkg-config
-version=2.0.3
-tarball_url="https://github.com/pkgconf/pkgconf/archive/refs/tags/pkgconf-${version}.tar.gz"
-tarball_blake2b="2f305e102913dbd6e45acb4e008afea879f95aab010f1ebc7a83c218d27f2079eb6fac51be811dad9a62057928ce270fe4e8cb6db24070d8f900956af5a67249"
-hostdeps="autoconf automake libtool"
+version=2.1.0
+tarball_url="https://distfiles.ariadne.space/pkgconf/pkgconf-${version}.tar.xz"
+tarball_blake2b="43ac91f15106764f0b03ac4e1c3ff59aaba0436a221a295be93dd1a78b74e0185e60be8d24d040cc4ce0b0fb4446a6a8f493e7cc69bafafe5cefa9beab9b2bd5"
 
 regenerate() {
-    libtoolize -cfvi && autoreconf -fvi
+    true
 }

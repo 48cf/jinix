@@ -1,8 +1,8 @@
 name=freeglut
 from_source=freeglut
 revision=1
-imagedeps="gcc ninja python git"
-hostdeps="gcc cmake pkg-config"
+imagedeps="cmake gcc ninja python git"
+hostdeps="gcc pkg-config"
 deps="core-libs libxi mesa glu"
 
 build() {

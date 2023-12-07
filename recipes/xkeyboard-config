@@ -1,17 +1,13 @@
 name=xkeyboard-config
 from_source=xkeyboard-config
 revision=1
-hostdeps="gcc autoconf automake libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs xorg-proto libx11"
 imagedeps="python"
 
 build() {
-    ${source_dir}/configure           \
-        --host=${OS_TRIPLET}           \
-        --prefix=${prefix}            \
-        --sysconfdir=/etc             \
-        --localstatedir=/var          \
-        --disable-nls                 \
+    autotools_configure \
+        --disable-nls \
         --with-xkb-rules-symlink=xorg
 
     make -j${parallelism}

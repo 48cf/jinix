@@ -1,8 +1,8 @@
 name=graphite2
 from_source=graphite2
 revision=1
-imagedeps="ninja python"
-hostdeps="gcc cmake pkg-config"
+imagedeps="cmake ninja python"
+hostdeps="gcc pkg-config"
 deps="core-libs"
 
 build() {

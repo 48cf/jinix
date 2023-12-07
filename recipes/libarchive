@@ -1,18 +1,11 @@
 name=libarchive
 from_source=libarchive
 revision=1
-hostdeps="gcc autoconf automake libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs zlib xz-utils zstd libexpat libxml"
 
 build() {
-    ${source_dir}/configure \
-        --host=${OS_TRIPLET} \
-        --build=${BUILD_MACHINE} \
-        --prefix=${prefix} \
-        --sysconfdir=/etc \
-        --localstatedir=/var \
-        --disable-static
-
+    autotools_configure_lib
     make -j${parallelism}
 }
 

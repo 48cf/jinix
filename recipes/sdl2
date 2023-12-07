@@ -1,8 +1,8 @@
 name=sdl2
 from_source=sdl2
 revision=1
-imagedeps="gcc ninja git"
-hostdeps="gcc cmake pkg-config"
+imagedeps="cmake gcc ninja git"
+hostdeps="gcc pkg-config"
 deps="core-libs libx11 libxext libxcursor libxi libxfixes libxrandr libxrender libxxf86vm mesa"
 
 build() {

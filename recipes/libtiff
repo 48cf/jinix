@@ -1,18 +1,11 @@
 name=libtiff
 from_source=libtiff
 revision=1
-hostdeps="gcc autoconf automake libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs freeglut libjpeg-turbo zlib zstd xz-utils"
 
 build() {
-    ${source_dir}/configure \
-        --host=${OS_TRIPLET} \
-        --prefix=${prefix} \
-        --sysconfdir=/etc \
-        --localstatedir=/var \
-        --disable-static \
-        --with-sysroot=${sysroot_dir} \
-        --enable-shared \
+    autotools_configure_lib \
         --without-x \
         --enable-zlib \
         --enable-zstd \

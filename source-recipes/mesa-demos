@@ -2,8 +2,7 @@ name=mesa-demos
 version=8.5.0
 tarball_url="https://archive.mesa3d.org/demos/${version}/mesa-demos-${version}.tar.gz"
 tarball_blake2b="82ded42d845449d925809046d605a30d3f66b5aba57716fdfee99611750001a80aebbda5c66099c3ee9525b655d86e8cf4aeb43adbc939182705ba8fa2ab9c92"
-hostdeps="automake autoconf libtool pkg-config"
 
 regenerate() {
-    libtoolize -cfvi && autoreconf -fvi
+    true
 }

@@ -1,8 +1,8 @@
 name=libzip
 from_source=libzip
 revision=1
-imagedeps="gcc ninja python git"
-hostdeps="gcc cmake pkg-config"
+imagedeps="cmake gcc ninja python git"
+hostdeps="gcc pkg-config"
 deps="core-libs zlib bzip2 xz-utils zstd openssl"
 
 build() {

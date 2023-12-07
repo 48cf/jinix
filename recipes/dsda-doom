@@ -1,8 +1,8 @@
 name=dsda-doom
 from_source=dsda-doom
 revision=1
-imagedeps="ninja git"
-hostdeps="gcc cmake pkg-config rdatawad"
+imagedeps="cmake ninja git"
+hostdeps="gcc pkg-config rdatawad"
 deps="core-libs zlib sdl2 glu"
 
 build() {

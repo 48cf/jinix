@@ -4,16 +4,29 @@ export CFLAGS="-O2 -pipe -march=x86-64 -mtune=generic"
 export CXXFLAGS="${CFLAGS}"
 
 OS_TRIPLET=x86_64-jinux-linux-gnu
+BUILD_MACHINE="$(${base_dir}/build-support/config.guess)"
 
-config_guess="${base_dir}/host-pkgs/automake/usr/local/share/automake-1.16/config.guess"
-if [ -f "${config_guess}" ]; then
-    BUILD_MACHINE="$(${config_guess})"
-fi
-unset config_guess
+autotools_configure() {
+    if [ -z "${configure_script_path}" ]; then
+        configure_script_path="${source_dir}/configure"
+    fi
 
-autotools_recursive_regen() {
-    for f in $(find . -name configure.ac); do
-        echo "* autotools regen in '$(dirname $f)'..."
-        ( cd "$(dirname "$f")" && libtoolize -cfvi && autoreconf -fvi "$@" )
-    done
+    ${configure_script_path} \
+        --host=${OS_TRIPLET} \
+        --build=${BUILD_MACHINE} \
+        --with-sysroot=${sysroot} \
+        --prefix=${prefix} \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --bindir=${prefix}/bin \
+        --sbindir=${prefix}/bin \
+        --libdir=${prefix}/lib \
+        "$@"
+}
+
+autotools_configure_lib() {
+    autotools_configure \
+        --disable-static \
+        --enable-shared \
+        "$@"
 }

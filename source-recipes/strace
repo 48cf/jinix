@@ -2,8 +2,7 @@ name=strace
 version=6.6
 tarball_url="https://github.com/strace/strace/releases/download/v${version}/strace-${version}.tar.xz"
 tarball_blake2b="f1465fec58ac20ccce6a88441a34b1402e5c51f0bb4b7963f69b5ab5019a8c8722e3406c6f93c10c1eea11d17de7f9874895d6f4df24cf9ec42a18f36267687b"
-hostdeps="automake autoconf libtool pkg-config"
 
 regenerate() {
-    libtoolize -cfvi && autoreconf -fvi
+    true
 }

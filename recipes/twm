@@ -1,16 +1,11 @@
 name=twm
 revision=1
 from_source=twm
-hostdeps="gcc autoconf automake libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs xorg-server xsetroot"
 
 build() {
-        STRIP=${OS_TRIPLET}-strip \
-    ${source_dir}/configure \
-        --host=${OS_TRIPLET} \
-        --prefix=${prefix} \
-        --sysconfdir=/etc \
-        --localstatedir=/var
+    STRIP=${OS_TRIPLET}-strip autotools_configure
 
     make -j${parallelism}
 }

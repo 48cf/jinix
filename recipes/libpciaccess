@@ -1,16 +1,11 @@
 name=libpciaccess
 from_source=libpciaccess
 revision=1
-hostdeps="gcc autoconf automake libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs zlib"
 
 build() {
-    ${source_dir}/configure \
-        --host=${OS_TRIPLET} \
-        --prefix=${prefix} \
-        --sysconfdir=/etc \
-        --localstatedir=/var \
-        --disable-static \
+    autotools_configure_lib \
         --with-zlib
 
     make -j${parallelism}

@@ -2,8 +2,7 @@ name=libunistring
 version=1.1
 tarball_url="https://ftp.gnu.org/gnu/libunistring/libunistring-${version}.tar.xz"
 tarball_blake2b="721adc90884006480055b95d0fa06cd862417aa02b467f1e14688292ad9c11f1e33520b14ed5dc2d2724c6df8713d3af1e8032014259d8355156cb72edfcb983"
-hostdeps="automake autoconf libtool pkg-config"
 
 regenerate() {
-    libtoolize -cfvi && autoreconf -fvi
+    true
 }

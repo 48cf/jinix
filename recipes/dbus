@@ -1,17 +1,11 @@
 name=dbus
 from_source=dbus
 revision=1
-hostdeps="gcc autoconf automake libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs glib libexpat"
 
 build() {
-    ${source_dir}/configure \
-        --host=${OS_TRIPLET} \
-        --prefix=${prefix} \
-        --sysconfdir=/etc \
-        --localstatedir=/var \
-        --disable-static \
-        --enable-shared \
+    autotools_configure_lib \
         --disable-doxygen-docs \
         --disable-xml-docs \
         --with-systemdsystemunitdir=no \

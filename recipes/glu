@@ -1,17 +1,11 @@
 name=glu
 from_source=glu
 revision=1
-hostdeps="gcc autoconf automake libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs mesa"
 
 build() {
-    ${source_dir}/configure \
-        --host=${OS_TRIPLET} \
-        --prefix=${prefix} \
-        --sysconfdir=/etc \
-        --localstatedir=/var \
-        --disable-static
-
+    autotools_configure_lib
     make -j${parallelism}
 }
 

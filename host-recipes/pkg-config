@@ -2,7 +2,6 @@ name=pkg-config
 from_source=pkg-config
 revision=1
 imagedeps="gcc"
-hostdeps="automake autoconf libtool"
 
 build() {
     "${source_dir}"/configure \
