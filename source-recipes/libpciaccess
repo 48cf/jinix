@@ -1,0 +1,9 @@
+name=libpciaccess
+version=0.17
+tarball_url="https://www.x.org/releases/individual/lib/libpciaccess-${version}.tar.xz"
+tarball_blake2b="41539b3d6385fe7c42b562c7602f87b07730bbbeea7d65d3cc8e5af974ed5f9985b0779d51891493dd241a36bb171a3744e3b1f3fd30bee8a19bb5bd785f4c5f"
+hostdeps="automake autoconf libtool pkg-config xorg-macros"
+
+regenerate() {
+    libtoolize -cfvi && autoreconf -fvi
+}
