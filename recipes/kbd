@@ -1,0 +1,20 @@
+name=kbd
+from_source=kbd
+revision=1
+hostdeps="gcc pkg-config"
+deps="core-libs pam"
+
+build() {
+        LIBS="-lintl" \
+    autotools_configure \
+        --disable-werror \
+        --enable-vlock
+
+    make -j${parallelism} AUTOM4TE=true
+}
+
+package() {
+    make install DESTDIR="${dest_dir}"
+
+    post_package_strip
+}
