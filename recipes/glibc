@@ -11,8 +11,6 @@ build() {
     echo "rootsbindir=${prefix}/bin" >> configparms
 
     autotools_configure_lib \
-        --libdir=${prefix}/lib \
-        --libexecdir=${prefix}/lib \
         --enable-kernel=4.4 \
         --with-headers=${sysroot}${prefix}/include \
         --disable-nscd
