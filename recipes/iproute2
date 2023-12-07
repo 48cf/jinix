@@ -1,0 +1,26 @@
+name=iproute2
+from_source=iproute2
+revision=1
+imagedeps="gcc"
+hostdeps="gcc pkg-config"
+deps="core-libs"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+        AR=${OS_TRIPLET}-ar \
+        CC=${OS_TRIPLET}-gcc \
+        PKG_CONFIG=${OS_TRIPLET}-pkg-config \
+        SBINDIR=${prefix}/bin \
+    ./configure \
+        --prefix=${prefix} \
+        --libdir=lib
+
+    make -j${parallelism}
+}
+
+package() {
+    make install DESTDIR="${dest_dir}" SBINDIR=${prefix}/bin
+
+    post_package_strip
+}
