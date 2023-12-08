@@ -19,7 +19,7 @@ package() {
     rm -rf tmp_libgcc_dir
     mkdir tmp_libgcc_dir
 
-    DESTDIR="$(realpath tmp_libgcc_dir)" make install-target-libgcc
+    DESTDIR="$(realpath tmp_libgcc_dir)" make install-strip-target-libgcc
 
     mkdir -p "${dest_dir}${prefix}"
 
@@ -29,6 +29,4 @@ package() {
     # Copy libgcc into GCC's tree else it will complain.
     mkdir -p "${base_dir}"/host-pkgs/gcc/usr/local/lib
     cp -r tmp_libgcc_dir/usr/local/lib/* "${base_dir}"/host-pkgs/gcc/usr/local/lib/
-
-    post_package_strip
 }
