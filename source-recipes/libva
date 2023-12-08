@@ -1,0 +1,8 @@
+name=libva
+version=2.20.0
+tarball_url="https://github.com/intel/libva/releases/download/${version}/libva-${version}.tar.bz2"
+tarball_blake2b="a76543049239a5b1287a5de5025db7e28f37d1674c1d6f2404c18f94a1e39009458b1a1921cae31d3698926494e50264730ec0a0853a7ac639bfa097b056242b"
+
+regenerate() {
+    true
+}

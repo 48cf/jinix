@@ -1,0 +1,19 @@
+name=libva
+from_source=libva
+revision=1
+hostdeps="gcc pkg-config"
+deps="core-libs libdrm libx11 libxcb libxext libxfixes"
+
+build() {
+    autotools_configure_lib \
+        --enable-drm \
+        --enable-x11
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}

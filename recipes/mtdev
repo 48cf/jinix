@@ -1,0 +1,17 @@
+name=mtdev
+from_source=mtdev
+revision=1
+hostdeps="gcc pkg-config"
+deps="core-libs"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}

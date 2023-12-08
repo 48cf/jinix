@@ -1,0 +1,8 @@
+name=libdrm
+version=2.4.118
+tarball_url="https://dri.freedesktop.org/libdrm/libdrm-${version}.tar.xz"
+tarball_blake2b="064e0c7fc1b84bb7cbe2bfe9b22b2a48d266637cbfdd5b72fa44c0c0981a212e2de7ebc42ddd1da5f06e621bc3e0d2a6d329c74ba14154e6c9e7ddf429cd8f04"
+
+regenerate() {
+    true
+}

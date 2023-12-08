@@ -1,0 +1,27 @@
+name=libinput
+from_source=libinput
+revision=1
+imagedeps="meson ninja"
+hostdeps="gcc pkg-config"
+deps="core-libs eudev libevdev mtdev"
+
+build() {
+    meson setup \
+        --cross-file ${base_dir}/build-support/cross_file.txt \
+        --prefix=${prefix} \
+        --libdir=lib \
+        --buildtype=release \
+        -Ddebug-gui=false \
+		-Ddocumentation=false \
+		-Dlibwacom=false \
+		-Dtests=false \
+        ${source_dir}
+
+    ninja
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}

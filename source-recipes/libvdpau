@@ -1,0 +1,8 @@
+name=libvdpau
+version=1.5
+tarball_url="https://gitlab.freedesktop.org/vdpau/libvdpau/-/archive/${version}/libvdpau-${version}.tar.gz"
+tarball_blake2b="c3d76c1e46b718d71daff74232f2de9efb989c496cef7fa1016ec76d751530be39b5b6ad6354819579043f23744a647492d5d52b5ab93cae89dd82fb17d08289"
+
+regenerate() {
+    true
+}
