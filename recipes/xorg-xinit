@@ -1,0 +1,17 @@
+name=xorg-xinit
+from_source=xorg-xinit
+revision=1
+hostdeps="gcc pkg-config"
+deps="core-libs libx11 xorg-proto"
+
+build() {
+    autotools_configure
+
+    make -j${parallelism}
+}
+
+package() {
+    make install DESTDIR="${dest_dir}"
+
+    post_package_strip
+}
