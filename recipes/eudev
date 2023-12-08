@@ -1,0 +1,36 @@
+name=eudev
+from_source=eudev
+revision=1
+imagedeps="gperf"
+hostdeps="gcc pkg-config"
+deps="core-libs"
+
+build() {
+    autotools_configure \
+        --disable-selinux \
+        --disable-kmod
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    mkdir -pv "${dest_dir}/etc/conf.d"
+    mkdir -pv "${dest_dir}/etc/init.d"
+    mkdir -pv "${dest_dir}/etc/runlevels/default"
+    mkdir -pv "${dest_dir}/etc/runlevels/sysinit"
+
+    cp -rv "${base_dir}/build-support/udev.initd" "${dest_dir}/etc/init.d/udev"
+    cp -rv "${base_dir}/build-support/udev.confd" "${dest_dir}/etc/conf.d/udev"
+    cp -rv "${base_dir}/build-support/udev-trigger.initd" "${dest_dir}/etc/init.d/udev-trigger"
+    cp -rv "${base_dir}/build-support/udev-trigger.confd" "${dest_dir}/etc/conf.d/udev-trigger"
+    cp -rv "${base_dir}/build-support/udev-settle.initd" "${dest_dir}/etc/init.d/udev-settle"
+    cp -rv "${base_dir}/build-support/udev-settle.confd" "${dest_dir}/etc/conf.d/udev-settle"
+
+    ln -sv /etc/init.d/udev "${dest_dir}/etc/runlevels/sysinit/udev"
+    ln -sv /etc/init.d/udev-trigger "${dest_dir}/etc/runlevels/sysinit/udev-trigger"
+    ln -sv /etc/init.d/udev-settle "${dest_dir}/etc/runlevels/default/udev-settle"
+
+    post_package_strip
+}

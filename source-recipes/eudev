@@ -1,0 +1,8 @@
+name=eudev
+version=3.2.14
+tarball_url="https://github.com/eudev-project/eudev/releases/download/v${version}/eudev-${version}.tar.gz"
+tarball_blake2b="7d68e77012288ecfac43be31f724224d371cb1084238fe045df248927eff854dbb391ad501e2a36d9b5ea4eb0a8cba3f9f21ea668908584a24c2a65df93ffdf8"
+
+regenerate() {
+    true
+}
