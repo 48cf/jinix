@@ -6,7 +6,7 @@ hostdeps="gcc pkg-config"
 deps="core-libs"
 
 build() {
-    autotools_configure \
+    autotools_configure_lib \
         --disable-selinux \
         --disable-kmod
 
