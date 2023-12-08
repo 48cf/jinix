@@ -1,0 +1,17 @@
+name=xf86-video-vesa
+from_source=xf86-video-vesa
+revision=1
+hostdeps="gcc pkg-config"
+deps="core-libs libinput xorg-server xorg-proto"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}

@@ -1,0 +1,8 @@
+name=xf86-video-vesa
+version=2.6.0
+tarball_url="https://www.x.org/archive/individual/driver/xf86-video-vesa-${version}.tar.xz"
+tarball_blake2b="18a4aae9125c03da183aea07403c2e0809adf18c963c4acda8b55130a2a22c9fa1b0dc02dbb3ea836a4e735396a660a1e55bec6482707c019f9bfd756442d6b9"
+
+regenerate() {
+    true
+}
