@@ -10,7 +10,7 @@ build() {
         --cross-file ${base_dir}/build-support/cross_file.txt \
         --prefix=${prefix} \
         --buildtype=release \
-        -Degl=no \
+        -Degl=yes \
         -Dtests=false \
         ${source_dir}
 
