@@ -11,9 +11,15 @@ build() {
     echo "rootsbindir=${prefix}/bin" >> configparms
 
     autotools_configure_lib \
-        --enable-kernel=4.4 \
         --with-headers=${sysroot}${prefix}/include \
-        --disable-nscd
+        --enable-bind-now \
+        --enable-cet \
+        --enable-fortify-source \
+        --enable-kernel=4.4 \
+        --enable-stack-protector=strong \
+        --disable-nscd \
+        --disable-profile \
+        --disable-werror
 
     make -j${parallelism}
 }

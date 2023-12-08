@@ -1,7 +1,9 @@
 JINX_MAJOR_VER=0.2
 
-export CFLAGS="-O2 -pipe -march=x86-64 -mtune=generic"
-export CXXFLAGS="${CFLAGS}"
+export CFLAGS="-march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions \
+               -Wp,-D_FORTIFY_SOURCE=2 -fstack-clash-protection -fcf-protection"
+export CXXFLAGS="$CFLAGS -Wp,-D_GLIBCXX_ASSERTIONS"
+export LDFLAGS="-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now"
 
 OS_TRIPLET=x86_64-jinux-linux-gnu
 BUILD_MACHINE="$(${base_dir}/build-support/config.guess)"

@@ -18,13 +18,27 @@ build() {
         --target=${OS_TRIPLET} \
         --with-sysroot="${sysroot_dir}" \
         --with-glibc-version=2.38 \
-        --disable-multilib \
+        --enable-__cxa_atexit \
+        --enable-checking=release \
+        --enable-clocale=gnu \
         --enable-default-pie \
         --enable-default-ssp \
-        --enable-initfini-array \
+        --enable-gnu-indirect-function \
+        --enable-gnu-unique-object \
+        --enable-libstdcxx-backtrace \
+        --enable-link-serialization=1 \
+        --enable-linker-build-id \
         --enable-languages=c,c++,lto \
+        --enable-lto \
+        --disable-multilib \
+        --enable-plugin \
         --enable-shared \
-        --enable-host-shared
+        --enable-host-shared \
+        --enable-threads=posix \
+        --enable-initfini-array \
+        --disable-libssp \
+        --disable-libstdcxx-pch \
+        --disable-werror
 
     make -j${parallelism} all-gcc
 }

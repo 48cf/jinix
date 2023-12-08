@@ -8,6 +8,9 @@ deps="core-libs graphite2 glib zlib freetype cairo icu"
 build() {
     cp -rp "${source_dir}"/. ./
 
+    export CFLAGS="${CFLAGS/-fexceptions/}"
+    export CXXFLAGS="${CXXFLAGS/-fexceptions/}"
+
     mkdir build && cd build
     meson setup \
         --cross-file ${base_dir}/build-support/cross_file.txt \

@@ -19,6 +19,19 @@ build() {
         --with-glibc-version=2.38 \
         --with-newlib \
         --without-headers \
+        --enable-checking=release \
+        --enable-default-pie \
+        --enable-default-ssp \
+        --enable-gnu-indirect-function \
+        --enable-gnu-unique-object \
+        --enable-link-serialization=1 \
+        --enable-linker-build-id \
+        --enable-languages=c,c++,lto \
+        --enable-lto \
+        --disable-multilib \
+        --enable-initfini-array \
+        --disable-libstdcxx-pch \
+        --disable-werror \
         --disable-libatomic \
         --disable-libgomp \
         --disable-libquadmath \
@@ -28,11 +41,7 @@ build() {
         --disable-multilib \
         --disable-nls \
         --disable-shared \
-        --disable-threads \
-        --enable-default-pie \
-        --enable-default-ssp \
-        --enable-initfini-array \
-        --enable-languages=c,c++,lto
+        --disable-threads
 
     make all-gcc -j${parallelism}
     make all-target-libgcc -j${parallelism}
