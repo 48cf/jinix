@@ -17,5 +17,8 @@ build() {
 package() {
     DESTDIR=${dest_dir} make install
 
+    rm -fv ${dest_dir}/etc/pam.d/other
+    chmod -v 4755 ${dest_dir}/usr/bin/unix_chkpwd
+
     post_package_strip
 }
