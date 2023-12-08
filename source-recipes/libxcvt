@@ -1,0 +1,8 @@
+name=libxcvt
+version=0.1.2
+tarball_url="https://www.x.org/archive/individual/lib/libxcvt-${version}.tar.xz"
+tarball_blake2b="8a4803eb6790fd0ea1520fd31e335f7a363c3606e74837a959453be8819ce0d450af7bb651887a891aa657a5eeac3e4983041060fa5c87b1238c83354e425de7"
+
+regenerate() {
+    true
+}
