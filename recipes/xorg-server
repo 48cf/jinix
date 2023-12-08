@@ -2,9 +2,12 @@ name=xorg-server
 from_source=xorg-server
 revision=1
 hostdeps="gcc pkg-config"
-deps="core-libs xorg-util-macros xorg-proto xcb-proto libpciaccess libxtrans libxshmfence libx11 libxxf86vm libxkbfile libxfont2 libepoxy libxi libxv libxdamage libxrender libxrandr libxcb libxfixes libxext nettle xkbcomp pixman"
+deps="core-libs xorg-util-macros xorg-proto xcb-proto libdrm libpciaccess libxtrans libxshmfence libx11 libxcvt libxxf86vm libxkbfile libxfont2 libepoxy libxi libxv libxdamage libxrender libxrandr libxcb libxfixes libxext mesa nettle xkbcomp pixman"
 
 build() {
+        ACLOCAL=true \
+        AUTOCONF=true \
+        AUTOMAKE=true \
         CFLAGS="-Wno-error=array-bounds ${common_flags}" \
     autotools_configure \
         --disable-static \
@@ -18,7 +21,6 @@ build() {
         --disable-xnest \
         --disable-dmx \
         --disable-suid-wrapper \
-        --disable-pciaccess \
         --disable-dpms \
         --disable-screensaver \
         --disable-xres \
@@ -26,16 +28,7 @@ build() {
         --disable-xvmc \
         --disable-systemd-logind \
         --disable-secure-rpc \
-        --disable-config-udev \
-        --disable-dri \
-        --disable-dri2 \
-        --disable-dri3 \
-        --disable-vbe \
-        --disable-int10-module \
-        --disable-vgahw \
-        --disable-libdrm \
-        --disable-glamor \
-        --disable-glx
+        --disable-config-udev
 
     make -j${parallelism}
 }
