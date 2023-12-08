@@ -1,0 +1,20 @@
+name=libglvnd
+from_source=libglvnd
+revision=1
+imagedeps="meson ninja"
+hostdeps="gcc pkg-config"
+deps="core-libs libx11 libxext"
+
+build() {
+    autotools_configure_lib \
+        --enable-x11 \
+        --enable-glx
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
