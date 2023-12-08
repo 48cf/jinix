@@ -1,0 +1,22 @@
+name=net-tools
+from_source=net-tools
+revision=1
+hostdeps="gcc"
+deps="core-libs xz-utils"
+
+build() {
+    cp -r ${source_dir}/. ./
+    sed -i "/^bool.*HAVE_HWSTRIP /s/[yn]$/n/" ./config.in
+    yes "" | ./configure.sh ./config.in
+}
+
+package() {
+    export BINDIR=${prefix}/bin
+    export SBINDIR=${prefix}/bin
+    export CC=${OS_TRIPLET}-gcc
+    export AR=${OS_TRIPLET}-ar
+
+    make DESTDIR=${dest_dir} install
+
+    post_package_strip
+}
