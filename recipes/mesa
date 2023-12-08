@@ -2,24 +2,42 @@ name=mesa
 from_source=mesa
 revision=1
 hostdeps="gcc pkg-config"
-deps="core-libs llvm zlib libxshmfence libxrandr libxdamage libxxf86vm libxfixes libx11 libxext libxcb libexpat"
-imagedeps="binutils meson ninja python-mako"
+deps="core-libs libglvnd libxshmfence libxrandr libxdamage libxxf86vm libxfixes libx11 libxext libxcb libexpat libva libvdpau llvm zlib"
+imagedeps="binutils glslang meson ninja python-mako"
 
 build() {
     cp ${base_dir}/build-support/cross_file.txt ./
-    sed -i "/^# sed adds binaries here.\$/a llvm-config = '${base_dir}/build-support/cross-llvm-config'" cross_file.txt
+
+    # XXX figure out a better way to llvm-config
+    sed -i "/^# sed adds binaries here.\$/a llvm-config = '/sysroot/usr/bin/llvm-config'" cross_file.txt
 
     meson setup \
         --cross-file cross_file.txt \
         --prefix=/usr \
         --libdir=lib \
-        --buildtype=debugoptimized \
-        -Dglx=gallium-xlib \
-        -Dplatforms=x11 \
-        -Ddri-drivers= \
-        -Dgallium-drivers=swrast \
-        -Dvulkan-drivers= \
+        --buildtype=release \
+        -Db_ndebug=true \
+        -Ddri3=enabled \
+        -Degl=enabled \
+        -Dgallium-drivers=r300,r600,nouveau,virgl,svga,swrast,i915,iris,crocus,zink \
+        -Dgallium-extra-hud=true \
+        -Dgallium-nine=true \
+        -Dgallium-va=enabled \
+        -Dgallium-vdpau=enabled \
+        -Dgallium-xa=enabled \
+        -Dgbm=enabled \
+        -Dgles1=disabled \
+        -Dgles2=enabled \
+        -Dglvnd=true \
+        -Dglx=dri \
         -Dllvm=enabled \
+        -Dosmesa=true \
+        -Dplatforms=x11 \
+        -Dshared-glapi=enabled \
+        -Dvalgrind=disabled \
+        -Dvideo-codecs=vc1dec,h264dec,h264enc,h265dec,h265enc \
+        -Dvulkan-drivers=amd,intel,intel_hasvk,swrast,virtio \
+        -Dvulkan-layers=device-select,intel-nullhw,overlay \
         ${source_dir}
 
     ninja
