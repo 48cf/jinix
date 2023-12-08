@@ -14,7 +14,7 @@ build() {
         SBINDIR=${prefix}/bin \
     ./configure \
         --prefix=${prefix} \
-        --libdir=lib
+        --libdir=${prefix}/lib
 
     make -j${parallelism}
 }
