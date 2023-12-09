@@ -1,21 +1,18 @@
 name=openssl
 from_source=openssl
 revision=1
-hostdeps="gcc pkg-config"
-deps="core-libs zlib"
+builddeps="base perl"
+deps="core-libs"
 
 build() {
-        CC=${OS_TRIPLET}-gcc \
-        CXX=${OS_TRIPLET}-g++ \
-        AR=${OS_TRIPLET}-ar \
     ${source_dir}/Configure \
         --prefix=${prefix} \
         --openssldir=/etc/ssl \
         --libdir=lib \
-        ${OS_TRIPLET} \
         shared \
         zlib-dynamic \
-        no-afalgeng
+        no-afalgeng \
+        linux-x86_64
 
     make -j${parallelism}
 }

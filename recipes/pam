@@ -1,7 +1,8 @@
 name=pam
 from_source=pam
 revision=1
-deps="base libtirpc libnsl"
+builddeps="base"
+deps="core-libs libtirpc libnsl"
 
 build() {
         LDFLAGS="-lintl" \

@@ -1,7 +1,8 @@
 name=libtirpc
 from_source=libtirpc
 revision=1
-deps="base"
+builddeps="base"
+deps="core-libs"
 
 build() {
     autotools_configure_lib \

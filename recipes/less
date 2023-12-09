@@ -1,10 +1,12 @@
 name=less
 from_source=less
 revision=1
-deps="base ncurses"
+builddeps="base"
+deps="core-libs ncurses"
 
 build() {
     autotools_configure
+
     make -j${parallelism}
 }
 
