@@ -17,7 +17,10 @@ post_package_strip() {
 
     for f in $(find "${dest_dir}"); do
         if file "$f" | grep 'not stripped' >/dev/null; then
-            ${strip_command} "$f"
+            tmp=$(mktemp)
+            ${strip_command} "$f" -o "$tmp"
+            chmod --reference="$f" "$tmp"
+            mv -f "$tmp" "$f"
         fi
     done
 }
