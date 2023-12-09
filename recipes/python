@@ -1,0 +1,41 @@
+name=python
+from_source=python
+revision=1
+builddeps="base"
+deps="libexpat libffi openssl"
+
+build() {
+    mkdir -p ./build
+    cd ./build
+
+    # XXX make this a host dep
+    if ! [ -f built ]; then
+        autotools_configure \
+            --without-readline
+
+        make -j${parallelism}
+        touch built
+    fi
+
+    cd -
+
+    autotools_configure_lib \
+        --without-static-libpython \
+        --infodir=${prefix}/share/info \
+		--mandir=${prefix}/share/man \
+        --with-build-python="$(pwd -P)/build/python" \
+        --with-system-expat \
+        --with-computed-gotos \
+        --with-pkg-config=yes \
+        --without-ensurepip
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    ln -sv python3 "${dest_dir}${prefix}/bin/python"
+
+    post_package_strip
+}

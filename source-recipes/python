@@ -1,0 +1,8 @@
+name=python
+version=3.12.1
+tarball_url="https://www.python.org/ftp/python/${version}/Python-${version}.tar.xz"
+tarball_blake2b="20f6f8b7b0d7e560d269138a38c5b9362073aa414f0a862357644b97eb76f9bf70b5365cac1dd1a615895302b046bd88404966e56818d57e506b9972d34445a3"
+
+regenerate() {
+    true
+}
