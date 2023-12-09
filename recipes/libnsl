@@ -1,11 +1,11 @@
 name=libnsl
 from_source=libnsl
 revision=1
-hostdeps="gcc pkg-config"
-deps="core-libs libtirpc"
+deps="base libtirpc"
 
 build() {
     autotools_configure_lib
+
     make -j${parallelism}
 }
 

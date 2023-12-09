@@ -1,8 +1,7 @@
 name=libtirpc
 from_source=libtirpc
 revision=1
-hostdeps="gcc pkg-config"
-deps="core-libs"
+deps="base"
 
 build() {
     autotools_configure_lib \

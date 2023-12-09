@@ -1,9 +1,7 @@
 name=pam
 from_source=pam
 revision=1
-imagedeps="byacc flex gcc gettext"
-hostdeps="gcc pkg-config"
-deps="core-libs libtirpc libnsl"
+deps="base libtirpc libnsl"
 
 build() {
         LDFLAGS="-lintl" \
