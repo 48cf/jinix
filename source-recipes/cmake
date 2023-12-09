@@ -1,0 +1,8 @@
+name=cmake
+version=3.28.0
+tarball_url="https://cmake.org/files/v3.28/cmake-${version}.tar.gz"
+tarball_blake2b="8e03436d7e2b16d5865cef4ed94d12ffdf134d12ad59c4296589bad1a2836916cbb17367f4adda99a9bd835af8b891fee34b2e00441dd22696e396e4109f61f2"
+
+regenerate() {
+    true
+}
