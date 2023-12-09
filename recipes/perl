@@ -1,0 +1,34 @@
+name=perl
+from_source=perl
+revision=1
+builddeps="base"
+deps="core-libs bzip2 zlib"
+
+build() {
+    export BUILD_ZLIB=False
+    export BUILD_BZIP2=0
+
+    ${source_dir}/Configure -des \
+        -Dprefix=${prefix} \
+        -Dvendorprefix=${prefix} \
+        -Dprivlib=${prefix}/lib/perl5/5.38/core_perl \
+        -Darchlib=${prefix}/lib/perl5/5.38/core_perl \
+        -Dsitelib=${prefix}/lib/perl5/5.38/site_perl \
+        -Dsitearch=${prefix}/lib/perl5/5.38/site_perl \
+        -Dvendorlib=${prefix}/lib/perl5/5.38/vendor_perl \
+        -Dvendorarch=${prefix}/lib/perl5/5.38/vendor_perl \
+        -Dman1dir=${prefix}/share/man/man1 \
+        -Dman3dir=${prefix}/share/man/man3 \
+        -Dldflags="-lintl -lm -lcrypt" \
+        -Duseshrplib \
+        -Dusethreads \
+        -Dmksymlinks
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
