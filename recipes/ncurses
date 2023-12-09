@@ -1,3 +1,5 @@
+cross_compile=yes
+
 name=ncurses
 from_source=ncurses
 revision=1

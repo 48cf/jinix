@@ -1,3 +1,5 @@
+cross_compile=yes
+
 name=file
 from_source=file
 revision=1

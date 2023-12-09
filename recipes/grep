@@ -1,3 +1,5 @@
+cross_compile=yes
+
 name=grep
 from_source=grep
 revision=1

@@ -1,3 +1,5 @@
+cross_compile=yes
+
 name=tar
 from_source=tar
 revision=1

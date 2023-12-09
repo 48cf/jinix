@@ -1,3 +1,5 @@
+cross_compile=yes
+
 name=readline
 from_source=readline
 revision=1

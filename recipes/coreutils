@@ -1,3 +1,5 @@
+cross_compile=yes
+
 name=coreutils
 from_source=coreutils
 revision=1

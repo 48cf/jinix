@@ -1,4 +1,5 @@
 JINX_MAJOR_VER=0.2
+JINX_NATIVE_MODE=yes
 
 export CFLAGS="-march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions \
                -Wp,-D_FORTIFY_SOURCE=2 -fstack-clash-protection -fcf-protection"
@@ -9,9 +10,14 @@ OS_TRIPLET=x86_64-jinux-linux-gnu
 BUILD_MACHINE="$(${base_dir}/build-support/config.guess)"
 
 post_package_strip() {
+    strip_command="strip"
+    if [ "$cross_compile" = "yes" ]; then
+        strip_command="${OS_TRIPLET}-strip"
+    fi
+
     for f in $(find "${dest_dir}"); do
         if file "$f" | grep 'not stripped' >/dev/null; then
-            ${OS_TRIPLET}-strip "$f"
+            ${strip_command} "$f"
         fi
     done
 }
@@ -21,10 +27,17 @@ autotools_configure() {
         configure_script_path="${source_dir}/configure"
     fi
 
+    cross_compile_autotools_flags=""
+    if [ "$cross_compile" = "yes" ]; then
+        cross_compile_autotools_flags=" \
+            --host=${OS_TRIPLET} \
+            --build=${BUILD_MACHINE} \
+            --with-sysroot=${sysroot} \
+        "
+    fi
+
     ${configure_script_path} \
-        --host=${OS_TRIPLET} \
-        --build=${BUILD_MACHINE} \
-        --with-sysroot=${sysroot} \
+        ${cross_compile_autotools_flags} \
         --prefix=${prefix} \
         --sysconfdir=/etc \
         --localstatedir=/var \

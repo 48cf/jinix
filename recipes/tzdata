@@ -1,3 +1,5 @@
+cross_compile=yes
+
 name=tzdata
 from_source=tzdata
 revision=1

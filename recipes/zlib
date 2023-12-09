@@ -1,3 +1,5 @@
+cross_compile=yes
+
 name=zlib
 from_source=zlib
 revision=1

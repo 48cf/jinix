@@ -1,8 +1,7 @@
 name=less
 from_source=less
 revision=1
-hostdeps="gcc pkg-config"
-deps="core-libs ncurses"
+deps="base ncurses"
 
 build() {
     autotools_configure

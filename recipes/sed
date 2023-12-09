@@ -1,3 +1,5 @@
+cross_compile=yes
+
 name=sed
 from_source=sed
 revision=1

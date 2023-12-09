@@ -1,3 +1,5 @@
+cross_compile=yes
+
 name=bash
 from_source=bash
 revision=1

@@ -1,3 +1,5 @@
+cross_compile=yes
+
 name=util-linux
 from_source=util-linux
 revision=1

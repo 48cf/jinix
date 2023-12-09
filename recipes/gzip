@@ -1,3 +1,5 @@
+cross_compile=yes
+
 name=gzip
 from_source=gzip
 revision=1

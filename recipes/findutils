@@ -1,3 +1,5 @@
+cross_compile=yes
+
 name=findutils
 from_source=findutils
 revision=1

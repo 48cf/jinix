@@ -1,3 +1,5 @@
+cross_compile=yes
+
 name=libiconv
 from_source=libiconv
 revision=1

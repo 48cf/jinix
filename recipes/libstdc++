@@ -1,3 +1,5 @@
+cross_compile=yes
+
 name=libstdc++
 from_source=gcc-host
 revision=1

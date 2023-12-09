@@ -1,3 +1,5 @@
+cross_compile=yes
+
 name=make
 from_source=make
 revision=1

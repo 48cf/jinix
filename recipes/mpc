@@ -1,3 +1,5 @@
+cross_compile=yes
+
 name=mpc
 from_source=mpc
 revision=1

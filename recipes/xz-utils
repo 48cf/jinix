@@ -1,3 +1,5 @@
+cross_compile=yes
+
 name=xz-utils
 from_source=xz-utils
 revision=1

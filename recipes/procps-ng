@@ -1,3 +1,5 @@
+cross_compile=yes
+
 name=procps-ng
 from_source=procps-ng
 revision=1

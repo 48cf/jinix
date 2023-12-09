@@ -1,3 +1,5 @@
+cross_compile=yes
+
 name=pcre2
 from_source=pcre2
 revision=1

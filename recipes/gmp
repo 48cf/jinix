@@ -1,3 +1,5 @@
+cross_compile=yes
+
 name=gmp
 from_source=gmp
 revision=1

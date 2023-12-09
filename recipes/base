@@ -1,0 +1,14 @@
+cross_compile=yes
+
+name=base
+from_source=glibc
+revision=1
+deps="core-libs base-files bash binutils bzip2 coreutils file findutils gawk gcc gmp grep gzip make mpc mpfr ncurses pcre2 procps-ng readline sed strace tar tzdata util-linux which xz-utils zlib zstd"
+
+build() {
+    true
+}
+
+package() {
+    true
+}

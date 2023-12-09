@@ -1,3 +1,5 @@
+cross_compile=yes
+
 name=binutils
 from_source=binutils
 revision=1
