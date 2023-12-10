@@ -1,0 +1,21 @@
+cross_compile=yes
+
+name=crossed-procps-ng
+from_source=procps-ng
+revision=1
+hostdeps="gcc pkg-config"
+deps="crossed-core-libs crossed-ncurses"
+
+build() {
+    autotools_configure \
+        --disable-static \
+        --disable-kill
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR=${dest_dir} make install
+
+    post_package_strip
+}

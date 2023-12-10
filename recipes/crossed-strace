@@ -1,0 +1,22 @@
+cross_compile=yes
+
+name=crossed-strace
+from_source=strace
+revision=1
+imagedeps="gcc"
+hostdeps="gcc pkg-config"
+deps="crossed-core-libs"
+
+build() {
+    autotools_configure \
+        --disable-gcc-Werror \
+        --disable-static
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}

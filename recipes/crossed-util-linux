@@ -1,0 +1,35 @@
+cross_compile=yes
+
+name=crossed-util-linux
+from_source=util-linux
+revision=1
+hostdeps="gcc pkg-config"
+deps="crossed-core-libs"
+
+build() {
+    autotools_configure \
+        ADJTIME_PATH=/var/lib/hwclock/adjtime \
+        --disable-makeinstall-chown \
+        --disable-chfn-chsh \
+        --disable-login \
+        --disable-nologin \
+        --disable-su \
+        --disable-setpriv \
+        --disable-runuser \
+        --disable-pylibmount \
+        --disable-static \
+        --without-python \
+        --docdir=${prefix}/share/doc/util-linux-${version}
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    # util-linux has no way to customize usrsbin_execdir
+    mv -v ${dest_dir}${prefix}/sbin/* ${dest_dir}${prefix}/bin/
+    rm -rvf ${dest_dir}${prefix}/sbin
+
+    post_package_strip
+}

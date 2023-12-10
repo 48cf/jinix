@@ -1,7 +1,11 @@
-name=gmp
+cross_compile=yes
+
+name=crossed-gmp
 from_source=gmp
 revision=1
-builddeps="crossed-base"
+imagedeps="gcc"
+hostdeps="gcc pkg-config"
+deps="crossed-core-libs"
 
 build() {
     autotools_configure_lib \

@@ -1,8 +1,11 @@
-name=mpfr
+cross_compile=yes
+
+name=crossed-mpfr
 from_source=mpfr
 revision=1
-builddeps="crossed-base"
-deps="gmp"
+imagedeps="gcc"
+hostdeps="gcc pkg-config"
+deps="crossed-core-libs crossed-gmp"
 
 build() {
     cp -rp "${source_dir}"/. ./

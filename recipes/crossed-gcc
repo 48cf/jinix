@@ -1,18 +1,21 @@
-name=gcc
+cross_compile=yes
+
+name=crossed-gcc
 from_source=gcc
 revision=1
-builddeps="crossed-base"
-deps="binutils gmp mpfr mpc zlib"
+imagedeps="gcc"
+hostdeps="gcc pkg-config"
+deps="crossed-core-libs crossed-binutils crossed-zlib crossed-gmp crossed-mpfr crossed-mpc"
 
 build() {
         CXXFLAGS_FOR_TARGET="$CFLAGS" \
         CFLAGS_FOR_TARGET="$CFLAGS" \
     ${source_dir}/configure \
-        --host=${OS_TRIPLET} \
         --prefix=${prefix} \
+        --host=${CROSSED_TRIPLET} \
+        --target=${CROSSED_TRIPLET} \
         --sysconfdir=/etc \
         --localstatedir=/var \
-        --target=${OS_TRIPLET} \
         --with-sysroot=/ \
         --with-build-sysroot=${sysroot_dir} \
         --with-glibc-version=2.38 \

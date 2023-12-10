@@ -14,7 +14,7 @@ build() {
         CFLAGS_FOR_TARGET="$CFLAGS" \
     ../configure \
         --prefix="${prefix}" \
-        --target=${OS_TRIPLET} \
+        --target=${CROSSED_TRIPLET} \
         --with-sysroot="${sysroot_dir}" \
         --with-glibc-version=2.38 \
         --with-newlib \

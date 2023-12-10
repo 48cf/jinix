@@ -1,8 +1,11 @@
-name=mpc
+cross_compile=yes
+
+name=crossed-mpc
 from_source=mpc
 revision=1
-builddeps="crossed-base"
-deps="gmp mpfr"
+imagedeps="gcc"
+hostdeps="gcc pkg-config"
+deps="crossed-core-libs crossed-gmp crossed-mpfr"
 
 build() {
     autotools_configure_lib

@@ -1,8 +1,11 @@
-name=bash
+cross_compile=yes
+
+name=crossed-bash
 from_source=bash
 revision=1
-builddeps="crossed-base"
-deps="core-libs ncurses readline"
+imagedeps="gcc"
+hostdeps="gcc pkg-config"
+deps="crossed-core-libs crossed-ncurses crossed-readline"
 
 build() {
     autotools_configure \

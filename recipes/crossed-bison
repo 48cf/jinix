@@ -1,11 +1,14 @@
-name=zlib
-from_source=zlib
+cross_compile=yes
+
+name=crossed-bison
+from_source=bison
 revision=1
-builddeps="crossed-base"
+hostdeps="gcc pkg-config"
+deps="crossed-core-libs"
 
 build() {
-        prefix="${prefix}" \
-    ${source_dir}/configure
+    autotools_configure \
+        --disable-static
 
     make -j${parallelism}
 }

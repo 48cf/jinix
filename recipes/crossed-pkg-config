@@ -1,0 +1,22 @@
+cross_compile=yes
+
+name=crossed-pkg-config
+from_source=pkg-config
+revision=1
+hostdeps="gcc pkg-config"
+deps="crossed-core-libs"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    ln -s pkgconf "${dest_dir}${prefix}/bin/pkg-config"
+    ln -s pkgconf "${dest_dir}${prefix}/bin/${CROSSED_TRIPLET}-pkg-config"
+
+    post_package_strip
+}

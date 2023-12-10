@@ -1,7 +1,9 @@
-name=glibc
+cross_compile=yes
+
+name=crossed-glibc
 from_source=glibc
 revision=1
-builddeps="crossed-base crossed-python"
+hostdeps="bootstrap-gcc"
 deps="linux-headers"
 
 build() {

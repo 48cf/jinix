@@ -1,0 +1,14 @@
+cross_compile=yes
+
+name=crossed-core-libs
+from_source=glibc
+revision=1
+deps="crossed-glibc crossed-libgcc crossed-libstdc++ crossed-libintl crossed-libiconv crossed-libxcrypt"
+
+build() {
+    true
+}
+
+package() {
+    true
+}

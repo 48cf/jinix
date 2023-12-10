@@ -1,0 +1,25 @@
+cross_compile=yes
+
+name=crossed-python
+from_source=python
+revision=1
+imagedeps="strace"
+hostdeps="gcc pkg-config python"
+deps="crossed-core-libs"
+
+build() {
+        ac_cv_file__dev_ptmx=yes \
+        ac_cv_file__dev_ptc=no \
+    autotools_configure_lib \
+        --disable-ipv6 \
+        --with-build-python=/usr/local/bin/python3 \
+        --without-ensurepip
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}

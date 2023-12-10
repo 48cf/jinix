@@ -7,7 +7,7 @@ hostdeps="pkg-config"
 build() {
     "${source_dir}"/configure \
         --prefix="${prefix}" \
-        --target=${OS_TRIPLET} \
+        --target=${CROSSED_TRIPLET} \
         --with-sysroot="${sysroot_dir}" \
         --disable-nls \
         --disable-werror \

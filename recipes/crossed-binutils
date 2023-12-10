@@ -1,14 +1,17 @@
-name=binutils
+cross_compile=yes
+
+name=crossed-binutils
 from_source=binutils
 revision=1
-builddeps="crossed-base"
-deps="gmp zlib"
+imagedeps="gcc"
+hostdeps="gcc pkg-config"
+deps="crossed-core-libs crossed-zlib crossed-gmp"
 
 build() {
     ${source_dir}/configure \
-        --host=${OS_TRIPLET} \
-        --target=${OS_TRIPLET} \
         --prefix=${prefix} \
+        --host=${CROSSED_TRIPLET} \
+        --target=${CROSSED_TRIPLET} \
         --with-sysroot=${sysroot_dir} \
         --disable-werror \
         --disable-dependency-tracking \
@@ -26,7 +29,7 @@ package() {
     DESTDIR="${dest_dir}" make install
 
     # Remove unnecessary directory
-    rm -rf "${dest_dir}${prefix}"/${OS_TRIPLET}
+    rm -rf "${dest_dir}${prefix}"/${CROSSED_TRIPLET}
 
     # Remove static libraries
     rm -rf "${dest_dir}${prefix}"/lib/*.a

@@ -1,0 +1,21 @@
+cross_compile=yes
+
+name=crossed-readline
+from_source=readline
+revision=1
+hostdeps="gcc pkg-config"
+deps="crossed-core-libs crossed-ncurses"
+
+build() {
+    autotools_configure_lib \
+        --enable-multibyte \
+        --with-curses
+
+    make SHLIB_LIBS="-lncursesw" -j${parallelism}
+}
+
+package() {
+    make SHLIB_LIBS="-lncursesw" install DESTDIR="${dest_dir}"
+
+    post_package_strip
+}

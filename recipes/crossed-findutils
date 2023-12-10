@@ -1,17 +1,19 @@
-name=mpfr
-from_source=mpfr
+cross_compile=yes
+
+name=crossed-findutils
+from_source=findutils
 revision=1
-builddeps="crossed-base"
-deps="gmp"
+imagedeps="python"
+hostdeps="gcc pkg-config"
+deps="crossed-core-libs"
 
 build() {
     cp -rp "${source_dir}"/. ./
 
         configure_script_path=./configure \
     autotools_configure \
-        --enable-static=no \
-        --enable-shared=yes \
-        --with-pic
+        --disable-nls \
+        --without-selinux
 
     make -j${parallelism}
 }

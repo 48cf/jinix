@@ -1,0 +1,21 @@
+cross_compile=yes
+
+name=crossed-libiconv
+from_source=libiconv
+revision=1
+imagedeps="binutils"
+hostdeps="gcc pkg-config"
+deps="crossed-glibc crossed-libgcc crossed-libstdc++"
+
+build() {
+    autotools_configure_lib  \
+        --disable-nls
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
