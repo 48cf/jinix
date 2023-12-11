@@ -1,0 +1,20 @@
+name=bison
+from_source=bison
+revision=1
+builddeps="crossed-base"
+deps="core-libs"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+        configure_script_path=./configure \
+    autotools_configure
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
