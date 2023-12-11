@@ -1,7 +1,7 @@
 name=bison
 from_source=bison
 revision=1
-builddeps="crossed-base"
+builddeps="base"
 deps="core-libs"
 
 build() {
