@@ -1,7 +1,7 @@
 name=neofetch
 from_source=neofetch
 revision=1
-rundeps="bash"
+deps="bash"
 
 build() {	
     true
