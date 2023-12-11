@@ -2,7 +2,7 @@ name=openssl
 from_source=openssl
 revision=1
 builddeps="base perl"
-deps="core-libs"
+deps="core-libs zlib"
 
 build() {
     ${source_dir}/Configure \
