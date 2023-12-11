@@ -4,7 +4,7 @@ revision=1
 imagedeps="gcc"
 hostdeps="pkg-config"
 hostrundeps="binutils"
-deps="crossed-glibc"
+deps="glibc"
 
 build() {
     cp -rp "${source_dir}"/. ./
@@ -15,7 +15,7 @@ build() {
         CFLAGS_FOR_TARGET="$CFLAGS" \
     ../configure \
         --prefix="${prefix}" \
-        --target=${CROSSED_TRIPLET} \
+        --target=${OS_TRIPLET} \
         --with-sysroot="${sysroot_dir}" \
         --with-glibc-version=2.38 \
         --enable-__cxa_atexit \

@@ -1,14 +1,17 @@
+cross_compile=yes
+
 name=binutils
 from_source=binutils
 revision=1
-builddeps="crossed-base"
-deps="gmp zlib"
+hostdeps="gcc pkg-config"
+deps="core-libs zlib gmp"
+imagedeps="gcc"
 
 build() {
     ${source_dir}/configure \
         --host=${OS_TRIPLET} \
-        --target=${OS_TRIPLET} \
         --prefix=${prefix} \
+        --target=${OS_TRIPLET} \
         --with-sysroot=${sysroot_dir} \
         --disable-werror \
         --disable-dependency-tracking \

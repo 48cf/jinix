@@ -1,7 +1,10 @@
+cross_compile=yes
+
 name=bash
 from_source=bash
 revision=1
-builddeps="crossed-base"
+imagedeps="gcc"
+hostdeps="gcc pkg-config"
 deps="core-libs ncurses readline"
 
 build() {

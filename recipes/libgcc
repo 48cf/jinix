@@ -1,19 +1,22 @@
+cross_compile=yes
+
 name=libgcc
 from_source=gcc-host
 revision=1
-builddeps="crossed-base gcc"
+hostdeps="gcc pkg-config"
+imagedeps="gcc"
 deps="glibc"
 
 build() {
     true
 
-    cd "${base_dir}"/builds/gcc/build
+    cd "${base_dir}"/host-builds/gcc/build
 
     make -j${parallelism} all-target-libgcc
 }
 
 package() {
-    cd "${base_dir}"/builds/gcc/build
+    cd "${base_dir}"/host-builds/gcc/build
 
     rm -rf tmp_libgcc_dir
     mkdir tmp_libgcc_dir

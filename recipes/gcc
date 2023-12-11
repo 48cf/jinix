@@ -1,8 +1,11 @@
+cross_compile=yes
+
 name=gcc
 from_source=gcc
 revision=1
-builddeps="crossed-base"
-deps="binutils gmp mpfr mpc zlib"
+hostdeps="gcc pkg-config"
+deps="core-libs binutils zlib gmp mpfr mpc"
+imagedeps="gcc"
 
 build() {
         CXXFLAGS_FOR_TARGET="$CFLAGS" \

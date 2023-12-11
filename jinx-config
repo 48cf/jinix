@@ -6,14 +6,13 @@ export CFLAGS="-march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions \
 export CXXFLAGS="$CFLAGS -Wp,-D_GLIBCXX_ASSERTIONS"
 export LDFLAGS="-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now"
 
-CROSSED_TRIPLET=x86_64-crossed-linux-gnu
-TARGET_TRIPLET=x86_64-pc-linux-gnu
+OS_TRIPLET=x86_64-jinux-linux-gnu
 BUILD_MACHINE="$(${base_dir}/build-support/config.guess)"
 
 post_package_strip() {
     strip_command="strip"
     if [ "$cross_compile" = "yes" ]; then
-        strip_command="${CROSSED_TRIPLET}-strip"
+        strip_command="${OS_TRIPLET}-strip"
     fi
 
     for f in $(find "${dest_dir}"); do
@@ -34,7 +33,7 @@ autotools_configure() {
     cross_compile_autotools_flags=""
     if [ "$cross_compile" = "yes" ]; then
         cross_compile_autotools_flags=" \
-            --host=${CROSSED_TRIPLET} \
+            --host=${OS_TRIPLET} \
             --build=${BUILD_MACHINE} \
             --with-sysroot=${sysroot} \
         "

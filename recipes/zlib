@@ -1,10 +1,14 @@
+cross_compile=yes
+
 name=zlib
 from_source=zlib
 revision=1
-builddeps="crossed-base"
+hostdeps="gcc pkg-config"
+deps="core-libs"
 
 build() {
         prefix="${prefix}" \
+        CHOST="${OS_TRIPLET}" \
     ${source_dir}/configure
 
     make -j${parallelism}
@@ -12,7 +16,6 @@ build() {
 
 package() {
     DESTDIR="${dest_dir}" make install
-
     # Remove static libraries
     rm -rf "${dest_dir}${prefix}"/lib/*.a
 
