@@ -1,0 +1,22 @@
+cross_compile=yes
+
+name=patch
+from_source=patch
+revision=1
+hostdeps="gcc pkg-config"
+deps="core-libs"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+        configure_script_path=./configure \
+    autotools_configure
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
