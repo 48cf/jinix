@@ -1,10 +1,7 @@
-cross_compile=yes
-
 name=strace
 from_source=strace
 revision=1
-imagedeps="gcc"
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs"
 
 build() {
