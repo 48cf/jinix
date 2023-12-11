@@ -1,9 +1,11 @@
+cross_compile=yes
+
 name=openrc
 from_source=openrc
 revision=1
 imagedeps="meson ninja"
 hostdeps="gcc pkg-config"
-deps="core-libs ncurses pam psmisc"
+deps="core-libs kbd ncurses net-tools pam psmisc shadow"
 
 build() {
     meson setup \

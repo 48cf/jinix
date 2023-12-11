@@ -1,22 +1,24 @@
 name=net-tools
 from_source=net-tools
 revision=1
-hostdeps="gcc"
+builddeps="base"
 deps="core-libs xz-utils"
 
 build() {
     cp -r ${source_dir}/. ./
+
     sed -i "/^bool.*HAVE_HWSTRIP /s/[yn]$/n/" ./config.in
     yes "" | ./configure.sh ./config.in
+
+    export BINDIR=${prefix}/bin
+    export SBINDIR=${prefix}/bin
+
+    make -j${parallelism} all
 }
 
 package() {
-    export BINDIR=${prefix}/bin
-    export SBINDIR=${prefix}/bin
-    export CC=${OS_TRIPLET}-gcc
-    export AR=${OS_TRIPLET}-ar
-
-    make DESTDIR=${dest_dir} install
+    # XXX once we figure out thse getcwd errors use `make install` instead
+    make DESTDIR=${dest_dir} installbin
 
     post_package_strip
 }
