@@ -1,6 +1,7 @@
 name=neofetch
 from_source=neofetch
 revision=1
+builddeps="base"
 deps="bash"
 
 build() {	
