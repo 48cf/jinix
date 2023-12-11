@@ -1,7 +1,7 @@
 name=psmisc
 from_source=psmisc
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs ncurses"
 
 build() {
