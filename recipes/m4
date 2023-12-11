@@ -1,0 +1,20 @@
+cross_compile=yes
+
+name=m4
+from_source=m4
+revision=1
+hostdeps="gcc pkg-config"
+deps="core-libs"
+
+build() {
+    autotools_configure \
+        --disable-static
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
