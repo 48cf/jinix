@@ -1,0 +1,29 @@
+name=dhcpcd
+from_source=dhcpcd
+revision=1
+builddeps="base"
+deps="core-libs eudev"
+
+build() {
+    cp -rp ${source_dir}/. ./
+
+        configure_script_path=./configure \
+    autotools_configure \
+        --privsepuser=dhcpcd \
+        --with-hook=ntp.conf
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    # Install the dhcpcd service
+    mkdir -pv "${dest_dir}/etc/init.d"
+    mkdir -pv "${dest_dir}/etc/runlevels/default"
+
+    cp -rv "${base_dir}/build-support/dhcpcd.initd" "${dest_dir}/etc/init.d/dhcpcd"
+    ln -sv /etc/init.d/dhcpcd "${dest_dir}/etc/runlevels/default/dhcpcd"
+
+    post_package_strip
+}
