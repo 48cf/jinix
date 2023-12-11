@@ -17,6 +17,9 @@ build() {
 }
 
 package() {
+    export BINDIR=${prefix}/bin
+    export SBINDIR=${prefix}/bin
+
     # XXX once we figure out thse getcwd errors use `make install` instead
     make DESTDIR=${dest_dir} installbin
 
