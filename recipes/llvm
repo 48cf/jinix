@@ -1,33 +1,27 @@
 name=llvm
 from_source=llvm
 revision=1
-imagedeps="chrpath cmake gcc ninja python git"
-hostdeps="gcc pkg-config"
+builddeps="base cmake python"
 deps="core-libs ncurses zlib zstd"
 
 build() {
+    # XXX use Ninja instead of Make when we port it
     cmake \
-        -GNinja \
-        -DCMAKE_TOOLCHAIN_FILE=${base_dir}/build-support/CMakeToolchain.txt \
+        -G "Unix Makefiles" \
         -DCMAKE_INSTALL_PREFIX=${prefix} \
         -DCMAKE_BUILD_TYPE=Release \
         -DBUILD_SHARED_LIBS=ON \
         -DLLVM_ENABLE_EH=ON \
         -DLLVM_ENABLE_RTTI=ON \
         -DLLVM_BUILD_LLVM_DYLIB=ON \
-        -DLLVM_DEFAULT_TARGET_TRIPLE=${OS_TRIPLET} \
-        -DLLVM_HOST_TRIPLE=${OS_TRIPLET} \
         -Wno-dev \
         ${source_dir}/llvm
 
-    ninja
+    make -j${parallelism}
 }
 
 package() {
-    DESTDIR="${dest_dir}" ninja install
-
-    cp ./NATIVE/bin/llvm-config ${dest_dir}${prefix}/bin/host-llvm-config
-    chrpath -d ${dest_dir}${prefix}/bin/host-llvm-config
+    DESTDIR="${dest_dir}" make install
 
     post_package_strip
 }
