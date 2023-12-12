@@ -1,16 +1,12 @@
 name=iproute2
 from_source=iproute2
 revision=1
-imagedeps="gcc"
-hostdeps="gcc pkg-config"
+builddeps="base bison flex"
 deps="core-libs"
 
 build() {
     cp -rp "${source_dir}"/. ./
 
-        AR=${OS_TRIPLET}-ar \
-        CC=${OS_TRIPLET}-gcc \
-        PKG_CONFIG=${OS_TRIPLET}-pkg-config \
         SBINDIR=${prefix}/bin \
     ./configure \
         --prefix=${prefix} \
