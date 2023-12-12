@@ -2,7 +2,7 @@ name=python
 from_source=python
 revision=1
 builddeps="base"
-deps="libexpat libffi openssl"
+deps="core-libs libexpat libffi openssl"
 
 build() {
     mkdir -p ./build
@@ -19,6 +19,7 @@ build() {
 
     cd -
 
+        _PYTHON_HOST_PLATFORM="linux-x86_64" \
     autotools_configure_lib \
         --without-static-libpython \
         --infodir=${prefix}/share/info \
@@ -26,8 +27,7 @@ build() {
         --with-build-python="$(pwd -P)/build/python" \
         --with-system-expat \
         --with-computed-gotos \
-        --with-pkg-config=yes \
-        --without-ensurepip
+        --with-pkg-config=yes
 
     make -j${parallelism}
 }
