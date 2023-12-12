@@ -1,7 +1,7 @@
 name=libfontenc
 from_source=libfontenc
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs xorg-proto zlib"
 
 build() {

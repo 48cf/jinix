@@ -1,7 +1,7 @@
 name=libxml
 from_source=libxml
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs zlib"
 
 build() {

@@ -1,15 +1,13 @@
 name=libx11
 from_source=libx11
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs xorg-util-macros xorg-proto libxcb libxtrans"
-imagedeps="gcc"
 
 build() {
     autotools_configure_lib \
         --disable-ipv6 \
-        --disable-malloc0returnsnull \
-        --with-keysymdefdir=${sysroot_dir}/usr/include/X11
+        --disable-malloc0returnsnull
 
     make -j${parallelism}
 }

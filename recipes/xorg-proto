@@ -1,11 +1,12 @@
 name=xorg-proto
 from_source=xorg-proto
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs"
 
 build() {
     autotools_configure
+
     make -j${parallelism}
 }
 

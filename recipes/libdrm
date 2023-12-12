@@ -1,3 +1,5 @@
+cross_compile=yes
+
 name=libdrm
 from_source=libdrm
 revision=1

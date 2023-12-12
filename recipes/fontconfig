@@ -1,9 +1,8 @@
 name=fontconfig
 from_source=fontconfig
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base gperf python"
 deps="core-libs freetype libexpat libxml"
-imagedeps="python gperf"
 
 build() {
     autotools_configure \

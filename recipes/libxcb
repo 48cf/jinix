@@ -1,12 +1,12 @@
 name=libxcb
 from_source=libxcb
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base python"
 deps="core-libs xorg-util-macros xorg-proto libxau libxdmcp xcb-proto"
-imagedeps="python"
 
 build() {
     autotools_configure_lib
+
     make -j${parallelism}
 }
 

@@ -1,11 +1,12 @@
 name=libpng
 from_source=libpng
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs zlib"
 
 build() {
     autotools_configure_lib
+
     make -j${parallelism}
 }
 

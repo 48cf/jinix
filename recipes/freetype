@@ -1,9 +1,8 @@
 name=freetype
 from_source=freetype
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs bzip2 libpng zlib"
-imagedeps="gcc"
 
 build() {
     autotools_configure_lib \

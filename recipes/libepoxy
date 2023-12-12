@@ -1,3 +1,5 @@
+cross_compile=yes
+
 name=libepoxy
 from_source=libepoxy
 revision=1

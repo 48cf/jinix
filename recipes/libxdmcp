@@ -1,7 +1,7 @@
 name=libxdmcp
 from_source=libxdmcp
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs xorg-proto xorg-util-macros libxau"
 
 build() {

@@ -1,7 +1,7 @@
 name=libxxf86vm
 from_source=libxxf86vm
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs xorg-util-macros xorg-proto libx11 libxtrans libxext"
 
 build() {
