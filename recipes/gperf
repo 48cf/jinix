@@ -1,0 +1,17 @@
+name=gperf
+from_source=gperf
+revision=1
+builddeps="base"
+deps="core-libs"
+
+build() {
+    autotools_configure
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
