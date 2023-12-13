@@ -1,7 +1,7 @@
 name=vim
-version=8.2.3704
+version=9.0.2160
 tarball_url="https://github.com/vim/vim/archive/refs/tags/v${version}.tar.gz"
-tarball_blake2b="4688a80b9b7982efd4dc47ed39b510c704ccb604ae3d3bb8037d2b4668cc8cff514ae3247682066470d03beef716d3e5bc2ea1f5e2d7da6b84c568d49c4f6595"
+tarball_blake2b="d00a20eb171f9ee976dbc7fefb5c35f73919100b9cd6d93669afa08710bee0f24aadcfd451f5aa0834bf7701b699853067d4452bfbb6f7e06c3a87bcca2dd8da"
 
 regenerate() {
     true
