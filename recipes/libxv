@@ -1,7 +1,7 @@
 name=libxv
 from_source=libxv
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs xorg-util-macros xorg-proto libx11 libxext libxfixes"
 
 build() {

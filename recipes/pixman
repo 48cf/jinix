@@ -1,11 +1,12 @@
 name=pixman
 from_source=pixman
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs libpng"
 
 build() {
     autotools_configure_lib
+
     make -j${parallelism}
 }
 

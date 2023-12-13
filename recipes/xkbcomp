@@ -1,11 +1,12 @@
 name=xkbcomp
 from_source=xkbcomp
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs xorg-util-macros libx11 libxkbfile"
 
 build() {
     autotools_configure
+
     make -j${parallelism}
 }
 
