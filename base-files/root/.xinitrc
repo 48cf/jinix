@@ -1,2 +1,2 @@
-xeyes &
+xterm &
 exec twm
