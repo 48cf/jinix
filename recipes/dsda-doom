@@ -1,14 +1,12 @@
 name=dsda-doom
 from_source=dsda-doom
 revision=1
-imagedeps="cmake ninja git"
-hostdeps="gcc pkg-config rdatawad"
+builddeps="base cmake ninja"
 deps="core-libs zlib sdl2 glu"
 
 build() {
     cmake \
         -GNinja \
-        -DCMAKE_TOOLCHAIN_FILE=${base_dir}/build-support/CMakeToolchain.txt \
         -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_BUILD_TYPE=Release \
         -DIMPORT_EXECUTABLES=/usr/local/rdatawad/ImportExecutables.cmake \

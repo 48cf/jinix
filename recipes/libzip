@@ -1,15 +1,14 @@
 name=libzip
 from_source=libzip
 revision=1
-imagedeps="cmake gcc ninja python git"
-hostdeps="gcc pkg-config"
+builddeps="base cmake ninja python"
 deps="core-libs zlib bzip2 xz-utils zstd openssl"
 
 build() {
     cmake \
         -GNinja \
-        -DCMAKE_TOOLCHAIN_FILE=${base_dir}/build-support/CMakeToolchain.txt \
-        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_INSTALL_PREFIX=${prefix} \
+        -DCMAKE_INSTALL_LIBDIR=lib \
         -DCMAKE_BUILD_TYPE=Release \
         -DBUILD_SHARED_LIBS=ON \
         -DENABLE_GNUTLS=OFF \

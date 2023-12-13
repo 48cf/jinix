@@ -1,11 +1,12 @@
 name=xkbutils
 from_source=xkbutils
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs xorg-util-macros xorg-proto libx11 libxt libxaw"
 
 build() {
     autotools_configure
+
     make -j${parallelism}
 }
 

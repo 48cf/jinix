@@ -1,8 +1,7 @@
 name=ace-of-penguins
 from_source=ace-of-penguins
 revision=1
-imagedeps="gcc libpng"
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs libx11 libxpm libpng zlib"
 
 build() {

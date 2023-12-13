@@ -1,15 +1,14 @@
 name=sdl2
 from_source=sdl2
 revision=1
-imagedeps="cmake gcc ninja git"
-hostdeps="gcc pkg-config"
+builddeps="base cmake ninja"
 deps="core-libs libx11 libxext libxcursor libxi libxfixes libxrandr libxrender libxxf86vm mesa"
 
 build() {
     cmake \
         -GNinja \
-        -DCMAKE_TOOLCHAIN_FILE=${base_dir}/build-support/CMakeToolchain.txt \
-        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_INSTALL_PREFIX=${prefix} \
+        -DCMAKE_INSTALL_LIBDIR=lib \
         -DCMAKE_BUILD_TYPE=Release \
         -DALTIVEC=OFF \
         -DDISKAUDIO=OFF \

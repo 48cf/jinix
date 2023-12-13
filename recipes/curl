@@ -1,7 +1,7 @@
 name=curl
 from_source=curl
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs openssl zlib zstd"
 
 build() {

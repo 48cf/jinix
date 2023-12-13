@@ -1,11 +1,12 @@
 name=libarchive
 from_source=libarchive
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs zlib xz-utils zstd libexpat libxml"
 
 build() {
     autotools_configure_lib
+
     make -j${parallelism}
 }
 

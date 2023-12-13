@@ -1,9 +1,8 @@
 name=limine
 from_source=limine
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base mtools nasm"
 deps="core-libs"
-imagedeps="mtools nasm"
 
 build() {
     autotools_configure \
@@ -12,8 +11,7 @@ build() {
         --enable-uefi-cd \
         --enable-bios \
         --enable-bios-cd \
-        --enable-bios-pxe \
-        TOOLCHAIN_FOR_TARGET=${OS_TRIPLET}
+        --enable-bios-pxe
 
     make -j${parallelism}
 }

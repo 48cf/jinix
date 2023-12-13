@@ -1,8 +1,7 @@
 name=libgcrypt
 from_source=libgcrypt
 revision=1
-imagedeps="gcc"
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs libgpg-error"
 
 build() {

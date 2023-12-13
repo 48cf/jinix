@@ -1,6 +1,7 @@
 name=dejavu
 from_source=dejavu
 revision=1
+builddeps="base"
 deps="core-libs freetype fontconfig"
 
 build() {

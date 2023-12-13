@@ -1,7 +1,7 @@
 name=sqlite
 from_source=sqlite
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs readline zlib"
 
 build() {
