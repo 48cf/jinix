@@ -1,0 +1,29 @@
+name=git
+from_source=git
+revision=1
+builddeps="base gettext python"
+deps="core-libs curl grep libexpat openssl pcre2 perl shadow zlib"
+
+_make() {
+    make \
+        prefix=${prefix} \
+        htmldir=${prefix}/share/doc/git/html \
+        sysconfdir=/etc \
+        perllibdir="$(perl -MConfig -wle 'print $Config{installvendorlib}')" \
+        CFLAGS="$CFLAGS -lintl -liconv" \
+        LDFLAGS="$LDFLAGS -lintl -liconv" \
+        "$@"
+}
+
+build() {
+    cp -rp ${source_dir}/. ./
+
+    _make -j${parallelism}
+}
+
+package() {
+    # XXX install-man is broken
+    _make DESTDIR="${dest_dir}" install
+
+    post_package_strip
+}
