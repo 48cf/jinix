@@ -1,7 +1,7 @@
 name=libtiff
 from_source=libtiff
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs freeglut libjpeg-turbo zlib zstd xz-utils"
 
 build() {

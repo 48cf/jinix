@@ -1,13 +1,11 @@
 name=glib
 from_source=glib
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base meson ninja python-setuptools"
 deps="core-libs pcre2 libffi zlib"
-imagedeps="meson ninja"
 
 build() {
     meson setup \
-        --cross-file ${base_dir}/build-support/cross_file.txt \
         --prefix=${prefix} \
         --libdir=lib \
         --buildtype=release \

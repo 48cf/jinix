@@ -1,21 +1,11 @@
 name=icu
 from_source=icu
 revision=1
-imagedeps="gcc"
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs"
 
 build() {
-    mkdir cross-build
-    cd cross-build
-    ${source_dir}/source/configure \
-        --prefix=/usr/local
-    make -j${parallelism}
-    cd ..
-
-        configure_script_path=${source_dir}/source/configure \
-    autotools_configure_lib \
-        --with-cross-build=$(realpath cross-build)
+    configure_script_path=${source_dir}/source/configure autotools_configure_lib
 
     make -j${parallelism}
 }
@@ -25,8 +15,8 @@ package() {
 
     # figure out if we can call post_package_strip instead
     mv "${dest_dir}${prefix}"/bin/icu-config ./icu-config.bak
-    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/bin/*
+    strip "${dest_dir}${prefix}"/bin/*
     mv ./icu-config.bak "${dest_dir}${prefix}"/bin/icu-config
 
-    ${OS_TRIPLET}-strip "${dest_dir}${prefix}"/lib/*so.73.1
+    strip "${dest_dir}${prefix}"/lib/*so.73.1
 }

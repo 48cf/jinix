@@ -1,13 +1,11 @@
 name=at-spi2-atk
 from_source=at-spi2-atk
 revision=1
-imagedeps="meson ninja"
-hostdeps="gcc pkg-config"
+builddeps="base meson ninja"
 deps="core-libs at-spi2-core atk dbus glib libxml"
 
 build() {
     meson setup \
-        --cross-file ${base_dir}/build-support/cross_file.txt \
         --prefix=${prefix} \
         --sysconfdir=/etc \
         --libdir=lib \

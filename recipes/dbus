@@ -1,7 +1,7 @@
 name=dbus
 from_source=dbus
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs glib libexpat"
 
 build() {

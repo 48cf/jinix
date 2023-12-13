@@ -1,7 +1,7 @@
 name=libwebp
 from_source=libwebp
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs libjpeg-turbo libpng freeglut sdl2 libtiff"
 
 build() {

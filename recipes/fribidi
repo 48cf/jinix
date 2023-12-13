@@ -1,12 +1,12 @@
 name=fribidi
 from_source=fribidi
 revision=1
-imagedeps="gcc"
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs"
 
 build() {
     autotools_configure_lib
+
     make -j${parallelism}
 }
 

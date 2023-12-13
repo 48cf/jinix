@@ -1,13 +1,11 @@
 name=gsettings-desktop-schemas
 from_source=gsettings-desktop-schemas
 revision=1
-imagedeps="meson ninja"
-hostdeps="gcc pkg-config"
+builddeps="base meson ninja"
 deps="core-libs glib"
 
 build() {
     meson setup \
-        --cross-file ${base_dir}/build-support/cross_file.txt \
         --prefix=${prefix} \
         --libdir=lib \
         --buildtype=release \

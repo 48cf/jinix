@@ -1,19 +1,14 @@
 name=harfbuzz
 from_source=harfbuzz
 revision=1
-imagedeps="meson ninja"
-hostdeps="gcc pkg-config"
+builddeps="base meson ninja"
 deps="core-libs graphite2 glib zlib freetype cairo icu"
 
 build() {
-    cp -rp "${source_dir}"/. ./
-
     export CFLAGS="${CFLAGS/-fexceptions/}"
     export CXXFLAGS="${CXXFLAGS/-fexceptions/}"
 
-    mkdir build && cd build
     meson setup \
-        --cross-file ${base_dir}/build-support/cross_file.txt \
         --prefix=${prefix} \
         --libdir=lib \
         --buildtype=release \
@@ -26,14 +21,13 @@ build() {
         -Dintrospection=disabled \
         -Ddocs=disabled \
         -Dtests=disabled \
-        ..
-    cd ..
+        ${source_dir}
 
-    ( cd build && ninja )
+    ninja
 }
 
 package() {
-    ( cd build && DESTDIR="${dest_dir}" ninja install )
+    DESTDIR="${dest_dir}" ninja install
 
     post_package_strip
 }

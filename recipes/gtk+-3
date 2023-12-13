@@ -1,13 +1,11 @@
 name=gtk+-3
 from_source=gtk+-3
 revision=1
-imagedeps="meson ninja gdk-pixbuf2"
-hostdeps="gcc pkg-config"
+builddeps="base meson ninja python-setuptools"
 deps="core-libs atk at-spi2-atk cairo glib gdk-pixbuf libx11 libxext libxcb libxrender libxrandr libxfixes libxdamage pango fribidi libepoxy libxkbcommon fontconfig freetype libxi harfbuzz libxcursor gsettings-desktop-schemas dbus"
 
 build() {
     meson setup \
-        --cross-file ${base_dir}/build-support/cross_file.txt \
         --prefix=${prefix} \
         --libdir=lib \
         --buildtype=release \

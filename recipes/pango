@@ -1,13 +1,11 @@
 name=pango
 from_source=pango
 revision=1
-imagedeps="meson ninja"
-hostdeps="gcc pkg-config"
+builddeps="base meson ninja"
 deps="core-libs glib fontconfig freetype fribidi cairo xorg-proto libx11 libxtrans libxext harfbuzz libxft"
 
 build() {
     meson setup \
-        --cross-file ${base_dir}/build-support/cross_file.txt \
         --prefix=${prefix} \
         --libdir=lib \
         --buildtype=release \

@@ -1,13 +1,11 @@
 name=libxkbcommon
 from_source=libxkbcommon
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base bison meson ninja"
 deps="core-libs libxcb libxml xkeyboard-config"
-imagedeps="meson ninja"
 
 build() {
     meson setup \
-        --cross-file "${base_dir}/build-support/cross_file.txt" \
         --prefix=/usr \
         --libdir=lib \
         --buildtype=release \
@@ -21,6 +19,7 @@ build() {
 
 package() {
     DESTDIR="${dest_dir}" ninja install
+
     mkdir -p "${dest_dir}${prefix}/share/X11/xkb"
 
     post_package_strip

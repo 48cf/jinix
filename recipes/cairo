@@ -1,8 +1,7 @@
 name=cairo
 from_source=cairo
 revision=1
-imagedeps="binutils"
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs freetype fontconfig libpng pixman libxcb libx11 libxext mesa libxrender glib"
 
 build() {

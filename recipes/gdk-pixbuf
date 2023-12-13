@@ -1,13 +1,11 @@
 name=gdk-pixbuf
 from_source=gdk-pixbuf
 revision=1
-imagedeps="meson ninja"
-hostdeps="gcc pkg-config"
+builddeps="base meson ninja"
 deps="core-libs glib libjpeg-turbo libpng libx11 libtiff"
 
 build() {
     meson setup \
-        --cross-file ${base_dir}/build-support/cross_file.txt \
         --prefix=${prefix} \
         --libdir=lib \
         --buildtype=release \
