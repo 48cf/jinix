@@ -1,0 +1,17 @@
+name=xorg-xrandr
+from_source=xorg-xrandr
+revision=1
+builddeps="base xorg-util-macros"
+deps="core-libs libxrandr"
+
+build() {
+    autotools_configure
+
+    make -j${parallelism}
+}
+
+package() {
+    make install DESTDIR="${dest_dir}"
+
+    post_package_strip
+}
