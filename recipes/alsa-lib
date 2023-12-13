@@ -1,0 +1,17 @@
+name=alsa-lib
+from_source=alsa-lib
+revision=1
+builddeps="base"
+deps="core-libs"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    make install DESTDIR="${dest_dir}"
+
+    post_package_strip
+}
