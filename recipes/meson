@@ -1,7 +1,7 @@
 name=meson
 from_source=meson
-builddeps="base python python-build python-installer python-setuptools python-wheel"
-deps="core-libs"
+builddeps="base python-build python-installer python-setuptools python-wheel"
+deps="core-libs python"
 
 build() {
     cp -rp "${source_dir}"/. ./
