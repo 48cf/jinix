@@ -1,7 +1,7 @@
 name=python
-version=3.12.1
+version=3.11.7
 tarball_url="https://www.python.org/ftp/python/${version}/Python-${version}.tar.xz"
-tarball_blake2b="20f6f8b7b0d7e560d269138a38c5b9362073aa414f0a862357644b97eb76f9bf70b5365cac1dd1a615895302b046bd88404966e56818d57e506b9972d34445a3"
+tarball_blake2b="3414118d30076e4223571825b5c595c5795422244de20dc70d07389a03b2c2b03b98a9ff562a8fd164db8f776dd741a9d7beb1c2ae4087ec6af677619a9dfd80"
 
 regenerate() {
     true

@@ -13,8 +13,8 @@ build() {
 }
 
 package() {
-    mkdir -p "${dest_dir}${prefix}/lib/python3.12/site-packages"
-    cp -rp dist/*.whl "${dest_dir}${prefix}/lib/python3.12/site-packages"
-    cd "${dest_dir}${prefix}/lib/python3.12/site-packages"
+    mkdir -p "${dest_dir}${prefix}/lib/python3.11/site-packages"
+    cp -rp dist/*.whl "${dest_dir}${prefix}/lib/python3.11/site-packages"
+    cd "${dest_dir}${prefix}/lib/python3.11/site-packages"
     7z x *.whl
 }
