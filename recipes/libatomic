@@ -1,0 +1,35 @@
+cross_compile=yes
+
+name=libatomic
+from_source=gcc-host
+revision=1
+hostdeps="gcc pkg-config"
+imagedeps="gcc"
+deps="glibc libgcc libstdc++"
+
+build() {
+    true
+
+    cd "${base_dir}"/host-builds/gcc/build
+
+    make -j${parallelism} all-target-libatomic
+}
+
+package() {
+    cd "${base_dir}"/host-builds/gcc/build
+
+    rm -rf tmp_libatomic_dir
+    mkdir tmp_libatomic_dir
+
+    DESTDIR="$(realpath tmp_libatomic_dir)" make install-strip-target-libatomic
+
+    mkdir -p "${dest_dir}${prefix}"
+    cp -r tmp_libatomic_dir/usr/local/${OS_TRIPLET}/* "${dest_dir}${prefix}"/
+
+    # Remove static libraries
+    rm -rf "${dest_dir}${prefix}"/lib/*.a
+
+    # Copy libatomic into GCC's tree else it will complain.
+    mkdir -p "${base_dir}"/host-pkgs/gcc/usr/local/lib
+    cp -r tmp_libatomic_dir/usr/local/* "${base_dir}"/host-pkgs/gcc/usr/local/
+}

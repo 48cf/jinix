@@ -3,7 +3,7 @@ cross_compile=yes
 name=core-libs
 from_source=glibc
 revision=1
-deps="glibc libgcc libstdc++ libintl libiconv libxcrypt"
+deps="glibc libgcc libstdc++ libatomic libintl libiconv libxcrypt"
 
 build() {
     true
