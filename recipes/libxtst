@@ -1,0 +1,17 @@
+name=libxtst
+from_source=libxtst
+revision=1
+builddeps="base"
+deps="core-libs libxext libxfixes libxi xorg-util-macros xorg-proto"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
