@@ -2,7 +2,7 @@ name=xorg-server
 from_source=xorg-server
 revision=1
 builddeps="base"
-deps="core-libs xorg-util-macros xorg-proto xcb-proto libdrm libpciaccess libxtrans libxshmfence libx11 libxcvt libxxf86vm libxkbfile libxfont2 libepoxy libxi libxv libxdamage libxrender libxrandr libxcb libxfixes libxext mesa nettle xkbcomp pixman"
+deps="core-libs eudev xorg-util-macros xorg-proto xcb-proto libdrm libpciaccess libxtrans libxshmfence libx11 libxcvt libxxf86vm libxkbfile libxfont2 libepoxy libxi libxv libxdamage libxrender libxrandr libxcb libxfixes libxext mesa nettle xkbcomp pixman"
 
 build() {
     export CFLAGS=${CFLAGS/-fno-plt}
@@ -17,6 +17,7 @@ build() {
         --enable-xorg \
         --enable-xv \
         --enable-xvfb \
+        --enable-config-udev \
         --disable-xephyr \
         --disable-xwayland \
         --disable-xnest \
@@ -25,11 +26,9 @@ build() {
         --disable-dpms \
         --disable-screensaver \
         --disable-xres \
-        --disable-xinerama \
         --disable-xvmc \
         --disable-systemd-logind \
-        --disable-secure-rpc \
-        --disable-config-udev
+        --disable-secure-rpc
 
     make -j${parallelism}
 }
