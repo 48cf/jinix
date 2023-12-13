@@ -1,0 +1,40 @@
+name=xterm
+from_source=xterm
+revision=1
+builddeps="base"
+deps="core-libs libx11 libxaw libxft libxkbfile ncurses xbitmaps"
+
+build() {
+    autotools_configure \
+      --with-app-defaults="${prefix}/share/X11/app-defaults/" \
+      --with-x \
+      --disable-full-tgetent \
+      --disable-imake \
+      --enable-ansi-color \
+      --enable-88-color \
+      --enable-256-color \
+      --enable-broken-osc \
+      --enable-broken-st \
+      --enable-load-vt-fonts \
+      --enable-i18n \
+      --enable-wide-chars \
+      --enable-doublechars \
+      --enable-warnings \
+      --enable-tcap-query \
+      --enable-logging \
+      --enable-dabbrev \
+      --enable-freetype \
+      --enable-narrowproto \
+      --enable-exec-xterm \
+      --enable-sixel-graphics \
+      --enable-regis-graphics \
+      --with-tty-group=tty
+
+    make -j${parallelism}
+}
+
+package() {
+    make DESTDIR="${dest_dir}" install
+
+    post_package_strip
+}
