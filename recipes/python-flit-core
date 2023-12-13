@@ -1,7 +1,7 @@
 name=python-flit-core
 from_source=python-flit-core
 builddeps="base p7zip python"
-deps="core-libs python-setuptools"
+deps="core-libs"
 
 build() {
     dist_dir="$(pwd -P)/dist"

@@ -1,7 +1,7 @@
 name=python-build
 from_source=python-build
-builddeps="base python"
-deps="core-libs python-installer python-packaging python-pyproject-hooks python-setuptools"
+builddeps="base python python-installer python-setuptools"
+deps="core-libs python-flit-core python-packaging python-pyproject-hooks"
 
 build() {
     cp -rp "${source_dir}"/. ./
@@ -10,8 +10,7 @@ build() {
     python -m build \
         --wheel \
         --no-isolation \
-        --skip-dependency-check \
-        .
+        --skip-dependency-check
 }
 
 package() {

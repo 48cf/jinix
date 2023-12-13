@@ -1,7 +1,7 @@
 name=python-installer
 from_source=python-installer
-builddeps="base p7zip python"
-deps="core-libs python-flit-core"
+builddeps="base p7zip python python-flit-core"
+deps="core-libs"
 
 build() {
     dist_dir="$(pwd -P)/dist"

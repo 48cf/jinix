@@ -1,7 +1,7 @@
 name=python-wheel
 from_source=python-wheel
-builddeps="base python"
-deps="core-libs python-build python-installer"
+builddeps="base python python-build python-installer"
+deps="core-libs"
 
 build() {
     cp -rp "${source_dir}"/. ./
