@@ -1,9 +1,8 @@
 name=xkeyboard-config
 from_source=xkeyboard-config
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base perl python"
 deps="core-libs xorg-proto libx11"
-imagedeps="python"
 
 build() {
     autotools_configure \
