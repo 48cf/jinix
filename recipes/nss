@@ -1,0 +1,34 @@
+name=nss
+from_source=nss
+revision=1
+builddeps="base gyp perl python strace"
+deps="core-libs nspr sqlite zlib"
+
+build() {
+    cp -rf ${source_dir}/. ./
+    cd nss
+
+    make -j${parallelism} \
+        BUILD_OPT=1 \
+        NSPR_INCLUDE_DIR="${prefix}/include/nspr" \
+        USE_SYSTEM_ZLIB=1 \
+        NSS_USE_SYSTEM_SQLITE=1 \
+        NSS_ENABLE_WERROR=0 \
+        USE_64=1
+}
+
+package() {
+    install -vm755 -d "${dest_dir}${prefix}/bin"
+    install -vm755 dist/Linux*/bin/{certutil,nss-config,pk12util} "${dest_dir}${prefix}/bin"
+
+    install -vm755 -d "${dest_dir}${prefix}/lib"
+    install -vm755 dist/Linux*/lib/*.so "${dest_dir}${prefix}/lib"
+
+    install -vm755 -d "${dest_dir}${prefix}/lib/pkgconfig"
+    install -vm644 dist/Linux*/lib/pkgconfig/nss.pc "${dest_dir}${prefix}/lib/pkgconfig"
+
+    install -vm755 -d "${dest_dir}${prefix}/include/nss"
+    install -vm644 dist/{public,private}/nss/* "${dest_dir}${prefix}/include/nss"
+
+    post_package_strip
+}

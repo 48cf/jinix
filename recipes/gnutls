@@ -1,0 +1,19 @@
+name=gnutls
+from_source=gnutls
+revision=1
+builddeps="base"
+deps="core-libs libffi libunistring libtasn1 nettle p11-kit"
+
+build() {
+    autotools_configure_lib \
+        --docdir=/usr/share/doc/gnutls-${version} \
+        --with-default-trust-store-pkcs11="pkcs11:"
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR=${dest_dir} make install
+
+    post_package_strip
+}

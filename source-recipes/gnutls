@@ -1,0 +1,8 @@
+name=gnutls
+version=3.8.2
+tarball_url="https://www.gnupg.org/ftp/gcrypt/gnutls/v3.8/gnutls-${version}.tar.xz"
+tarball_blake2b="d70524f17919bc02fefc610ede948d209e50e3276fc1e2d40aaed5c208265455da220d948f4a3f21db57f9d253c103f3a1b9a6daa2229d02c7c224448acc2777"
+
+regenerate() {
+    true
+}

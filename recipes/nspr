@@ -1,0 +1,26 @@
+name=nspr
+from_source=nspr
+revision=1
+builddeps="base"
+deps="core-libs"
+
+build() {
+        configure_script_path=${source_dir}/nspr/configure \
+    autotools_configure_lib \
+        --includedir=${prefix}/include/nspr \
+        --enable-optimize \
+        --disable-debug \
+        --enable-64bit
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    ln -sv nspr.pc "${dest_dir}${prefix}/lib/pkgconfig/mozilla-nspr.pc"
+    rm -rv "${dest_dir}${prefix}/include/nspr/md"
+    rm -v "${dest_dir}"${prefix}/bin/{compile-et.pl,prerr.properties}
+
+    post_package_strip
+}

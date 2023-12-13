@@ -1,0 +1,26 @@
+name=p11-kit
+from_source=p11-kit
+revision=1
+builddeps="base meson ninja"
+deps="core-libs libtasn1 nss"
+
+build() {
+    meson setup \
+        --prefix=${prefix} \
+        --sysconfdir=/etc \
+        --libdir=lib \
+        --buildtype=release \
+        -Dtrust_paths=/etc/pki/anchors \
+        ${source_dir}
+
+    ninja
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    ln -svf "${dest_dir}${prefix}/libexec/p11-kit/trust-extract-compat" "${dest_dir}${prefix}/bin/update-ca-certificates"
+    ln -svf pkcs11/p11-kit-trust.so "${dest_dir}${prefix}/lib/libnssckbi.so"
+
+    post_package_strip
+}
