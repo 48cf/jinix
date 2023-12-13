@@ -1,0 +1,25 @@
+name=asciidoc
+from_source=asciidoc
+builddeps="base python python-installer python-setuptools python-wheel"
+deps="core-libs"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    ./configure \
+      --docdir ${prefix}/share/doc/asciidoc \
+      --prefix ${prefix}
+
+    make build
+}
+
+package() {
+    make DESTDIR="${dest_dir}" install
+    make DESTDIR="${dest_dir}" docs
+
+    _platlib="$(python -c 'import sysconfig; print(sysconfig.get_paths()["platlib"])')"
+    install -Dm0644 -t "${dest_dir}/${_platlib}/${pkgname}/" asciidoc/api.py
+    install -Dm0644 -t "${dest_dir}/usr/share/man/man1/" doc/*.1
+
+    post_package_strip
+}
