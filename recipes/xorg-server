@@ -5,9 +5,6 @@ builddeps="base"
 deps="core-libs xorg-util-macros xorg-proto xcb-proto libdrm libpciaccess libxtrans libxshmfence libx11 libxcvt libxxf86vm libxkbfile libxfont2 libepoxy libxi libxv libxdamage libxrender libxrandr libxcb libxfixes libxext mesa nettle xkbcomp pixman"
 
 build() {
-        ACLOCAL=true \
-        AUTOCONF=true \
-        AUTOMAKE=true \
         CFLAGS="-Wno-error=array-bounds ${common_flags}" \
     autotools_configure \
         --disable-static \
