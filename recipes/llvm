@@ -14,6 +14,8 @@ build() {
         -DLLVM_ENABLE_RTTI=ON \
         -DLLVM_BUILD_LLVM_DYLIB=ON \
         -DLLVM_ENABLE_PROJECTS="clang;lld" \
+        -DLLVM_DEFAULT_TARGET_TRIPLE=${OS_TRIPLET} \
+        -DLLVM_HOST_TRIPLE=${OS_TRIPLET} \
         -Wno-dev \
         ${source_dir}/llvm
 
