@@ -1,0 +1,14 @@
+name=ninja
+from_source=ninja
+builddeps="base python"
+deps="core-libs"
+
+build() {
+    python "${source_dir}/configure.py" --bootstrap
+}
+
+package() {
+    install -Dvm755 ninja "${dest_dir}${prefix}/bin/ninja"
+
+    post_package_strip
+}

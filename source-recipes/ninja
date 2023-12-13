@@ -1,0 +1,8 @@
+name=ninja
+version=1.11.1
+tarball_url="https://github.com/ninja-build/ninja/archive/refs/tags/v${version}.tar.gz"
+tarball_blake2b="c96cf7c319b7abd65f644465688d256f8b3a576c4616d0c63852e25dd0dc5f63c66708d429d8dddb6228502eb147211a86a5dd369b80ec2228902b370d2343e5"
+
+regenerate() {
+    true
+}
