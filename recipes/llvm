@@ -1,13 +1,12 @@
 name=llvm
 from_source=llvm
 revision=1
-builddeps="base cmake python"
+builddeps="base cmake ninja python"
 deps="core-libs ncurses zlib zstd"
 
 build() {
-    # XXX use Ninja instead of Make when we port it
     cmake \
-        -G "Unix Makefiles" \
+        -GNinja \
         -DCMAKE_INSTALL_PREFIX=${prefix} \
         -DCMAKE_BUILD_TYPE=Release \
         -DBUILD_SHARED_LIBS=ON \
@@ -17,11 +16,11 @@ build() {
         -Wno-dev \
         ${source_dir}/llvm
 
-    make -j${parallelism}
+    ninja
 }
 
 package() {
-    DESTDIR="${dest_dir}" make install
+    DESTDIR="${dest_dir}" ninja install
 
     post_package_strip
 }
