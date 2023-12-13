@@ -1,0 +1,17 @@
+name=python-markupsafe
+from_source=python-markupsafe
+builddeps="base python python-setuptools"
+deps="core-libs"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python setup.py build
+}
+
+package() {
+    # XXX enable optimizations
+    python setup.py install \
+        --prefix="${prefix}" \
+        --root="${dest_dir}"
+}
