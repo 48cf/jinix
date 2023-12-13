@@ -1,18 +1,11 @@
 name=mesa
 from_source=mesa
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base bison cmake flex meson ninja python-mako python-setuptools"
 deps="core-libs libglvnd libxshmfence libxrandr libxdamage libxxf86vm libxfixes libx11 libxext libxcb libexpat libva libvdpau llvm zlib"
-imagedeps="binutils glslang meson ninja python-mako"
 
 build() {
-    cp ${base_dir}/build-support/cross_file.txt ./
-
-    # XXX figure out a better way to llvm-config
-    sed -i "/^# sed adds binaries here.\$/a llvm-config = '/sysroot/usr/bin/llvm-config'" cross_file.txt
-
     meson setup \
-        --cross-file cross_file.txt \
         --prefix=/usr \
         --libdir=lib \
         --buildtype=release \
@@ -36,8 +29,8 @@ build() {
         -Dshared-glapi=enabled \
         -Dvalgrind=disabled \
         -Dvideo-codecs=vc1dec,h264dec,h264enc,h265dec,h265enc \
-        -Dvulkan-drivers=amd,intel,intel_hasvk,swrast,virtio \
-        -Dvulkan-layers=device-select,intel-nullhw,overlay \
+        -Dvulkan-drivers=`#amd,intel,intel_hasvk,swrast,virtio` \
+        -Dvulkan-layers=`#device-select,intel-nullhw,overlay` \
         ${source_dir}
 
     ninja

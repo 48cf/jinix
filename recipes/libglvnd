@@ -1,8 +1,7 @@
 name=libglvnd
 from_source=libglvnd
 revision=1
-imagedeps="meson ninja"
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs libx11 libxext"
 
 build() {

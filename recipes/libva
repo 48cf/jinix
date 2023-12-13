@@ -1,7 +1,7 @@
 name=libva
 from_source=libva
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs libdrm libx11 libxcb libxext libxfixes"
 
 build() {

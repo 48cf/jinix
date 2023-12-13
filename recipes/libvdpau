@@ -1,13 +1,11 @@
 name=libvdpau
 from_source=libvdpau
 revision=1
-imagedeps="meson ninja"
-hostdeps="gcc pkg-config"
+builddeps="base meson ninja strace"
 deps="core-libs libxext xorg-proto"
 
 build() {
     meson setup \
-        --cross-file ${base_dir}/build-support/cross_file.txt \
         --prefix=${prefix} \
         --libdir=lib \
         --buildtype=release \

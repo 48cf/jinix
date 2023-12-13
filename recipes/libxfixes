@@ -1,11 +1,12 @@
 name=libxfixes
 from_source=libxfixes
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs xorg-util-macros xorg-proto libx11 libxtrans"
 
 build() {
     autotools_configure_lib
+
     make -j${parallelism}
 }
 
