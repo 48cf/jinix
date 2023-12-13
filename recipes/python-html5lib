@@ -1,0 +1,18 @@
+name=python-html5lib
+from_source=python-html5lib
+builddeps="base python python-setuptools"
+deps="core-libs python-six"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python setup.py build
+}
+
+package() {
+    # XXX enable optimizations
+    python setup.py install \
+        --prefix="${prefix}" \
+        --root="${dest_dir}" \
+        --skip-build
+}
