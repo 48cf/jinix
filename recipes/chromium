@@ -10,11 +10,18 @@ build() {
     export AR=llvm-ar
     export NM=llvm-nm
 
+    # https://github.com/ungoogled-software/ungoogled-chromium-archlinux/issues/123
     export CFLAGS=${CFLAGS/-fexceptions}
     export CFLAGS=${CFLAGS/-fcf-protection}
     export CXXFLAGS=${CXXFLAGS/-fexceptions}
     export CXXFLAGS=${CXXFLAGS/-fcf-protection}
+
+    # https://crbug.com/957519#c122 (not sure if still applicable)
     export CXXFLAGS=${CXXFLAGS/-Wp,-D_GLIBCXX_ASSERTIONS}
+
+    # Do not warn about unknown warning options
+    export CFLAGS="$CFLAGS -Wno-unknown-warning-option"
+    export CXXFLAGS="$CXXFLAGS -Wno-unknown-warning-option"
 
     _build_dir=$(pwd -P)
     cd ${source_dir}
