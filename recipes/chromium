@@ -1,0 +1,93 @@
+name=chromium
+from_source=chromium
+revision=1
+builddeps="base git gn gperf llvm ninja nodejs python"
+deps="core-libs alsa-lib cups dbus gtk+-3 libffi libgcrypt libva libxcomposite libxtst nss pciutils"
+
+build() {
+    export CC=clang
+    export CXX=clang++
+    export AR=llvm-ar
+    export NM=llvm-nm
+
+    export CFLAGS=${CFLAGS/-fexceptions}
+    export CFLAGS=${CFLAGS/-fcf-protection}
+    export CXXFLAGS=${CXXFLAGS/-fexceptions}
+    export CXXFLAGS=${CXXFLAGS/-fcf-protection}
+    export CXXFLAGS=${CXXFLAGS/-Wp,-D_GLIBCXX_ASSERTIONS}
+
+    _build_dir=$(pwd -P)
+    cd ${source_dir}
+    gn gen ${_build_dir} --args="
+        is_clang=true
+        clang_use_chrome_plugins=false
+        use_lld=true
+        clang_base_path=\"${prefix}\"
+        custom_toolchain=\"//build/toolchain/linux/unbundle:default\"
+        host_toolchain=\"//build/toolchain/linux/unbundle:default\"
+        enable_rust=false
+        is_debug=false
+        dcheck_always_on=false
+        dcheck_is_configurable=false
+        is_component_build=false
+        enable_nacl=false
+        enable_hangout_services_extension=false
+        enable_widevine=false
+        use_cups=true
+        use_kerberos=false
+        use_pulseaudio=false
+        use_vaapi=true
+        rtc_use_pipewire=false
+        gtk_version=3
+        use_gold=false
+        use_sysroot=false
+        use_custom_libcxx=true
+        enable_pseudolocales=false
+        blink_enable_generated_code_formatting=false
+        proprietary_codecs=true
+        ffmpeg_branding=\"Chrome\"
+        target_cpu=\"x64\"
+        treat_warnings_as_errors=false
+        fatal_linker_warnings=false
+        use_system_libdrm=true
+        use_system_minigbm=true
+        use_xkbcommon=true
+        use_qt=false
+        ozone_platform_x11=true
+        ozone_platform_wayland=false
+        ozone_platform=\"x11\"
+        is_official_build=true
+        symbol_level=0
+        chrome_pgo_phase=0
+        safe_browsing_mode=0
+    "
+
+    cd ${_build_dir}
+    ninja chrome chrome_sandbox chromedriver
+}
+
+package() {
+    install -D chrome "${dest_dir}${prefix}/lib/chromium/chromium"
+    install -D chromedriver "${dest_dir}${prefix}/bin/chromedriver"
+    install -Dm4755 chrome_sandbox "${dest_dir}${prefix}/lib/chromium/chrome-sandbox"
+
+    _toplevel_files="
+        chrome_100_percent.pak
+        chrome_200_percent.pak
+        chrome_crashpad_handler
+        resources.pak
+        v8_context_snapshot.bin
+        icudtl.dat
+        libEGL.so
+        libGLESv2.so
+        libvk_swiftshader.so
+        libvulkan.so.1
+        vk_swiftshader_icd.json
+    "
+
+    for file in ${_toplevel_files}; do
+        cp -pv ${file} "${dest_dir}${prefix}/lib/chromium/"
+    done
+
+    install -Dm644 -t "${dest_dir}${prefix}/lib/chromium/locales" locales/*.pak
+}

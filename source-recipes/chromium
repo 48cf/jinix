@@ -1,0 +1,40 @@
+name=chromium
+version=120.0.6099.71
+tarball_url="https://commondatastorage.googleapis.com/chromium-browser-official/chromium-${version}.tar.xz"
+tarball_blake2b="1e5096b8d03f1ee65b5c1ea98cdc2230bb3f789bcf87750891d47c5c79e79997602997b72c3c5f4f8f10a5f7bb754ccf1065e789ff5949c2ce084b1759e7280b"
+imagedeps="python"
+allow_network=yes
+
+uc_version=${version}-1
+uc_tarball_url="https://github.com/ungoogled-software/ungoogled-chromium/archive/${uc_version}.tar.gz"
+uc_tarball_blake2b="39824687663edd23da583b57e9af04e76aebb76ce0c8a029fc085f90f77f3543ade47d965822c6492fee5c79ca3a1adf675bd2190466720081744a2ea425a867"
+
+regenerate() {
+    mkdir -p third_party/node/linux/node-linux-x64/bin
+	ln -s /usr/bin/node third_party/node/linux/node-linux-x64/bin/node
+
+    uc_tarball_name="uc-${uc_version}.tar.gz"
+    uc_tarball_path="${base_dir}/sources/${uc_tarball_name}"
+    if [ ! -f "${uc_tarball_path}" ]; then
+        curl -L -o "${uc_tarball_path}" ${uc_tarball_url}
+    fi
+
+    uc_actual_blake2b="$(b2sum "${uc_tarball_path}" | awk '{print $1;}')"
+    if ! [ ${uc_actual_blake2b} = ${uc_tarball_blake2b} ]; then
+        die "* error: Failed to verify BLAKE2B for ${uc_tarball_name}.
+Expected '${uc_tarball_blake2b}';
+got '${uc_actual_blake2b}'."
+    fi
+
+    tar -xf "${uc_tarball_path}"
+
+    uc_repo="$(pwd -P)/ungoogled-chromium-${uc_version}"
+    uc_utils="${uc_repo}/utils"
+
+    python "${uc_utils}/prune_binaries.py" ./ "${uc_repo}/pruning.list"
+    python "${uc_utils}/patches.py" apply ./ "${uc_repo}/patches"
+    python "${uc_utils}/domain_substitution.py" apply \
+        -r "${uc_repo}/domain_regex.list" \
+        -f "${uc_repo}/domain_substitution.list" \
+        -c domainsubcache.tar.gz ./
+}
