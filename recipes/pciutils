@@ -1,0 +1,32 @@
+name=pciutils
+from_source=pciutils
+revision=1
+builddeps="base"
+deps="core-libs zlib"
+
+build() {
+    cp -rp ${source_dir}/. ./
+
+    make -j${parallelism} \
+        OPT="$CFLAGS -fPIC -DPIC" \
+        ZLIB=yes \
+        SHARED=yes \
+        PREFIX="${prefix}" \
+        SHAREDIR="${prefix}/share/hwdata" \
+        MANDIR="${prefix}/share/man" \
+        SBINDIR="${prefix}/bin" \
+        all
+}
+
+package() {
+    make \
+        SHARED=yes \
+        PREFIX="${prefix}" \
+        SBINDIR="${prefix}/bin" \
+        SHAREDIR="${prefix}/share/hwdata" \
+        MANDIR="${prefix}/share/man" \
+        DESTDIR="${dest_dir}" \
+        install install-lib
+
+    post_package_strip
+}
