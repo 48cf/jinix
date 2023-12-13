@@ -1,0 +1,8 @@
+name=nodejs
+version=21.4.0
+tarball_url="https://github.com/nodejs/node/archive/refs/tags/v${version}.tar.gz"
+tarball_blake2b="236b7e57cfe7b92fb461e514d4a67e25c738badd37d82ca7f973d383a568042ba998c1da7323c9361bceecc0ca26e0abe6d382f5e3eee013986862c65c278280"
+
+regenerate() {
+    true
+}

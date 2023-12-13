@@ -1,0 +1,29 @@
+name=nodejs
+from_source=nodejs
+revision=1
+builddeps="base git procps-ng python"
+deps="core-libs icu openssl zlib"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    ./configure \
+        --prefix=/usr \
+        --with-intl=system-icu \
+        --without-npm \
+        --shared \
+        --shared-openssl \
+        --shared-zlib \
+        --experimental-http-parser
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    cd "${dest_dir}${prefix}/lib/"
+    ln -s libnode.so.* libnode.so
+
+    post_package_strip
+}
