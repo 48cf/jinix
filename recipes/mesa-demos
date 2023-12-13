@@ -1,7 +1,7 @@
 name=mesa-demos
 from_source=mesa-demos
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs freetype mesa glu libx11 libxext"
 
 build() {
