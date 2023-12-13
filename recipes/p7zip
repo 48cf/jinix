@@ -1,0 +1,23 @@
+name=p7zip
+from_source=p7zip
+revision=1
+builddeps="base"
+deps="core-libs"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    make OPTFLAGS="$CFLAGS" LOCAL_LIBS="-liconv -lpthread" -j${parallelism} 7z 7zr 7za
+}
+
+package() {
+    make install \
+        DEST_DIR="${dest_dir}" \
+        DEST_HOME="${prefix}" \
+        DEST_MAN="${prefix}/share/man"
+
+    # Remove the manual for the file manager
+    rm -rf "${dest_dir}${prefix}/share/doc/p7zip/DOC/MANUAL/fm"
+
+    post_package_strip
+}
