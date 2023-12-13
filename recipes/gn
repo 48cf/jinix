@@ -1,0 +1,23 @@
+name=gn
+from_source=gn
+revision=1
+builddeps="base llvm git ninja python"
+deps="core-libs"
+
+build() {
+    ${source_dir}/build/gen.py \
+        --no-last-commit-position \
+        --no-static-libstdc++ \
+        --out-path=$(pwd -P)
+
+    cat <<EOF >last_commit_position.h
+#define LAST_COMMIT_POSITION_NUM 0
+#define LAST_COMMIT_POSITION "0 (${version})"
+EOF
+    ninja
+}
+
+package() {
+    install -Dv gn "${dest_dir}/usr/bin/gn"
+    install -Dvm644 -t "${dest_dir}/usr/share/doc/gn" ${source_dir}/docs/*
+}
