@@ -5,6 +5,10 @@ builddeps="base"
 deps="core-libs libinput xorg-server xorg-proto"
 
 build() {
+    export CFLAGS=${CFLAGS/-fno-plt}
+    export CXXFLAGS=${CXXFLAGS/-fno-plt}
+    export LDFLAGS=${LDFLAGS/,-z,now}
+
     autotools_configure_lib
 
     make -j${parallelism}
