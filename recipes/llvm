@@ -1,7 +1,7 @@
 name=llvm
 from_source=llvm
 revision=1
-builddeps="base cmake ninja python"
+builddeps="base cmake git ninja python"
 deps="core-libs ncurses zlib zstd"
 
 build() {
@@ -13,6 +13,7 @@ build() {
         -DLLVM_ENABLE_EH=ON \
         -DLLVM_ENABLE_RTTI=ON \
         -DLLVM_BUILD_LLVM_DYLIB=ON \
+        -DLLVM_ENABLE_PROJECTS="clang;lld" \
         -Wno-dev \
         ${source_dir}/llvm
 
