@@ -1,0 +1,17 @@
+name=xmlto
+from_source=xmlto
+revision=1
+builddeps="base"
+deps="core-libs"
+
+build() {
+    autotools_configure BASH=/usr/bin/bash
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
