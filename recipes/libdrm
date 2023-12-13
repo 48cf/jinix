@@ -1,15 +1,11 @@
-cross_compile=yes
-
 name=libdrm
 from_source=libdrm
 revision=1
-imagedeps="meson ninja"
-hostdeps="gcc pkg-config"
+builddeps="base meson ninja"
 deps="core-libs libpciaccess"
 
 build() {
     meson setup \
-        --cross-file ${base_dir}/build-support/cross_file.txt \
         --prefix=${prefix} \
         --libdir=lib \
         --buildtype=release \
