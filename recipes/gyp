@@ -1,0 +1,19 @@
+name=gyp
+from_source=gyp
+revision=1
+builddeps="base python-build python-installer python-setuptools python-wheel"
+deps="core-libs python python-six"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python -m build \
+        --wheel \
+        --no-isolation
+}
+
+package() {
+    python -m installer \
+        --destdir="${dest_dir}" \
+        dist/*.whl
+}
