@@ -1,0 +1,27 @@
+name=cups
+from_source=cups
+revision=1
+builddeps="base"
+deps="core-libs dbus gnutls pam zlib"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+        configure_script_path=./configure \
+    autotools_configure_lib \
+        --disable-gssapi \
+        --disable-browsing \
+        --with-rcdir=/tmp/cupsinit \
+        --with-rundir=/run/cups \
+        --with-system-groups=lpadmin \
+        --with-docdir="${prefix}/share/cups/doc-${version}" \
+        --with-components=libcups
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
