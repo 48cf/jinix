@@ -1,0 +1,22 @@
+name=python-build
+from_source=python-build
+builddeps="base python"
+deps="core-libs python-installer python-packaging python-pyproject-hooks python-setuptools"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+        PYTHONPATH="${source_dir}/src" \
+    python -m build \
+        --wheel \
+        --no-isolation \
+        --skip-dependency-check \
+        .
+}
+
+package() {
+    # XXX enable optimizations
+    python -m installer \
+        --destdir="${dest_dir}" \
+        dist/*.whl
+}

@@ -1,0 +1,8 @@
+name=python-pyproject-hooks
+version=1.0.0
+tarball_url="https://github.com/pypa/pyproject-hooks/archive/refs/tags/v${version}.tar.gz"
+tarball_blake2b="c90d2fb70ada9414cbbf201bfbb695b4e9055b61fdcdc8e0f8a2548e4f47e7512140fc71fee9f9306577d97b76ca64e77b7c58d526381c5481739e630e5250a1"
+
+regenerate() {
+    true
+}

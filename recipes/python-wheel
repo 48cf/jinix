@@ -1,0 +1,18 @@
+name=python-wheel
+from_source=python-wheel
+builddeps="base python"
+deps="core-libs python-build python-installer"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python -m build \
+        --wheel \
+        --no-isolation
+}
+
+package() {
+    python -m installer \
+        --destdir="${dest_dir}" \
+        dist/*.whl
+}

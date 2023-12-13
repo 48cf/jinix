@@ -1,0 +1,8 @@
+name=python-packaging
+version=23.2
+tarball_url="https://github.com/pypa/packaging/archive/${version}.tar.gz"
+tarball_blake2b="2f673aa75ef2c96365f4fe89aa4c6884ba0c2a215ef7a739470e0a80b9965db364f968840d3384d7c7d53b3678f92087cc9613730161aefc1192f958f0e11cd3"
+
+regenerate() {
+    true
+}
