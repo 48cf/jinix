@@ -1,7 +1,7 @@
 name=xf86-video-vesa
 from_source=xf86-video-vesa
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs libinput xorg-server xorg-proto"
 
 build() {

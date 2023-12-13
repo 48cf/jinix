@@ -1,7 +1,7 @@
 name=mtdev
 from_source=mtdev
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs"
 
 build() {

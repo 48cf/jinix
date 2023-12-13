@@ -1,13 +1,11 @@
 name=libevdev
 from_source=libevdev
 revision=1
-imagedeps="meson ninja"
-hostdeps="gcc pkg-config"
+builddeps="base meson ninja"
 deps="core-libs eudev mtdev"
 
 build() {
     meson setup \
-        --cross-file ${base_dir}/build-support/cross_file.txt \
         --prefix=${prefix} \
         --libdir=lib \
         --buildtype=release \
