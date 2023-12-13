@@ -1,11 +1,12 @@
 name=libxft
 from_source=libxft
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs xorg-util-macros xorg-proto libx11 libxrender freetype fontconfig"
 
 build() {
     autotools_configure_lib
+
     make -j${parallelism}
 }
 

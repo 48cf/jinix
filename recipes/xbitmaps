@@ -1,11 +1,12 @@
 name=xbitmaps
 revision=1
 from_source=xbitmaps
-hostdeps="gcc pkg-config xorg-macros"
+builddeps="base"
 deps="core-libs"
 
 build() {
     autotools_configure
+
     make -j${parallelism}
 }
 

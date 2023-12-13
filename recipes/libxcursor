@@ -1,11 +1,12 @@
 name=libxcursor
 from_source=libxcursor
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs libxrender libxfixes libx11"
 
 build() {
     autotools_configure_lib
+
     make -j${parallelism}
 }
 

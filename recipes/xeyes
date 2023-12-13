@@ -1,7 +1,7 @@
 name=xeyes
 from_source=xeyes
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs libx11 libxmu libxaw libxrender libxft libxt libxi libxkbfile"
 
 build() {

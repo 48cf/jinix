@@ -1,9 +1,8 @@
 name=libxt
 from_source=libxt
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs xorg-util-macros xorg-proto libx11 libxtrans libsm libice"
-imagedeps="gcc"
 
 build() {
     autotools_configure_lib \

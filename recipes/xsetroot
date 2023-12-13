@@ -1,7 +1,7 @@
 name=xsetroot
 revision=1
 from_source=xsetroot
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs xorg-server libxmu xbitmaps libxcursor"
 
 build() {

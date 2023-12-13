@@ -1,7 +1,7 @@
 name=libxinerama
 from_source=libxinerama
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs libx11 libxext xorg-util-macros xorg-proto"
 
 build() {

@@ -1,12 +1,11 @@
 name=xorg-xinput
 from_source=xorg-xinput
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs libx11 libxext libxrandr libxi libxinerama xorg-proto"
 
 build() {
-    autotools_configure \
-        --without-xinerama
+    autotools_configure
 
     make -j${parallelism}
 }

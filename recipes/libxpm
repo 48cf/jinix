@@ -1,11 +1,12 @@
 name=libxpm
 from_source=libxpm
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base gettext"
 deps="core-libs xorg-util-macros xorg-proto libx11 libxext libxt"
 
 build() {
     LIBS="-lintl" autotools_configure_lib
+
     make -j${parallelism}
 }
 

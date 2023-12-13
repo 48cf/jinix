@@ -1,11 +1,12 @@
 name=twm
 revision=1
 from_source=twm
-hostdeps="gcc pkg-config"
+builddeps="base bison"
 deps="core-libs xorg-server xsetroot"
 
 build() {
     autotools_configure
+
     make -j${parallelism}
 }
 

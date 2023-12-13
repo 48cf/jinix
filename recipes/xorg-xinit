@@ -1,7 +1,7 @@
 name=xorg-xinit
 from_source=xorg-xinit
 revision=1
-hostdeps="gcc pkg-config"
+builddeps="base"
 deps="core-libs libx11 xorg-proto"
 
 build() {
