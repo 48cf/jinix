@@ -1,4 +1,5 @@
-QEMUFLAGS ?= -M q35,smm=off -m 2G -hdd image.hdd -smp 4
+QEMUFLAGS ?= -M q35,smm=off -m 2G -hdd image.hdd -smp 4 \
+    -device qemu-xhci,id=xhci -device usb-tablet,bus=xhci.0
 
 .PHONY: all
 all:
