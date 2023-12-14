@@ -1,18 +1,15 @@
+# XXX this is provided by python 3.11, but we need to revert commit containing
+# this change when we upgrade to 3.12 because of [PEP 632](https://peps.python.org/pep-0632/)
+
 name=python-setuptools
 from_source=python-setuptools
-builddeps="base python"
-deps="core-libs"
+builddeps="base"
+deps="python"
 
 build() {
-    cp -rp "${source_dir}"/. ./
-
-    python setup.py build
+    true
 }
 
 package() {
-    # XXX enable optimizations
-    python setup.py install \
-        --prefix="${prefix}" \
-        --root="${dest_dir}" \
-        --skip-build
+    true
 }
