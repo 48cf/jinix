@@ -2,7 +2,7 @@ name=gtk+-3
 from_source=gtk+-3
 revision=1
 builddeps="base meson ninja python-setuptools"
-deps="core-libs atk at-spi2-atk cairo glib gdk-pixbuf libx11 libxext libxcb libxrender libxrandr libxfixes libxdamage pango fribidi libepoxy libxkbcommon fontconfig freetype libxi harfbuzz libxcursor gsettings-desktop-schemas dbus"
+deps="core-libs at-spi2-core cairo glib gdk-pixbuf libx11 libxext libxcb libxrender libxrandr libxfixes libxdamage pango fribidi libepoxy libxkbcommon fontconfig freetype libxi harfbuzz libxcursor gsettings-desktop-schemas dbus"
 
 build() {
     meson setup \
