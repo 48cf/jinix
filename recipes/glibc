@@ -28,11 +28,4 @@ build() {
 
 package() {
     DESTDIR=${dest_dir} make install
-
-    # We use libiconv
-    rm "${dest_dir}${prefix}"/bin/iconv* "${dest_dir}${prefix}"/include/iconv.h
-
-    # We use libintl
-    rm "${dest_dir}${prefix}"/include/libintl.h
-    rm "${dest_dir}${prefix}"/share/locale/locale.alias
 }

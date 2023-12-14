@@ -6,19 +6,13 @@ deps="core-libs"
 
 build() {
     autotools_configure \
-        --disable-static \
-        --without-included-gettext \
-        --with-libintl-prefix="${sysroot_dir}${prefix}"
+        --disable-static
 
     make -j${parallelism}
 }
 
 package() {
     DESTDIR="${dest_dir}" make install
-
-    # We use a separate libintl package
-    rm -f "${dest_dir}${prefix}"/include/libintl.h "${dest_dir}${prefix}"/lib/libintl.so*
-    rm -f "${dest_dir}${prefix}"/share/locale/locale.alias
 
     post_package_strip
 }
