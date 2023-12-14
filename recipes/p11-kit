@@ -20,7 +20,11 @@ package() {
     DESTDIR="${dest_dir}" ninja install
 
     ln -svf "${dest_dir}${prefix}/libexec/p11-kit/trust-extract-compat" "${dest_dir}${prefix}/bin/update-ca-certificates"
-    ln -svf pkcs11/p11-kit-trust.so "${dest_dir}${prefix}/lib/libnssckbi.so"
+    # XXX figure out how to nicely provide this symlink
+    #     the purpose of it is to make system CAs available to NSS-aware
+    #     applications, but we currently cannot do this as it conflicts
+    #     with a library installed by NSS
+    # ln -svf pkcs11/p11-kit-trust.so "${dest_dir}${prefix}/lib/libnssckbi.so"
 
     post_package_strip
 }
