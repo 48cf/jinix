@@ -19,7 +19,6 @@ build() {
         -Dvendorarch=${prefix}/lib/perl5/5.38/vendor_perl \
         -Dman1dir=${prefix}/share/man/man1 \
         -Dman3dir=${prefix}/share/man/man3 \
-        -Dldflags="-lintl -lm -lcrypt" \
         -Duseshrplib \
         -Dusethreads \
         -Dmksymlinks

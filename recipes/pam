@@ -5,7 +5,6 @@ builddeps="base"
 deps="core-libs libtirpc libnsl"
 
 build() {
-        LDFLAGS="-lintl" \
     autotools_configure \
         --enable-securedir=${prefix}/lib/security \
         --docdir=${prefix}/share/doc/Linux-PAM-${version}

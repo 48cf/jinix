@@ -5,7 +5,7 @@ builddeps="base gettext"
 deps="core-libs xorg-util-macros xorg-proto libx11 libxext libxt"
 
 build() {
-    LIBS="-lintl" autotools_configure_lib
+    autotools_configure_lib
 
     make -j${parallelism}
 }

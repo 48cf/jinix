@@ -10,8 +10,6 @@ _make() {
         htmldir=${prefix}/share/doc/git/html \
         sysconfdir=/etc \
         perllibdir="$(perl -MConfig -wle 'print $Config{installvendorlib}')" \
-        CFLAGS="$CFLAGS -lintl -liconv" \
-        LDFLAGS="$LDFLAGS -lintl -liconv" \
         "$@"
 }
 

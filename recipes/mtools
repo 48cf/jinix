@@ -7,7 +7,6 @@ deps="core-libs"
 build() {
     export CFLAGS="${CFLAGS/-Wp,-D_FORTIFY_SOURCE=2/}"
 
-        LIBS="-liconv" \
     autotools_configure
 
     make -j${parallelism}

@@ -7,7 +7,7 @@ deps="core-libs"
 build() {
     cp -rp "${source_dir}"/. ./
 
-    make OPTFLAGS="$CFLAGS" LOCAL_LIBS="-liconv -lpthread" -j${parallelism} 7z 7zr 7za
+    make OPTFLAGS="$CFLAGS" -j${parallelism} 7z 7zr 7za
 }
 
 package() {

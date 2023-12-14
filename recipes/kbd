@@ -5,7 +5,6 @@ builddeps="base"
 deps="core-libs pam"
 
 build() {
-        LIBS="-lintl" \
     autotools_configure \
         --disable-werror \
         --enable-vlock

@@ -6,7 +6,6 @@ builddeps="base gperf"
 deps="core-libs"
 
 build() {
-        LIBS="-lintl" \
     autotools_configure_lib \
         --disable-selinux \
         --disable-kmod
