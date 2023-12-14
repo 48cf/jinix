@@ -1,7 +1,7 @@
 cross_compile=yes
 
 name=libintl
-from_source=libintl
+from_source=gettext
 revision=1
 hostdeps="gcc pkg-config"
 deps="glibc libgcc libstdc++ libiconv"

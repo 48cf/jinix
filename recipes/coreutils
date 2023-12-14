@@ -12,7 +12,7 @@ build() {
 
         configure_script_path=./configure \
     autotools_configure \
-        --disable-nls
+        --enable-no-install-program=uptime,kill
 
     make -j${parallelism}
 }
