@@ -1,10 +1,10 @@
 [binaries]
-c = 'x86_64-jinux-linux-gnu-gcc'
-cpp = 'x86_64-jinux-linux-gnu-g++'
-ar = 'x86_64-jinux-linux-gnu-ar'
-nm = 'x86_64-jinux-linux-gnu-nm'
-strip = 'x86_64-jinux-linux-gnu-strip'
-pkg-config = 'x86_64-jinux-linux-gnu-pkg-config'
+c = 'x86_64-jinix-linux-gnu-gcc'
+cpp = 'x86_64-jinix-linux-gnu-g++'
+ar = 'x86_64-jinix-linux-gnu-ar'
+nm = 'x86_64-jinix-linux-gnu-nm'
+strip = 'x86_64-jinix-linux-gnu-strip'
+pkg-config = 'x86_64-jinix-linux-gnu-pkg-config'
 # sed adds binaries here.
 
 [host_machine]

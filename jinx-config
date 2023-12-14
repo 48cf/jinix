@@ -6,7 +6,7 @@ export CFLAGS="-march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions \
 export CXXFLAGS="$CFLAGS -Wp,-D_GLIBCXX_ASSERTIONS"
 export LDFLAGS="-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now"
 
-OS_TRIPLET=x86_64-jinux-linux-gnu
+OS_TRIPLET=x86_64-jinix-linux-gnu
 BUILD_MACHINE="$(${base_dir}/build-support/config.guess)"
 
 post_package_strip() {

@@ -2,8 +2,8 @@ set(CMAKE_SYSTEM_NAME Linux)
 
 set(CMAKE_FIND_ROOT_PATH $ENV{XBSTRAP_SYSROOT_DIR})
 
-set(CMAKE_C_COMPILER x86_64-jinux-linux-gnu-gcc)
-set(CMAKE_CXX_COMPILER x86_64-jinux-linux-gnu-g++)
+set(CMAKE_C_COMPILER x86_64-jinix-linux-gnu-gcc)
+set(CMAKE_CXX_COMPILER x86_64-jinix-linux-gnu-g++)
 
 # search for programs in the build host directories
 SET(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
