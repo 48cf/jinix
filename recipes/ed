@@ -1,0 +1,20 @@
+name=ed
+from_source=ed
+revision=1
+builddeps="base texinfo"
+deps="core-libs readline"
+
+build() {
+    autotools_configure \
+        CPPFLAGS="$CPPFLAGS" \
+        CFLAGS="$CFLAGS" \
+        LDFLAGS="$LDFLAGS"
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
