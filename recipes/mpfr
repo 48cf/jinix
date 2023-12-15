@@ -14,6 +14,7 @@ build() {
     autotools_configure \
         --enable-static=no \
         --enable-shared=yes \
+        --enable-thread-safe \
         --with-pic
 
     make -j${parallelism}

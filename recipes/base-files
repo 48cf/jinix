@@ -6,8 +6,6 @@ revision=1
 
 build() {
     true
-
-    true
 }
 
 package() {

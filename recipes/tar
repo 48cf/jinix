@@ -11,7 +11,7 @@ build() {
 
         configure_script_path=./configure \
     autotools_configure \
-        --disable-nls
+        --enable-backup-scripts
 
     make -j${parallelism}
 }

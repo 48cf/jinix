@@ -20,6 +20,7 @@ build() {
         --with-build-sysroot=${sysroot_dir} \
         --with-glibc-version=2.38 \
         --enable-__cxa_atexit \
+        --enable-cet=auto \
         --enable-checking=release \
         --enable-clocale=gnu \
         --enable-default-pie \
@@ -36,7 +37,6 @@ build() {
         --enable-shared \
         --enable-host-shared \
         --enable-threads=posix \
-        --enable-initfini-array \
         --disable-libssp \
         --disable-libstdcxx-pch \
         --disable-werror \

@@ -35,6 +35,8 @@ KERNEL_PATH=boot:///vmlinuz
 CMDLINE=root=/dev/sda2 rw init=/bin/openrc-init
 EOF
 
+sudo cp pkgs/linux/usr/share/linux/vmlinuz sysroot/boot/
+
 ls -la sysroot/
 
 sudo sync

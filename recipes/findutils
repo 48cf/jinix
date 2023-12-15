@@ -11,9 +11,7 @@ build() {
     cp -rp "${source_dir}"/. ./
 
         configure_script_path=./configure \
-    autotools_configure \
-        --disable-nls \
-        --without-selinux
+    autotools_configure
 
     make -j${parallelism}
 }

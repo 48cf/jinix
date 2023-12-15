@@ -11,7 +11,16 @@ build() {
         --with-sysroot="${sysroot_dir}" \
         --disable-nls \
         --disable-werror \
-        --disable-dependency-tracking
+        --enable-cet \
+        --enable-colored-disassembly \
+        --enable-default-execstack=no \
+        --enable-deterministic-archives \
+        --enable-gold \
+        --enable-ld=default \
+        --enable-new-dtags \
+        --enable-relro \
+        --enable-shared \
+        --enable-threads
 
     make -j${parallelism} all
 }

@@ -16,7 +16,7 @@ jinx:
 
 .PHONY: distro-base
 distro-base: jinx
-	./jinx build base
+	./jinx build base openrc linux
 
 .PHONY: distro-full
 distro-full: jinx

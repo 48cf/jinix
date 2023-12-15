@@ -10,8 +10,7 @@ build() {
     cp -rp "${source_dir}"/. ./
 
         configure_script_path=./configure \
-    autotools_configure \
-        --disable-nls
+    autotools_configure
 
     make -j${parallelism}
 }
