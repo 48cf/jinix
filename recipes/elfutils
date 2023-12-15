@@ -1,0 +1,24 @@
+name=elfutils
+from_source=elfutils
+revision=1
+builddeps="base gettext"
+deps="core-libs bzip2 xz-utils zlib zstd"
+
+build() {
+    autotools_configure_lib \
+        --disable-libdebuginfod \
+        --disable-debuginfod \
+        --program-prefix="eu-" \
+        --with-bzlib \
+        --with-lzma \
+        --with-zlib \
+        --with-zstd
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
