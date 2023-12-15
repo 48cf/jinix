@@ -1,0 +1,19 @@
+name=chromium-launcher
+from_source=chromium-launcher
+revision=1
+builddeps="base"
+deps="core-libs glib"
+
+build() {
+    cp -rp ${source_dir}/. ./
+
+    make -j${parallelism}
+}
+
+package() {
+    make DESTDIR="${dest_dir}" PREFIX="${prefix}" install
+
+    ln -sv chromium "${dest_dir}${prefix}/bin/chromium-browser"
+
+    post_package_strip
+}

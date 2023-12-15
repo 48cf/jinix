@@ -1,0 +1,8 @@
+name=chromium-launcher
+version=8
+tarball_url="https://github.com/foutrelis/chromium-launcher/archive/refs/tags/v${version}.tar.gz"
+tarball_blake2b="43c0ee6758fc8e368118ae260470d3169e30a573fd03a33940445831a3372ee715bbfad6c1929bef310bf714c819bf5485258de5d1f0f724a1ab2fc6f1ffa34e"
+
+regenerate() {
+    true
+}
