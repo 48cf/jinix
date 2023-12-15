@@ -2,7 +2,7 @@ name=chromium
 from_source=chromium
 revision=1
 builddeps="base git gn gperf llvm ninja nodejs python"
-deps="core-libs alsa-lib cups dbus gtk+-3 libffi libgcrypt libva libxcomposite libxtst nss pciutils"
+deps="core-libs alsa-lib chromium-launcher cups dbus gtk+-3 libffi libgcrypt libva libxcomposite libxtst nss pciutils"
 
 build() {
     export CC=clang
@@ -67,6 +67,7 @@ build() {
         symbol_level=0
         chrome_pgo_phase=0
         safe_browsing_mode=0
+        is_cfi=false
     "
 
     cd ${_build_dir}
