@@ -1,0 +1,20 @@
+name=cpio
+from_source=cpio
+revision=1
+builddeps="base"
+deps="core-libs"
+
+build() {
+    autotools_configure
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    rm -rvf "${dest_dir}/usr/libexec"
+    rm -rvf "${dest_dir}/usr/share/man/man8"
+
+    post_package_strip
+}
