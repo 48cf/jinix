@@ -1,0 +1,22 @@
+name=bc
+from_source=bc
+revision=1
+builddeps="base ed texinfo"
+deps="core-libs readline"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+        configure_script_path=./configure \
+    autotools_configure \
+        --infodir="${prefix}/share/info" \
+        --with-readline
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
