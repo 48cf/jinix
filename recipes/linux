@@ -1,7 +1,7 @@
 name=linux
 from_source=linux
 revision=1
-builddeps="base bc bison cpio elfutils flex perl python"
+builddeps="base bc bison cpio elfutils flex kmod perl python"
 
 build() {
     cp -rp "${source_dir}"/. ./
@@ -11,9 +11,9 @@ build() {
 }
 
 package() {
-    mkdir -p "${dest_dir}${prefix}"/share/linux
-    cp arch/x86/boot/bzImage "${dest_dir}${prefix}"/share/linux/vmlinuz
+    mkdir -pv "${dest_dir}${prefix}"/share/linux
 
-    make INSTALL_MOD_PATH="${dest_dir}${prefix}" INSTALL_MOD_STRIP=1 \
-         DEPMOD=/doesnt/exist modules_install
+    cp -rpv arch/x86/boot/bzImage "${dest_dir}${prefix}"/share/linux/vmlinuz
+
+    make INSTALL_MOD_PATH="${dest_dir}${prefix}" INSTALL_MOD_STRIP=1 modules_install
 }

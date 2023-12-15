@@ -1,0 +1,25 @@
+name=kmod
+from_source=kmod
+revision=1
+builddeps="base"
+deps="core-libs openssl xz-utils zlib zstd"
+
+build() {
+    autotools_configure_lib \
+        --with-xz \
+        --with-zlib \
+        --with-zstd \
+        --with-openssl
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR=${dest_dir} make install
+
+    for x in {dep,ins,ls,rm}mod mod{info,probe}; do
+        ln -sv kmod "${dest_dir}${prefix}/bin/$x"
+    done
+
+    post_package_strip
+}
