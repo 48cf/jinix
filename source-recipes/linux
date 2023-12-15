@@ -1,9 +1,9 @@
 name=linux
-version=6.6.4
+version=6.6.7
 tarball_url="https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${version}.tar.xz"
-tarball_blake2b="75f20de7474f45966a32f7a1e5f9beadb2b4e111fe9c0ab769ccaa203e798f1a1b0ee05c3cb14de6bb609e2e9df1e238deeadfc21dbf08c6b407c9530bac11ef"
+tarball_blake2b="000c45693d074c79816ea61c8e46b58281eed5532903df92c466d3f062ec6a302e59c2782235b21d309976929659e581ff08c8d5b067bb02e7f0cc4e40593643"
 allow_network=yes
 
 regenerate() {
-    curl -Lo .config https://github.com/no92/linux-mlibc/raw/06155bd1d46ff17b63b5872d41ee666db864ab2e/scripts/kernel.config
+    curl -Lo .config https://gitlab.archlinux.org/archlinux/packaging/packages/linux/-/raw/de5ec760e2df25b4141cfd295f2243442e5fb056/config
 }
