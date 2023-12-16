@@ -11,7 +11,7 @@ image.hdd: jinx
 	./build-support/makeimage.sh
 
 jinx:
-	curl -Lo jinx https://github.com/mintsuki/jinx/raw/28fb26030eb088d84bf4ebea7841a7b544dbe8e0/jinx
+	curl -Lo jinx https://github.com/mintsuki/jinx/raw/d3a0dfc59e4385dea740f74a77ff22eca34ee895/jinx
 	chmod +x jinx
 
 .PHONY: distro-base
