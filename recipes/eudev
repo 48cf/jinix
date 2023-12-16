@@ -3,12 +3,11 @@ from_source=eudev
 revision=1
 imagedeps="gperf"
 builddeps="base gperf"
-deps="core-libs"
+deps="core-libs kmod"
 
 build() {
     autotools_configure_lib \
-        --disable-selinux \
-        --disable-kmod
+        --disable-selinux
 
     make -j${parallelism}
 }
