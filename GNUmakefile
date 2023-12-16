@@ -16,7 +16,7 @@ jinx:
 
 .PHONY: distro-base
 distro-base: jinx
-	./jinx build base openrc linux
+	./jinx build base openrc linux initramfs
 
 .PHONY: distro-full
 distro-full: jinx
