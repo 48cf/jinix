@@ -41,9 +41,9 @@ if test "$BASH" &&\
    test "$PS1" &&\
    test -z "$POSIXLY_CORRECT" &&\
    test "${0#-}" != sh &&\
-   test -r /etc/bash/bashrc
+   test -r /etc/bash.bashrc
 then
-    . /etc/bash/bashrc
+    . /etc/bash.bashrc
 fi
 
 # Termcap is outdated, old, and crusty, kill it.
