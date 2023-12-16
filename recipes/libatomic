@@ -26,9 +26,6 @@ package() {
     mkdir -p "${dest_dir}${prefix}"
     cp -r tmp_libatomic_dir/usr/local/${OS_TRIPLET}/* "${dest_dir}${prefix}"/
 
-    # Remove static libraries
-    rm -rf "${dest_dir}${prefix}"/lib/*.a
-
     # Copy libatomic into GCC's tree else it will complain.
     mkdir -p "${base_dir}"/host-pkgs/gcc/usr/local/lib
     cp -r tmp_libatomic_dir/usr/local/* "${base_dir}"/host-pkgs/gcc/usr/local/
