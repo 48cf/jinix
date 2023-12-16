@@ -1,10 +1,10 @@
 name=initramfs
 from_source=base-files
 revision=1
-builddeps="base busybox dracut eudev linux"
+builddeps="base busybox dracut eudev linux kmod"
 
 build() {
-    dracut --kver 6.6.7 --kmoddir /usr/lib/modules/6.6.7 --add busybox -N --strip --zstd --verbose initramfs.img 6.6.7
+    dracut --kver 6.6.7 --add busybox -N --strip --zstd --verbose initramfs.img
 }
 
 package() {
