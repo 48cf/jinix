@@ -3,7 +3,7 @@ cross_compile=yes
 name=base
 from_source=base-files
 revision=1
-deps="core-libs base-files bash binutils bzip2 coreutils diffutils file findutils gawk gcc gmp grep gzip m4 make mpc mpfr ncurses pcre2 pkg-config procps-ng readline sed tar tzdata util-linux which xz-utils zlib zstd"
+deps="core-libs base-files bash binutils bzip2 coreutils diffutils file findutils gawk gcc gmp grep gzip lzip m4 make mpc mpfr ncurses pcre2 pkg-config procps-ng readline sed tar tzdata util-linux which xz-utils zlib zstd"
 
 build() {
     true
