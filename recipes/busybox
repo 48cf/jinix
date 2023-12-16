@@ -1,0 +1,23 @@
+name=busybox
+from_source=busybox
+revision=1
+builddeps="base"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    make -j${parallelism}
+}
+
+package() {
+    mkdir -p "${dest_dir}${prefix}"/bin
+    install -Dm0755 busybox "${dest_dir}${prefix}"/bin/busybox
+
+    # docs
+    mkdir -p "${dest_dir}${prefix}"/share/man/man1
+    install -Dm644 docs/busybox.1 "${dest_dir}${prefix}"/share/man/man1/busybox.1
+    mkdir -p "${dest_dir}${prefix}"/share/doc/busybox
+    for doc in BusyBox.html BusyBox.txt; do
+        install -Dm644 docs/$doc "${dest_dir}${prefix}"/share/doc/busybox/$doc
+    done
+}
