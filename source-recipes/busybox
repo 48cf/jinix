@@ -5,5 +5,5 @@ tarball_blake2b="e515825cb3ab1c520e16b9c2512e9fc72947366a72a0466bff59b507fdffbc7
 allow_network=yes
 
 regenerate() {
-    curl -Lo .config https://gitlab.archlinux.org/archlinux/packaging/packages/busybox/-/raw/f632b37112b029ce937adbc26487e146a7b2258c/config
+    curl -Lo .config https://gitlab.archlinux.org/archlinux/packaging/packages/mkinitcpio-busybox/-/raw/af43daa9fd5e061b139798bdb67839248f3c6030/config
 }
