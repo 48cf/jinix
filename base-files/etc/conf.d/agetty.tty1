@@ -1,1 +1,1 @@
-agetty_options="--autologin root --noclear"
+agetty_options="--autologin root"
