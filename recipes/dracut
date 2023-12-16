@@ -2,7 +2,7 @@ name=dracut
 from_source=dracut
 revision=1
 builddeps="base"
-deps="core-libs cpio elfutils kmod"
+deps="core-libs busybox cpio elfutils kmod"
 
 build() {
     cp -rp ${source_dir}/. ./
