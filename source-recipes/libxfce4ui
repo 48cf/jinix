@@ -1,0 +1,8 @@
+name=libxfce4ui
+version=4.19.3
+tarball_url="https://archive.xfce.org/src/xfce/libxfce4ui/4.19/libxfce4ui-${version}.tar.bz2"
+tarball_blake2b="175e88fa58712933c681a8851c787d7322d806005cd450e3db3d3a7744ea08a599ddba071944c031e047365c4fec70b0144f84a3ed491b9bd5efb7a359233303"
+
+regenerate() {
+    true
+}

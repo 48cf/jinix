@@ -1,0 +1,19 @@
+name=libxfce4ui
+from_source=libxfce4ui
+revision=1
+builddeps="base gettext perl"
+deps="core-libs glib gtk+-3 libepoxy libice libx11 libxfce4util xfconf"
+
+build() {
+    autotools_configure_lib \
+        --enable-epoxy \
+        --with-vendor-info="Jinix"
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
