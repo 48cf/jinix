@@ -6,8 +6,7 @@ deps="core-libs"
 
 build() {
     autotools_configure \
-        CPPFLAGS="$CPPFLAGS" \
-        CFLAGS="$CFLAGS" \
+        CXXFLAGS="$CXXFLAGS" \
         LDFLAGS="$LDFLAGS"
 
     make -j${parallelism}
