@@ -1,0 +1,17 @@
+name=xfconf
+from_source=xfconf
+revision=1
+builddeps="base gettext python"
+deps="core-libs dbus glib libxfce4util"
+
+build() {
+    autotools_configure
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}

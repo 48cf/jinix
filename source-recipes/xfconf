@@ -1,0 +1,8 @@
+name=xfconf
+version=4.19.1
+tarball_url="https://archive.xfce.org/src/xfce/xfconf/4.19/xfconf-${version}.tar.bz2"
+tarball_blake2b="dd0ae72fc5ccb1146d69e1e0a9b67e89205ea460f75fcc4ccee1cb36b600f5b145f75d9f10f576bc3040bd065aa8d855788e79fde78541c9853f3cf04f0b5bb3"
+
+regenerate() {
+    true
+}
