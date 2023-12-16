@@ -1,0 +1,23 @@
+name=dracut
+from_source=dracut
+revision=1
+builddeps="base"
+deps="core-libs cpio elfutils kmod"
+
+build() {
+    cp -rp ${source_dir}/. ./
+
+    DRACUT_VERSION="${version}" make dracut-version.sh
+
+        configure_script_path=./configure \
+    autotools_configure_lib \
+        --disable-documentation
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}

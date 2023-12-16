@@ -33,9 +33,11 @@ cat <<EOF | sudo tee sysroot/boot/limine.cfg
 PROTOCOL=linux
 KERNEL_PATH=boot:///vmlinuz
 CMDLINE=root=/dev/sda2 rw init=/bin/openrc-init
+MODULE_PATH=boot:///initramfs.img
 EOF
 
 sudo cp pkgs/linux/usr/share/linux/vmlinuz sysroot/boot/
+sudo cp pkgs/initramfs/usr/share/initramfs/initramfs.img sysroot/boot/
 
 ls -la sysroot/
 
