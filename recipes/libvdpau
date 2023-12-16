@@ -1,7 +1,7 @@
 name=libvdpau
 from_source=libvdpau
 revision=1
-builddeps="base meson ninja strace"
+builddeps="base meson ninja"
 deps="core-libs libxext xorg-proto"
 
 build() {

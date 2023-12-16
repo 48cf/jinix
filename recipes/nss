@@ -1,7 +1,7 @@
 name=nss
 from_source=nss
 revision=1
-builddeps="base gyp perl python strace"
+builddeps="base gyp perl python"
 deps="core-libs nspr sqlite zlib"
 
 build() {
