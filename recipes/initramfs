@@ -4,7 +4,7 @@ revision=1
 builddeps="base busybox dracut eudev linux kmod"
 
 build() {
-    dracut --kver 6.6.7 --add busybox -N --strip --zstd --verbose initramfs.img
+    dracut --kver 6.6.7 --no-hostonly --strip --zstd --verbose --omit systemd --add busybox initramfs.img
 }
 
 package() {
