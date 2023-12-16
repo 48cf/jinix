@@ -1,0 +1,17 @@
+name=libxfce4util
+from_source=libxfce4util
+revision=1
+builddeps="base gettext"
+deps="core-libs glib"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
