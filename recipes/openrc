@@ -14,7 +14,7 @@ build() {
 		-Dtermcap=ncurses \
         ${source_dir}
 
-    ninja
+    ninja -j${parallelism}
 }
 
 package() {

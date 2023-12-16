@@ -14,7 +14,7 @@ build() {
         -DCMAKE_SYSTEM_PROCESSOR=x86_64 \
         ${source_dir}
 
-    ninja
+    ninja -j${parallelism}
 }
 
 package() {

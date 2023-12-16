@@ -12,7 +12,7 @@ build() {
         -DIMPORT_EXECUTABLES=/usr/local/rdatawad/ImportExecutables.cmake \
         ${source_dir}/prboom2
 
-    ninja
+    ninja -j${parallelism}
 }
 
 package() {

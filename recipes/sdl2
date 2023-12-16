@@ -46,7 +46,7 @@ build() {
         -DSDL_STATIC=OFF \
         ${source_dir}
 
-    ninja
+    ninja -j${parallelism}
 }
 
 package() {

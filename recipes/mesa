@@ -33,7 +33,7 @@ build() {
         -Dvulkan-layers=`#device-select,intel-nullhw,overlay` \
         ${source_dir}
 
-    ninja
+    ninja -j${parallelism}
 }
 
 package() {

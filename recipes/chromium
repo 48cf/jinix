@@ -71,7 +71,7 @@ build() {
     "
 
     cd ${_build_dir}
-    ninja chrome chrome_sandbox chromedriver
+    ninja -j${parallelism} chrome chrome_sandbox chromedriver
 }
 
 package() {

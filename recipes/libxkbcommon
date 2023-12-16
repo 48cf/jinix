@@ -14,7 +14,7 @@ build() {
         -Denable-wayland=false \
         "${source_dir}"
 
-    ninja
+    ninja -j${parallelism}
 }
 
 package() {

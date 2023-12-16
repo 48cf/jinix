@@ -14,7 +14,7 @@ build() {
         -Dintrospection=disabled \
         ${source_dir}
 
-    ninja
+    ninja -j${parallelism}
 }
 
 package() {

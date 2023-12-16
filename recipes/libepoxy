@@ -12,7 +12,7 @@ build() {
         -Dtests=false \
         ${source_dir}
 
-    ninja
+    ninja -j${parallelism}
 }
 
 package() {

@@ -13,7 +13,7 @@ build() {
         -Dtrust_paths=/etc/pki/anchors \
         ${source_dir}
 
-    ninja
+    ninja -j${parallelism}
 }
 
 package() {

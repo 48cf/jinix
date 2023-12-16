@@ -15,7 +15,7 @@ build() {
         -DFREEGLUT_BUILD_STATIC_LIBS=OFF \
         ${source_dir}
 
-    ninja
+    ninja -j${parallelism}
 }
 
 package() {

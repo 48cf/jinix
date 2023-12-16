@@ -17,7 +17,7 @@ build() {
         -Dinstall-test-programs=true \
         ${source_dir}
 
-    ninja
+    ninja -j${parallelism}
 }
 
 package() {

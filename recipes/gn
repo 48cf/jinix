@@ -14,7 +14,7 @@ build() {
 #define LAST_COMMIT_POSITION_NUM 0
 #define LAST_COMMIT_POSITION "0 (${version})"
 EOF
-    ninja
+    ninja -j${parallelism}
 }
 
 package() {
