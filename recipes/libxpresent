@@ -1,0 +1,17 @@
+name=libxpresent
+from_source=libxpresent
+revision=1
+builddeps="base"
+deps="core-libs xorg-util-macros xorg-proto libxfixes libxrandr"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
