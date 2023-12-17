@@ -1,0 +1,8 @@
+name=perl-io-html
+version=1.004
+tarball_url="https://cpan.metacpan.org/authors/id/C/CJ/CJM/IO-HTML-${version}.tar.gz"
+tarball_blake2b="633abc5d652bc5fddd8ff6d3b82e5048832bab084e3d8e5dfc3b99fc7221501b5147342bc4ead7b03b8c19a5ca2370deaae52fdafb1b860b7845f27873c629f7"
+
+regenerate() {
+    true
+}

@@ -1,0 +1,8 @@
+name=perl-lwp-mediatypes
+version=6.04
+tarball_url="https://cpan.metacpan.org/authors/id/O/OA/OALDERS/LWP-MediaTypes-${version}.tar.gz"
+tarball_blake2b="db96012d5b2668fd669d5c4152675a07a2cc91de0fd99d4516fd754b738aa81df24f59e1100692fd893372fb6401a4ffa3fa008956b3eb6cc5b42a1fff81bddf"
+
+regenerate() {
+    true
+}

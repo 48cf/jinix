@@ -1,0 +1,18 @@
+name=perl-libwww
+from_source=perl-libwww
+revision=1
+builddeps="base"
+deps="core-libs perl perl-encode-locale perl-file-listing perl-html-parser perl-http-cookies perl-http-daemon perl-http-cookiejar perl-http-date perl-http-negotiate perl-lwp-mediatypes perl-net-http perl-try-tiny perl-uri perl-www-robotrules"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+    perl Makefile.PL INSTALLDIRS=vendor
+    make
+}
+
+package() {
+    make DESTDIR="${dest_dir}" install
+
+    find "${dest_dir}" -name '.packlist' -delete
+    find "${dest_dir}" -name '*.pod' -delete
+}

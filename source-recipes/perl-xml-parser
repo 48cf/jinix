@@ -1,0 +1,8 @@
+name=perl-xml-parser
+version=2.46
+tarball_url="https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-${version}.tar.gz"
+tarball_blake2b="a815c8f517adb609a1690e6127660eb339649eacffb21d77664b4f9ea071fbaeb432f50bc6469cb36a6b9b4b4e037f778dd2289bed6d87f497713d1d8cab9d0e"
+
+regenerate() {
+    true
+}

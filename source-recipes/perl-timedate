@@ -1,0 +1,8 @@
+name=perl-timedate
+version=2.33
+tarball_url="https://cpan.metacpan.org/authors/id/A/AT/ATOOMIC/TimeDate-${version}.tar.gz"
+tarball_blake2b="512f104f0b8431c413412dfef44768e1ea942fe528262c1f4dc7d7eea9240d4da1a8b662a603e9d04b392d62e38e9b1d7b60cc82b013215a16ed3c97ee66ab47"
+
+regenerate() {
+    true
+}
