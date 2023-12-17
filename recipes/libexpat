@@ -5,8 +5,7 @@ builddeps="base"
 deps="core-libs"
 
 build() {
-    autotools_configure_lib \
-        --without-xmlwf
+    autotools_configure_lib
 
     make -j${parallelism}
 }
