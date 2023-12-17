@@ -1,0 +1,25 @@
+name=libwnck
+from_source=libwnck
+revision=1
+builddeps="base gettext meson ninja"
+deps="core-libs cairo glib gtk+-3 libx11 libxi libxres"
+
+build() {
+    meson setup \
+        --prefix=${prefix} \
+        --libdir=lib \
+        --buildtype=release \
+		-Dinstall_tools=true \
+        -Dstartup_notification="disabled" \
+		-Dintrospection="disabled" \
+		-Dgtk_doc=false \
+        ${source_dir}
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
