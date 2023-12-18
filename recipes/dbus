@@ -2,7 +2,7 @@ name=dbus
 from_source=dbus
 revision=1
 builddeps="base"
-deps="core-libs glib libexpat"
+deps="core-libs glib libexpat libx11 libxt xorg-proto"
 
 build() {
     autotools_configure_lib \
@@ -12,6 +12,7 @@ build() {
         --with-systemduserunitdir=no \
         --with-system-pid-file=/run/dbus/pid \
         --with-system-socket=/run/dbus/system_bus_socket \
+        --enable-x11-autolaunch \
         --disable-selinux \
         --disable-apparmor \
         --disable-libaudit \
@@ -25,6 +26,13 @@ build() {
 
 package() {
     DESTDIR="${dest_dir}" make install
+
+    # Install the dbus service
+    mkdir -pv "${dest_dir}/etc/init.d"
+    mkdir -pv "${dest_dir}/etc/runlevels/default"
+
+    cp -rv "${base_dir}/build-support/dbus.initd" "${dest_dir}/etc/init.d/dbus"
+    ln -sv /etc/init.d/dbus "${dest_dir}/etc/runlevels/default/dbus"
 
     post_package_strip
 }
