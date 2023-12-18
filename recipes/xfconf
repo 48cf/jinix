@@ -1,7 +1,7 @@
 name=xfconf
 from_source=xfconf
 revision=1
-builddeps="base gettext python"
+builddeps="base intltool gettext python"
 deps="core-libs dbus glib libxfce4util"
 
 build() {

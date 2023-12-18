@@ -1,7 +1,7 @@
 name=xfconf
-version=4.19.1
-tarball_url="https://archive.xfce.org/src/xfce/xfconf/4.19/xfconf-${version}.tar.bz2"
-tarball_blake2b="dd0ae72fc5ccb1146d69e1e0a9b67e89205ea460f75fcc4ccee1cb36b600f5b145f75d9f10f576bc3040bd065aa8d855788e79fde78541c9853f3cf04f0b5bb3"
+version=4.18.1
+tarball_url="https://archive.xfce.org/src/xfce/xfconf/4.18/xfconf-${version}.tar.bz2"
+tarball_blake2b="1344637b8f29f03e546d432f7703cba3add24d13e9615e3a69adab7050fbae7e0db44aec41dc322e3ee1e7aa744de3d9a41d80bf3d0a0ce9fbd91407d6db31d0"
 
 regenerate() {
     true
