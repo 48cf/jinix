@@ -1,0 +1,31 @@
+name=libcap
+from_source=libcap
+revision=1
+builddeps="base"
+deps="core-libs pam"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    make -j${parallelism} \
+        prefix="${prefix}" \
+        lib=lib \
+        sbindir=bin \
+        PAM_CAP=yes \
+        DYNAMIC=yes \
+        GOLANG=no
+}
+
+package() {
+    make install \
+        prefix="${prefix}" \
+        lib=lib \
+        sbindir=bin \
+        DESTDIR="${dest_dir}" \
+        RAISE_SETFCAP=no
+
+    # Remove static libraries
+    rm -rf "${dest_dir}${prefix}"/lib/*.a
+
+    post_package_strip
+}
