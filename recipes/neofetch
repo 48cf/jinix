@@ -4,7 +4,7 @@ revision=1
 builddeps="base"
 deps="bash"
 
-build() {	
+build() {
     true
 }
 

@@ -10,9 +10,9 @@ build() {
         --libdir=lib \
         --buildtype=release \
         -Ddebug-gui=false \
-		-Ddocumentation=false \
-		-Dlibwacom=false \
-		-Dtests=false \
+        -Ddocumentation=false \
+        -Dlibwacom=false \
+        -Dtests=false \
         ${source_dir}
 
     ninja -j${parallelism}

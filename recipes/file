@@ -30,10 +30,10 @@ build() {
         FILE=${base_dir}/builds/file/build/src/file \
     autotools_configure_lib \
         --enable-fsect-man5 \
-		--enable-bzlib \
-		--enable-xzlib \
-		--enable-zlib \
-		--enable-zstdlib \
+        --enable-bzlib \
+        --enable-xzlib \
+        --enable-zlib \
+        --enable-zstdlib \
         --disable-libseccomp
 
     make -j${parallelism}

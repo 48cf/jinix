@@ -7,11 +7,11 @@ deps="core-libs"
 build() {
     autotools_configure_lib
 
-	make -j${parallelism}
+    make -j${parallelism}
 }
 
 package() {
-	DESTDIR="${dest_dir}" make install
+    DESTDIR="${dest_dir}" make install
 
-	post_package_strip
+    post_package_strip
 }

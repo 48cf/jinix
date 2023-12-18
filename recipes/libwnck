@@ -9,10 +9,10 @@ build() {
         --prefix=${prefix} \
         --libdir=lib \
         --buildtype=release \
-		-Dinstall_tools=true \
+        -Dinstall_tools=true \
         -Dstartup_notification="disabled" \
-		-Dintrospection="disabled" \
-		-Dgtk_doc=false \
+        -Dintrospection="disabled" \
+        -Dgtk_doc=false \
         ${source_dir}
 
     ninja -j${parallelism}
