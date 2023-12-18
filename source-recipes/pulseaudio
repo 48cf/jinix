@@ -1,0 +1,8 @@
+name=pulseaudio
+version=16.1
+tarball_url="https://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-${version}.tar.xz"
+tarball_blake2b="535706abcea2cae39834b23c8bdc37f71b0e633de2d8e43ea4425da97a850b57c2f980c318681cbc86cf1e746200609dad41f8b96ecf4568f86d94aa6831c9a1"
+
+regenerate() {
+    true
+}
