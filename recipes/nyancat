@@ -1,0 +1,17 @@
+name=nyancat
+from_source=nyancat
+revision=1
+builddeps="base"
+deps="core-libs"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+    make -j${parallelism}
+}
+
+package() {
+    install -Dvm755 src/nyancat "${dest_dir}"/usr/bin/nyancat
+    install -Dvm644 nyancat.1 "${dest_dir}"/usr/share/man/man1/nyancat.1
+
+    post_package_strip
+}
