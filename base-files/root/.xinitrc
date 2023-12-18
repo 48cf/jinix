@@ -1,2 +1,2 @@
 xterm &
-exec twm
+exec dbus-launch --exit-with-session xfwm4
