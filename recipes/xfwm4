@@ -5,19 +5,21 @@ builddeps="base gettext intltool"
 deps="core-libs glib gtk+-3 libepoxy libwnck libx11 libxcomposite libxdamage libxfce4ui libxfce4util libxfixes libxi libxinerama libxpresent libxrandr libxrender libxres pango xfconf"
 
 build() {
-		CFLAGS="$CFLAGS -Wl,--copy-dt-needed-entries"
-	autotools_configure_lib \
-		--enable-epoxy \
-		--enable-compositor \
-		--enable-xpresent \
-		--enable-randr \
-		--enable-render \
-		--enable-xi2 \
-		--enable-xsync
+        CFLAGS="$CFLAGS -Wl,--copy-dt-needed-entries"
+    autotools_configure_lib \
+        --enable-epoxy \
+        --enable-compositor \
+        --enable-xpresent \
+        --enable-randr \
+        --enable-render \
+        --enable-xi2 \
+        --enable-xsync
 
-	make -j${parallelism}
+    make -j${parallelism}
 }
 
 package() {
     DESTDIR="${dest_dir}" make install
+
+    post_package_strip
 }
