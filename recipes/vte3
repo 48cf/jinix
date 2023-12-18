@@ -1,0 +1,32 @@
+name=vte3
+from_source=vte3
+revision=1
+builddeps="base gettext libxml meson ninja"
+deps="core-libs cairo fribidi glib gnutls gtk+-3 icu pango pcre2 zlib"
+
+build() {
+    meson setup \
+        --prefix=${prefix} \
+        --sysconfdir=/etc \
+        --libdir=lib \
+        --buildtype=release \
+        -Da11y=true \
+        -Dfribidi=true \
+        -Dglade=true \
+        -Dgnutls=true \
+        -Dgtk3=true \
+        -Dgtk4=false \
+        -Dicu=true \
+        -Dgir=false \
+        -Dvapi=false \
+        -D_systemd=false \
+        ${source_dir}
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR=${dest_dir} ninja install
+
+    post_package_strip
+}

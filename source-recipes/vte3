@@ -1,0 +1,8 @@
+name=vte3
+version=0.74.2
+tarball_url="https://gitlab.gnome.org/GNOME/vte/-/archive/${version}/vte-${version}.tar.gz"
+tarball_blake2b="1dbda319db500d0589223c700420fb17bd26d671a9ae1aa1bb499758ea6a49abaaf0def531d0565164e25041eeb87098ed59da15293e4888c5a3b0f1f323912a"
+
+regenerate() {
+    true
+}
