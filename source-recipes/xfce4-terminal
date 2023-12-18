@@ -1,0 +1,8 @@
+name=xfce4-terminal
+version=1.1.1
+tarball_url="https://archive.xfce.org/src/apps/xfce4-terminal/1.1/xfce4-terminal-${version}.tar.bz2"
+tarball_blake2b="e33bf7f0ff56200154a7195b6aaf09a7b67c7577c78190fd110b1dc035914295735925bf82f0cd3b6809646315236a32fc835acbb8d97b73b57025205faef9e8"
+
+regenerate() {
+    true
+}

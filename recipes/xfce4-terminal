@@ -1,0 +1,17 @@
+name=xfce4-terminal
+from_source=xfce4-terminal
+revision=1
+builddeps="base gettext intltool"
+deps="core-libs libxfce4ui vte3"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
