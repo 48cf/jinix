@@ -1,0 +1,8 @@
+name=gdb
+version=14.1
+tarball_url="https://ftp.gnu.org/gnu/gdb/gdb-${version}.tar.xz"
+tarball_blake2b="52a07b4745f95561f360a597d6ec1d212dafc8e9134dc415cd7bcfb02c26934a60807c8400b545a756c68392e16e104178cdc1464430c53611973881e921a942"
+
+regenerate() {
+    true
+}

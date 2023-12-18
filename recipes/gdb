@@ -1,0 +1,22 @@
+name=gdb
+from_source=gdb
+revision=1
+builddeps="base texinfo python"
+deps="core-libs libexpat mpfr ncurses readline xz-utils"
+
+build() {
+    autotools_configure \
+        --enable-tui \
+        --with-system-readline \
+        --with-python=/usr/bin/python \
+        --with-system-gdbinit=/etc/gdb/gdbinit
+
+    make -j${parallelism}
+}
+
+package() {
+    make -C gdb DESTDIR="${dest_dir}" install
+    make -C gdbserver DESTDIR="${dest_dir}" install
+
+    post_package_strip
+}
