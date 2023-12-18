@@ -1,0 +1,25 @@
+name=tint2
+from_source=tint2
+revision=1
+builddeps="base cmake git ninja"
+deps="core-libs cairo glib gtk+-3 imlib2 libx11 libxcomposite libxdamage libxinerama libxrandr libxrender pango"
+
+build() {
+        CFLAGS="$CFLAGS -Wl,--copy-dt-needed-entries" \
+    cmake \
+        -GNinja \
+        -DCMAKE_INSTALL_PREFIX=${prefix} \
+        -DCMAKE_INSTALL_LIBDIR=lib \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DENABLE_RSVG=No \
+        -DENABLE_SN=No \
+        ${source_dir}
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
