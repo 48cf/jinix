@@ -1,0 +1,23 @@
+name=htop
+from_source=htop
+revision=1
+builddeps="base"
+deps="core-libs libcap libnl ncurses"
+
+build() {
+    autotools_configure \
+        --enable-affinity \
+        --enable-capabilities \
+        --enable-delayacct \
+        --enable-openvz \
+        --enable-unicode \
+        --enable-vserver
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}

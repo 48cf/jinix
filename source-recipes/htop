@@ -1,0 +1,8 @@
+name=htop
+version=3.2.2
+tarball_url="https://github.com/htop-dev/htop/releases/download/${version}/htop-${version}.tar.xz"
+tarball_blake2b="da3b4aea4e5d32d4b432e0f45089e7795b59d9a947dc4af76cb6b7f9137e6d45901c8169c8d2c796a3f43162c1e3c8f1e18bd17f20750637e06fe4c3ebe22caa"
+
+regenerate() {
+    true
+}
