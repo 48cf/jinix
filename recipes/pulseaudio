@@ -14,6 +14,7 @@ build() {
         --sysconfdir=/etc \
         --libdir=lib \
         --buildtype=release \
+        -Dudevrulesdir=${prefix}/lib/udev/rules.d \
         -Ddatabase=simple \
         -Ddoxygen=false \
         -Dbluez5=disabled \
