@@ -8,10 +8,12 @@ build() {
     meson setup \
         --prefix=${prefix} \
         --libdir=lib \
+        --sbindir=bin \
         --buildtype=release \
         -Dos=Linux \
-		-Dpam=true \
-		-Dtermcap=ncurses \
+        -Dpam=true \
+        -Dsysvinit=true \
+        -Dtermcap=ncurses \
         ${source_dir}
 
     ninja -j${parallelism}
@@ -20,9 +22,7 @@ build() {
 package() {
     DESTDIR="${dest_dir}" ninja install
 
-	# Move files installed in /usr/sbin to /usr/bin
-    mv -v ${dest_dir}${prefix}/sbin/* ${dest_dir}${prefix}/bin
-    rm -rvf ${dest_dir}${prefix}/sbin
+    sed -i 's/#agetty_options=""/agetty_options="--autologin root"/' "${dest_dir}"/etc/conf.d/agetty
 
     post_package_strip
 }
