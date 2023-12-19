@@ -1,0 +1,22 @@
+name=glib-networking
+from_source=glib-networking
+revision=1
+builddeps="base meson ninja"
+deps="core-libs gsettings-desktop-schemas glib gnutls"
+
+build() {
+    meson setup \
+        --prefix=${prefix} \
+        --libdir=lib \
+        --buildtype=release \
+        -Dlibproxy=disabled \
+        ${source_dir}
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}

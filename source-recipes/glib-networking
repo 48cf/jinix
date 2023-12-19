@@ -1,0 +1,8 @@
+name=glib-networking
+version=2.78.0
+tarball_url="https://download.gnome.org/sources/glib-networking/2.78/glib-networking-${version}.tar.xz"
+tarball_blake2b="24b503a79e3a75c706e5aac98bb4593c6a282d980175633e77097ec8dcb7399f1e197ef42cad9f1f0a7c0456e0f09fbb7a197dcdf1ee2eff0f061ea826e2ee33"
+
+regenerate() {
+    true
+}
