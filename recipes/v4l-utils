@@ -1,0 +1,32 @@
+name=v4l-utils
+from_source=v4l-utils
+revision=1
+builddeps="base meson ninja perl"
+deps="core-libs alsa-lib glu libjpeg-turbo llvm sdl2"
+
+build() {
+    meson setup \
+        --prefix=${prefix} \
+        --libdir=lib \
+        --buildtype=release \
+        -Dudevdir=${prefix}/lib/udev/rules.d \
+        -Ddoxygen-doc=disabled \
+        -Dgconv=disabled \
+        ${source_dir}
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    # Move v4l2-dbg from ${prefix}/sbin to ${prefix}/bin
+    mv -v "${dest_dir}${prefix}/sbin/v4l2-dbg" "${dest_dir}${prefix}/bin/"
+    rmdir -v "${dest_dir}${prefix}/sbin"
+
+    # Install contrib programs
+    install -Dvm755 contrib/test/v4l2gl "${dest_dir}${prefix}/bin/"
+    install -Dvm755 contrib/test/v4l2grab "${dest_dir}${prefix}/bin/"
+
+    post_package_strip
+}
