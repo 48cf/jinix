@@ -1,0 +1,17 @@
+name=popt
+from_source=popt
+revision=1
+builddeps="base"
+deps="core-libs"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
