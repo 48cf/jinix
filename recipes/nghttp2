@@ -1,0 +1,19 @@
+name=nghttp2
+from_source=nghttp2
+revision=1
+builddeps="base"
+deps="core-libs libxml"
+
+build() {
+    autotools_configure_lib \
+        -enable-lib-only \
+        --docdir=${prefix}/share/doc/nghttp2-${version}
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
