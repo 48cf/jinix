@@ -1,0 +1,8 @@
+name=libtheora
+version=1.1.1
+tarball_url="https://downloads.xiph.org/releases/theora/libtheora-${version}.tar.xz"
+tarball_blake2b="f5df62c68c31537582f8a2ea64dba6b01cc056f364aa06fe905e42cc7aa8c78d7de89419dd52d586210ea29cdfdb24c2ff01e490c9b137e5d2f1845a2aa430de"
+
+regenerate() {
+    true
+}

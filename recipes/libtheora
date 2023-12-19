@@ -1,0 +1,17 @@
+name=libtheora
+from_source=libtheora
+revision=1
+builddeps="base"
+deps="base libogg libvorbis"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
