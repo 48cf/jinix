@@ -1,0 +1,17 @@
+name=python-jinja
+from_source=python-jinja
+builddeps="base python python-setuptools"
+deps="core-libs python-markupsafe"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python setup.py build
+}
+
+package() {
+    # XXX enable optimizations
+    python setup.py install \
+        --prefix="${prefix}" \
+        --root="${dest_dir}"
+}
