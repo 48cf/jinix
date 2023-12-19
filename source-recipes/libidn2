@@ -1,0 +1,8 @@
+name=libidn2
+version=2.3.4
+tarball_url="https://ftp.gnu.org/gnu/libidn/libidn2-${version}.tar.gz"
+tarball_blake2b="26ef58894ad51ca9775cf07edb1353a8aeb7af0df36ce8698425be216a067903797cdbc50c7644292c7e05b23c7bba35c9fe5e38c70e6f55784d8bcdd9c2fdb2"
+
+regenerate() {
+    true
+}
