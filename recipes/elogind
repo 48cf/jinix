@@ -1,0 +1,30 @@
+name=elogind
+from_source=elogind
+revision=1
+builddeps="base gettext git gperf meson ninja openrc perl python python-jinja"
+deps="core-libs dbus eudev libcap libxslt pam"
+
+build() {
+    meson setup \
+        --prefix=${prefix} \
+        --sysconfdir=/etc \
+        --libdir=lib \
+        --buildtype=release \
+        -Dman=false \
+        -Ddocdir=${prefix}/share/doc/elogind-${version} \
+        -Dcgroup-controller=elogind \
+        -Ddev-kvm-mode=0660 \
+        -Ddbuspolicydir=/etc/dbus-1/system.d \
+        ${source_dir}
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    ln -sfv libelogind.pc ${dest_dir}${prefix}/lib/pkgconfig/libsystemd.pc
+    ln -sfvn elogind ${dest_dir}${prefix}/include/systemd
+
+    post_package_strip
+}
