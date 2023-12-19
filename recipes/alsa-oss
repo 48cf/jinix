@@ -1,0 +1,20 @@
+name=alsa-oss
+from_source=alsa-oss
+revision=1
+builddeps="base"
+deps="core-libs alsa-lib"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    make install DESTDIR="${dest_dir}"
+
+    # Remove the static library
+    rm -v "${dest_dir}${prefix}/lib/libossredir.a"
+
+    post_package_strip
+}
