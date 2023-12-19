@@ -1,0 +1,8 @@
+name=libvpx
+version=1.13.1
+tarball_url="https://github.com/webmproject/libvpx/archive/refs/tags/v${version}.tar.gz"
+tarball_blake2b="f7e2fa2880a11c7e40fed8ab5efe843346c351b8de8725aa6803cdebdf9c1253e26992fe3ffed3a68710674765b4d2aec2cce06d22885b722e728d03eaf916f7"
+
+regenerate() {
+    true
+}
