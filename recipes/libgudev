@@ -1,0 +1,22 @@
+name=libgudev
+from_source=libgudev
+revision=1
+builddeps="base meson ninja"
+deps="base eudev glib"
+
+build() {
+    meson setup \
+        --prefix=${prefix} \
+        --sysconfdir=/etc \
+        --libdir=lib \
+        --buildtype=release \
+        ${source_dir}
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
