@@ -1,0 +1,26 @@
+name=polkit
+from_source=polkit
+revision=1
+builddeps="base gettext meson ninja perl"
+deps="core-libs duktape elogind glib libxslt pam"
+
+build() {
+    meson setup \
+        --prefix=${prefix} \
+        --sysconfdir=/etc \
+        --libdir=lib \
+        --buildtype=release \
+        -Dman=false \
+        -Dtests=false \
+        -Dintrospection=false \
+        -Dsession_tracking=libelogind \
+        ${source_dir}
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
