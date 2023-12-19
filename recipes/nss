@@ -2,12 +2,12 @@ name=nss
 from_source=nss
 revision=1
 builddeps="base gyp perl python"
-deps="core-libs nspr sqlite zlib"
+deps="core-libs nspr p11-kit sqlite zlib"
 
 build() {
     cp -rf ${source_dir}/. ./
-    cd nss
 
+    cd nss
     make -j${parallelism} \
         BUILD_OPT=1 \
         NSPR_INCLUDE_DIR="${prefix}/include/nspr" \
@@ -29,6 +29,10 @@ package() {
 
     install -vm755 -d "${dest_dir}${prefix}/include/nss"
     install -vm644 dist/{public,private}/nss/* "${dest_dir}${prefix}/include/nss"
+
+    # Replace built-in trust with p11-kit trust
+    ln -s pkcs11/p11-kit-trust.so "${dest_dir}${prefix}/lib/p11-kit-trust.so"
+    ln -sf p11-kit-trust.so "${dest_dir}${prefix}/lib/libnssckbi.so"
 
     post_package_strip
 }
