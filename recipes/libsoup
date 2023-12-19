@@ -1,0 +1,24 @@
+name=libsoup
+from_source=libsoup
+revision=1
+builddeps="base gettext meson ninja"
+deps="core-libs brotli curl glib-networking libpsl libxml sqlite"
+
+build() {
+    meson setup \
+        --prefix=${prefix} \
+        --libdir=lib \
+        --buildtype=release \
+        -Dvapi=disabled \
+        -Dgssapi=disabled \
+        -Dsysprof=disabled \
+        ${source_dir}
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
