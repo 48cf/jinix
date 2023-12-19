@@ -1,0 +1,24 @@
+name=libdv
+from_source=libdv
+revision=1
+builddeps="base meson ninja"
+deps="core-libs popt"
+
+build() {
+    meson setup \
+        --prefix=${prefix} \
+        --sysconfdir=/etc \
+        --libdir=lib \
+        --buildtype=release \
+        -Dtests=disabled \
+        -Dtools=enabled \
+        ${source_dir}
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
