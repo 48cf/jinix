@@ -1,0 +1,8 @@
+name=libsoup3
+version=3.4.4
+tarball_url="https://download.gnome.org/sources/libsoup/3.4/libsoup-${version}.tar.xz"
+tarball_blake2b="6818ea74fab3531bb0a8e60df9885c5c6729780446f37cff73eb9fdf9d75fb00357dbdc3ae8d8c6e0ff105cb8df42eacf2e1e8865db4cb07871bacf3c62139b7"
+
+regenerate() {
+    true
+}
