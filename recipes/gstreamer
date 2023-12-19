@@ -2,7 +2,7 @@ name=gstreamer
 from_source=gstreamer
 revision=1
 builddeps="base bison flex gettext meson ninja"
-deps="base glib libcap"
+deps="core-libs glib libcap"
 
 build() {
     meson setup \

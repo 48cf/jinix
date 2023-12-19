@@ -2,7 +2,7 @@ name=gstreamer-plugins-base
 from_source=gstreamer-plugins-base
 revision=1
 builddeps="base gettext meson ninja"
-deps="base gstreamer alsa-lib graphene iso-codes libgudev libjpeg-turbo libogg libpng libtheora libvorbis libxi libxv mesa pango opus sdl2"
+deps="core-libs gstreamer alsa-lib graphene iso-codes libgudev libjpeg-turbo libogg libpng libtheora libvorbis libxi libxv mesa pango opus sdl2"
 
 build() {
     meson setup \

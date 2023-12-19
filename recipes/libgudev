@@ -2,7 +2,7 @@ name=libgudev
 from_source=libgudev
 revision=1
 builddeps="base meson ninja"
-deps="base eudev glib"
+deps="core-libs eudev glib"
 
 build() {
     meson setup \

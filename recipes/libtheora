@@ -2,7 +2,7 @@ name=libtheora
 from_source=libtheora
 revision=1
 builddeps="base"
-deps="base libogg libvorbis"
+deps="core-libs libogg libvorbis"
 
 build() {
     autotools_configure_lib

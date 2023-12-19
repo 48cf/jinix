@@ -2,7 +2,7 @@ name=iso-codes
 from_source=iso-codes
 revision=1
 builddeps="base gettext python"
-deps="base"
+deps="core-libs"
 
 build() {
     cp -rp "${source_dir}"/. ./
