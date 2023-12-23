@@ -9,7 +9,7 @@ tarball_url="https://commondatastorage.googleapis.com/chromium-browser-official/
 tarball_blake2b="1e5096b8d03f1ee65b5c1ea98cdc2230bb3f789bcf87750891d47c5c79e79997602997b72c3c5f4f8f10a5f7bb754ccf1065e789ff5949c2ce084b1759e7280b"
 source_imagedeps="python"
 builddeps="base git gn gperf llvm ninja nodejs python"
-deps="core-libs alsa-lib chromium-launcher cups dbus gtk+-3 libffi libgcrypt libva libxcomposite libxtst nss pciutils"
+deps="core-libs alsa-lib chromium-launcher cups dbus gtk+-3 libffi libgcrypt libva libxcomposite libxtst nss pciutils pulseaudio"
 allow_network=yes
 
 regenerate() {
@@ -80,7 +80,7 @@ build() {
         enable_widevine=false
         use_cups=true
         use_kerberos=false
-        use_pulseaudio=false
+        use_pulseaudio=true
         use_vaapi=true
         rtc_use_pipewire=false
         gtk_version=3
