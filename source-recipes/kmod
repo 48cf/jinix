@@ -1,8 +1,0 @@
-name=kmod
-version=31
-tarball_url="https://cdn.kernel.org/pub/linux/utils/kernel/kmod/kmod-${version}.tar.xz"
-tarball_blake2b="0dc8572da570315cf0aadd87fa7e83d0f88dea91c8566749e6f3004f9a6df916dce337ca99ea5929d41f45b408c1e3effa50f9d24615d7fa28688150a5ce91cf"
-
-regenerate() {
-    true
-}

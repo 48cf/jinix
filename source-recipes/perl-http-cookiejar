@@ -1,8 +1,0 @@
-name=perl-http-cookiejar
-version=0.014
-tarball_url="https://cpan.metacpan.org/authors/id/D/DA/DAGOLDEN/HTTP-CookieJar-${version}.tar.gz"
-tarball_blake2b="8979526253be074542d4a4cd67d6dbca0841dc613cf661a213a3a32b2deb0715b1ed72fec50d3ffb48f5bdec9dd2d2114b62803b24ab52c6bfcf4bfcd2ba4ea8"
-
-regenerate() {
-    true
-}

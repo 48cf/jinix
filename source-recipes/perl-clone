@@ -1,8 +1,0 @@
-name=perl-clone
-version=0.46
-tarball_url="https://cpan.metacpan.org/authors/id/G/GA/GARU/Clone-${version}.tar.gz"
-tarball_blake2b="a28f8b501972e1be29be39e0b08446ce369956a0ba5b9c82217e18214de70a2fab7adff0570ac78909026119c4cf05d6d5b5f98426c220b9bc50a1a945a8839c"
-
-regenerate() {
-    true
-}

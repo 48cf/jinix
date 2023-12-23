@@ -1,8 +1,0 @@
-name=flac
-version=1.4.3
-tarball_url="https://downloads.xiph.org/releases/flac/flac-${version}.tar.xz"
-tarball_blake2b="c4f441aeaa0493433347b8a110ca01865fd40d5b21150174372af2fee4fa5c3397a67add31138e92999eab9d9abe6c46a5ac29e13cbac60093fbff6d7a672ad3"
-
-regenerate() {
-    true
-}

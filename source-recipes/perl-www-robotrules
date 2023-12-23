@@ -1,8 +1,0 @@
-name=perl-www-robotrules
-version=6.02
-tarball_url="https://cpan.metacpan.org/authors/id/G/GA/GAAS/WWW-RobotRules-${version}.tar.gz"
-tarball_blake2b="b9ad0d2a16a6614bba6b307ba8d81095be59b7c4128050fdd019723f22e1085571abe9eb977cbf5e971dbfce18eb4be1ef1866a0bc86bd7c017c033541cad352"
-
-regenerate() {
-    true
-}

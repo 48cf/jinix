@@ -1,8 +1,0 @@
-name=libxfce4util
-version=4.19.2
-tarball_url="https://archive.xfce.org/src/xfce/libxfce4util/4.19/libxfce4util-${version}.tar.bz2"
-tarball_blake2b="addee65233ce7f6a335b9c072066ea1a4d357e4dce62ecb75cce56aa3d7c27916c141d1124951821f1d4234813a54e51ed933829937adcf0f6c906a4fb65e907"
-
-regenerate() {
-    true
-}

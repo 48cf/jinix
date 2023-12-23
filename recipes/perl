@@ -1,6 +1,8 @@
 name=perl
-from_source=perl
+version=5.38.2
 revision=1
+tarball_url="https://www.cpan.org/src/5.0/perl-${version}.tar.gz"
+tarball_blake2b="864a2e339a8fa15df4259e5f24aecb3316c92698b18c93fe9a9d13a1cde6b1aacba06f22a3ab58b50485ff5c3ddab759bb44ef6e56c66b3e059635561f84e203"
 builddeps="base"
 deps="core-libs bzip2 zlib"
 

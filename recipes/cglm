@@ -1,6 +1,8 @@
 name=cglm
-from_source=cglm
+version=0.9.0
 revision=1
+tarball_url="https://github.com/recp/cglm/archive/refs/tags/v${version}.tar.gz"
+tarball_blake2b="d02cb83abeeea793e5ab7b9473a9a26dcaf3e15209b555c34b6981e3becd6edbd94f0687126114a8917d9f4958575f2cf37a846b7fc54fd236d30198d1fe7aaf"
 builddeps="base meson ninja"
 deps="core-libs"
 

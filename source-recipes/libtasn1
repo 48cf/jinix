@@ -1,8 +1,0 @@
-name=libtasn1
-version=4.19.0
-tarball_url="https://ftp.gnu.org/gnu/libtasn1/libtasn1-${version}.tar.gz"
-tarball_blake2b="6e8232590cd87da3bfd9182ed44eccdfbdfcc85e88d8cf19fffdb3d600e04694b77079b95bbd822d2c3fff29458ddae0f0440f9c1c19c711923a2507bd19270f"
-
-regenerate() {
-    true
-}

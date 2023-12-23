@@ -1,6 +1,8 @@
 name=dracut
-from_source=dracut
+version=059
 revision=1
+tarball_url="https://github.com/dracutdevs/dracut/archive/refs/tags/${version}.tar.gz"
+tarball_blake2b="86bbe18875cd3507e187b724cab212dc82e1daca7cedf79aeef13c34601adfff72bf2c0ba4c652e715b43c9a16f7be6a4a2b29dc75bef014640e1ec07c8d455b"
 builddeps="base"
 deps="core-libs busybox cpio elfutils kmod"
 

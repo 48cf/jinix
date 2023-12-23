@@ -1,8 +1,0 @@
-name=p11-kit
-version=0.25.3
-tarball_url="https://github.com/p11-glue/p11-kit/releases/download/${version}/p11-kit-${version}.tar.xz"
-tarball_blake2b="5c695c1ef95edf4bbbab001aa634076c433df0bc89cb8104deaec2ce00c6908640e467755b49c6900e5d7d5d81e1a3871f4978a212c6f6ae088386ac0b95289a"
-
-regenerate() {
-    true
-}

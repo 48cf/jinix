@@ -1,6 +1,8 @@
 name=perl-http-negotiate
-from_source=perl-http-negotiate
+version=6.01
 revision=1
+tarball_url="https://cpan.metacpan.org/authors/id/G/GA/GAAS/HTTP-Negotiate-${version}.tar.gz"
+tarball_blake2b="157e6470dabf0eda068aba69e3e53fe28a9a38634df6ae77fc8354e6e190629ee90f81e1cdacd0018d0ca5183183db6960ebeac5d2d536d800a7dadc23775dcd"
 builddeps="base"
 deps="core-libs perl perl-http-message"
 

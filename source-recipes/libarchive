@@ -1,8 +1,0 @@
-name=libarchive
-version=3.6.2
-tarball_url="https://github.com/libarchive/libarchive/releases/download/v${version}/libarchive-${version}.tar.xz"
-tarball_blake2b="355b5d402e352dee802513485ce7e047af58d6de5b9bf6a49f3fd8d7b94117007598820ac979585c0da79747e8b63b70ab151131182368a11f97a047cf9029d4"
-
-regenerate() {
-    true
-}

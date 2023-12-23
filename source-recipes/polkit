@@ -1,8 +1,0 @@
-name=polkit
-version=123
-tarball_url="https://gitlab.freedesktop.org/polkit/polkit/-/archive/${version}/polkit-${version}.tar.gz"
-tarball_blake2b="38a1afcc6d5da0d4bc572c83ac682a2946f4ce48905430d1f5dd76fd22b58b0dd1573d5dad2e82518852ab7f48919af0f0c601e3f6b03c9420efb9725b345a04"
-
-regenerate() {
-    true
-}

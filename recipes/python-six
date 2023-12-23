@@ -1,5 +1,8 @@
 name=python-six
-from_source=python-six
+version=1.16.0
+revision=1
+tarball_url="https://files.pythonhosted.org/packages/71/39/171f1c67cd00715f190ba0b100d606d440a28c93c7714febeca8b79af85e/six-${version}.tar.gz"
+tarball_blake2b="764f8da9a0d89e95af002c79c2b19e852fdec9a6819655c57be019b48bd65a5f7909473e71887e6080073f381f983c077487591d4e44297542cf6b9a29ba42b8"
 builddeps="base python python-setuptools"
 deps="core-libs"
 

@@ -1,6 +1,8 @@
 name=libgudev
-from_source=libgudev
+version=238
 revision=1
+tarball_url="https://download.gnome.org/sources/libgudev/${version}/libgudev-${version}.tar.xz"
+tarball_blake2b="386491e78c82081e89dad897d16ea6733430a67db3f75f2d9fdee5474b074ad6fede9f08e429f4eb6feaa9bbbb982d9d039db738aac5b5ce0ffac2d3a19430d4"
 builddeps="base meson ninja"
 deps="core-libs eudev glib"
 

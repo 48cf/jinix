@@ -1,8 +1,0 @@
-name=python-markupsafe
-version=2.1.3
-tarball_url="https://pypi.io/packages/source/M/MarkupSafe/MarkupSafe-${version}.tar.gz"
-tarball_blake2b="1edca84c47c93fddfd22ee2fef2ba3907921ecb2d807c0e105c403d235e5abacba929be94970ad693f4c7d019653ece8255238d825bfc84d1a4a604fb476a783"
-
-regenerate() {
-    true
-}

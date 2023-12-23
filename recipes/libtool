@@ -1,6 +1,8 @@
 name=libtool
-from_source=libtool
+version=2.4.7
 revision=1
+tarball_url="https://ftp.gnu.org/gnu/libtool/libtool-${version}.tar.xz"
+tarball_blake2b="5e022586337637dd634bd40578ad944bec6e3b8de41f95d55777b90cc88cbc4badb3d76cbf0e638166ece1ea7de828e83590e1e6bac30c1e4b1c254a11a742f2"
 builddeps="base"
 deps="core-libs"
 

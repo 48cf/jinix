@@ -1,6 +1,8 @@
 name=alsa-oss
-from_source=alsa-oss
+version=1.1.8
 revision=1
+tarball_url="https://www.alsa-project.org/files/pub/oss-lib/alsa-oss-${version}.tar.bz2"
+tarball_blake2b="47124c4edd14878b202e6ff6866b5441ffa0991ac3011a3db1efcd1dd2a0c27c9f2b8b38c2a51e8b46cb5714a97393a462154cdfaf89f1238244f7b2635a7740"
 builddeps="base"
 deps="core-libs alsa-lib"
 

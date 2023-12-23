@@ -1,8 +1,0 @@
-name=perl-html-parser
-version=3.81
-tarball_url="https://cpan.metacpan.org/authors/id/O/OA/OALDERS/HTML-Parser-${version}.tar.gz"
-tarball_blake2b="1211333cf563817249ab51f382101aaf013b82ba3a7dd5e08c9487a0b3dd26598d026d85da8f94f00f17dba8102dcdfddab2320f2071c6702f0b6c7ac9e9cda5"
-
-regenerate() {
-    true
-}

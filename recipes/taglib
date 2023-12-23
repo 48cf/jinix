@@ -1,6 +1,8 @@
 name=taglib
-from_source=taglib
+version=1.13.1
 revision=1
+tarball_url="https://taglib.org/releases/taglib-${version}.tar.gz"
+tarball_blake2b="36cf9b59ded95c9996d04a86055a36a7b74a2a01c13f75826d4907abca0b982c5f9b0e4bcd6648707013108f8eaf424ab95f07c383130452aa169e2cab33f466"
 builddeps="base cmake ninja"
 deps="core-libs"
 

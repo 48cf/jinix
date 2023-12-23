@@ -1,8 +1,10 @@
 cross_compile=yes
 
 name=which
-from_source=which
+version=2.21
 revision=1
+tarball_url="https://carlowood.github.io/which/which-${version}.tar.gz"
+tarball_blake2b="355888b0dfe3e4e1679a8a9e1255a935fa48be220408abc441fae69fe0b26bd39e0544ed20e75497ed5bccaa75e788d9aec17007c668f15eaf6b1599faa131a0"
 hostdeps="gcc"
 deps="core-libs"
 

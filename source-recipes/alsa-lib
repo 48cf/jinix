@@ -1,8 +1,0 @@
-name=alsa-lib
-version=1.2.10
-tarball_url="https://www.alsa-project.org/files/pub/lib/alsa-lib-${version}.tar.bz2"
-tarball_blake2b="b2e4f8431e61f5bb56b2b5d124e67d5a68bbca3c647bebfa93f5e5ff092ec9ef3f6cb6315801fcd93e21151784814ff238d357313b8b44f32d4e7c9ee565388f"
-
-regenerate() {
-    true
-}

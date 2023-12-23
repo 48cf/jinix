@@ -1,6 +1,8 @@
 name=nss
-from_source=nss
+version=3.95
 revision=1
+tarball_url="https://archive.mozilla.org/pub/security/nss/releases/NSS_${version/./_}_RTM/src/nss-${version}.tar.gz"
+tarball_blake2b="9d40b09c0c58901781abfad609dd45f44c2f4d1ce9d4f1592748cb64a9eb29b1ac84be54ebb19fa528d8b9fd08911f769a80f72d9e6dbb22e82e5b3581a30af1"
 builddeps="base gyp perl python"
 deps="core-libs nspr p11-kit sqlite zlib"
 

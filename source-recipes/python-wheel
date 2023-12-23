@@ -1,8 +1,0 @@
-name=python-wheel
-version=0.42.0
-tarball_url="https://files.pythonhosted.org/packages/b0/b4/bc2baae3970c282fae6c2cb8e0f179923dceb7eaffb0e76170628f9af97b/wheel-${version}.tar.gz"
-tarball_blake2b="201f8246dc55c62bb700e706d7734e76689b13a3036aeeca7531f483c7f354ccc5ca7452106038425ba300e74f1041f7408f6749d03e39aca289398598833014"
-
-regenerate() {
-    true
-}

@@ -1,8 +1,0 @@
-name=libnsl
-version=2.0.1
-tarball_url="https://github.com/thkukuk/libnsl/releases/download/v${version}/libnsl-${version}.tar.xz"
-tarball_blake2b="91ad7558127a675bc861dee11d00d82a999462d34753f579a77c1579a7f8be1ded2eff11ecfde9dc81e2466118c288ee18a8b280453f6548cc2b4528021e1503"
-
-regenerate() {
-    true
-}

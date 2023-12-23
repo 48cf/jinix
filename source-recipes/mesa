@@ -1,8 +1,0 @@
-name=mesa
-version=23.3.0
-tarball_url="https://archive.mesa3d.org/mesa-${version}.tar.xz"
-tarball_blake2b="1b87d15cbe1b4c761653b7042c46eac3036f08dfcf3a0a81aa7bf6c1c0c402b05f37ce8da9d88df72e1745d66a648c2b8c161b04bf558107f548f6d8167cc798"
-
-regenerate() {
-    true
-}

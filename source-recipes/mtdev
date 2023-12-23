@@ -1,8 +1,0 @@
-name=mtdev
-version=1.1.6
-tarball_url="https://bitmath.org/code/mtdev/mtdev-${version}.tar.bz2"
-tarball_blake2b="212cf0f0bea0fc295528c90c6685770e88cb135a714cbf21e53b75ab2eaedd210269d073520e44c5bffafe8a5ecca521221061193725cba916bc2cf703fd5166"
-
-regenerate() {
-    true
-}

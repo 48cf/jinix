@@ -1,6 +1,8 @@
 name=p7zip
-from_source=p7zip
+version=17.05
 revision=1
+tarball_url="https://github.com/p7zip-project/p7zip/archive/refs/tags/v${version}.tar.gz"
+tarball_blake2b="0bcba638d3acaf2aa270e02693ad4295dfcc6b388037bdb446e25f3f4e1cb34f1b05bbc9a845364ca770625c32b2d7f55f63f504ad8e0863fff4bf940ae1fddd"
 builddeps="base"
 deps="core-libs"
 

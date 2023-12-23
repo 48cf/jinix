@@ -1,6 +1,8 @@
 name=elfutils
-from_source=elfutils
+version=0.190
 revision=1
+tarball_url="https://sourceware.org/elfutils/ftp/${version}/elfutils-${version}.tar.bz2"
+tarball_blake2b="9934aff08f1898377708b28595fb52130ef9f80408132ac7d306845b10672ba45cf1ac69783da07b3eea9fd647741d44da45b8b2626c45a768cb2844c6186513"
 builddeps="base gettext"
 deps="core-libs bzip2 xz-utils zlib zstd"
 

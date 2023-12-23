@@ -1,6 +1,8 @@
 name=psmisc
-from_source=psmisc
+version=23.6
 revision=1
+tarball_url="https://downloads.sourceforge.net/psmisc/psmisc-${version}.tar.xz"
+tarball_blake2b="468bf4e84695efcedb832f890b6201b7bc4aca7c5aabaf30e67f4471671421897ee7cd67f01d4b3d60c3e1c63752eb7384e627e75fa7db290cd749da08e2f788"
 builddeps="base"
 deps="core-libs ncurses"
 

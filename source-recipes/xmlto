@@ -1,8 +1,0 @@
-name=xmlto
-version=0.0.28
-tarball_url="https://releases.pagure.org/xmlto/xmlto-${version}.tar.gz"
-tarball_blake2b=babdb40f0a2f106a4aed951dc987cc23f44e8aab55e8b69860e295715716b056c0d5a683c122a737be37ae3927d755a7dc1a2dcc062c428f2d190e25dd8cd491
-
-regenerate() {
-    true
-}

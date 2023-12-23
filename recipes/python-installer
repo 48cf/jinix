@@ -1,5 +1,8 @@
 name=python-installer
-from_source=python-installer
+version=0.7.0
+revision=1
+tarball_url="https://github.com/pypa/installer/archive/${version}.tar.gz"
+tarball_blake2b="c9adfa4c6487c42bcb696345b0ae53a70aa8fcf56c8024e3e90dbb8c7704cd945f63ccbe2c64135f2c1b2b90dd5d3a267ae8ebfa70baaa7672a40715a2e51aa3"
 builddeps="base p7zip python python-flit-core"
 deps="core-libs"
 

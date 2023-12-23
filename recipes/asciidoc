@@ -1,7 +1,15 @@
 name=asciidoc
-from_source=asciidoc
+version=10.2.0
+revision=1
+tarball_url="https://github.com/asciidoc-py/asciidoc-py/releases/download/${version}/asciidoc-${version}.tar.gz"
+tarball_blake2b=ed5db8fd1432b255e9c03e17805c26c76a42392c2ebeaf839b8c0aaaf38cd1a36d79b645ca4474503181200924df91218eb0997dd82335a30d6a0a1b35eb5730
+source_imagedeps="autoconf automake libtool"
 builddeps="base python python-installer python-setuptools python-wheel"
 deps="core-libs"
+
+regenerate() {
+    autoreconf -fvi
+}
 
 build() {
     cp -rp "${source_dir}"/. ./

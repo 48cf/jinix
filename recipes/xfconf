@@ -1,6 +1,8 @@
 name=xfconf
-from_source=xfconf
+version=4.18.1
 revision=1
+tarball_url="https://archive.xfce.org/src/xfce/xfconf/4.18/xfconf-${version}.tar.bz2"
+tarball_blake2b="1344637b8f29f03e546d432f7703cba3add24d13e9615e3a69adab7050fbae7e0db44aec41dc322e3ee1e7aa744de3d9a41d80bf3d0a0ce9fbd91407d6db31d0"
 builddeps="base intltool gettext python"
 deps="core-libs dbus glib libxfce4util"
 

@@ -1,8 +1,0 @@
-name=perl-http-message
-version=6.45
-tarball_url="https://cpan.metacpan.org/authors/id/O/OA/OALDERS/HTTP-Message-${version}.tar.gz"
-tarball_blake2b="8b9245a94540686e500fabedced9a63a172e89285292cfe5cfa8a907eda7ad6f35bff3dab1eab25d2b636289c0fa768e3761167c93d14cd12e7d65eeaabeb1cd"
-
-regenerate() {
-    true
-}

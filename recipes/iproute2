@@ -1,6 +1,8 @@
 name=iproute2
-from_source=iproute2
+version=6.6.0
 revision=1
+tarball_url="https://mirrors.edge.kernel.org/pub/linux/utils/net/iproute2/iproute2-${version}.tar.xz"
+tarball_blake2b="9d20f19c04c2bbde7a3ae53e61e4623b119570c8446f34b93ddadd64677caa432e00ee085498bc277e0842cc2124340c7100925106d0ef2c11dd8002aacac08f"
 builddeps="base bison flex"
 deps="core-libs"
 

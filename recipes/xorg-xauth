@@ -1,6 +1,8 @@
 name=xorg-xauth
-from_source=xorg-xauth
+version=1.1.2
 revision=1
+tarball_url="https://www.x.org/releases/individual/app/xauth-${version}.tar.xz"
+tarball_blake2b="2ba168229bdf0c1d0fdd4c352e434abfc6f527cbafce35abac8d403a0dea91f00fd858f91f177128d13a0e618d1d95061c71ef32a3e12ac91b72a257dcfcd12b"
 builddeps="base"
 deps="core-libs libx11 libxau libxext libxmu xorg-proto"
 

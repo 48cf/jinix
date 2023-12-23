@@ -1,6 +1,8 @@
 name=xorg-xinput
-from_source=xorg-xinput
+version=1.6.4
 revision=1
+tarball_url="https://www.x.org/releases/individual/app/xinput-${version}.tar.xz"
+tarball_blake2b="cdbba586432017474d98f549703fac12b32fef92663aee446b112f780d484715e21b86131028eb69930ae622f0ec625c5572e2450631fd348156f44321304d70"
 builddeps="base"
 deps="core-libs libx11 libxext libxrandr libxi libxinerama xorg-proto"
 

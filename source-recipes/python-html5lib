@@ -1,8 +1,0 @@
-name=python-html5lib
-version=1.1
-tarball_url="https://github.com/html5lib/html5lib-python/archive/refs/tags/${version}.tar.gz"
-tarball_blake2b="c00dd7cd5ea1fa5165f486542e6450543c8f207266ab1a3c1abbbb8fe7c75239b79391aeb425ef2fe0440eb1a5d4c8ee0f4d63808a4b05c08e9a3727570abf3d"
-
-regenerate() {
-    true
-}

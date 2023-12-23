@@ -1,8 +1,0 @@
-name=net-tools
-version=2.10
-tarball_url="https://downloads.sourceforge.net/project/net-tools/net-tools-${version}.tar.xz"
-tarball_blake2b="0d11a5c12f6447282c65ee74428c1b9f6da9fd6d26ca558813d002fac8a4f03fd25a26231a5f4e45f88d821e9a8281e3be1fea4a832bd09afbc2239634a1c25d"
-
-regenerate() {
-    true
-}

@@ -1,6 +1,8 @@
 name=libnl
-from_source=libnl
+version=3.9.0
 revision=1
+tarball_url="https://github.com/thom311/libnl/releases/download/libnl${version//./_}/libnl-${version}.tar.gz"
+tarball_blake2b="56a39aad9aa15992ff02fe35732abbc5ed5d107b814587e02b914631489877899989d49c7aeee1ecb461ad5f525c7cd7c045c9770864d83b0a58490293441193"
 builddeps="base bison flex"
 deps="core-libs"
 

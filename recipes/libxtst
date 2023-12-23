@@ -1,6 +1,8 @@
 name=libxtst
-from_source=libxtst
+version=1.2.4
 revision=1
+tarball_url="https://www.x.org/archive/individual/lib/libXtst-${version}.tar.xz"
+tarball_blake2b="6c3e6154f221530158b8275ee638934c633f2e812333df0093a01663c416ded0b6be509578cca78d51c6b540ab17379e1e0503bf296abe3112f1afeda12e4af9"
 builddeps="base"
 deps="core-libs libxext libxfixes libxi xorg-util-macros xorg-proto"
 

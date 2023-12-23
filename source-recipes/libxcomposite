@@ -1,8 +1,0 @@
-name=libxcomposite
-version=0.4.6
-tarball_url="https://www.x.org/archive/individual/lib/libXcomposite-${version}.tar.xz"
-tarball_blake2b="1e017ac65c7fb9973f8a1ad06116c67b9ebecf880bee8fb9b2afd83e85ec53853eb082c7edfb6a53f1a8451ac8c61c63c540facbf97953997695b18d65d00c45"
-
-regenerate() {
-    true
-}

@@ -1,6 +1,8 @@
 name=xorg-xrandr
-from_source=xorg-xrandr
+version=1.5.2
 revision=1
+tarball_url="https://www.x.org/archive/individual/app/xrandr-${version}.tar.xz"
+tarball_blake2b="7c4afea6b8bc4361bde2565e930db98abb925b51d717e23c3ec95853aacf58b465f8c858652b8eebd7b0fdb289b4da4ab9235e571f61c8f77e4818efcb12de07"
 builddeps="base xorg-util-macros"
 deps="core-libs libxrandr"
 

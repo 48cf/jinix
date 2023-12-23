@@ -1,6 +1,8 @@
 name=texinfo
-from_source=texinfo
+version=7.1
 revision=1
+tarball_url="https://ftp.gnu.org/gnu/texinfo/texinfo-${version}.tar.xz"
+tarball_blake2b="4385ca6250daeaa4f6bfedd9ab41f25993613031bcb8da55360365701213f4f3cf786d958749c59dc1c9dda328eca42f028aa051a7062313142aa92f55a96ecd"
 builddeps="base"
 deps="core-libs gzip ncurses perl"
 

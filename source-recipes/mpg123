@@ -1,8 +1,0 @@
-name=mpg123
-version=1.32.3
-tarball_url="https://downloads.sourceforge.net/mpg123/mpg123-${version}.tar.bz2"
-tarball_blake2b="67f889403c2bb639d675ec5ebea5a19c4b7174971d62bdd8d940ad659e6b0c06dada38422fc9d71b878917aa89e305ec48c8faa78d65d507cd6a0c9a79951359"
-
-regenerate() {
-    true
-}

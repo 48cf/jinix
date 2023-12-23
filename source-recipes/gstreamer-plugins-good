@@ -1,8 +1,0 @@
-name=gstreamer-plugins-good
-version=1.22.7
-tarball_url="https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-${version}.tar.xz"
-tarball_blake2b="0c05afb9dfc70305219df4887caf887cf666bf76e7c6fd660550c7e603950bbffbdc2ab24d73e5eb47cf5f7032b92bad1b26d7b6e5ee320273894d5dfbd9e152"
-
-regenerate() {
-    true
-}

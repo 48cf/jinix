@@ -1,8 +1,0 @@
-name=perl-http-date
-version=6.06
-tarball_url="https://cpan.metacpan.org/authors/id/O/OA/OALDERS/HTTP-Date-${version}.tar.gz"
-tarball_blake2b="bdafda3a1afd2414dcd814688f2275282ecba06afb5191c4f475a131e36ed2bc64387dda6df6d52135ff998536803cb85224c2f7adb39891a8b789a962b64f66"
-
-regenerate() {
-    true
-}

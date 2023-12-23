@@ -1,6 +1,8 @@
 name=cpio
-from_source=cpio
+version=2.14
 revision=1
+tarball_url="https://ftp.gnu.org/gnu/cpio/cpio-${version}.tar.bz2"
+tarball_blake2b="f2fa9f5bc39cd91f4755fdf27f43cff4d1c1f098639502689a01314762ad686bf357a1eda7f92e4c802e6e8335548ca31fc789cea056ef685c558892ddcbebd1"
 builddeps="base"
 deps="core-libs"
 

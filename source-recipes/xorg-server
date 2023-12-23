@@ -1,8 +1,0 @@
-name=xorg-server
-version=21.1.9
-tarball_url="https://www.x.org/releases/individual/xserver/xorg-server-${version}.tar.xz"
-tarball_blake2b="8e0a2e0f5fc4d06a08c1424fe618da9822e951f5b744b4cac1b1e14305ab598b162e4f08fb53ba5e60d0001257216755a576b470c961c26a909d66e9a46d1c77"
-
-regenerate() {
-    true
-}

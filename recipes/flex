@@ -1,6 +1,8 @@
 name=flex
-from_source=flex
+version=2.6.4
 revision=1
+tarball_url="https://github.com/westes/flex/releases/download/v${version}/flex-${version}.tar.gz"
+tarball_blake2b="c003d4f764f7f4d41e33af7ee28c2af272a9f0aee6ba7c2494ba96722d8d0b18f7a3f745217e9a2cecb43b6863328267a810280670c04464156b3eb3d7ee9d62"
 builddeps="base"
 deps="core-libs"
 

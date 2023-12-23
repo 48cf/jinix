@@ -1,8 +1,0 @@
-name=tint2
-version=17.0.2
-tarball_url="https://gitlab.com/o9000/tint2/-/archive/${version}/tint2-${version}.tar.gz"
-tarball_blake2b="fd0c8c2cc9af04cc6cc5801cb76809a8ec927bf88e1c6a2704b94ae2809f964a6c9f6dabbd581704cd38e3b27fb3161249eec3a06a98f4426e907ba5e8309cdc"
-
-regenerate() {
-    true
-}

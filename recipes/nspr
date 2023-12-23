@@ -1,6 +1,8 @@
 name=nspr
-from_source=nspr
+version=4.35
 revision=1
+tarball_url="https://archive.mozilla.org/pub/nspr/releases/v${version}/src/nspr-${version}.tar.gz"
+tarball_blake2b="c80402d7be9e69ab6d1e768a18d271a8d28900f4cae7df2709d1ab26e100d908f508762bb771d4042aa7152934ce83d495e2102e894c56574187be8040d65629"
 builddeps="base"
 deps="core-libs"
 

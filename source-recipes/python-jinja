@@ -1,8 +1,0 @@
-name=python-jinja
-version=3.1.2
-tarball_url="https://pypi.io/packages/source/J/Jinja2/Jinja2-${version}.tar.gz"
-tarball_blake2b="1b9780cac6e33f4370a5e7d8882d42a640662939c10e355391d9c45119b313e86e37b574551ac44908911feb24b08b537329b98f009c54ad4ed928259fda759f"
-
-regenerate() {
-    true
-}

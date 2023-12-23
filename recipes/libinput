@@ -1,6 +1,8 @@
 name=libinput
-from_source=libinput
+version=1.18.2
 revision=1
+tarball_url="https://www.freedesktop.org/software/libinput/libinput-${version}.tar.xz"
+tarball_blake2b="8058a51b896d06360a7ea607ec6640a9e65094b6a9322e5d2c631a4ea131d56d1d6eb0b174545f43dc25267ddab1b4a35d9ed794c6a9e938425b2aba99e770c4"
 builddeps="base meson ninja"
 deps="core-libs eudev libevdev mtdev"
 

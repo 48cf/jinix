@@ -1,6 +1,8 @@
 name=lzip
-from_source=lzip
+version=1.23
 revision=1
+tarball_url="https://download.savannah.gnu.org/releases/lzip/lzip-${version}.tar.gz"
+tarball_blake2b="934a35e31b0db76c4dcbe2fe903f04b60471485118aa5d4001599a3c23a7db74f05f703cf430bb299795be7025f71efb225afddff85c8245e962bdadcf82aef7"
 builddeps="base"
 deps="core-libs"
 

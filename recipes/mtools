@@ -1,6 +1,8 @@
 name=mtools
-from_source=mtools
+version=4.0.10
 revision=1
+tarball_url="https://ftp.gnu.org/gnu/mtools/mtools-${version}.tar.gz"
+tarball_blake2b="56179e1dfdb69491779c63ea77af1a612e010e664e8529e02e9875cfe48f48a11c3aadbc0e3d9afb883cbf8370f39cf02a4ea73561d699a8e93905d7170ba9fe"
 builddeps="base"
 deps="core-libs"
 

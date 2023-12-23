@@ -1,8 +1,0 @@
-name=elogind
-version=252.9
-tarball_url="https://github.com/elogind/elogind/archive/refs/tags/v${version}.tar.gz"
-tarball_blake2b="dd566125e407b3479a44b007890f97c9c87a325b3fed2d3505499d2163f113affd998e14b1c1fc50b9b86b0d155b51dae344dcc1cddafb6a48c631d0a0f00c9a"
-
-regenerate() {
-    true
-}

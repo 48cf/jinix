@@ -1,8 +1,10 @@
 name=at-spi2-core
-from_source=at-spi2-core
+version=2.48.2
 revision=1
+tarball_url="https://download.gnome.org/sources/at-spi2-core/2.48/at-spi2-core-${version}.tar.xz"
+tarball_blake2b="3e499c155a6d8780cb08a714521b530353f8e8a507c42acfbab89ea637413f17f5ecb431574eb862ac47d465f80320f04dedeced0547c0f057b426ea763f6c81"
 builddeps="base meson ninja"
-deps="core-libs dbus glib libxml"
+deps="core-libs dbus glib libxml libxtst"
 
 build() {
     meson setup \

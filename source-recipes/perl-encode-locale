@@ -1,8 +1,0 @@
-name=perl-encode-locale
-version=1.05
-tarball_url="https://cpan.metacpan.org/authors/id/G/GA/GAAS/Encode-Locale-$version.tar.gz"
-tarball_blake2b="f66bac8ebf012e7673b344b3899bed755558b80833a68b009b6083aeadd9d69748a63bee4e5e3c20dffaf7f2551fd6c9c778273ae992752c426e081d35715dee"
-
-regenerate() {
-    true
-}

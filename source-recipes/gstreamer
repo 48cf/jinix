@@ -1,8 +1,0 @@
-name=gstreamer
-version=1.22.7
-tarball_url="https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-${version}.tar.xz"
-tarball_blake2b="4bfbc1b75f85b0ebca22917ffab1ccdb0eba9deae6eee4ab076f492b6871ca5001018cd97c7b1b31948d29e0d08beb248fe28c29a0de754fe67db1c7cc5f4332"
-
-regenerate() {
-    true
-}

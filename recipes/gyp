@@ -1,6 +1,8 @@
 name=gyp
-from_source=gyp
+version=a03d7413becefc8d55c8aa3df58b55b9bd0e9052
 revision=1
+tarball_url="https://github.com/chromium/gyp/archive/${version}.tar.gz"
+tarball_blake2b="0b07e8f31b10542613eb0bf091fff29e74ea7da81db7091d4b30a5885a65feecad44067486cb535b3b0fbe9bf0d882abb269bd9e18a6520aa968066b5d2ff87c"
 builddeps="base python-build python-installer python-setuptools python-wheel"
 deps="core-libs python python-six"
 

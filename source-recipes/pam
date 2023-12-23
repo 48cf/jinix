@@ -1,8 +1,0 @@
-name=pam
-version=1.5.3
-tarball_url="https://github.com/linux-pam/linux-pam/releases/download/v${version}/Linux-PAM-${version}.tar.xz"
-tarball_blake2b="362c939f3afc343e6f4e78e7f6ba6f7a9c6ee0a9948bb5a4fc34cecfd29e9fa974082534d4ceedd04d8d3e34c7b3ef43d2a07ba5f41d26da04ec8330fc3790fb"
-
-regenerate() {
-    true
-}

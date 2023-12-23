@@ -1,6 +1,8 @@
 name=pciutils
-from_source=pciutils
+version=3.10.0
 revision=1
+tarball_url="https://mj.ucw.cz/download/linux/pci/pciutils-${version}.tar.gz"
+tarball_blake2b="2e1255eb5508c9d1339f5bc772c2592a03cae4d8d097e8939748c9bb5d5d949be53d705d1b7d903f7ea88b2abeea91e39de16e39d2f46f0a1f62f8a9e32c6faa"
 builddeps="base"
 deps="core-libs zlib"
 

@@ -1,8 +1,0 @@
-name=perl-libwww
-version=6.72
-tarball_url="https://cpan.metacpan.org/authors/id/O/OA/OALDERS/libwww-perl-${version}.tar.gz"
-tarball_blake2b="20e58a888d46dc7e35b59bf7f5be29f5e0039ee15d81656ffa5c494b62a5e755eb7048d110a6a8fa2e2a33ed51a016e3aaa48898f9d8513aff3d74f1f3a4bd37"
-
-regenerate() {
-    true
-}

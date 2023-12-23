@@ -1,6 +1,8 @@
 name=libglvnd
-from_source=libglvnd
+version=1.7.0
 revision=1
+tarball_url="https://gitlab.freedesktop.org/glvnd/libglvnd/uploads/c24806c283070dc70700234ca8ffacf8/libglvnd-${version}.tar.gz"
+tarball_blake2b="db644c278ed0ab858f1223ef28d36663afa3fc3ab977da77068dbbdfe614512dd3783365138ebe711110fc6ae43c4599a4be4d3099f281139230b6f12973ac27"
 builddeps="base"
 deps="core-libs libx11 libxext"
 

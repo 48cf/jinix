@@ -1,6 +1,8 @@
 name=gn
-from_source=gn
+version=85944ebc24a90ec1e489e85a46fdc68542c3146f
 revision=1
+tarball_url="https://github.com/48cf/gn-mirror/archive/${version}.tar.gz"
+tarball_blake2b="2e0804a317b84dee62f4bd1ab885582cf5f82ce49f9e4acdcbbb684724d37450ce27a86210789e39fad9f080c6c6e8e37737987eb9a30dae04c05e7573cd4fa2"
 builddeps="base llvm git ninja python"
 deps="core-libs"
 

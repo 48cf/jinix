@@ -1,6 +1,8 @@
 name=perl-net-http
-from_source=perl-net-http
+version=6.23
 revision=1
+tarball_url="https://cpan.metacpan.org/authors/id/O/OA/OALDERS/Net-HTTP-${version}.tar.gz"
+tarball_blake2b="bfc72d3147e7019515e788b2751d4d2f51b0ff2f4013916c32a64423460acff9a75ad5c100c58da083ae8cc6fee6ddc2bf44bcac8c9c45f4c7b29cd322973fef"
 builddeps="base"
 deps="core-libs perl"
 

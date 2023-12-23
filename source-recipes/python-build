@@ -1,8 +1,0 @@
-name=python-build
-version=1.0.3
-tarball_url="https://github.com/pypa/build/archive/${version}.tar.gz"
-tarball_blake2b="cb707b21582a1f7a5f649dcaf0fa7d30d253641a51c6af1284b17df46ad877af5280b5d1a07ce7eb90ef468d0f850e3e85dba1f24f7942c6ba432789760ae670"
-
-regenerate() {
-    true
-}

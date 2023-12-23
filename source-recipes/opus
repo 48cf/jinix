@@ -1,8 +1,0 @@
-name=opus
-version=1.4
-tarball_url="https://downloads.xiph.org/releases/opus/opus-${version}.tar.gz"
-tarball_blake2b="21f11df745cb868f4da1586d678901045fd9bd0c0590628015f3adc2522c88b0660df88096abe975051fec3188b76b93762c4a01907c2ab2b23c40fde79cf6ad"
-
-regenerate() {
-    true
-}

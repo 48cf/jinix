@@ -1,6 +1,8 @@
 name=cups
-from_source=cups
+version=2.4.7
 revision=1
+tarball_url="https://github.com/OpenPrinting/cups/releases/download/v${version}/cups-${version}-source.tar.gz"
+tarball_blake2b="d81de62cff37c576ef8fb125b97568c2d86602cec6151d7030552fad421d7bc77a5df1e860d5ac5a241e739cc0d1fe5fcac44b8451ad2fc4dc675cf74fd41382"
 builddeps="base"
 deps="core-libs dbus gnutls pam zlib"
 

@@ -1,8 +1,0 @@
-name=xterm
-version=388
-tarball_url="https://invisible-mirror.net/archives/xterm/xterm-${version}.tgz"
-tarball_blake2b="fe003ee6a234bf978a3b85ab840f59470239b3584e20e379a62ee45fd70d8e1083cc04f2f2194697cd900a74e3a0c17d67cab07b3b9b32addf23d093464d3ec1"
-
-regenerate() {
-    true
-}

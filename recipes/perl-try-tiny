@@ -1,6 +1,8 @@
 name=perl-try-tiny
-from_source=perl-try-tiny
+version=0.31
 revision=1
+tarball_url="https://cpan.metacpan.org/authors/id/E/ET/ETHER/Try-Tiny-${version}.tar.gz"
+tarball_blake2b="34bb5ae5a03accd3b99e25d8a69d9d9f1255a5cadc6c77c8909dd5e793d0d15ded10ae2e3410a07fe01f9ff50aba3fe0bc947904a61d1106ee8a16509fce1d88"
 builddeps="base"
 deps="core-libs perl"
 

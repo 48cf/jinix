@@ -1,8 +1,0 @@
-name=libxslt
-version=1.1.39
-tarball_url="https://download.gnome.org/sources/libxslt/1.1/libxslt-${version}.tar.xz"
-tarball_blake2b="7c87b769d345fc99a966bea6b4e94533fa211dc3a987ce013a03eefb05dde73ef75526bdecf7d32d8c77112232096fb22d8ec4f0a781b9f59d0422a2db75df01"
-
-regenerate() {
-    true
-}

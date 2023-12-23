@@ -1,6 +1,8 @@
 name=xf86-input-libinput
-from_source=xf86-input-libinput
+version=1.4.0
 revision=1
+tarball_url="https://www.x.org/archive/individual/driver/xf86-input-libinput-${version}.tar.xz"
+tarball_blake2b="258c0c1584e3dd370044be9702d669b1036597d936af9b7bda6cbd19642a9188054beab85a18d5571020859b3046db916efe05d4691f468eae706bd78c33e2d6"
 builddeps="base"
 deps="core-libs libinput xorg-server xorg-proto"
 

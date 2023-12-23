@@ -1,8 +1,0 @@
-name=git
-version=2.43.0
-tarball_url="https://www.kernel.org/pub/software/scm/git/git-${version}.tar.xz"
-tarball_blake2b="5da19211df56e306eb95cef65b2a987134d2f0853dc1db30e1cc99d0357b3f5ab7f1e434e73948d7b6ad6b7bfc44f75349479f46050ee63a6516c72b774b4eba"
-
-regenerate() {
-    true
-}
