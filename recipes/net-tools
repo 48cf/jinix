@@ -25,5 +25,13 @@ package() {
     # XXX once we figure out thse getcwd errors use `make install` instead
     make DESTDIR=${dest_dir} installbin
 
+    # inettools provides these, so let's not overwrite that.
+    rm ${dest_dir}/${prefix}/bin/hostname
+    rm ${dest_dir}/${prefix}/bin/dnsdomainname
+    rm ${dest_dir}/${prefix}/bin/ypdomainname
+    rm ${dest_dir}/${prefix}/bin/domainname
+    rm ${dest_dir}/${prefix}/bin/nisdomainname
+    rm ${dest_dir}/${prefix}/bin/ifconfig
+
     post_package_strip
 }
