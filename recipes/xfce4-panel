@@ -1,0 +1,19 @@
+name=xfce4-panel
+version=4.18.5
+revision=1
+tarball_url="https://archive.xfce.org/src/xfce/xfce4-panel/4.18/xfce4-panel-${version}.tar.bz2"
+tarball_blake2b="c0ea27d10d66f6a8abd5beef539063036885cfd627f3a2686d4df0d27e9499a0fc814189aa8df1b51d4ea016ceb48f98805e0492ba288653ed1bea12b4154fd7"
+builddeps="base gettext intltool"
+deps="core-libs cairo exo garcon libwnck"
+
+build() {
+    autotools_configure
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
