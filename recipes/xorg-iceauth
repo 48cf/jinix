@@ -1,0 +1,19 @@
+name=xorg-iceauth
+version=1.0.9
+revision=1
+tarball_url="https://www.x.org/releases/individual/app/iceauth-${version}.tar.xz"
+tarball_blake2b="39848a28a289f38b43184bc579d8263509dc71bf78ed0a0282e8c22a9f5f468606308ca7785481ce7ff1b683d7854b15cbbadc6ff7c9d0c4d9ff4beef9598211"
+builddeps="base"
+deps="core-libs libice xorg-proto"
+
+build() {
+    autotools_configure
+
+    make -j${parallelism}
+}
+
+package() {
+    make install DESTDIR="${dest_dir}"
+
+    post_package_strip
+}
