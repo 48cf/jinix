@@ -1,0 +1,20 @@
+name=xfce4-session
+version=4.18.3
+revision=1
+tarball_url="https://archive.xfce.org/src/xfce/xfce4-session/4.18/xfce4-session-${version}.tar.bz2"
+tarball_blake2b="bc729218fb845589655e5cd35c15dab3a3fad931b348098e052212b60c52214727af734641512590f85c88cd36d2db160d8e24d98ad34d47358469c466da9f38"
+builddeps="base gettext intltool"
+deps="core-libs libwnck libxfce4ui xfdesktop xorg-iceauth"
+
+build() {
+    autotools_configure \
+        --disable-legacy-sm
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
