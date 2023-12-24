@@ -1,0 +1,20 @@
+name=gobject-introspection
+version=1.78.0
+revision=1
+tarball_url="https://gitlab.gnome.org/GNOME/gobject-introspection/-/archive/${version}/gobject-introspection-${version}.tar.gz"
+tarball_blake2b="b384dc829b4171234c8b3e4e380edba48c5888cd53c46907d533949640b0529940e6ce150a7882f96f2e73f5160d8fbe55fd626323fc2906b99ee71bfbcf74a1"
+builddeps="base bison cairo flex git meson ninja"
+deps="core-libs glib"
+
+build() {
+    meson_configure \
+        -Dgtk_doc=false
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
