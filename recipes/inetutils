@@ -1,0 +1,35 @@
+name=inetutils
+version=2.4
+revision=1
+tarball_url="https://ftp.gnu.org/gnu/inetutils/inetutils-${version}.tar.xz"
+tarball_blake2b="1f7a33f313b736b305f62587c727ba843659621fbd89610dea81a0acf0e74aca8d3005cca2e3451fe30517880678023d4949bf1b1276bb660b80802e97c06bc8"
+builddeps="base"
+deps="core-libs"
+
+build() {
+
+    autotools_configure_lib \
+        --bindir=/usr/bin \
+        --localstatedir=/var \
+        --disable-logger \
+        --disable-whois \
+        --disable-rcp \
+        --disable-rexec \
+        --disable-rlogin \
+        --disable-rsh \
+        --disable-servers \
+        --disable-talk
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    # XXX: unknown why these aren't executable
+    chmod 0755 ${dest_dir}/${prefix}/bin/ping
+    chmod 0755 ${dest_dir}/${prefix}/bin/ping6
+    chmod 0755 ${dest_dir}/${prefix}/bin/traceroute
+
+    post_package_strip
+}
