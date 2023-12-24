@@ -1,20 +1,10 @@
+_perl_package_version=6.16
+_perl_package_author=OALDERS
+_perl_package_name=HTTP-Daemon
+_perl_package_deps="perl-http-date perl-http-message perl-lwp-mediatypes"
+
 name=perl-http-daemon
-version=6.16
 revision=1
-tarball_url="https://cpan.metacpan.org/authors/id/O/OA/OALDERS/HTTP-Daemon-${version}.tar.gz"
 tarball_blake2b="d9e9b2512eb7ea705a9030264105260fc5ea44eb6ea6799fb15cf135eb92fcf4e4ed34731aff0b5e7ad882ad5863b8ca12a45afd773eb67425f4853a8c06e694"
-builddeps="base"
-deps="core-libs perl perl-http-date perl-http-message perl-lwp-mediatypes"
 
-build() {
-    cp -rp "${source_dir}"/. ./
-    perl Makefile.PL INSTALLDIRS=vendor
-    make
-}
-
-package() {
-    make DESTDIR="${dest_dir}" install
-
-    find "${dest_dir}" -name '.packlist' -delete
-    find "${dest_dir}" -name '*.pod' -delete
-}
+perl_common

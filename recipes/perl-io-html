@@ -1,20 +1,9 @@
+_perl_package_version=1.004
+_perl_package_author=CJM
+_perl_package_name=IO-HTML
+
 name=perl-io-html
-version=1.004
 revision=1
-tarball_url="https://cpan.metacpan.org/authors/id/C/CJ/CJM/IO-HTML-${version}.tar.gz"
 tarball_blake2b="633abc5d652bc5fddd8ff6d3b82e5048832bab084e3d8e5dfc3b99fc7221501b5147342bc4ead7b03b8c19a5ca2370deaae52fdafb1b860b7845f27873c629f7"
-builddeps="base"
-deps="core-libs perl"
 
-build() {
-    cp -rp "${source_dir}"/. ./
-    perl Makefile.PL INSTALLDIRS=vendor
-    make
-}
-
-package() {
-    make DESTDIR="${dest_dir}" install
-
-    find "${dest_dir}" -name '.packlist' -delete
-    find "${dest_dir}" -name '*.pod' -delete
-}
+perl_common

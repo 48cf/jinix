@@ -1,20 +1,9 @@
+_perl_package_version=3.20
+_perl_package_author=PETDANCE
+_perl_package_name=HTML-Tagset
+
 name=perl-html-tagset
-version=3.20
 revision=1
-tarball_url="https://cpan.metacpan.org/authors/id/P/PE/PETDANCE/HTML-Tagset-${version}.tar.gz"
 tarball_blake2b="d74358e6c5eb1d1b9fa78e40a80ffc0e98ccedcaa743e99eda18ed82d2c1244700ccb0e9db6bba7dca71b1e1fceb04e157b556e52cc00d245ecbd3dd2d68a063"
-builddeps="base"
-deps="core-libs perl"
 
-build() {
-    cp -rp "${source_dir}"/. ./
-    perl Makefile.PL INSTALLDIRS=vendor
-    make
-}
-
-package() {
-    make DESTDIR="${dest_dir}" install
-
-    find "${dest_dir}" -name '.packlist' -delete
-    find "${dest_dir}" -name '*.pod' -delete
-}
+perl_common

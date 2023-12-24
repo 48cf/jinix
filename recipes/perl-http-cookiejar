@@ -1,20 +1,10 @@
+_perl_package_version=0.014
+_perl_package_author=DAGOLDEN
+_perl_package_name=HTTP-CookieJar
+_perl_package_deps="perl-http-date"
+
 name=perl-http-cookiejar
-version=0.014
 revision=1
-tarball_url="https://cpan.metacpan.org/authors/id/D/DA/DAGOLDEN/HTTP-CookieJar-${version}.tar.gz"
 tarball_blake2b="8979526253be074542d4a4cd67d6dbca0841dc613cf661a213a3a32b2deb0715b1ed72fec50d3ffb48f5bdec9dd2d2114b62803b24ab52c6bfcf4bfcd2ba4ea8"
-builddeps="base"
-deps="core-libs perl perl-http-date"
 
-build() {
-    cp -rp "${source_dir}"/. ./
-    perl Makefile.PL INSTALLDIRS=vendor
-    make
-}
-
-package() {
-    make DESTDIR="${dest_dir}" install
-
-    find "${dest_dir}" -name '.packlist' -delete
-    find "${dest_dir}" -name '*.pod' -delete
-}
+perl_common

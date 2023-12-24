@@ -1,20 +1,9 @@
+_perl_package_version=6.04
+_perl_package_author=OALDERS
+_perl_package_name=LWP-MediaTypes
+
 name=perl-lwp-mediatypes
-version=6.04
 revision=1
-tarball_url="https://cpan.metacpan.org/authors/id/O/OA/OALDERS/LWP-MediaTypes-${version}.tar.gz"
 tarball_blake2b="db96012d5b2668fd669d5c4152675a07a2cc91de0fd99d4516fd754b738aa81df24f59e1100692fd893372fb6401a4ffa3fa008956b3eb6cc5b42a1fff81bddf"
-builddeps="base"
-deps="core-libs perl"
 
-build() {
-    cp -rp "${source_dir}"/. ./
-    perl Makefile.PL INSTALLDIRS=vendor
-    make
-}
-
-package() {
-    make DESTDIR="${dest_dir}" install
-
-    find "${dest_dir}" -name '.packlist' -delete
-    find "${dest_dir}" -name '*.pod' -delete
-}
+perl_common

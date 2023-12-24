@@ -1,20 +1,10 @@
+_perl_package_version=3.81
+_perl_package_author=OALDERS
+_perl_package_name=HTML-Parser
+_perl_package_deps="perl-html-tagset perl-http-message perl-uri"
+
 name=perl-html-parser
-version=3.81
 revision=1
-tarball_url="https://cpan.metacpan.org/authors/id/O/OA/OALDERS/HTML-Parser-${version}.tar.gz"
 tarball_blake2b="1211333cf563817249ab51f382101aaf013b82ba3a7dd5e08c9487a0b3dd26598d026d85da8f94f00f17dba8102dcdfddab2320f2071c6702f0b6c7ac9e9cda5"
-builddeps="base"
-deps="core-libs perl perl-html-tagset perl-http-message perl-uri"
 
-build() {
-    cp -rp "${source_dir}"/. ./
-    perl Makefile.PL INSTALLDIRS=vendor
-    make
-}
-
-package() {
-    make DESTDIR="${dest_dir}" install
-
-    find "${dest_dir}" -name '.packlist' -delete
-    find "${dest_dir}" -name '*.pod' -delete
-}
+perl_common

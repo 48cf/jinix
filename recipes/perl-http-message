@@ -1,20 +1,10 @@
+_perl_package_version=6.45
+_perl_package_author=OALDERS
+_perl_package_name=HTTP-Message
+_perl_package_deps="perl-clone perl-encode-locale perl-http-date perl-io-html perl-lwp-mediatypes perl-uri"
+
 name=perl-http-message
-version=6.45
 revision=1
-tarball_url="https://cpan.metacpan.org/authors/id/O/OA/OALDERS/HTTP-Message-${version}.tar.gz"
 tarball_blake2b="8b9245a94540686e500fabedced9a63a172e89285292cfe5cfa8a907eda7ad6f35bff3dab1eab25d2b636289c0fa768e3761167c93d14cd12e7d65eeaabeb1cd"
-builddeps="base"
-deps="core-libs perl perl-clone perl-encode-locale perl-http-date perl-io-html perl-lwp-mediatypes perl-uri"
 
-build() {
-    cp -rp "${source_dir}"/. ./
-    perl Makefile.PL INSTALLDIRS=vendor
-    make
-}
-
-package() {
-    make DESTDIR="${dest_dir}" install
-
-    find "${dest_dir}" -name '.packlist' -delete
-    find "${dest_dir}" -name '*.pod' -delete
-}
+perl_common

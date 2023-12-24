@@ -1,20 +1,9 @@
+_perl_package_version=0.31
+_perl_package_author=ETHER
+_perl_package_name=Try-Tiny
+
 name=perl-try-tiny
-version=0.31
 revision=1
-tarball_url="https://cpan.metacpan.org/authors/id/E/ET/ETHER/Try-Tiny-${version}.tar.gz"
 tarball_blake2b="34bb5ae5a03accd3b99e25d8a69d9d9f1255a5cadc6c77c8909dd5e793d0d15ded10ae2e3410a07fe01f9ff50aba3fe0bc947904a61d1106ee8a16509fce1d88"
-builddeps="base"
-deps="core-libs perl"
 
-build() {
-    cp -rp "${source_dir}"/. ./
-    perl Makefile.PL INSTALLDIRS=vendor
-    make
-}
-
-package() {
-    make DESTDIR="${dest_dir}" install
-
-    find "${dest_dir}" -name '.packlist' -delete
-    find "${dest_dir}" -name '*.pod' -delete
-}
+perl_common

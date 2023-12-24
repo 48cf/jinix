@@ -1,20 +1,10 @@
+_perl_package_version=2.46
+_perl_package_author=TODDR
+_perl_package_name=XML-Parser
+_perl_package_deps="libexpat perl-libwww"
+
 name=perl-xml-parser
-version=2.46
 revision=1
-tarball_url="https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-${version}.tar.gz"
 tarball_blake2b="a815c8f517adb609a1690e6127660eb339649eacffb21d77664b4f9ea071fbaeb432f50bc6469cb36a6b9b4b4e037f778dd2289bed6d87f497713d1d8cab9d0e"
-builddeps="base"
-deps="core-libs libexpat perl perl-libwww"
 
-build() {
-    cp -rp "${source_dir}"/. ./
-    perl Makefile.PL INSTALLDIRS=vendor
-    make
-}
-
-package() {
-    make DESTDIR="${dest_dir}" install
-
-    find "${dest_dir}" -name '.packlist' -delete
-    find "${dest_dir}" -name '*.pod' -delete
-}
+perl_common

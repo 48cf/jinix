@@ -1,20 +1,10 @@
+_perl_package_version=6.11
+_perl_package_author=OALDERS
+_perl_package_name=HTTP-Cookies
+_perl_package_deps="perl-http-date perl-http-message"
+
 name=perl-http-cookies
-version=6.11
 revision=1
-tarball_url="https://cpan.metacpan.org/authors/id/O/OA/OALDERS/HTTP-Cookies-${version}.tar.gz"
 tarball_blake2b="59c6e8302bf015cfa4bf24bc63108ef9677af603d6bc06f90f84f3ee180fdf25fd95667e81238e3f408bc23a4e36d18c848fb2976647fc50b80bfff576a7bfac"
-builddeps="base"
-deps="core-libs perl-http-date perl-http-message"
 
-build() {
-    cp -rp "${source_dir}"/. ./
-    perl Makefile.PL INSTALLDIRS=vendor
-    make
-}
-
-package() {
-    make DESTDIR="${dest_dir}" install
-
-    find "${dest_dir}" -name '.packlist' -delete
-    find "${dest_dir}" -name '*.pod' -delete
-}
+perl_common

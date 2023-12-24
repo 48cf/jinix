@@ -1,20 +1,9 @@
+_perl_package_version=5.21
+_perl_package_author=OALDERS
+_perl_package_name=URI
+
 name=perl-uri
-version=5.21
 revision=1
-tarball_url="https://cpan.metacpan.org/authors/id/O/OA/OALDERS/URI-$version.tar.gz"
 tarball_blake2b="0b8703ecea052bd6248ea64317640af1800e2d9cc5762ed70930c70f68656368fe8cf129f15d93e931622740f8b5b822f9cc8fc312a6aa2ab53885001ce0a4ef"
-builddeps="base"
-deps="core-libs perl"
 
-build() {
-    cp -rp "${source_dir}"/. ./
-    perl Makefile.PL INSTALLDIRS=vendor
-    make
-}
-
-package() {
-    make DESTDIR="${dest_dir}" install
-
-    find "${dest_dir}" -name '.packlist' -delete
-    find "${dest_dir}" -name '*.pod' -delete
-}
+perl_common

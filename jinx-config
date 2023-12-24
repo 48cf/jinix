@@ -58,3 +58,23 @@ autotools_configure_lib() {
         --enable-shared \
         "$@"
 }
+
+perl_common() {
+    version=${_perl_package_version}
+    tarball_url="https://cpan.metacpan.org/authors/id/$(printf '%.1s' "${_perl_package_author}")/$(printf '%.2s' "${_perl_package_author}")/${_perl_package_author}/${_perl_package_name}-${version}.tar.gz"
+    builddeps="base"
+    deps="core-libs perl ${_perl_package_deps}"
+
+    build() {
+        cp -rp "${source_dir}"/. ./
+        perl Makefile.PL INSTALLDIRS=vendor
+        make
+    }
+
+    package() {
+        make DESTDIR="${dest_dir}" install
+
+        find "${dest_dir}" -name '.packlist' -delete
+        find "${dest_dir}" -name '*.pod' -delete
+    }
+}
