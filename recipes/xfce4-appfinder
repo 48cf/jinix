@@ -1,0 +1,19 @@
+name=xfce4-appfinder
+version=4.18.1
+revision=1
+tarball_url="https://archive.xfce.org/src/xfce/xfce4-appfinder/4.18/xfce4-appfinder-${version}.tar.bz2"
+tarball_blake2b="b715da63ea4e98e268e4173548b6826ab8c0cec95ab208b55c17e4a3eabd458f9eb486171b23226bb30c1ed2cc0b868f1c87b40b86980b7ee7d51f3cdf7e1455"
+builddeps="base gettext intltool"
+deps="core-libs garcon"
+
+build() {
+    autotools_configure
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
