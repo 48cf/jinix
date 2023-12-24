@@ -1,53 +1,72 @@
-# /etc/profile
+# Begin /etc/profile
+# Written for Beyond Linux From Scratch
+# by James Robertson <jameswrobertson@earthlink.net>
+# modifications by Dagmar d'Surreal <rivyqntzne@pbzpnfg.arg>
 
-# This file was lifted straight from my Artix Linux host system.
-# Credits to them :)
+# System wide environment variables and startup programs.
 
-# Set our umask
-umask 022
+# System wide aliases and functions should go in /etc/bashrc.  Personal
+# environment variables and startup programs should go into
+# ~/.bash_profile.  Personal aliases and functions should go into
+# ~/.bashrc.
 
-# Append "$1" to $PATH when not already in.
-# This function API is accessible to scripts in /etc/profile.d
-append_path () {
-    case ":$PATH:" in
-        *:"$1":*)
-            ;;
-        *)
-            PATH="${PATH:+$PATH:}$1"
-    esac
+# Functions to help us manage paths.  Second argument is the name of the
+# path variable to be modified (default: PATH)
+pathremove () {
+        local IFS=':'
+        local NEWPATH
+        local DIR
+        local PATHVARIABLE=${2:-PATH}
+        for DIR in ${!PATHVARIABLE} ; do
+                if [ "$DIR" != "$1" ] ; then
+                  NEWPATH=${NEWPATH:+$NEWPATH:}$DIR
+                fi
+        done
+        export $PATHVARIABLE="$NEWPATH"
 }
 
-# Append our default paths
-append_path '/usr/local/sbin'
-append_path '/usr/local/bin'
-append_path '/usr/bin'
+pathprepend () {
+        pathremove $1 $2
+        local PATHVARIABLE=${2:-PATH}
+        export $PATHVARIABLE="$1${!PATHVARIABLE:+:${!PATHVARIABLE}}"
+}
 
-# Force PATH to be environment
-export PATH
+pathappend () {
+        pathremove $1 $2
+        local PATHVARIABLE=${2:-PATH}
+        export $PATHVARIABLE="${!PATHVARIABLE:+${!PATHVARIABLE}:}$1"
+}
 
-# Load profiles from /etc/profile.d
-if test -d /etc/profile.d/; then
-    for profile in /etc/profile.d/*.sh; do
-        test -r "$profile" && . "$profile"
-    done
-    unset profile
+export -f pathremove pathprepend pathappend
+
+# Set the initial path
+export PATH=/usr/bin
+
+# Set up some environment variables.
+export HISTSIZE=1000
+export HISTIGNORE="&:[bf]g:exit"
+
+# Set some defaults for graphical systems
+export XDG_DATA_DIRS=${XDG_DATA_DIRS:-/usr/share/}
+export XDG_CONFIG_DIRS=${XDG_CONFIG_DIRS:-/etc/xdg/}
+export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-/tmp/xdg-$USER}
+
+# Set up a red prompt for root and a green one for users.
+NORMAL="\[\e[0m\]"
+RED="\[\e[1;31m\]"
+GREEN="\[\e[1;32m\]"
+if [[ $EUID == 0 ]] ; then
+  PS1="$RED\u@\h [ $NORMAL\w$RED ]# $NORMAL"
+else
+  PS1="$GREEN\u@\h [ $NORMAL\w$GREEN ]\$ $NORMAL"
 fi
 
-# Unload our profile API functions
-unset -f append_path
+for script in /etc/profile.d/*.sh ; do
+        if [ -r $script ] ; then
+                . $script
+        fi
+done
 
-# Source global bash config, when interactive but not posix or sh mode
-if test "$BASH" &&\
-   test "$PS1" &&\
-   test -z "$POSIXLY_CORRECT" &&\
-   test "${0#-}" != sh &&\
-   test -r /etc/bash.bashrc
-then
-    . /etc/bash.bashrc
-fi
+unset script RED GREEN NORMAL
 
-# Termcap is outdated, old, and crusty, kill it.
-unset TERMCAP
-
-# Man is much better than us at figuring this out
-unset MANPATH
+# End /etc/profile
