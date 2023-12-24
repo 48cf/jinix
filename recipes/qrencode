@@ -1,0 +1,20 @@
+name=qrencode
+version=4.1.1
+revision=1
+tarball_url="https://fukuchi.org/works/qrencode/qrencode-${version}.tar.bz2"
+tarball_blake2b="ae3abb4a162518c0204d09c9df7434fb348e24c20e790a261841220b0a7165168137d5acbdbc53e40558724eac2e1e21786f11013f384b545d56a1c9caaff61d"
+builddeps="base"
+deps="core-libs libpng"
+
+build() {
+
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
