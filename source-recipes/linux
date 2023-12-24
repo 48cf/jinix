@@ -6,4 +6,5 @@ allow_network=yes
 
 regenerate() {
     curl -Lo .config https://gitlab.archlinux.org/archlinux/packaging/packages/linux/-/raw/de5ec760e2df25b4141cfd295f2243442e5fb056/config
+    sed -i '/^CONFIG_DEFAULT_HOSTNAME/s/archlinux/jinix/' .config
 }
