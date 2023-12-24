@@ -1,8 +1,6 @@
 JINX_MAJOR_VER=0.2
 JINX_NATIVE_MODE=yes
 
-SYSTEMD=yes
-
 export CFLAGS="-march=native -O2 -pipe -fno-plt -fexceptions \
                -Wp,-D_FORTIFY_SOURCE=2 -fstack-clash-protection -fcf-protection"
 export CXXFLAGS="$CFLAGS -Wp,-D_GLIBCXX_ASSERTIONS"

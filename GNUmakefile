@@ -5,14 +5,10 @@ QEMUFLAGS ?= -M q35,smm=off -m 2G -hdd image.hdd -smp 4 \
 
 .PHONY: all
 all:
-	rm -f image.hdd
-	$(MAKE) SYSTEMD=no image.hdd
+	$(MAKE) image
 
-all-systemd:
-	rm -f image.hdd
-	$(MAKE) SYSTEMD=yes image.hdd
-
-image.hdd: jinx
+.PHONY: image
+image: jinx
 	$(MAKE) distro-base
 	./build-support/makeimage.sh
 
@@ -23,9 +19,9 @@ jinx:
 .PHONY: distro-base
 distro-base: jinx
 ifeq ($(SYSTEMD),yes)
-	./jinx build base systemd linux initramfs
+	SYSTEMD=yes ./jinx build base systemd linux initramfs
 else
-	./jinx build base openrc linux initramfs
+	SYSTEMD=no ./jinx build base openrc linux initramfs
 endif
 
 # XXX BROKEN IF SYSTEMD IS MERGED
