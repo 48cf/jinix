@@ -6,8 +6,17 @@ all:
 	rm -f image.hdd
 	$(MAKE) image.hdd
 
+all-systemd:
+	rm -f image.hdd
+	$(MAKE) image.hdd-systemd
+
 image.hdd: jinx
 	$(MAKE) distro-base
+	./build-support/makeimage.sh
+
+.PHONY: image.hdd-systemd
+image.hdd-systemd: jinx
+	$(MAKE) distro-base-systemd
 	./build-support/makeimage.sh
 
 jinx:
@@ -18,12 +27,17 @@ jinx:
 distro-base: jinx
 	./jinx build base openrc linux initramfs
 
+.PHONY: distro-base-systemd
+distro-base: jinx
+	./jinx build base systemd linux initramfs
+
+#BROKEN IF SYSTEMD IS MERGED
 .PHONY: distro-full
 distro-full: jinx
 	./jinx build-all
 
 .PHONY: run-kvm
-run-kvm: image.hdd
+run-kvm: image.hdd-systemd
 	qemu-system-x86_64 -enable-kvm -cpu host $(QEMUFLAGS)
 
 .PHONY: run

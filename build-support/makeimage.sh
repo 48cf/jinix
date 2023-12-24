@@ -32,7 +32,7 @@ cat <<EOF | sudo tee sysroot/boot/limine.cfg
 :Linux
 PROTOCOL=linux
 KERNEL_PATH=boot:///vmlinuz
-CMDLINE=root=/dev/sda2 rw init=/bin/openrc-init
+CMDLINE=root=/dev/sda2 rw init=/bin/init
 MODULE_PATH=boot:///initramfs.img
 EOF
 
