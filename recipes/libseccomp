@@ -1,0 +1,20 @@
+name=libseccomp
+version=2.5.5
+revision=1
+tarball_url="https://github.com/seccomp/libseccomp/releases/download/v${version}/libseccomp-${version}.tar.gz"
+tarball_blake2b="d770cee1f3e02fbbcd9f25655b360ab38160ad800e2829a67f2b9da62b095a90be99ac851a67344cf95bd6810a6268da4655dc1d37d996e58239c4999eb41998"
+builddeps="base gperf"
+deps="core-libs"
+
+build() {
+
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
