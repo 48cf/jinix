@@ -1,0 +1,19 @@
+name=exo
+version=4.18.0
+revision=1
+tarball_url="https://archive.xfce.org/src/xfce/exo/4.18/exo-${version}.tar.bz2"
+tarball_blake2b="99cd22b9f2c806907449afdd640abd85be2ec37269d0436a20300ac88ee4fbe39807e39ba51ae8fe82d621c478d65d1f452209779e7d48caee899305b40f3a27"
+builddeps="base gettext intltool"
+deps="core-libs dbus gtk+-3 libxfce4ui libxfce4util"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
