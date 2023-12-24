@@ -6,10 +6,10 @@ set -ex
 
 rm -f image.hdd
 dd if=/dev/zero bs=1G count=0 seek=100 of=image.hdd
-parted -s image.hdd mklabel gpt
-parted -s image.hdd mkpart ESP fat32 2048s 1%
-parted -s image.hdd set 1 esp on
-parted -s image.hdd mkpart root ext4 1% 100%
+sudo parted -s image.hdd mklabel gpt
+sudo parted -s image.hdd mkpart ESP fat32 2048s 1%
+sudo parted -s image.hdd set 1 esp on
+sudo parted -s image.hdd mkpart root ext4 1% 100%
 
 USED_LOOPBACK=$(sudo losetup -Pf --show image.hdd)
 
