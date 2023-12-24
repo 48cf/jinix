@@ -3,8 +3,8 @@ version=254
 revision=1
 tarball_url="https://github.com/systemd/systemd/archive/v${version}/systemd-${version}.tar.gz"
 tarball_blake2b="4703ac102dd0003a2ef59dfd9b6fc6345b57cf1ff6397ebc71b3e9abb35ad5b891d114038a91eddba25b4ec81b8208a36691bc5490173b223ba35842cd1776d4"
-builddeps="base meson ninja gperf python-jinja"
-deps="core-libs pam curl git gnutls libgcrypt libidn2 libpwquality libseccomp libxkbcommon p11-kit pcre2 qrencode libcap kmod"
+builddeps="base gperf meson ninja python-jinja"
+deps="core-libs curl git gnutls kmod libcap libgcrypt libidn2 libpwquality libseccomp libxkbcommon p11-kit pam pcre2 qrencode"
 
 build() {
     meson setup \
@@ -34,10 +34,6 @@ build() {
 
 package() {
     DESTDIR="${dest_dir}" ninja install
-
-    #systemd-machine-id-setup
-
-    #systemctl preset-all
 
     post_package_strip
 }

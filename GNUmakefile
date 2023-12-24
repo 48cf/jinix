@@ -1,22 +1,19 @@
+SYSTEMD ?= no
+
 QEMUFLAGS ?= -M q35,smm=off -m 2G -hdd image.hdd -smp 4 \
     -device qemu-xhci,id=xhci -device usb-tablet,bus=xhci.0
 
 .PHONY: all
 all:
 	rm -f image.hdd
-	$(MAKE) image.hdd
+	$(MAKE) SYSTEMD=no image.hdd
 
 all-systemd:
 	rm -f image.hdd
-	$(MAKE) image.hdd-systemd
+	$(MAKE) SYSTEMD=yes image.hdd
 
 image.hdd: jinx
 	$(MAKE) distro-base
-	./build-support/makeimage.sh
-
-.PHONY: image.hdd-systemd
-image.hdd-systemd: jinx
-	$(MAKE) distro-base-systemd
 	./build-support/makeimage.sh
 
 jinx:
@@ -25,19 +22,19 @@ jinx:
 
 .PHONY: distro-base
 distro-base: jinx
-	./jinx build base openrc linux initramfs
-
-.PHONY: distro-base-systemd
-distro-base: jinx
+ifeq ($(SYSTEMD),yes)
 	./jinx build base systemd linux initramfs
+else
+	./jinx build base openrc linux initramfs
+endif
 
-#BROKEN IF SYSTEMD IS MERGED
+# XXX BROKEN IF SYSTEMD IS MERGED
 .PHONY: distro-full
 distro-full: jinx
 	./jinx build-all
 
 .PHONY: run-kvm
-run-kvm: image.hdd-systemd
+run-kvm: image.hdd
 	qemu-system-x86_64 -enable-kvm -cpu host $(QEMUFLAGS)
 
 .PHONY: run

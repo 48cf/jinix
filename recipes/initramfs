@@ -1,18 +1,28 @@
 name=initramfs
 from_source=base-files
 revision=1
+builddeps="base busybox dracut linux kmod"
+
 if [ "$SYSTEMD" = "yes" ]; then
-builddeps="base busybox dracut systemd linux kmod"
+    builddeps="$builddeps systemd"
 else
-builddeps="base busybox dracut eudev linux kmod"
+    builddeps="$builddeps eudev"
 fi
 
 build() {
-    if [ "$SYSTEMD" = "yes" ]; then
-        dracut --kver 6.6.7 --no-hostonly --strip --zstd --verbose --add busybox initramfs.img
-    else
-        dracut --kver 6.6.7 --no-hostonly --strip --zstd --verbose --omit systemd --add busybox initramfs.img
+    if ! [ "$SYSTEMD" = "yes" ]; then
+        openrc_args="--omit systemd"
     fi
+
+    dracut \
+        --kver 6.6.7 \
+        --no-hostonly \
+        --strip \
+        --zstd \
+        --verbose \
+        --add busybox \
+        ${openrc_args} \
+        initramfs.img
 }
 
 package() {
