@@ -3,7 +3,7 @@ version=7.3.0
 revision=1
 tarball_url="https://github.com/harfbuzz/harfbuzz/releases/download/${version}/harfbuzz-${version}.tar.xz"
 tarball_blake2b="7b1f6fb0c4c7483ff7a7c27f613b8579af30a304432e1a4e157aec4344449aed93e68443df1f2bc741be6780a6b2214d54804e2df9a20d83c8256b5f98c7fcda"
-builddeps="base meson ninja"
+builddeps="base gobject-introspection meson ninja"
 deps="core-libs graphite2 glib zlib freetype cairo icu"
 
 build() {
@@ -13,11 +13,11 @@ build() {
     meson_configure \
         -Dgraphite2=enabled \
         -Dglib=enabled \
-        -Dgobject=disabled \
+        -Dgobject=enabled \
         -Dicu=enabled \
         -Dfreetype=enabled \
         -Dcairo=enabled \
-        -Dintrospection=disabled \
+        -Dintrospection=enabled \
         -Ddocs=disabled \
         -Dtests=disabled
 

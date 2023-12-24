@@ -3,7 +3,7 @@ version=2.42.10
 revision=1
 tarball_url="https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-${version}.tar.xz"
 tarball_blake2b="b6bec388b70a971ea5b336001920fdf433bcbc539d54e62c7b6198e968f0bd3560ef9adc94215b64b01e7d5db69c95d5a1d32654b38b051fceb75e93666b3385"
-builddeps="base meson ninja"
+builddeps="base gettext gobject-introspection meson ninja"
 deps="core-libs glib libjpeg-turbo libpng libx11 libtiff"
 
 build() {
@@ -16,6 +16,9 @@ build() {
 
 package() {
     DESTDIR="${dest_dir}" ninja install
+
+    # XXX install step warns that gdk-pixbuf-query-loaders wasn't run because
+    # DESTDIR was set, figure out how we can run this manually instead
 
     post_package_strip
 }
