@@ -1,0 +1,23 @@
+name=libpwquality
+version=1.4.5
+revision=1
+tarball_url="https://github.com/libpwquality/libpwquality/releases/download/libpwquality-${version}/libpwquality-${version}.tar.bz2"
+tarball_blake2b="f5326996ab607bf9d24de446d9714987ad259fd2222bc54983769abc298969e2e9a4cee78f2a5c5d963bd0e5f57ea3aa346b0ce108b465a8da82810486b37e36"
+builddeps="base python"
+deps="core-libs pam cracklib"
+
+build() {
+
+    autotools_configure_lib \
+        --with-securedir=/usr/lib/security \
+        --disable-python-bindings
+
+    make -j${parallelism}
+}
+
+package() {
+    # TODO: This should also update /etc/pam.d/system-password, see BLFS for instructions
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
