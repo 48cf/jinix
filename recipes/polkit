@@ -7,16 +7,11 @@ builddeps="base gettext meson ninja perl"
 deps="core-libs duktape elogind glib libxslt pam"
 
 build() {
-    meson setup \
-        --prefix=${prefix} \
-        --sysconfdir=/etc \
-        --libdir=lib \
-        --buildtype=release \
+    meson_configure \
         -Dman=false \
         -Dtests=false \
         -Dintrospection=false \
-        -Dsession_tracking=libelogind \
-        ${source_dir}
+        -Dsession_tracking=libelogind
 
     ninja -j${parallelism}
 }

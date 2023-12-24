@@ -7,12 +7,7 @@ builddeps="base meson ninja"
 deps="core-libs eudev glib"
 
 build() {
-    meson setup \
-        --prefix=${prefix} \
-        --sysconfdir=/etc \
-        --libdir=lib \
-        --buildtype=release \
-        ${source_dir}
+    meson_configure
 
     ninja -j${parallelism}
 }

@@ -7,12 +7,8 @@ builddeps="base meson ninja"
 deps="core-libs gsettings-desktop-schemas glib gnutls"
 
 build() {
-    meson setup \
-        --prefix=${prefix} \
-        --libdir=lib \
-        --buildtype=release \
-        -Dlibproxy=disabled \
-        ${source_dir}
+    meson_configure \
+        -Dlibproxy=disabled
 
     ninja -j${parallelism}
 }

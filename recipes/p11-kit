@@ -7,13 +7,8 @@ builddeps="base gettext meson ninja"
 deps="core-libs libnsl libtasn1"
 
 build() {
-    meson setup \
-        --prefix=${prefix} \
-        --sysconfdir=/etc \
-        --libdir=lib \
-        --buildtype=release \
-        -Dtrust_paths=/etc/pki/anchors \
-        ${source_dir}
+    meson_configure \
+        -Dtrust_paths=/etc/pki/anchors
 
     ninja -j${parallelism}
 }

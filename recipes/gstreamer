@@ -7,14 +7,9 @@ builddeps="base bison flex gettext meson ninja"
 deps="core-libs glib libcap"
 
 build() {
-    meson setup \
-        --prefix=${prefix} \
-        --sysconfdir=/etc \
-        --libdir=lib \
-        --buildtype=release \
+    meson_configure \
        -Dgst_debug=false \
-       -Dpackage-name="GStreamer 1.22.7" \
-       ${source_dir}
+       -Dpackage-name="GStreamer ${version}"
 
     ninja -j${parallelism}
 }

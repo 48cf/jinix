@@ -7,15 +7,11 @@ builddeps="base gettext meson ninja"
 deps="core-libs cairo glib gtk+-3 libx11 libxi libxres"
 
 build() {
-    meson setup \
-        --prefix=${prefix} \
-        --libdir=lib \
-        --buildtype=release \
+    meson_configure \
         -Dinstall_tools=true \
         -Dstartup_notification="disabled" \
         -Dintrospection="disabled" \
-        -Dgtk_doc=false \
-        ${source_dir}
+        -Dgtk_doc=false
 
     ninja -j${parallelism}
 }

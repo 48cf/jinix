@@ -10,10 +10,7 @@ build() {
     export CFLAGS="${CFLAGS/-fexceptions/}"
     export CXXFLAGS="${CXXFLAGS/-fexceptions/}"
 
-    meson setup \
-        --prefix=${prefix} \
-        --libdir=lib \
-        --buildtype=release \
+    meson_configure \
         -Dgraphite2=enabled \
         -Dglib=enabled \
         -Dgobject=disabled \
@@ -22,8 +19,7 @@ build() {
         -Dcairo=enabled \
         -Dintrospection=disabled \
         -Ddocs=disabled \
-        -Dtests=disabled \
-        ${source_dir}
+        -Dtests=disabled
 
     ninja -j${parallelism}
 }

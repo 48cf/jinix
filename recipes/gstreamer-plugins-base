@@ -7,14 +7,9 @@ builddeps="base gettext meson ninja"
 deps="core-libs gstreamer alsa-lib graphene iso-codes libgudev libjpeg-turbo libogg libpng libtheora libvorbis libxi libxv mesa pango opus sdl2"
 
 build() {
-    meson setup \
-        --prefix=${prefix} \
-        --sysconfdir=/etc \
-        --libdir=lib \
-        --buildtype=release \
+    meson_configure \
         --wrap-mode=nodownload \
-       -Dpackage-name="GStreamer 1.22.7" \
-       ${source_dir}
+       -Dpackage-name="GStreamer ${version}"
 
     ninja -j${parallelism}
 }

@@ -7,14 +7,10 @@ builddeps="base bison meson ninja"
 deps="core-libs libxcb libxml xkeyboard-config"
 
 build() {
-    meson setup \
-        --prefix=/usr \
-        --libdir=lib \
-        --buildtype=release \
+    meson_configure \
         -Denable-docs=false \
         -Denable-x11=true \
-        -Denable-wayland=false \
-        "${source_dir}"
+        -Denable-wayland=false
 
     ninja -j${parallelism}
 }

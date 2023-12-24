@@ -7,15 +7,11 @@ builddeps="base meson ninja"
 deps="core-libs eudev libevdev mtdev"
 
 build() {
-    meson setup \
-        --prefix=${prefix} \
-        --libdir=lib \
-        --buildtype=release \
+    meson_configure \
         -Ddebug-gui=false \
         -Ddocumentation=false \
         -Dlibwacom=false \
-        -Dtests=false \
-        ${source_dir}
+        -Dtests=false
 
     ninja -j${parallelism}
 }

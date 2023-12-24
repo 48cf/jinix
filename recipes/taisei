@@ -7,15 +7,11 @@ builddeps="base meson ninja"
 deps="core-libs freetype libpng sdl2 libwebp zlib cglm openssl libzip"
 
 build() {
-    meson setup \
-        --prefix=${prefix} \
-        --libdir=lib \
-        --buildtype=release \
+    meson_configure \
         -Ddocs=false \
         -Da_sdl2mixer=false \
         -Da_default=null \
-        -Db_lto=false \
-        ${source_dir}
+        -Db_lto=false
 
     ninja -j${parallelism}
 }

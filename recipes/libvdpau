@@ -7,13 +7,9 @@ builddeps="base meson ninja"
 deps="core-libs libxext xorg-proto"
 
 build() {
-    meson setup \
-        --prefix=${prefix} \
-        --libdir=lib \
-        --buildtype=release \
+    meson_configure \
         -Ddocumentation=false \
-        -Ddri2=true \
-        ${source_dir}
+        -Ddri2=true
 
     ninja -j${parallelism}
 }

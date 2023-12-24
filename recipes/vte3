@@ -7,11 +7,7 @@ builddeps="base gettext libxml meson ninja"
 deps="core-libs cairo fribidi glib gnutls gtk+-3 icu pango pcre2 zlib"
 
 build() {
-    meson setup \
-        --prefix=${prefix} \
-        --sysconfdir=/etc \
-        --libdir=lib \
-        --buildtype=release \
+    meson_configure \
         -Da11y=true \
         -Dfribidi=true \
         -Dglade=true \
@@ -21,8 +17,7 @@ build() {
         -Dicu=true \
         -Dgir=false \
         -Dvapi=false \
-        -D_systemd=false \
-        ${source_dir}
+        -D_systemd=false
 
     ninja -j${parallelism}
 }

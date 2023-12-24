@@ -7,18 +7,14 @@ builddeps="base meson ninja python-setuptools"
 deps="core-libs at-spi2-core cairo glib gdk-pixbuf libx11 libxext libxcb libxrender libxrandr libxfixes libxdamage pango fribidi libepoxy libxkbcommon fontconfig freetype libxi harfbuzz libxcursor gsettings-desktop-schemas dbus"
 
 build() {
-    meson setup \
-        --prefix=${prefix} \
-        --libdir=lib \
-        --buildtype=release \
+    meson_configure \
         -Dprint_backends=file \
         -Dintrospection=false \
         -Dx11_backend=true \
         -Dbroadway_backend=true \
         -Dwayland_backend=false \
         -Dgtk_doc=false \
-        -Dcolord=no \
-        ${source_dir}
+        -Dcolord=no
 
     ninja -j${parallelism}
 }

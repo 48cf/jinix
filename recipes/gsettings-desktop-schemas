@@ -11,12 +11,8 @@ regenerate() {
 }
 
 build() {
-    meson setup \
-        --prefix=${prefix} \
-        --libdir=lib \
-        --buildtype=release \
-        -Dintrospection=false \
-        ${source_dir}
+    meson_configure \
+        -Dintrospection=false
 
     ninja -j${parallelism}
 }

@@ -7,16 +7,11 @@ builddeps="base meson ninja"
 deps="core-libs kbd ncurses net-tools pam psmisc shadow"
 
 build() {
-    meson setup \
-        --prefix=${prefix} \
-        --libdir=lib \
-        --sbindir=bin \
-        --buildtype=release \
+    meson_configure \
         -Dos=Linux \
         -Dpam=true \
         -Dsysvinit=true \
-        -Dtermcap=ncurses \
-        ${source_dir}
+        -Dtermcap=ncurses
 
     ninja -j${parallelism}
 }

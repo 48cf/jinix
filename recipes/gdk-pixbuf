@@ -7,13 +7,9 @@ builddeps="base meson ninja"
 deps="core-libs glib libjpeg-turbo libpng libx11 libtiff"
 
 build() {
-    meson setup \
-        --prefix=${prefix} \
-        --libdir=lib \
-        --buildtype=release \
+    meson_configure \
         -Dgio_sniffing=false \
-        -Dman=false \
-        ${source_dir}
+        -Dman=false
 
     ninja -j${parallelism}
 }

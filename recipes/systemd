@@ -7,11 +7,7 @@ builddeps="base gperf meson ninja python-jinja"
 deps="core-libs curl git gnutls kmod libcap libgcrypt libidn2 libpwquality libseccomp libxkbcommon p11-kit pam pcre2 qrencode"
 
 build() {
-    meson setup \
-        --prefix=${prefix} \
-        --sysconfdir=/etc \
-        --libdir=lib \
-        --buildtype=release \
+    meson_configure \
         -Ddefault-dnssec=no \
         -Dfirstboot=true \
         -Dinstall-tests=false \
@@ -26,8 +22,7 @@ build() {
         -Dpamconfdir=/etc/pam.d \
         -Ddev-kvm-mode=0660 \
         -Dnobody-group=nogroup \
-        -Ddocdir=${prefix}/share/doc/systemd-${version} \
-        ${source_dir}
+        -Ddocdir="${prefix}/share/doc/systemd-${version}"
 
     ninja -j${parallelism}
 }

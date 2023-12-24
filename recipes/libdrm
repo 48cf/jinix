@@ -7,17 +7,13 @@ builddeps="base meson ninja"
 deps="core-libs libpciaccess"
 
 build() {
-    meson setup \
-        --prefix=${prefix} \
-        --libdir=lib \
-        --buildtype=release \
+    meson_configure \
         -Dudev=true \
         -Detnaviv=disabled \
         -Dfreedreno=disabled \
         -Dvc4=disabled \
         -Dvalgrind=disabled \
-        -Dinstall-test-programs=true \
-        ${source_dir}
+        -Dinstall-test-programs=true
 
     ninja -j${parallelism}
 }

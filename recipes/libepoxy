@@ -7,12 +7,9 @@ builddeps="base meson ninja"
 deps="core-libs mesa xorg-proto libx11"
 
 build() {
-    meson setup \
-        --prefix=${prefix} \
-        --buildtype=release \
+    meson_configure \
         -Degl=yes \
-        -Dtests=false \
-        ${source_dir}
+        -Dtests=false
 
     ninja -j${parallelism}
 }

@@ -78,3 +78,17 @@ perl_common() {
         find "${dest_dir}" -name '*.pod' -delete
     }
 }
+
+meson_configure() {
+    if [ -z "${meson_source_dir}" ]; then
+        meson_source_dir="${source_dir}"
+    fi
+
+    meson setup "${meson_source_dir}" \
+        --prefix=${prefix} \
+        --sysconfdir=/etc \
+        --libdir=lib \
+        --sbindir=bin \
+        --buildtype=release \
+        "$@"
+}

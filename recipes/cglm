@@ -7,12 +7,8 @@ builddeps="base meson ninja"
 deps="core-libs"
 
 build() {
-    meson setup \
-        --prefix=${prefix} \
-        --libdir=lib \
-        --buildtype=release \
-        -Dbuild_tests=false \
-        ${source_dir}
+    meson_configure \
+        -Dbuild_tests=false
 
     ninja -j${parallelism}
 }

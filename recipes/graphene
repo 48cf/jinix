@@ -7,11 +7,7 @@ builddeps="base meson ninja"
 deps="core-libs glib"
 
 build() {
-    meson setup \
-        --prefix=${prefix} \
-        --libdir=lib \
-        --buildtype=release \
-        ${source_dir}
+    meson_configure
 
     ninja -j${parallelism}
 }

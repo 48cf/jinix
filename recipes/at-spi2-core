@@ -7,14 +7,9 @@ builddeps="base meson ninja"
 deps="core-libs dbus glib libxml libxtst"
 
 build() {
-    meson setup \
-        --prefix=${prefix} \
-        --sysconfdir=/etc \
-        --libdir=lib \
-        --buildtype=release \
+    meson_configure \
         -Dsystemd_user_dir=/tmp \
-        -Dintrospection=disabled \
-        ${source_dir}
+        -Dintrospection=disabled
 
     ninja -j${parallelism}
 }

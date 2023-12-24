@@ -11,17 +11,14 @@ build() {
 
     mkdir -p build
     cd build
-    meson setup \
-        --prefix=${prefix} \
-        --sysconfdir=/etc \
-        --libdir=lib \
-        --buildtype=release \
+
+        meson_source_dir=./ \
+    meson_configure \
         -Dudevrulesdir=${prefix}/lib/udev/rules.d \
         -Ddatabase=simple \
         -Ddoxygen=false \
         -Dbluez5=disabled \
-        -Dtests=false \
-        ..
+        -Dtests=false
 
     ninja -j${parallelism}
 }

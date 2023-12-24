@@ -11,14 +11,9 @@ builddeps="base meson ninja"
 deps="core-libs popt"
 
 build() {
-    meson setup \
-        --prefix=${prefix} \
-        --sysconfdir=/etc \
-        --libdir=lib \
-        --buildtype=release \
+    meson_configure \
         -Dtests=disabled \
-        -Dtools=enabled \
-        ${source_dir}
+        -Dtools=enabled
 
     ninja -j${parallelism}
 }

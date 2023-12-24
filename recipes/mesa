@@ -4,13 +4,10 @@ revision=1
 tarball_url="https://archive.mesa3d.org/mesa-${version}.tar.xz"
 tarball_blake2b="1b87d15cbe1b4c761653b7042c46eac3036f08dfcf3a0a81aa7bf6c1c0c402b05f37ce8da9d88df72e1745d66a648c2b8c161b04bf558107f548f6d8167cc798"
 builddeps="base bison cmake flex meson ninja python-mako python-setuptools"
-deps="core-libs libglvnd libxshmfence libxrandr libxdamage libxxf86vm libxfixes libx11 libxext libxcb libexpat libva libvdpau llvm zlib"
+deps="core-libs elfutils libglvnd libxshmfence libxrandr libxdamage libxxf86vm libxfixes libx11 libxext libxcb libexpat libva libvdpau llvm zlib"
 
 build() {
-    meson setup \
-        --prefix=/usr \
-        --libdir=lib \
-        --buildtype=release \
+    meson_configure \
         -Db_ndebug=true \
         -Ddri3=enabled \
         -Degl=enabled \
@@ -32,8 +29,7 @@ build() {
         -Dvalgrind=disabled \
         -Dvideo-codecs=vc1dec,h264dec,h264enc,h265dec,h265enc \
         -Dvulkan-drivers=`#amd,intel,intel_hasvk,swrast,virtio` \
-        -Dvulkan-layers=`#device-select,intel-nullhw,overlay` \
-        ${source_dir}
+        -Dvulkan-layers=`#device-select,intel-nullhw,overlay`
 
     ninja -j${parallelism}
 }

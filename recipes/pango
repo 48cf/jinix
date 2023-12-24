@@ -7,12 +7,8 @@ builddeps="base meson ninja"
 deps="core-libs glib fontconfig freetype fribidi cairo xorg-proto libx11 libxtrans libxext harfbuzz libxft"
 
 build() {
-    meson setup \
-        --prefix=${prefix} \
-        --libdir=lib \
-        --buildtype=release \
-        -Dintrospection=disabled \
-        ${source_dir}
+    meson_configure \
+        -Dintrospection=disabled
 
     ninja -j${parallelism}
 }

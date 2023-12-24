@@ -7,14 +7,10 @@ builddeps="base meson ninja perl"
 deps="core-libs alsa-lib glu libjpeg-turbo llvm sdl2"
 
 build() {
-    meson setup \
-        --prefix=${prefix} \
-        --libdir=lib \
-        --buildtype=release \
-        -Dudevdir=${prefix}/lib/udev/rules.d \
+    meson_configure \
+        -Dudevdir="${prefix}/lib/udev/rules.d" \
         -Ddoxygen-doc=disabled \
-        -Dgconv=disabled \
-        ${source_dir}
+        -Dgconv=disabled
 
     ninja -j${parallelism}
 }

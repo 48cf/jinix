@@ -7,17 +7,12 @@ builddeps="base gettext git gperf meson ninja openrc perl python python-jinja"
 deps="core-libs dbus eudev libcap libxslt pam"
 
 build() {
-    meson setup \
-        --prefix=${prefix} \
-        --sysconfdir=/etc \
-        --libdir=lib \
-        --buildtype=release \
+    meson_configure \
         -Dman=false \
         -Ddocdir=${prefix}/share/doc/elogind-${version} \
         -Dcgroup-controller=elogind \
         -Ddev-kvm-mode=0660 \
-        -Ddbuspolicydir=/etc/dbus-1/system.d \
-        ${source_dir}
+        -Ddbuspolicydir=/etc/dbus-1/system.d
 
     ninja -j${parallelism}
 }
