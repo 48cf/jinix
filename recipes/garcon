@@ -1,0 +1,19 @@
+name=garcon
+version=4.18.1
+revision=1
+tarball_url="https://archive.xfce.org/src/xfce/garcon/4.18/garcon-${version}.tar.bz2"
+tarball_blake2b="395cc8f7c7029196f25ecb52d393989ab0df0d9ddd34ec1fc4b0a2ee46b1a059a87c75797adb84d7557523e8e0c464278344fe3d793f05941a90874bdc8e036d"
+builddeps="base gettext gobject-introspection intltool python"
+deps="core-libs gtk+-3 libxfce4ui"
+
+build() {
+    autotools_configure
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
