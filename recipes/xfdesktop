@@ -1,0 +1,19 @@
+name=xfdesktop
+version=4.18.1
+revision=1
+tarball_url="https://archive.xfce.org/src/xfce/xfdesktop/4.18/xfdesktop-${version}.tar.bz2"
+tarball_blake2b="3d4f54b64a6adc5f52bf6b48862b1fbf9b9608113035fdce89a2cb08a674f773f42edc0e1d05a27e89de7df71f7d53f400b794a2a79888cf51570c3ab060db8b"
+builddeps="base gettext intltool"
+deps="core-libs exo gtk+-3 libwnck libxfce4ui libxfce4util"
+
+build() {
+    autotools_configure
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
