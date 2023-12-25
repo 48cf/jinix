@@ -1,0 +1,15 @@
+name=hicolor-icon-theme
+version=0.17
+revision=1
+tarball_url="https://icon-theme.freedesktop.org/releases/hicolor-icon-theme-${version}.tar.xz"
+tarball_blake2b="c20c6e23eae799468d9f4aac038d823611cabdbcc8237d9fdb4f3d7ee5c8031223b0e9e0cf7c2b3fdf975291489223445775f340024cb6d4bdbdd29a4cf5548e"
+builddeps="base"
+deps="core-libs"
+
+build() {
+    autotools_configure
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+}
