@@ -1,0 +1,20 @@
+name=thunar
+version=4.18.8
+revision=1
+tarball_url="https://archive.xfce.org/src/xfce/thunar/4.18/thunar-${version}.tar.bz2"
+tarball_blake2b="dbd61d387f21956edad5f5f614c170b072788b2a1768382127f6fda3bca00afa0816201f364ba476e842fc44800bab3029e89db4aade10f1ab4f86012a4ba90b"
+builddeps="base gettext intltool"
+deps="core-libs exo libgudev pcre2"
+
+build() {
+    autotools_configure \
+        --docdir="${prefix}/share/doc/thunar-${version}"
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
