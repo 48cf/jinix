@@ -1,0 +1,33 @@
+name=alsa-utils
+version=1.2.9
+revision=1
+tarball_url="https://www.alsa-project.org/files/pub/utils/alsa-utils-${version}.tar.bz2"
+tarball_blake2b="9d75f63c7ff8b0d7ee835a1ad8fc242dee9b59770b1ad0ff9cd233caf50ac844323fb2ebb8e649f03a0a30a161ec72cba472ac79e390c3f0eb6e2a184d8f576c"
+builddeps="base fftw"
+deps="core-libs alsa-lib libsamplerate pciutils psmisc"
+
+if [ "$SYSTEMD" = "yes" ]; then
+    deps="${deps} systemd"
+fi
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    if [ "$SYSTEMD" = "yes" ]; then
+        configure_flags="--with-systemdsystemunitdir=\"${prefix}/lib/systemd/system\""
+    fi
+
+        configure_script_path=./configure \
+    autotools_configure_lib \
+        --disable-alsaconf \
+        --with-udev-rules-dir="${prefix}/lib/udev/rules.d" \
+        ${configure_flags}
+
+    make -j${parallelism}
+}
+
+package() {
+    make install DESTDIR="${dest_dir}"
+
+    post_package_strip
+}
