@@ -1,0 +1,19 @@
+name=vala
+version=0.56.14
+revision=1
+tarball_url="https://download.gnome.org/sources/vala/0.56/vala-${version}.tar.xz"
+tarball_blake2b="db6ccca635122ff2089cd61fd8335376eed435f15d9bd7c20837829fe5acc8df49a51194e3bc17d0c24567240cf2519348cc2b0a7b177b971dc037ed39e893de"
+builddeps="base bison flex"
+deps="core-libs glib libxslt graphviz"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
