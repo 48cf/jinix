@@ -1,0 +1,15 @@
+name=icon-naming-utils
+version=0.8.90
+revision=1
+tarball_url="http://tango.freedesktop.org/releases/icon-naming-utils-${version}.tar.bz2"
+tarball_blake2b="9157474d6c83c342a70a69a15738848d78b8f3e85fcc7a2e877895797c88fbeb798706cfa15854a28b0cae83f605dd8d05f424d8b21c431db818d178a8ce7bcb"
+builddeps="base perl-xml-simple"
+deps="core-libs"
+
+build() {
+    autotools_configure
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+}
