@@ -1,0 +1,10 @@
+_perl_package_version=2.25
+_perl_package_author=GRANTM
+_perl_package_name=XML-Simple
+_perl_package_deps="perl-xml-parser"
+
+name=perl-xml-simple
+revision=1
+tarball_blake2b="6b990c0095fd573ce92db8ca4fbeaf259b33817992bbc0f465dcf1df1f77b56d5229b94a062a59178676500f7445ddf824a8e0d05b21df9ce1a5491d328eee48"
+
+perl_common
