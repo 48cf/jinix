@@ -1,0 +1,20 @@
+name=lxde-icon-theme
+version=0.5.1
+revision=1
+tarball_url="https://downloads.sourceforge.net/lxde/lxde-icon-theme-${version}.tar.xz"
+tarball_blake2b="0c2b6cb3c60fc5260c2813db84977167b56898f1388bc034180c2efd6b7d3fe5baea6a18f9cadbf984d3680100bf2c5ebbc8f1130491c41b1223efff889ff4a8"
+builddeps="base"
+deps="core-libs"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+        configure_script_path=./configure \
+    autotools_configure
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    # XXX figure out how to run gtk-update-icon-cache
+}
