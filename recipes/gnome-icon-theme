@@ -1,0 +1,15 @@
+name=gnome-icon-theme
+version=3.12.0
+revision=1
+tarball_url="https://download.gnome.org/sources/gnome-icon-theme/3.12/gnome-icon-theme-${version}.tar.xz"
+tarball_blake2b="df25489c2bc8f51833a4b6c8ef5b05ba83e31e36431d9a11b3e172f71a11194c3adc38bebf98c0e6253e1d55e751422128345033ea2bebf6ae9a0f78252539b8"
+builddeps="base gettext icon-naming-utils intltool"
+deps="core-libs gtk+-3 hicolor-icon-theme"
+
+build() {
+    autotools_configure
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+}

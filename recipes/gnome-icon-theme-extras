@@ -1,0 +1,18 @@
+name=gnome-icon-theme-extras
+version=3.12.0
+revision=1
+tarball_url="https://download.gnome.org/sources/gnome-icon-theme-extras/3.12/gnome-icon-theme-extras-${version}.tar.xz"
+tarball_blake2b="48035e7094e3832a1d355867668c535c2aed691e3d3633963b7811cd49cddbbc08e15981df8b3f6f93ce8c66facb8a1ee04227dfa24788d6971bcdc6a4f5a277"
+builddeps="base gettext icon-naming-utils intltool"
+deps="core-libs gtk+-3 gnome-icon-theme hicolor-icon-theme"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+        configure_script_path=./configure \
+    autotools_configure
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+}

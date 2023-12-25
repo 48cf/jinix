@@ -1,0 +1,18 @@
+name=gnome-icon-theme-symbolic
+version=3.12.0
+revision=1
+tarball_url="https://download.gnome.org/sources/gnome-icon-theme-symbolic/3.12/gnome-icon-theme-symbolic-${version}.tar.xz"
+tarball_blake2b="e9543bced2f49c98890cb684cfe58d66b84e0e18a469b1c77e24cc10968a2663a1f15e3dc49d937706eb39bbcc83189a59069c666490153a3fb460650210c613"
+builddeps="base gettext icon-naming-utils intltool"
+deps="core-libs gtk+-3 gnome-icon-theme hicolor-icon-theme"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+        configure_script_path=./configure \
+    autotools_configure
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+}
