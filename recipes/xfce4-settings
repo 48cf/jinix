@@ -1,0 +1,19 @@
+name=xfce4-settings
+version=4.18.4
+revision=1
+tarball_url="https://archive.xfce.org/src/xfce/xfce4-settings/4.18/xfce4-settings-${version}.tar.bz2"
+tarball_blake2b="0269ed1778becc547ba187c096d7c9938cc00f56fb1c9312c9d0eb9b5344d4785f88abadecf391724699de2cb28b35ffed057f06e85f3e098a902a4047969a9c"
+builddeps="base gettext intltool"
+deps="core-libs exo garcon libcanberra libinput"
+
+build() {
+    autotools_configure
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
