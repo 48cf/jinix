@@ -4,7 +4,7 @@ revision=1
 tarball_url="https://download.gnome.org/sources/gtk%2B/3.24/gtk%2B-${version}.tar.xz"
 tarball_blake2b="1cffcf0066f0f9d42fd01d9cf0dbab2465bf749fe70ebe24a843807c77b696047cbb739fead7f7872833ee562439d96857d02b3037b949babaa3797482104fda"
 builddeps="base cmake gettext gobject-introspection meson ninja python-setuptools"
-deps="core-libs at-spi2-core cairo glib gdk-pixbuf iso-codes libx11 libxext libxcb libxcomposite libxrender libxrandr libxfixes libxdamage libxinerama libxslt pango fribidi libepoxy libxkbcommon fontconfig freetype libxi harfbuzz libxcursor gsettings-desktop-schemas dbus"
+deps="core-libs at-spi2-core cairo glib gdk-pixbuf iso-codes libx11 libxext libxcb libxcomposite libxrender libxrandr libxfixes libxdamage libxinerama libxslt pango fribidi libepoxy libxkbcommon fontconfig freetype libxi harfbuzz libxcursor gsettings-desktop-schemas dbus wayland-protocols sassc"
 
 build() {
     meson_configure \
@@ -12,7 +12,7 @@ build() {
         -Dintrospection=true \
         -Dx11_backend=true \
         -Dbroadway_backend=true \
-        -Dwayland_backend=false \
+        -Dwayland_backend=true \
         -Dgtk_doc=false \
         -Dcolord=no
 
