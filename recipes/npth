@@ -1,0 +1,19 @@
+name=npth
+version=1.6
+revision=1
+tarball_url="https://www.gnupg.org/ftp/gcrypt/npth/npth-${version}.tar.bz2"
+tarball_blake2b="665fdb2f4cbe59750b6b4b7c2701ee80a23a122df10c9f8be47c4af5f3bf5968f709637ab3f4878bb68609752fbb6ce1364e109fdfeba64e4db258733a33f3fc"
+builddeps="base"
+deps="core-libs"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
