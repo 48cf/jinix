@@ -1,0 +1,19 @@
+name=libksba
+version=1.6.5
+revision=1
+tarball_url="https://www.gnupg.org/ftp/gcrypt/libksba/libksba-${version}.tar.bz2"
+tarball_blake2b="934bde6412de6c1f3062b101930d7b2beac3f6e3f2fbeb5c964a6252b68a3b70c7cb3a48c7eac04b7f1d2ea3c717e1c7e164c1bc6113b46244b9dd130c64b540"
+builddeps="base"
+deps="core-libs libgpg-error"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
