@@ -1,0 +1,24 @@
+name=pth
+version=2.0.7
+revision=1
+tarball_url="https://ftp.gnu.org/gnu/pth/pth-${version}.tar.gz"
+tarball_blake2b="f6a3df2136bb0194a6ceca76a750d68c549b9ff069f4fb02154e9f6418b3fc52befe1196e1ed4655a1acf1c6ef676184aa6f3403d0a39cb2c9315bb0d4fb150a"
+builddeps="base"
+deps="core-libs libnsl"
+
+regenerate() {
+    sed -i 's#$(LOBJS): Makefile#$(LOBJS): pth_p.h Makefile#' Makefile.in
+}
+
+build() {
+    autotools_configure_lib \
+        --mandir=${prefix}/share/man
+
+    make -j${parallelism}
+}
+
+package() {
+    make DESTDIR="${dest_dir}" install
+
+    post_package_strip
+}
