@@ -1,0 +1,25 @@
+name=libusb
+version=1.0.26
+revision=1
+tarball_url="https://github.com/libusb/libusb/releases/download/v${version}/libusb-${version}.tar.bz2"
+tarball_blake2b="0cc397ecf4de0066abbff9b286a9e4fcd48658698d5e0d6b736abf56b48c1b55a05f15fff7be53fd33f767621e0c25d87275a47e05a4bcb44c4b8ac9221cd081"
+builddeps="base"
+deps="core-libs"
+
+if [ "$SYSTEMD" = "yes" ]; then
+    deps="$deps systemd"
+else
+    deps="$deps eudev"
+fi
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
