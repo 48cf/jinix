@@ -1,8 +1,8 @@
 name=libgpg-error
-version=1.45
+version=1.46
 revision=1
 tarball_url="https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-${version}.tar.gz"
-tarball_blake2b="07355d0bbae734d329dde90d6e4a204c06dfd353537daf6f686c74c1c2c616b41a1b64bf564eb5b094e22851ac5f9a244d63f8e74a1dd0149913b79183192d6c"
+tarball_blake2b="cc6319ad47acdc792634b243aa86920fb675a8df81ea8ef4f8bffcbe15d0688cd0c69ac4b901909186d38e203365d9345ae472d51ac456f7d2cd36d7941c99d6"
 builddeps="base"
 deps="core-libs"
 
