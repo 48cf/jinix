@@ -1,0 +1,24 @@
+name=cyrus-sasl
+version=2.1.28
+revision=1
+tarball_url="https://github.com/cyrusimap/cyrus-sasl/releases/download/cyrus-sasl-${version}/cyrus-sasl-${version}.tar.gz"
+tarball_blake2b="6cca8c26cebb9c2ee5d539c43797d30b6309a476ec4233225789978e1d7315c4ea5d2abbc7f5464be0f3c0de5fd9212706b43fbc92f40b76cd0b1013cc00f823"
+builddeps="base"
+deps="core-libs pam sqlite gdbm openssl"
+
+build() {
+    autotools_configure_lib \
+        --enable-auth-sasldb \
+        --with-dblib=gdbm \
+        --with-dbpath=/var/lib/sasl/sasldb2 \
+        --with-sphinx-build=no \
+        --with-saslauthd=/var/run/saslauthd
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
