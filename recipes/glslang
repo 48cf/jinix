@@ -1,0 +1,26 @@
+name=glslang
+version=14.0.0
+revision=1
+tarball_url="https://github.com/KhronosGroup/glslang/archive/refs/tags/${version}/glslang-${version}.tar.gz"
+tarball_blake2b="a804f58224e0ac4fd2f123923077571468918da6ac55ded7b11db91d83d132cd887c85bf0b96e4e40ed5464315c4f2a8c326881fb7307c5b85694406afded9d7"
+builddeps="base cmake ninja python"
+deps="core-libs spirv-tools"
+
+build() {
+    cmake \
+        -GNinja \
+        -DCMAKE_INSTALL_PREFIX=${prefix} \
+        -DCMAKE_INSTALL_LIBDIR=lib \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DBUILD_SHARED_LIBS=ON \
+        -DALLOW_EXTERNAL_SPIRV_TOOLS=ON \
+        ${source_dir}
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
