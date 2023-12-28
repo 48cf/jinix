@@ -1,0 +1,26 @@
+name=man-db
+version=2.12.0
+revision=1
+tarball_url="https://download.savannah.gnu.org/releases/man-db/man-db-${version}.tar.xz"
+tarball_blake2b="a6258c1fc9cd81be5d288298660f5b9bda22d726ef98dd5c0a1998809a32391f7244be6897ee8e03483e705a426d6a59d442de3dc2e84f45500daa825ac639db"
+builddeps="base flex"
+deps="core-libs groff less libpipeline gdbm"
+
+build() {
+    autotools_configure_lib \
+        --docdir=${prefix}/share/doc/man-db-${version} \
+        --sysconfdir=/etc \
+        --disable-setuid \
+        --enable-cache-owner=bin \
+        --with-browser=${prefix}/bin/lynx \
+        --with-vgrind=${prefix}/bin/vgrind \
+        --with-grap=${prefix}/bin/grap
+
+    make -j${parallelism}
+}
+
+package() {
+    make DESTDIR="${dest_dir}" install
+
+    post_package_strip
+}
