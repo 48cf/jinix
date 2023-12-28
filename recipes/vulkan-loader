@@ -1,0 +1,26 @@
+name=vulkan-loader
+version=1.3.274
+revision=1
+tarball_url="https://github.com/KhronosGroup/Vulkan-Loader/archive/refs/tags/v${version}/Vulkan-Loader-${version}.tar.gz"
+tarball_blake2b="b12e1fbee9856cf8abfbc7b99720ddcece2d36df0cbfe1a525ddca5d199130b474306a27300af0cc288ada992a8d14fc80241d0b8f92007080d8b010704a8e78"
+builddeps="base cmake ninja"
+deps="core-libs vulkan-headers wayland libxcb libx11 libxrandr"
+
+build() {
+    cmake \
+        -GNinja \
+        -DCMAKE_INSTALL_PREFIX=${prefix} \
+        -DCMAKE_INSTALL_LIBDIR=lib \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DBUILD_SHARED_LIBS=ON \
+        -DCMAKE_SKIP_RPATH=TRUE \
+        ${source_dir}
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
