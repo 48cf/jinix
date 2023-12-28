@@ -4,7 +4,7 @@ revision=1
 tarball_url="https://gitlab.freedesktop.org/wayland/wayland/-/releases/${version}/downloads/wayland-${version}.tar.xz"
 tarball_blake2b="b0bb366e7f3494813d1574228ae5dd48eccde035120d6dd8709e3a24738681ab9dd9ba6a13924b6a35982d331fa8911fa7346911da9f618be9c9109da0288629"
 builddeps="base meson ninja"
-deps="core-libs libxml"
+deps="core-libs libxml libffi libexpat"
 
 build() {
     meson_configure \
