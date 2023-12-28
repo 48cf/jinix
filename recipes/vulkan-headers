@@ -1,0 +1,25 @@
+name=vulkan-headers
+version=1.3.274
+revision=1
+tarball_url="https://github.com/KhronosGroup/Vulkan-Headers/archive/refs/tags/v${version}/Vulkan-Headers-${version}.tar.gz"
+tarball_blake2b="0e53a597ddf367c638220de3866a0c6c98182bc5b25586f1adf29b525d85a023cc3167fc77c49c66371187e5d0bd62f0dd6dfea62e90126fe5159ff0f666c8bd"
+builddeps="base cmake ninja"
+deps="core-libs"
+
+build() {
+    cmake \
+        -GNinja \
+        -DCMAKE_INSTALL_PREFIX=${prefix} \
+        -DCMAKE_INSTALL_LIBDIR=lib \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DBUILD_SHARED_LIBS=ON \
+        ${source_dir}
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
