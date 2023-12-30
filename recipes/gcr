@@ -1,0 +1,20 @@
+name=gcr
+version=3.41.1
+revision=1
+tarball_url="https://download.gnome.org/sources/gcr/3.41/gcr-${version}.tar.xz"
+tarball_blake2b="9d254b7f2ad864c45200e58b685db97c1ffbc83d29ba8cbda94d30ec565aa3dc5a2535305dc63b3264131b68ec9e48f37ac30d5ba08d0ce156f3b6091cd62dc1"
+builddeps="base meson ninja gobject-introspection vala gettext"
+deps="core-libs glib libgcrypt p11-kit gnupg gtk+-3 libxslt libsecret openssh"
+
+build() {
+    meson_configure \
+        -Dgtk_doc=false
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
