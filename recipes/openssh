@@ -1,0 +1,24 @@
+name=openssh
+version=9.6p1
+revision=1
+tarball_url="https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${version}.tar.gz"
+tarball_blake2b="dd7f6747fe89f7b386be4faaf7fc43398a9bf439e45608ae61c2126cf8743c64ef7b5af45c75e9007b0bda525f8809261ca0f2fc47ce60177ba769a5324719dd"
+builddeps="base"
+deps="core-libs pam openssl"
+
+build() {
+    autotools_configure_lib \
+        --sysconfdir=/etc/ssh \
+        --with-privsep-path=/var/lib/sshd \
+        --with-default-path=/usr/bin \
+        --with-superuser-path=/usr/sbin:/usr/bin \
+        --with-pid-dir=/run
+
+    make -j${parallelism}
+}
+
+package() {
+    make DESTDIR="${dest_dir}" install
+
+    post_package_strip
+}
