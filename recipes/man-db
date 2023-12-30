@@ -7,6 +7,13 @@ builddeps="base flex"
 deps="core-libs groff less libpipeline gdbm"
 
 build() {
+
+    if [ "$SYSTEMD" = "yes" ]; then
+        configure_flags="--with-systemdsystemunitdir=${prefix}/lib/systemd/system"
+    else
+        configure_flags="--with-systemdsystemunitdir=no"
+    fi
+
     autotools_configure_lib \
         --docdir=${prefix}/share/doc/man-db-${version} \
         --sysconfdir=/etc \
@@ -14,7 +21,8 @@ build() {
         --enable-cache-owner=bin \
         --with-browser=${prefix}/bin/lynx \
         --with-vgrind=${prefix}/bin/vgrind \
-        --with-grap=${prefix}/bin/grap
+        --with-grap=${prefix}/bin/grap \
+        ${configure_flags}
 
     make -j${parallelism}
 }
