@@ -1,0 +1,20 @@
+name=python-cython
+version=0.29.36
+revision=1
+tarball_url="https://github.com/cython/cython/releases/download/${version}/Cython-${version}.tar.gz"
+tarball_blake2b="d8040bcad2353fa317ff75ae3a483be5df85f22ad3b9a529024b7cb2329c2703247f9b949effc63651694a32556e597d46a9c48abc601ac37d68a2582564a2bd"
+builddeps="base python python-setuptools"
+deps="core-libs"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python setup.py build
+}
+
+package() {
+    # XXX enable optimizations
+    python setup.py install \
+        --prefix="${prefix}" \
+        --root="${dest_dir}"
+}
