@@ -36,5 +36,9 @@ package() {
     ln -s pkcs11/p11-kit-trust.so "${dest_dir}${prefix}/lib/p11-kit-trust.so"
     ln -sf p11-kit-trust.so "${dest_dir}${prefix}/lib/libnssckbi.so"
 
+    # Install the certificate data
+    install -vm755 -d "${dest_dir}${prefix}/share/nss"
+    install -vm644 nss/lib/ckfw/builtins/certdata.txt "${dest_dir}${prefix}/share/nss"
+
     post_package_strip
 }
