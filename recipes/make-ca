@@ -6,6 +6,10 @@ tarball_blake2b="a378a551c90dc78d261f26f43f41dc7640ac7d2d4cb677aae42a5f4bb10c2ff
 builddeps="base perl"
 deps="core-libs curl nss openssl p11-kit"
 
+if [ "$SYSTEMD" = "yes" ]; then
+    deps="${deps} systemd"
+fi
+
 build() {
     cp -rp "${source_dir}"/. ./
 }
