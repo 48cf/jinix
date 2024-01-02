@@ -1,0 +1,27 @@
+name=exiv
+version=0.28.1
+revision=1
+tarball_url="https://github.com/Exiv2/exiv2/archive/v${version}/exiv2-${version}.tar.gz"
+tarball_blake2b="a26f8e54cf6284c56ff429c13d5a8985dc6181a36b4c13ea6f2e59bc00016a2a8d915ddbc0cedb441b8283e30f18312a500900ffd89ca984006ac84807a03852"
+builddeps="base cmake"
+deps="core-libs brotli curl inih"
+
+build() {
+    cmake \
+        -DCMAKE_INSTALL_PREFIX=${prefix} \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DEXIV2_ENABLE_VIDEO=yes \
+        -DEXIV2_ENABLE_WEBREADY=yes \
+        -DEXIV2_ENABLE_CURL=yes \
+        -DEXIV2_BUILD_SAMPLES=no \
+        -G "Unix Makefiles" \
+        ${source_dir}
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
