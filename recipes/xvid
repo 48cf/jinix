@@ -1,0 +1,31 @@
+name=xvid
+version=1.3.7
+revision=1
+tarball_url="https://downloads.xvid.com/downloads/xvidcore-${version}.tar.gz"
+tarball_blake2b="26b2dce1456fd49a5afb4d2edc718c70b86240843e267cae4d267e6dd38ee37b6f6beabbb8bb3f7e2237a1ac6d2d34f2431df50c98a785fa4a45f591f021ac24"
+builddeps="base nasm"
+deps="core-libs"
+
+regenerate() {
+    sed -i 's/^LN_S=@LN_S@/& -f -v/' ${source_dir}/build/generic/platform.inc.in
+}
+
+build() {
+    cp -rp ${source_dir}/. ./
+
+    cd build/generic
+    configure_script_path=./configure \
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    cd build/generic
+    sed -i '/libdir.*STATIC_LIB/ s/^/#/' Makefile
+    make DESTDIR="${dest_dir}" install
+
+    chmod -v 755 ${dest_dir}/${prefix}/lib/libxvidcore.so.4.3
+
+    post_package_strip
+}
