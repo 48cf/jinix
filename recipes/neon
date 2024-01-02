@@ -1,0 +1,22 @@
+name=neon
+version=0.32.5
+revision=1
+tarball_url="https://notroj.github.io/neon/neon-${version}.tar.gz"
+tarball_blake2b="be11a169d41057c2524c3cc41e40404729c4907c89df9a305e639fd023731cad01639fb0baaf3249f7e154d517e161ab96431407b441a53a62c2d7e8c8f47073"
+builddeps="base"
+deps="core-libs libxml nss openssl"
+
+build() {
+    cp -rp ${source_dir}/. ./
+
+    autotools_configure_lib \
+        --with-ssl
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
