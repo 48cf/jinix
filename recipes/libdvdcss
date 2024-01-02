@@ -1,0 +1,20 @@
+name=libdvdcss
+version=1.4.3
+revision=1
+tarball_url="https://get.videolan.org/libdvdcss/${version}/libdvdcss-${version}.tar.bz2"
+tarball_blake2b="ce654b78ce3b30961dddd3a4b80d6fb520ed07e5e1ccf76ed09b65c7a4164212b12868a6c0bf91bc8893498539ae0400208087ef7c00dd1fd1cfd18fbc4352ae"
+builddeps="base"
+deps="core-libs"
+
+build() {
+    autotools_configure_lib \
+        --docdir=/usr/share/doc/libdvdcss-${version}
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
