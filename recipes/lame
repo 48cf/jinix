@@ -1,0 +1,20 @@
+name=lame
+version=3.100
+revision=1
+tarball_url="https://downloads.sourceforge.net/lame/lame-${version}.tar.gz"
+tarball_blake2b="6954d30cfd3951ea07762ba5dd7ff27038b78455f423099a225ebf748abddf9970e444456ca5a6179bd381e2205b32293392cb757c203901674860710fe2c183"
+builddeps="base"
+deps="core-libs libsndfile"
+
+build() {
+    autotools_configure_lib \
+        --enable-mp3rtp
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make pkghtmldir=${prefix}/share/doc/lame-${version} install
+
+    post_package_strip
+}
