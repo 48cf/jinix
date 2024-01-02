@@ -1,0 +1,28 @@
+name=jasper
+version=4.1.1
+revision=1
+tarball_url="https://github.com/jasper-software/jasper/archive/version-${version}/jasper-${version}.tar.gz"
+tarball_blake2b="7f72c7f5633b7b0b119733ea7cdaa51684d3593ea19de21ae45f036ac79245b418b4f72a90f4b7d458b38ea480f008a8b67a74a0c4f440c9d86f76419e04e712"
+builddeps="base cmake ninja python"
+deps="core-libs libjpeg-turbo freeglut"
+
+build() {
+    cmake \
+        -GNinja \
+        -DCMAKE_INSTALL_PREFIX=${prefix} \
+        -DCMAKE_INSTALL_LIBDIR=lib \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_SKIP_INSTALL_RPATH=YES \
+        -DJAS_ENABLE_DOC=NO \
+        -DALLOW_IN_SOURCE_BUILD=YES \
+        -DCMAKE_INSTALL_DOCDIR=${prefix}/share/doc/jasper-${version} \
+        ${source_dir}
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
