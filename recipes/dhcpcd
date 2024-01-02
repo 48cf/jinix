@@ -4,14 +4,24 @@ revision=1
 tarball_url="https://github.com/NetworkConfiguration/dhcpcd/releases/download/v${version}/dhcpcd-${version}.tar.xz"
 tarball_blake2b="52435e2afa4fa5563b629af3f69b149b87de75097d20819423429741e8f2d16df136409180c509ff08b28fd060ad74da4d73057556349b8041c716dbeb7dbcc3"
 builddeps="base"
-deps="core-libs eudev"
+deps="core-libs"
+
+if [ "$SYSTEMD" = "yes" ]; then
+    deps="${deps} systemd"
+else
+    deps="${deps} eudev"
+fi
 
 build() {
     cp -rp ${source_dir}/. ./
 
         configure_script_path=./configure \
     autotools_configure \
-        --privsepuser=dhcpcd \
+        --sysconfdir=/etc \
+        --libexecdir=/usr/lib/dhcpcd \
+        --dbdir=/var/lib/dhcpcd \
+        --runstatedir=/run \
+        --disable-privsep \
         --with-hook=ntp.conf
 
     make -j${parallelism}
