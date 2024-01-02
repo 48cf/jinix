@@ -1,0 +1,25 @@
+name=faad
+version=2.11.1
+revision=1
+tarball_url="https://github.com/knik0/faad2/archive/${version}/faad2-${version}.tar.gz"
+tarball_blake2b="f1e58a5618bdd93ee919f2d77dd461972cf4bc930c4a1738a8b4ec949fd2572ce0662a08ea01a4caca0da5fe007ec119d00184cd76e6f9f98c3141d24a589504"
+builddeps="base cmake ninja python"
+deps="core-libs"
+
+build() {
+    cmake \
+        -GNinja \
+        -DCMAKE_INSTALL_PREFIX=${prefix} \
+        -DCMAKE_INSTALL_LIBDIR=lib \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DBUILD_SHARED_LIBS=ON \
+        ${source_dir}
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
