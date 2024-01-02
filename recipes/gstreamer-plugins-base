@@ -9,7 +9,7 @@ deps="core-libs gstreamer alsa-lib graphene iso-codes libgudev libjpeg-turbo lib
 build() {
     meson_configure \
         --wrap-mode=nodownload \
-       -Dpackage-name="GStreamer ${version}"
+        -Dpackage-name="GStreamer ${version}"
 
     ninja -j${parallelism}
 }
