@@ -1,15 +1,25 @@
 name=cmake
-version=3.28.0
+version=3.28.1
 revision=1
 tarball_url="https://cmake.org/files/v3.28/cmake-${version}.tar.gz"
-tarball_blake2b="8e03436d7e2b16d5865cef4ed94d12ffdf134d12ad59c4296589bad1a2836916cbb17367f4adda99a9bd835af8b891fee34b2e00441dd22696e396e4109f61f2"
+tarball_blake2b="7c6d3876633024b8a22dd6aca078e4bd7649c18a810ada68378435e9cfc30878b89529dc69e6e2dcecd114c9686fe6ce937fa5587e47f00128504349cecb967b"
 builddeps="base"
-deps="core-libs openssl"
+deps="core-libs curl libarchive libuv nghttp2 openssl"
+
+prepare() {
+    sed -i '/"lib64"/s/64//' ${source_dir}/Modules/GNUInstallDirs.cmake
+}
 
 build() {
-    ${source_dir}/configure \
+    ${source_dir}/bootstrap \
         --prefix=${prefix} \
-        --parallel=${parallelism}
+        --parallel=${parallelism} \
+        --system-libs \
+        --mandir=/share/man \
+        --no-system-jsoncpp \
+        --no-system-cppdap \
+        --no-system-librhash \
+        --docdir=/share/doc/cmake-${version}
 
     make -j${parallelism}
 }
