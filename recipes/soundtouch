@@ -1,0 +1,25 @@
+name=soundtouch
+version=2.3.2
+revision=1
+tarball_url="https://www.surina.net/soundtouch/soundtouch-${version}.tar.gz"
+tarball_blake2b="cd3c8fffaa81a2ed867f5a564dd7ff3047b4de576536c3c116162981261bf3789d16def1c94e5be2450373be3f61fd67fa44e3552e19cad7b7d5d56500b98255"
+source_imagedeps="autoconf automake pkg-config libtool"
+builddeps="base"
+deps="core-libs"
+
+regenerate() {
+    autoreconf -fvi
+}
+
+build() {
+    autotools_configure_lib \
+        --docdir=/usr/share/doc/soundtouch-${version}
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
