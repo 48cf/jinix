@@ -6,7 +6,7 @@ tarball_blake2b="7c6d3876633024b8a22dd6aca078e4bd7649c18a810ada68378435e9cfc3087
 builddeps="base"
 deps="core-libs curl libarchive libuv nghttp2 openssl"
 
-prepare() {
+regenerate() {
     sed -i '/"lib64"/s/64//' ${source_dir}/Modules/GNUInstallDirs.cmake
 }
 
