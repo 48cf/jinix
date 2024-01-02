@@ -1,0 +1,19 @@
+name=libcdio
+version=2.1.0
+revision=1
+tarball_url="https://ftp.gnu.org/gnu/libcdio/libcdio-${version}.tar.bz2"
+tarball_blake2b="4859fc545cf81246279b7b0434c02916e874681b40d00f8253fd7837941a34c5a717a81b1c3b1714153ad343e03c28668984f6fd5647662ec4e6759752326cb0"
+builddeps="base"
+deps="core-libs libcddb"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
