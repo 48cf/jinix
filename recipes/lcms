@@ -1,0 +1,24 @@
+name=lcms
+version=2.14
+revision=1
+tarball_url="https://github.com/mm2/Little-CMS/releases/download/lcms${version}/lcms2-${version}.tar.gz"
+tarball_blake2b="777b0bf65829121a3d32bca1ab936ac022f9af739bccdd02d5f86688c3386b974f526a012bdec4d36649566eea0aa659db317dd383eede6488236d601156a0f9"
+builddeps="base"
+deps="core-libs libjpeg-turbo libtiff"
+
+prepare() {
+    sed '/BufferSize < TagSize/,+1 s/goto Error/TagSize = BufferSize/' \
+    -i ${source_dir}/src/cmsio0.c
+}
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
