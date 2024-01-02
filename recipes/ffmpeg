@@ -1,0 +1,43 @@
+name=ffmpeg
+version=6.1
+revision=1
+tarball_url="https://ffmpeg.org/releases/ffmpeg-${version}.tar.xz"
+tarball_blake2b="5eaee0e0f72139e3b018e6ee26a102c7d6881ec8e7a70b21c51e4a515a37396ae12f19185112bb3f8b3401b85e68c08435146a83470e07ffb571d3d9bca89289"
+builddeps="base nasm"
+deps="core-libs libaom libass fdk-aac freetype lame libtheora libvorbis libvpx opus x264 x265 alsa-lib libva libvdpau sdl2 fontconfig fribidi frei0r-plugins libcdio-paranoia libdrm libwebp openjpeg pulseaudio speex v4l-utils vulkan-loader xvid openssl"
+
+build() {
+    cp -rp ${source_dir}/. ./
+
+    ./configure --prefix=${prefix} \
+        --enable-gpl \
+        --enable-version3 \
+        --enable-nonfree \
+        --disable-static \
+        --enable-shared \
+        --disable-debug \
+        --enable-libaom \
+        --enable-libass \
+        --enable-libdrm \
+        --enable-libfdk-aac \
+        --enable-libfreetype \
+        --enable-libmp3lame \
+        --enable-libopus \
+        --enable-libpulse \
+        --enable-libtheora \
+        --enable-libvorbis \
+        --enable-libvpx \
+        --enable-libx264 \
+        --enable-libx265 \
+        --enable-openssl \
+        --enable-vulkan \
+        --docdir=${prefix}/share/doc/ffmpeg-${version}
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
