@@ -1,0 +1,19 @@
+name=libwpe
+version=1.14.1
+revision=1
+tarball_url="https://wpewebkit.org/releases/libwpe-${version}.tar.xz"
+tarball_blake2b="5f24322ff463fe9701e47c5eb46076fd406cbef2f54ca08b962c93f425a2ee217eed810ee7d2582ba6d54691071d651f8e60f624a88e99330027a8221e3f4d2c"
+builddeps="base meson ninja"
+deps="core-libs libxkbcommon mesa"
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
