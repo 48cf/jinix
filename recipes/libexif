@@ -1,0 +1,20 @@
+name=libexif
+version=0.6.24
+revision=1
+tarball_url="https://github.com/libexif/libexif/releases/download/v${version}/libexif-${version}.tar.bz2"
+tarball_blake2b="75d3a2b4fefd7b7706226e70d31250ef7e99eeb81a4839ddc36cc9e3180534542d8a02851f8e6fd5034bbc925a616ead8c4bfb0cce8bc5886c3ec54811914a6b"
+builddeps="base"
+deps="core-libs"
+
+build() {
+    autotools_configure_lib \
+        --docdir=/usr/share/doc/libexif-${version}
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
