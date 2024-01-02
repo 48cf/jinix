@@ -6,6 +6,18 @@ tarball_blake2b="5c695c1ef95edf4bbbab001aa634076c433df0bc89cb8104deaec2ce00c6908
 builddeps="base gettext meson ninja"
 deps="core-libs libffi libnsl libtasn1"
 
+regenerate() {
+    sed '20,$ d' -i ${source_dir}/trust/trust-extract-compat
+
+    cat >> ${source_dir}/trust/trust-extract-compat << "EOF"
+    # Copy existing anchor modifications to /etc/ssl/local
+    /usr/libexec/make-ca/copy-trust-modifications
+
+    # Update trust stores
+    /usr/bin/make-ca -r
+EOF
+}
+
 build() {
     meson_configure \
         -Dtrust_paths=/etc/pki/anchors
