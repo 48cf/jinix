@@ -1,0 +1,19 @@
+name=json-glib
+version=1.8.0
+revision=1
+tarball_url="https://download.gnome.org/sources/json-glib/1.8/json-glib-${version}.tar.xz"
+tarball_blake2b="eef0344c353bb9288efb700a6041342379627b924a042263e011f21140166b57b108f6816e80ac692159b49943f9c1afeb722efafa34e8c60f2fcdf53a0dc034"
+builddeps="base meson ninja gobject-introspection"
+deps="core-libs glib"
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
