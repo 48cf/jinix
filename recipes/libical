@@ -1,0 +1,28 @@
+name=libical
+version=3.0.17
+revision=1
+tarball_url="https://github.com/libical/libical/releases/download/v${version}/libical-${version}.tar.gz"
+tarball_blake2b="002eba515280c685db49d7f6781048ca4f86a22fb44a740b459fd8ae8f7dd669cb8a623df16e87913a397fc9b242d75c999e7aea26f09254982d77f1c9f87ac2"
+builddeps="base cmake ninja python gobject-introspection vala"
+deps="core-libs icu python-gobject"
+
+build() {
+    cmake \
+        -GNinja \
+        -DCMAKE_INSTALL_PREFIX=${prefix} \
+        -DCMAKE_INSTALL_LIBDIR=lib \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DSHARED_ONLY=yes \
+        -DICAL_BUILD_DOCS=false \
+        -DGOBJECT_INTROSPECTION=true \
+        -DICAL_GLIB_VAPI=true \
+        ${source_dir}
+
+    ninja -j1
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
