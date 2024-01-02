@@ -6,7 +6,7 @@ tarball_blake2b="777b0bf65829121a3d32bca1ab936ac022f9af739bccdd02d5f86688c3386b9
 builddeps="base"
 deps="core-libs libjpeg-turbo libtiff"
 
-prepare() {
+regenerate() {
     sed '/BufferSize < TagSize/,+1 s/goto Error/TagSize = BufferSize/' \
     -i ${source_dir}/src/cmsio0.c
 }
