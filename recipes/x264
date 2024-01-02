@@ -1,0 +1,20 @@
+name=x264
+version=20230215
+revision=1
+tarball_url="https://anduin.linuxfromscratch.org/BLFS/x264/x264-${version}.tar.xz"
+tarball_blake2b="2a856df36743f083358264087125df527331600bcd2a19bda99e11914d68bdc67b8bfa534adbc3cf1aab0d121dfb3b5a2e970e8daf278a181535159f8e85f96a"
+builddeps="base nasm"
+deps="core-libs"
+
+build() {
+    autotools_configure_lib \
+        --disable-cli
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
