@@ -1,0 +1,21 @@
+name=giflib
+version=5.2.1
+revision=1
+tarball_url="https://sourceforge.net/projects/giflib/files/giflib-${version}.tar.gz"
+tarball_blake2b="8c1e105bbb65dc7ab103976caed70834356440f381ec5118311882fb1c558bb65f6c1081e5767f9835087860de44df5dfcd2826f89744dded548d535736f27f0"
+builddeps="base xmlto"
+deps="core-libs"
+
+build() {
+    cp -rp ${source_dir}/. ./
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make PREFIX=${prefix} install
+
+    rm -fv ${dest_dir}/usr/lib/libgif.a
+
+    post_package_strip
+}
