@@ -1,0 +1,19 @@
+name=gexiv
+version=0.14.2
+revision=1
+tarball_url="https://download.gnome.org/sources/gexiv2/0.14/gexiv2-${version}.tar.xz"
+tarball_blake2b="37e79b1dd4c4324d4d7e2ef709b803a11aff4fbbe50ce5f0a4ff3f0053c77e251150297c1d0b42399c08f67bb669ee88b1e53ea1e853689480b3491ab45bc3e5"
+builddeps="base meson ninja gobject-introspection vala python-gobject"
+deps="core-libs exiv"
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
