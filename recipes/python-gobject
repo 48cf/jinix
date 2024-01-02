@@ -1,0 +1,20 @@
+name=python-gobject
+version=3.46.0
+revision=1
+tarball_url="https://download.gnome.org/sources/pygobject/3.46/pygobject-${version}.tar.xz"
+tarball_blake2b="6b8c9b4bf6df819c09b7bd2ea6dcb0e7c24ed7f171487b774469bd2c4694df9d4473dbde05273afc7a370f2b1f352d60347aa221bdd674a4aa8a54123d5e54cd"
+builddeps="base gobject-introspection python python-setuptools"
+deps="core-libs python-cairo"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python setup.py build
+}
+
+package() {
+    # XXX enable optimizations
+    python setup.py install \
+        --prefix="${prefix}" \
+        --root="${dest_dir}"
+}
