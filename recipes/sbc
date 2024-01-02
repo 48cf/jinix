@@ -1,0 +1,19 @@
+name=sbc
+version=2.0
+revision=1
+tarball_url="https://www.kernel.org/pub/linux/bluetooth/sbc-${version}.tar.xz"
+tarball_blake2b="d6dd20499871a4c217833c98a2f134ed828438ec4e5aa2073c8b9fc96da5c9ffc2d32e7a56697186731ac540ab58ff0c52559aff575feb8f2da30172badd4921"
+builddeps="base"
+deps="core-libs libsndfile"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
