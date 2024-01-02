@@ -1,0 +1,19 @@
+name=unzip
+version=6.0
+revision=1
+tarball_url="https://downloads.sourceforge.net/infozip/unzip60.tar.gz"
+tarball_blake2b="5016d300b4452018a391f4ebc03c6960c068df400a0407c0c60bd7bb5ec5012031f916d8b204a6149ba291c2c35beba40d9b43c76fc093026e79471329ab0e47"
+builddeps="base"
+deps="core-libs"
+
+build() {
+    cp -rp ${source_dir}/. ./
+
+    make -f unix/Makefile generic -j${parallelism}
+}
+
+package() {
+    make prefix=${dest_dir}/${prefix} MANDIR=${dest_dir}/${prefix}/share/man/man1 -f unix/Makefile install
+
+    post_package_strip
+}
