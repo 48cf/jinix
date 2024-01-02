@@ -1,0 +1,27 @@
+name=libcddb
+version=1.3.2
+revision=1
+tarball_url="https://downloads.sourceforge.net/libcddb/libcddb-${version}.tar.bz2"
+tarball_blake2b="8386ea051f23004396d53ad228a595d13c8c194361223026e901ff859f8e3d2dadb93d5e779902ec4698c164a3e06073fc82f331b22b4cf42f5ab8b1fae562e6"
+builddeps="base"
+deps="core-libs"
+
+regenerate() {
+    sed -e '/DEFAULT_SERVER/s/freedb.org/gnudb.gnudb.org/' \
+    -e '/DEFAULT_PORT/s/888/&0/'                       \
+    -i ${source_dir}/include/cddb/cddb_ni.h
+    sed '/^Genre:/s/Trip-Hop/Electronic/' -i ${source_dir}/tests/testdata/920ef00b.txt
+    sed '/DISCID/i# Revision: 42'         -i ${source_dir}/tests/testcache/misc/12340000
+}
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
