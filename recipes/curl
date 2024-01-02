@@ -9,7 +9,8 @@ deps="core-libs openssl zlib zstd"
 build() {
     autotools_configure_lib \
         --enable-threaded-resolver \
-        --with-openssl
+        --with-openssl \
+        --with-ca-path=/etc/ssl/certs
 
     make -j${parallelism}
 }
