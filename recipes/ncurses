@@ -10,20 +10,16 @@ hostdeps="gcc pkg-config"
 deps="core-libs"
 
 build() {
-        cf_cv_func_nanosleep=yes \
     autotools_configure \
-        --disable-root-access \
-        --disable-root-environ \
-        --disable-setuid-environ \
+        --mandir=${prefix}/share/man \
         --enable-widec \
         --enable-pc-files \
         --with-shared \
-        --with-cxx-binding \
         --with-cxx-shared \
         --without-normal \
+        --without-debug \
         --with-manpage-format=normal \
-        --with-pkg-config-libdir=/usr/lib/pkgconfig \
-        --with-termlib
+        --with-pkg-config-libdir=/usr/lib/pkgconfig
 
     make -j${parallelism}
 }
