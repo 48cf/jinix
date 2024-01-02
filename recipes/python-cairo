@@ -1,0 +1,20 @@
+name=python-cairo
+version=1.25.1
+revision=1
+tarball_url="https://github.com/pygobject/pycairo/releases/download/v${version}/pycairo-${version}.tar.gz"
+tarball_blake2b="ba4eedaf47e514bd7c3ad5ea738d099428958988a708255f59df48372d112d0195fe746be03de56aa25ccce9c2366b8898fcdd568b427372d0340c5edd550a5c"
+builddeps="base python python-setuptools"
+deps="core-libs cairo"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python setup.py build
+}
+
+package() {
+    # XXX enable optimizations
+    python setup.py install \
+        --prefix="${prefix}" \
+        --root="${dest_dir}"
+}
