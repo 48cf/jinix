@@ -1,0 +1,23 @@
+name=make-ca
+version=1.13
+revision=1
+tarball_url="https://github.com/lfs-book/make-ca/releases/download/v${version}/make-ca-${version}.tar.xz"
+tarball_blake2b="a378a551c90dc78d261f26f43f41dc7640ac7d2d4cb677aae42a5f4bb10c2ff1e064f57cddf71b0e8f0026a894c69f0c0b02d2ec29d57ab7a8b32191a9a8c404"
+builddeps="base perl"
+deps="core-libs curl nss openssl p11-kit"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    install -v -dm755 "${dest_dir}/etc/ssl/local"
+
+    # Move /usr/sbin to /usr/bin
+    mv "${dest_dir}${prefix}/sbin" "${dest_dir}${prefix}/bin"
+
+    # Create the initial CA certificate store
+    "${dest_dir}${prefix}/bin/make-ca" -f -C "${prefix}/share/nss/certdata.txt" -D "${dest_dir}"
+}
