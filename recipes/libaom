@@ -1,0 +1,29 @@
+name=libaom
+version=3.8.0
+revision=1
+tarball_url="https://storage.googleapis.com/aom-releases/libaom-${version}.tar.gz"
+tarball_blake2b="276e50c134a5a5925591cbc5c76a11383d288854bc5f4db79d97f1e4e41e74f5739ee916df127112cb678673f09aeb5dfa91f1d8696b0894923837cea991bd73"
+builddeps="base cmake ninja python nasm perl"
+deps="core-libs"
+
+build() {
+    cmake \
+        -GNinja \
+        -DCMAKE_INSTALL_PREFIX=${prefix} \
+        -DCMAKE_INSTALL_LIBDIR=lib \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DBUILD_SHARED_LIBS=1 \
+        -DENABLE_DOCS=no \
+        -DENABLE_NASM=yes \
+        ${source_dir}
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    rm -v ${dest_dir}/usr/lib/libaom.a
+
+    post_package_strip
+}
