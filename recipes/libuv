@@ -1,0 +1,24 @@
+name=libuv
+version=1.47.0
+revision=1
+tarball_url="https://dist.libuv.org/dist/v${version}/libuv-v${version}.tar.gz"
+tarball_blake2b="68f4080661357ca8954b60bc164ee4695d59f2ba62b0050384e97f471782ea8b22af88d33c57301c638e7338c8980a3afc60dc3497777211a98315c3514d418a"
+source_imagedeps="autoconf automake pkg-config libtool"
+builddeps="base"
+deps="core-libs"
+
+regenerate() {
+    bash autogen.sh
+}
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
