@@ -1,0 +1,42 @@
+name=libmad
+version=0.15.1b
+revision=1
+tarball_url="https://downloads.sourceforge.net/mad/libmad-${version}.tar.gz"
+tarball_blake2b="b00de857a0634d7193f656b74cdd5c0642b674f3ee3303a642f8a6fcb64eebaf2b100c6e09d85d892880b5fc4f224c0a5d1ecf5bd95bc5caf00e959c7beac4a5"
+source_imagedeps="autoconf automake pkg-config libtool"
+builddeps="base"
+deps="core-libs"
+
+regenerate() {
+    sed "s@AM_CONFIG_HEADER@AC_CONFIG_HEADERS@g" -i ${source_dir}/configure.ac
+    touch ${source_dir}/NEWS ${source_dir}/AUTHORS ${source_dir}/ChangeLog
+    autoreconf -fvi
+}
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    mkdir -pv ${dest_dir}/${prefix}/lib/pkgconfig
+
+    cat > ${dest_dir}/${prefix}/lib/pkgconfig/mad.pc << "EOF"
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: mad
+Description: MPEG audio decoder
+Requires:
+Version: 0.15.1b
+Libs: -L${libdir} -lmad
+Cflags: -I${includedir}
+EOF
+
+    post_package_strip
+}
