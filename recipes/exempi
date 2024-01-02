@@ -1,0 +1,19 @@
+name=exempi
+version=2.6.5
+revision=1
+tarball_url="https://libopenraw.freedesktop.org/download/exempi-${version}.tar.xz"
+tarball_blake2b="bc8c347af4c9c7bf085311ce055bd1c7cd5c2b845c723dd74bbcdf104be018885a82180333dbdda3cf9a64a4125dfe0fa0904fbd05663c3a6c32e6a60a8ca2d3"
+builddeps="base"
+deps="core-libs boost libexpat"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
