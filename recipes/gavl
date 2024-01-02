@@ -1,0 +1,22 @@
+name=gavl
+version=1.4.0
+revision=1
+tarball_url="https://downloads.sourceforge.net/gmerlin/gavl-${version}.tar.gz"
+tarball_blake2b="2ed47cf63d8ce3424d0714e202a11ecef89c5a9c160a6045e238bae4179c02398600fc9c6d914784bb24a86c501f93971631461bdecaa8a70743a674748a2ec3"
+builddeps="base"
+deps="core-libs libpng"
+
+build() {
+    LIBS=-lm \
+    autotools_configure_lib \
+        --without-doxygen \
+        --docdir=/usr/share/doc/gavl-${version}
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
