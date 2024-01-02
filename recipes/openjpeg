@@ -1,0 +1,25 @@
+name=openjpeg
+version=2.5.0
+revision=1
+tarball_url="https://github.com/uclouvain/openjpeg/archive/v${version}/openjpeg-${version}.tar.gz"
+tarball_blake2b="472d9998a7407574d3bc059d1c0b662a8a553cfe5cb7806a022cb35e14564417a8e06e9970f06d8e65ef149019bab747caefa8e29bc793d07ad86e076909d306"
+builddeps="base cmake ninja python"
+deps="core-libs lcms libpng libtiff"
+
+build() {
+    cmake \
+        -GNinja \
+        -DCMAKE_INSTALL_PREFIX=${prefix} \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DBUILD_SHARED_LIBS=ON \
+        -DBUILD_STATIC_LIBS=OFF \
+        ${source_dir}
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
