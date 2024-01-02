@@ -1,0 +1,25 @@
+name=frei0r-plugins
+version=1.8.0
+revision=1
+tarball_url="https://files.dyne.org/frei0r/releases/frei0r-plugins-${version}.tar.gz"
+tarball_blake2b="079017e0ff0ef08cf4b35ae18832191bacbdd01922c634adaad3b81f36af60548abe27fc3c2704c23f977dc8ab5554dc874886ddfa1766bbcd6bcadaa3f964da"
+builddeps="base cmake ninja python"
+deps="core-libs cairo freetype gavl"
+
+build() {
+    cmake \
+        -GNinja \
+        -DCMAKE_INSTALL_PREFIX=${prefix} \
+        -DCMAKE_INSTALL_LIBDIR=lib \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DWITHOUT_OPENCV=TRUE \
+        ${source_dir}
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
