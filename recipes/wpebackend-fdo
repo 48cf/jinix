@@ -1,0 +1,19 @@
+name=wpebackend-fdo
+version=1.14.2
+revision=1
+tarball_url="https://wpewebkit.org/releases/wpebackend-fdo-${version}.tar.xz"
+tarball_blake2b="31d670140672a7234acfd8d98c01901039745739489c5b9e7fdcb47ac08c8202d782df8cb5c94a6ed0c38d788ecc087bc81799beff392be24b9b8e661fa7ef52"
+builddeps="base meson ninja"
+deps="core-libs glib libepoxy libwpe wayland-protocols"
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
