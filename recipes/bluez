@@ -1,0 +1,61 @@
+name=bluez
+version=5.71
+revision=1
+tarball_url="https://www.kernel.org/pub/linux/bluetooth/bluez-${version}.tar.xz"
+tarball_blake2b="73e5f08771f821c90a70c553c600c48c4f1adb85aa9cb1a1eaae61a33b2dda73b7825fe769b3ea1daaaadedc39ad3fb71d84b336408f5ce6963f0373e9f7dcce"
+builddeps="base"
+deps="core-libs dbus glib libical"
+
+if [ "$SYSTEMD" = "yes" ]; then
+    deps="${deps} systemd"
+else
+    deps="${deps} eudev"
+fi
+
+build() {
+
+    CFLAGS="$CFLAGS -Wl,--copy-dt-needed-entries" \
+    autotools_configure_lib \
+        --disable-manpages \
+        --enable-library 
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    ln -svf ../libexec/bluetooth/bluetoothd ${dest_dir}/usr/bin
+
+    install -v -dm755 ${dest_dir}/etc/bluetooth
+    install -v -m644 ${source_dir}/src/main.conf ${dest_dir}/etc/bluetooth/main.conf
+
+    cat > ${dest_dir}/etc/bluetooth/rfcomm.conf << "EOF"
+# Start rfcomm.conf
+# Set up the RFCOMM configuration of the Bluetooth subsystem in the Linux kernel.
+# Use one line per command
+# See the rfcomm man page for options
+
+
+# End of rfcomm.conf
+EOF
+
+cat > ${dest_dir}/etc/bluetooth/uart.conf << "EOF"
+# Start uart.conf
+# Attach serial devices via UART HCI to BlueZ stack
+# Use one line per device
+# See the hciattach man page for options
+
+# End of uart.conf
+EOF
+
+    if [ "$SYSTEMD" = "yes" ]; then
+        mkdir -pv ${dest_dir}/etc/systemd/system/bluetooth.target.wants
+        mkdir -pv ${dest_dir}/etc/systemd/user
+        ln -svn /usr/lib/systemd/system/bluetooth.service ${dest_dir}/etc/systemd/system/dbus-org.bluez.service
+        ln -svn /usr/lib/systemd/system/bluetooth.service ${dest_dir}/etc/systemd/system/bluetooth.target.wants/bluetooth.service
+        ln -svn /usr/lib/systemd/user/obex.service ${dest_dir}/etc/systemd/user/dbus-org.bluez.obex.service
+    fi
+
+    post_package_strip
+}
