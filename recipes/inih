@@ -1,0 +1,19 @@
+name=inih
+version=57
+revision=1
+tarball_url="https://github.com/benhoyt/inih/archive/r${version}/inih-r${version}.tar.gz"
+tarball_blake2b="df2e2a14b4186616071f6ad2a64e0423148fb9a4624a74d4b16845a4a12eb72b1965f1314b92a710b80cc68d85dbe4ef09d6db159b76be856a4041f21a8c520c"
+builddeps="base meson ninja"
+deps="core-libs"
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
