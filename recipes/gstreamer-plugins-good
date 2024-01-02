@@ -9,7 +9,7 @@ deps="core-libs alsa-oss cairo flac gdk-pixbuf gstreamer-plugins-base libdv libs
 build() {
     meson_configure \
         --wrap-mode=nodownload \
-       -Dpackage-name="GStreamer ${version}"
+        -Dpackage-name="GStreamer ${version}"
 
     ninja -j${parallelism}
 }
