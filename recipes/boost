@@ -1,0 +1,19 @@
+name=boost
+version=1.84.0
+revision=1
+tarball_url="https://boostorg.jfrog.io/artifactory/main/release/${version}/source/boost_1_84_0.tar.bz2"
+tarball_blake2b="a872ee00402be0383726020f4d13a7df6c2765c52eac2e09aab1604432931d26dd597503f5dcbbf788d7e7528d13c6d1dbfff1e85d22bf92c7828ef74cf2405d"
+builddeps="base which python"
+deps="core-libs icu"
+
+build() {
+    cp -rp ${source_dir}/. ./
+    ./bootstrap.sh --prefix=${prefix} --with-python=python3
+    ./b2 stage -j${parallelism} threading=multi link=shared
+}
+
+package() {
+    DESTDIR="${dest_dir}" ./b2 install --prefix=${dest_dir}/${prefix} --includedir=${dest_dir}/${prefix}/include --libdir=${dest_dir}/${prefix}/lib threading=multi link=shared
+
+    post_package_strip
+}
