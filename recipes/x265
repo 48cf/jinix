@@ -1,0 +1,29 @@
+name=x265
+version=20230215
+revision=1
+tarball_url="https://anduin.linuxfromscratch.org/BLFS/x265/x265-${version}.tar.xz"
+tarball_blake2b="fc575f0bdfaf5000f923c64529ca5074977efc0701f9ce51471afd490dd618b9f0380d061cab74f1b8ed21c3a375ce6c284ce75c78cefa8b97bffb0429507625"
+builddeps="base cmake ninja python nasm"
+deps="core-libs"
+
+build() {
+    cmake \
+        -GNinja \
+        -DCMAKE_INSTALL_PREFIX=${prefix} \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DBUILD_SHARED_LIBS=ON \
+        -DBUILD_STATIC_LIBS=OFF \
+        -DGIT_ARCHETYPE=1 \
+        -Wno-dev \
+        ${source_dir}/source
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    rm -vf ${dest_dir}/usr/lib/libx265.a 
+
+    post_package_strip
+}
