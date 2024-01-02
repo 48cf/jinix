@@ -1,0 +1,23 @@
+name=liba52
+version=0.7.4
+revision=1
+tarball_url="https://liba52.sourceforge.net/files/a52dec-${version}.tar.gz"
+tarball_blake2b="e8475b391a3afe77883f5683f58a64d2babfcf93c08a3bcbd0208476323e9c86c5d268d2738efddd2093a1c47886deb22185cb8f00c4ec8b4153f64e1af1f49e"
+builddeps="base"
+deps="core-libs"
+
+build() {
+    CFLAGS="${CFLAGS:--g -O3} -fPIC" \
+    autotools_configure_lib \
+        --mandir=${prefix}/share/man
+
+    make -j${parallelism}
+}
+
+package() {
+    make DESTDIR="${dest_dir}" install
+
+    cp ${source_dir}/liba52/a52_internal.h ${dest_dir}/usr/include/a52dec
+
+    post_package_strip
+}
