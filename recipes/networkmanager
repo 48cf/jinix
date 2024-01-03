@@ -1,0 +1,74 @@
+name=networkmanager
+version=1.44.2
+revision=1
+tarball_url="https://download.gnome.org/sources/NetworkManager/1.44/NetworkManager-${version}.tar.xz"
+tarball_blake2b="2bb5ac06018d45d55623d742fba49c3b485116091992ad56a4680ce00946c96bd0c1b3b5d34f2c36c6347ff51182e00158351c0c6989cdc7db4a49b52564a1b7"
+builddeps="base meson ninja gettext gobject-introspection vala perl"
+deps="core-libs jansson libndp curl dhcpcd iptables newt nss polkit python-gobject wpa-supplicant bluez python-dbus-python gnutls libpsl modemmanager upower mobile-broadband-provider-info"
+
+if [ "$SYSTEMD" = "yes" ]; then
+    deps="${deps} systemd"
+fi
+
+build() {
+
+    if [ "$SYSTEMD" = "yes" ]; then
+        systemd_args="-Dsession_tracking=systemd"
+    else
+        systemd_args=""
+    fi
+
+    CXXFLAGS+="-O2 -fPIC" \
+    meson_configure \
+        -Dlibaudit=no \
+        -Dlibpsl=true \
+        -Dnmtui=true \
+        -Dovs=false \
+        -Dppp=false \
+        -Dselinux=false \
+        -Dqt=false \
+        -Dmodem_manager=true \
+        -Dmobile_broadband_provider_info_database='' \
+        ${systemd_args}
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    mv -v ${dest_dir}${prefix}/share/doc/NetworkManager{,-1.44.2}
+
+    mkdir -pv ${dest_dir}/etc/NetworkManager/conf.d
+    mkdir -pv ${dest_dir}${prefix}/share/polkit-1/rules.d
+
+cat >> ${dest_dir}/etc/NetworkManager/NetworkManager.conf << "EOF"
+[main]
+plugins=keyfile
+EOF
+
+cat > ${dest_dir}/etc/NetworkManager/conf.d/polkit.conf << "EOF"
+[main]
+auth-polkit=true
+EOF
+
+cat > ${dest_dir}/etc/NetworkManager/conf.d/dhcp.conf << "EOF"
+[main]
+dhcp=internal
+EOF
+
+cat > ${dest_dir}/etc/NetworkManager/conf.d/no-dns-update.conf << "EOF"
+[main]
+dns=none
+EOF
+
+cat > ${dest_dir}${prefix}/share/polkit-1/rules.d/org.freedesktop.NetworkManager.rules << "EOF"
+polkit.addRule(function(action, subject) {
+    if (action.id.indexOf("org.freedesktop.NetworkManager.") == 0 && subject.isInGroup("netdev")) {
+        return polkit.Result.YES;
+    }
+});
+EOF
+
+    post_package_strip
+}
