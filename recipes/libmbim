@@ -1,0 +1,19 @@
+name=libmbim
+version=1.26.4
+revision=1
+tarball_url="https://www.freedesktop.org/software/libmbim/libmbim-${version}.tar.xz"
+tarball_blake2b="96fb932e89455364eec39d879256eb10efd4fafc18c0dc69619b3a73cea1e62e3ea50b828c2785082e6422c39d8775c9bc1c084db3aaafdf054b1e7aa7d6929f"
+builddeps="base gobject-introspection python"
+deps="core-libs"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
