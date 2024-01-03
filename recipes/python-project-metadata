@@ -1,0 +1,21 @@
+name=python-project-metadata
+version=0.7.0
+revision=1
+tarball_url="https://files.pythonhosted.org/packages/source/p/pyproject-metadata/pyproject-metadata-${version}.tar.gz"
+tarball_blake2b="5378d099a4b0018d04db6b84d93e06676d42daea5eecf2e5f2c262700f286dbc681ea137d6d16274d7477f245b3ecc7ecad440163499d32b09c0c13386817fbd"
+builddeps="base python-build python-installer python-setuptools python-wheel"
+deps="core-libs python-packaging"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python -m build \
+        --wheel \
+        --no-isolation
+}
+
+package() {
+    python -m installer \
+        --destdir="${dest_dir}" \
+        dist/*.whl
+}
