@@ -1,0 +1,20 @@
+name=tracker-miners
+version=3.6.2
+revision=1
+tarball_url="https://download.gnome.org/sources/tracker-miners/3.6/tracker-miners-${version}.tar.xz"
+tarball_blake2b="d0da1caaa72467ec03c7e3c35cbee48aca08dca59d45d11e5f5f887d75954dbac0671d5698226c9cb89e97b3a76b318013ca17f8508ec3f867758662f53b25b7"
+builddeps="base meson ninja gettext"
+deps="core-libs gstreamer-plugins-base tracker exempi gexiv giflib gstreamer-plugins-good gstreamer-plugins-libav icu libexif libgrss libgxps libseccomp poppler dconf ffmpeg libgsf networkmanager taglib totem-pl-parser upower"
+
+build() {
+    meson_configure \
+        -Dman=false
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
