@@ -1,0 +1,22 @@
+name=gstreamer-plugins-bad
+version=1.22.7
+revision=1
+tarball_url="https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-${version}.tar.xz"
+tarball_blake2b="7f1e92f172fecac079c78c18fb026dd71d2145f014ef5543b40bc54fb2d0028b1eaf83389bc6c50a9097d65ce03a0157712016b4a78331590fe721e0fc50148a"
+builddeps="base gettext meson ninja gobject-introspection"
+deps="core-libs bluez curl faac faad fdk-aac gstreamer-plugins-base json-glib lcms libaom libass libdvdread libdvdnav libexif librsvg libsoup libsndfile libssh libusb libva libwebp libxkbcommon neon nettle openjpeg opus qrencode sbc soundtouch wayland wpebackend-fdo x265 gtk+-3 opencv"
+
+build() {
+    meson_configure \
+        --wrap-mode=nodownload \
+        -Dgpl=enabled \
+        -Dpackage-name="GStreamer ${version}"
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
