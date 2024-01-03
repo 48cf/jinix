@@ -8,7 +8,7 @@ deps="core-libs openssl libevent libavif libpng libjpeg-turbo libtiff brotli bzi
 
 build() {
     autotools_configure_lib \
-        --mandir=${prefix}share/man \
+        --mandir=${prefix}/share/man \
         --enable-graphics \
         --with-avif \
         --with-brotli \
