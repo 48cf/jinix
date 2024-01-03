@@ -1,0 +1,21 @@
+name=desktop-file-utils
+version=0.27
+revision=1
+tarball_url="https://www.freedesktop.org/software/desktop-file-utils/releases/desktop-file-utils-${version}.tar.xz"
+tarball_blake2b="66708cd11d5f81824cad814846cdeac6c339e8e93a7f1dceaeed545d9dc1940523fd64ae890e54632b3d32cc91b258aabd41d6d467081539f978ae2993fdfb22"
+builddeps="base gettext meson ninja"
+deps="core-libs glib"
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    mkdir -pv ${dest_dir}/usr/share/applications
+
+    post_package_strip
+}
