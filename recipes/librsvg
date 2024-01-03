@@ -1,0 +1,24 @@
+name=librsvg
+version=2.56.0 # Blocked on cairo 1.17.0 but site is down
+revision=1
+tarball_url="https://download.gnome.org/sources/librsvg/2.56/librsvg-${version}.tar.xz"
+tarball_blake2b="0f33ab883655f1f0a5471df68d84f83ce392dd53df8bdd3c2d20da13192712e3e2533f0a08a9d9b52c14fd479c6e868c8f492c690e67e1f633c4bcec67d02c5d"
+builddeps="base gobject-introspection rustc vala python"
+deps="core-libs cairo gdk-pixbuf pango"
+allow_network=yes
+
+build() {
+    export CARGO_HOME=/tmp/cargo
+    autotools_configure_lib \
+        --with-vala \
+        --docdir=/usr/share/doc/librsvg-${version}
+
+    make -j${parallelism}
+}
+
+package() {
+    export CARGO_HOME=/tmp/cargo
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
