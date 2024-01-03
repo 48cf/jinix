@@ -1,0 +1,24 @@
+name=mobile-broadband-provider-info
+version=20230416
+revision=1
+tarball_url="https://gitlab.gnome.org/GNOME/mobile-broadband-provider-info/-/archive/${version}/mobile-broadband-provider-info-${version}.tar.gz"
+tarball_blake2b="b1b176f9fe4babd47b7888fb6ff2ac8361cd43933a2fb80686a8d8380ac72454dee30fd81dc04dad40f8e6deab1738ee5b8065476050b6f7943caa775f9a6795"
+source_imagedeps="autoconf automake pkg-config libtool"
+builddeps="base"
+deps="core-libs libxslt"
+
+regenerate() {
+    autoreconf -fvi
+}
+
+build() {
+    autotools_configure
+
+    make -j${parallelism}
+}
+
+package() {
+    make install DESTDIR="${dest_dir}"
+
+    post_package_strip
+}
