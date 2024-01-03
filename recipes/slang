@@ -1,0 +1,23 @@
+name=slang
+version=2.3.3
+revision=1
+tarball_url="https://www.jedsoft.org/releases/slang/slang-${version}.tar.bz2"
+tarball_blake2b="2f304b25e807fe38b544479f4a6e98723816d08cda576177a270df736d7db8992a478f980333afc10a7bc0b5dc5508e49b33a13de02f0466f065efdfa3b7b351"
+builddeps="base"
+deps="core-libs libpng pcre readline"
+
+build() {
+    cp -rp ${source_dir}/. ./
+
+    configure_script_path=./configure \
+    autotools_configure_lib \
+        --with-readline=gnu
+
+    make -j1
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install_doc_dir=${prefix}share/doc/slang-${version} SLSH_DOC_DIR=${prefix}share/doc/slang-${version}/slsh install
+
+    post_package_strip
+}
