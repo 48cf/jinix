@@ -1,0 +1,22 @@
+name=libppd
+version=2.0.0
+revision=1
+tarball_url="https://github.com/OpenPrinting/libppd/releases/download/${version}/libppd-${version}.tar.xz"
+tarball_blake2b="8505c5ab5b515104308624a8f78505343b894df08ab8ac2727d7bd82d0d65d256d22ecaf384b212d9a5c45d2a619a6311722a8c5ed954b7a8a9780477aedb458"
+builddeps="base gettext"
+deps="core-libs libcupsfilters"
+
+build() {
+    autotools_configure \
+        --docdir=${prefix}/share/doc/libppd-${version} \
+        --with-cups-rundir=/run/cups \
+        --disable-mutool
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
