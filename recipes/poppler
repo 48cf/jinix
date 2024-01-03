@@ -1,0 +1,26 @@
+name=poppler
+version=23.12.0
+revision=1
+tarball_url="https://poppler.freedesktop.org/poppler-${version}.tar.xz"
+tarball_blake2b="c63699d4ba62fd739b49cd94fd9510abedf9accc2f07cf2cd361da5fb561ce4289c3537343341defe3fb4fb31587a39b3967324e1f357799dc8b140f8c9eedbf"
+builddeps="base cmake gobject-introspection"
+deps="core-libs fontconfig boost cairo gpgme lcms libjpeg-turbo libpng libtiff nss openjpeg curl gdk-pixbuf gtk+-3 poppler-data"
+
+build() {
+    cmake \
+        -DCMAKE_INSTALL_PREFIX=${prefix} \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DTESTDATADIR=$PWD/testfiles \
+        -DENABLE_QT6=OFF \
+        -DENABLE_UNSTABLE_API_ABI_HEADERS=ON \
+        -DENABLE_QT5=OFF \
+        ${source_dir}
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
