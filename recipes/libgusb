@@ -1,0 +1,20 @@
+name=libgusb
+version=0.4.8
+revision=1
+tarball_url="https://github.com/hughsie/libgusb/releases/download/${version}/libgusb-${version}.tar.xz"
+tarball_blake2b="f904bb8a0766a61b0e7d6e5e80d7f0eed5c44537065db2b9bf33cd694fcaa58d93a7cdec37802fd278c2eb7ad2e4de79cd492baa1ead373e31e4d75488999e1e"
+builddeps="base meson ninja gobject-introspection vala"
+deps="core-libs json-glib libusb umockdev usbutils"
+
+build() {
+    meson_configure \
+        -Ddocs=false
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
