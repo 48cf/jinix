@@ -1,0 +1,21 @@
+name=libpaper
+version=2.1.2
+revision=1
+tarball_url="https://github.com/rrthomas/libpaper/releases/download/v${version}/libpaper-${version}.tar.gz"
+tarball_blake2b="d931c70ea1b26e57ef5cf120189dbf089d7b122ab195b154e6dc100845f63acd051195662d1b019a2f738ebe65047207b39609f4db0e748eaabc3868f3a2ccb0"
+builddeps="base"
+deps="core-libs"
+
+build() {
+    autotools_configure \
+        --enable-relocatable \
+        --docdir=${prefix}/share/doc/libpaper-${version}
+
+    make -j${parallelism}
+}
+
+package() {
+    make install DESTDIR="${dest_dir}"
+
+    post_package_strip
+}
