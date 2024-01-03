@@ -1,0 +1,19 @@
+name=libgxps
+version=0.3.2
+revision=1
+tarball_url="https://download.gnome.org/sources/libgxps/0.3/libgxps-${version}.tar.xz"
+tarball_blake2b="4e41361a90fe24816aff33e90dc1084d0c1c799a4c9368364e73d9a5df34a45be75bb9906ee272cd1956b3631894d4be63070cce57983e2401dc1496f08c3e33"
+builddeps="base meson ninja gobject-introspection"
+deps="core-libs gtk+-3 lcms libarchive libjpeg-turbo libtiff libxslt"
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
