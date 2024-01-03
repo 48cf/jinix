@@ -11,21 +11,11 @@ build() {
 
         configure_script_path=./configure \
     autotools_configure \
-        --disable-gtktest \
-        --disable-icon-cache-update \
-        --disable-desktop-database-update \
+        --enable-multibyte \
         --disable-canberra \
         --disable-selinux \
-        --disable-xsmp \
-        --disable-channel \
         --disable-netbeans \
-        --enable-multibyte \
-        --disable-acl \
-        --disable-gpm \
-        --disable-sysmouse \
-        --disable-nls \
-        --with-tlib=tinfo \
-        --enable-gui=no \
+        --disable-gui \
         --without-x
 
     make -j${parallelism}
