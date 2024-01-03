@@ -1,0 +1,23 @@
+name=highlight
+version=4.10
+revision=1
+tarball_url="http://www.andre-simon.de/zip/highlight-${version}.tar.bz2"
+tarball_blake2b="c1271c44a34e40ae2d53ee14aaef050aa6769fa31aac111807f205078340dc3322f3bdf083843c9dd35149cb37592489fe24a9e96e33eb43c05cbfd958fd096e"
+builddeps="base"
+deps="core-libs boost lua"
+
+regenerate() {
+    sed -i '/GZIP/s/^/#/' ${source_dir}/makefile
+}
+
+build() {
+    cp -rp ${source_dir}/. ./
+
+    make -j${parallelism}
+}
+
+package() {
+    make DESTDIR="${dest_dir}" doc_dir=${dest_dir}${prefix}/share/doc/highlight-${version} install
+
+    post_package_strip
+}
