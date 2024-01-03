@@ -1,0 +1,21 @@
+name=swig
+version=4.2.0
+revision=1
+tarball_url="https://downloads.sourceforge.net/swig/swig-${version}.tar.gz"
+tarball_blake2b="4f1c3c7d4b1e218b67a2d796d2171df73971036a433e5fb80233b3050f022d578efdff28fc44d98a6d176ec6270b4942f5f56e9a74bbd8b30d6836c76c620a04"
+builddeps="base"
+deps="core-libs pcre2 boost perl python" # Add more languages here as available
+
+build() {
+    autotools_configure_lib \
+        --without-javascript \
+        --without-maximum-compile-warnings
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
