@@ -1,0 +1,21 @@
+name=python-meson-python
+version=0.12.0
+revision=1
+tarball_url="https://files.pythonhosted.org/packages/source/m/meson_python/meson_python-${version}.tar.gz"
+tarball_blake2b="3855093bacb96e73e5df2fdcc2e820791b59b413a6fcdaf9073c6206f0127c36ebed34d1e3325188dfcd44438ead8fe5a17e6e7020a4cc0e41f62101442635c1"
+builddeps="base python-build python-installer python-setuptools python-wheel meson ninja"
+deps="core-libs python-project-metadata patchelf"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python -m build \
+        --wheel \
+        --no-isolation
+}
+
+package() {
+    python -m installer \
+        --destdir="${dest_dir}" \
+        dist/*.whl
+}
