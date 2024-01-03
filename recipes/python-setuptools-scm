@@ -1,0 +1,21 @@
+name=python-setuptools-scm
+version=7.1.0
+revision=1
+tarball_url="https://files.pythonhosted.org/packages/source/s/setuptools_scm/setuptools_scm-${version}.tar.gz"
+tarball_blake2b="be5ae215dadcc290290762b732434258409ecc2d71cdf1332ffe73431effae7cbc33e052a718efd952be79350171ed3e468492fc719bc08750dc23364fb0ee9d"
+builddeps="base python-build python-installer python-setuptools python-wheel"
+deps="core-libs python-packaging python-typing-extensions"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python -m build \
+        --wheel \
+        --no-isolation
+}
+
+package() {
+    python -m installer \
+        --destdir="${dest_dir}" \
+        dist/*.whl
+}
