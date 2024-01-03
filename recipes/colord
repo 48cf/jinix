@@ -1,0 +1,42 @@
+name=colord
+version=1.4.6
+revision=1
+tarball_url="https://www.freedesktop.org/software/colord/releases/colord-${version}.tar.xz"
+tarball_blake2b="bf87ed1abe0a827ad81b5467847975d70e4cb83c1973fac3bcb1650875b7a0b375d48633bb1b01c7da1e8acd62cc4cf19f0efe9722e12bde3d8ec4833800ef2c"
+builddeps="base meson ninja gobject-introspection vala gettext"
+deps="core-libs dbus glib lcms polkit sqlite libgudev libgusb libxslt"
+
+if [ "$SYSTEMD" = "yes" ]; then
+    deps="${deps} systemd"
+fi
+
+regenerate() {
+    sed '/cmsUnregisterPluginsTHR/d' -i ${source_dir}/lib/colord/cd-context-lcms.c
+}
+
+build() {
+
+    if [ "$SYSTEMD" = "yes" ]; then
+        systemd_args="-Dsystemd=true"
+    else
+        systemd_args="-Dsystemd=false"
+    fi
+
+    meson_configure \
+        -Ddaemon_user=colord \
+        -Dvapi=true \
+        -Dlibcolordcompat=true \
+        -Dargyllcms_sensor=false \
+        -Dbash_completion=false \
+        -Ddocs=false \
+        -Dman=false \
+        ${systemd_args}
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
