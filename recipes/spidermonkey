@@ -1,0 +1,47 @@
+name=spidermonkey
+version=115.6.0esr
+revision=1
+tarball_url="https://archive.mozilla.org/pub/firefox/releases/${version}/source/firefox-${version}.source.tar.xz"
+tarball_blake2b="80ab9a45f9170265751a913e789a54acd0503846a77e43fbfe181c3d5846d5945f5c4f4bf3a35231e250e15377f8d4abd0a01617b3a3b0f94197450300111360"
+builddeps="base rustc python python-six which"
+deps="core-libs icu llvm readline"
+
+regenerate() {
+    _site_packages="$(python -c 'import site; print(site.getsitepackages()[0])')"
+
+    for i in $(find -name six.py); do
+        ln -sfv "${_site_packages}/six.py" "$i";
+    done
+}
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    mkdir obj
+    cd obj
+
+    export CC="gcc"
+    export CXX="g++"
+    export CARGO_HOME="/tmp/cargo"
+    ../js/src/configure \
+        --prefix="${prefix}" \
+        --disable-debug-symbols  \
+        --disable-jemalloc \
+        --enable-rust-simd \
+        --enable-readline \
+        --with-intl-api \
+        --with-system-icu \
+        --with-system-zlib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make -C obj install
+
+    ln -sfv js115 "${dest_dir}${prefix}/bin/js"
+    rm -v "${dest_dir}${prefix}/lib/libjs_static.ajs"
+    sed -i '/@NSPR_CFLAGS@/d' "${dest_dir}${prefix}/bin/js115-config"
+
+    post_package_strip
+}
