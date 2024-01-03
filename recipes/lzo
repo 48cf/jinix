@@ -1,0 +1,20 @@
+name=lzo
+version=2.10
+revision=1
+tarball_url="https://www.oberhumer.com/opensource/lzo/download/lzo-${version}.tar.gz"
+tarball_blake2b="124b6645a2cb7f01f153c9fa6e1976378bdfb224841a7b45ab19c584c6ef704c20719ae87640b8d83f3f9269a57d9cc2e870a914124dac03a2ef1336e9feb9c9"
+builddeps="base"
+deps="core-libs"
+
+build() {
+    autotools_configure_lib \
+        --docdir=/usr/share/doc/lzo-${version}
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
