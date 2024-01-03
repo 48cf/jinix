@@ -4,7 +4,7 @@ revision=1
 tarball_url="https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-${version}.tar.xz"
 tarball_blake2b="c6880858ed0dafef8102e097a380d771043051180cac220ead724a5861976f1e56f0d96939d271e806880fdb9473a31cfa7476d772ca9cc2c77d6c6163f5fef3"
 builddeps="base gettext meson ninja gobject-introspection"
-deps="core-libs gstreamer alsa-lib graphene iso-codes libgudev libjpeg-turbo libogg libpng libtheora libvorbis libxi libxv mesa pango opus sdl2 gdk-pixbuf gtk+-3"
+deps="core-libs gstreamer alsa-lib graphene iso-codes libgudev libjpeg-turbo libogg libpng libtheora libvorbis libxi libxv mesa pango opus sdl2 gdk-pixbuf"
 
 build() {
     meson_configure \
