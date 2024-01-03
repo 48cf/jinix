@@ -1,0 +1,33 @@
+name=tk
+version=8.6.13
+revision=1
+tarball_url="https://downloads.sourceforge.net/tcl/tk${version}-src.tar.gz"
+tarball_blake2b="5f00cf64feb7c7eb6739303c857dfabff4cbf4148c65462c2a5cc49cc8010fba950ffa7043101e98ded543a6c6e9b925dc1ee0e6e9031a240ae29b918f81060a"
+builddeps="base"
+deps="core-libs tcl libx11"
+
+build() {
+    cp -rp ${source_dir}/. ./
+    cd unix
+    configure_script_path=./configure \
+    autotools_configure_lib \
+        --mandir=${prefix}/share/man \
+        --enable-64bit
+
+    make -j${parallelism}
+
+    sed -e "s@^\(TK_SRC_DIR='\).*@\1/usr/include'@" \
+    -e "/TK_B/s@='\(-L\)\?.*unix@='\1/usr/lib@" \
+    -i tkConfig.sh
+}
+
+package() {
+    cd unix
+    DESTDIR="${dest_dir}" make install
+    DESTDIR="${dest_dir}" make install-private-headers
+
+    ln -v -sf wish8.6 ${dest_dir}${prefix}/bin/wish
+    chmod -v 755 ${dest_dir}${prefix}/lib/libtk8.6.so
+
+    post_package_strip
+}
