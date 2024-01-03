@@ -1,0 +1,20 @@
+name=geoclue
+version=2.7.1
+revision=1
+tarball_url="https://gitlab.freedesktop.org/geoclue/geoclue/-/archive/${version}/geoclue-${version}.tar.bz2"
+tarball_blake2b="a2fc44d4941936d8dcd495d77d11b0d948d7031ca048b97ff0940c7fcdd37ba604655f2e255c5e0dd5cc7a82a2d5a15b18aab4825b2446560e225c13df6da3b8"
+builddeps="base meson ninja gobject-introspection vala gettext"
+deps="core-libs json-glib libsoup3 modemmanager avahi libnotify"
+
+build() {
+    meson_configure \
+        -Dgtk-doc=false
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
