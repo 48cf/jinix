@@ -1,0 +1,23 @@
+name=jansson
+version=2.14
+revision=1
+tarball_url="https://github.com/akheron/jansson/releases/download/v${version}/jansson-${version}.tar.bz2"
+tarball_blake2b="b7b7e98360fd73f7925b88e3729a7a18307b4f05fed4b37659d24ddc03208469471d508dcd245534f73af3b5e93f595e49e3cb2c99733955b03d471bd5a32f15"
+builddeps="base"
+deps="core-libs"
+
+regenerate() {
+    sed -e "/DT/s;| sort;| sed 's/@@libjansson.*//' &;" -i ${source_dir}/test/suites/api/check-exports
+}
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
