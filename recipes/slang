@@ -17,7 +17,7 @@ build() {
 }
 
 package() {
-    DESTDIR="${dest_dir}" make install_doc_dir=${prefix}share/doc/slang-${version} SLSH_DOC_DIR=${prefix}share/doc/slang-${version}/slsh install
+    DESTDIR="${dest_dir}" make install_doc_dir=${prefix}/share/doc/slang-${version} SLSH_DOC_DIR=${prefix}/share/doc/slang-${version}/slsh install
 
     post_package_strip
 }
