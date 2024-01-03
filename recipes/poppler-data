@@ -1,0 +1,17 @@
+name=poppler-data
+version=0.4.12
+revision=1
+tarball_url="https://poppler.freedesktop.org/poppler-data-${version}.tar.gz"
+tarball_blake2b="0d34ff1fcc9120b5db2baded9d931ca37128106eecdd54892d0256f9736f799d52eacd4017741797432048def914dd13150c6e3bf8d9ea5b8597a799a497d1c7"
+builddeps="base"
+deps="core-libs"
+
+build() {
+    cp -rp ${source_dir}/. ./
+}
+
+package() {
+    DESTDIR="${dest_dir}" make prefix=${prefix} install
+
+    post_package_strip
+}
