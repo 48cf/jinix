@@ -1,0 +1,20 @@
+name=patchelf
+version=0.17.2
+revision=1
+tarball_url="https://github.com/NixOS/patchelf/releases/download/${version}/patchelf-${version}.tar.gz"
+tarball_blake2b="552ef479786e4e5093a5cba42057166a26fc49baafdb1293d702e32a0c00dbbf82535d5008f46af383305f82dd590065be209e90f02350ffa579357bf25c90e0"
+builddeps="base"
+deps="core-libs"
+
+build() {
+    autotools_configure_lib \
+        --docdir=/usr/share/doc/patchelf-${version}
+
+    make -j${parallelism}
+}
+
+package() {
+    make DESTDIR="${dest_dir}" install
+
+    post_package_strip
+}
