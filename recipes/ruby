@@ -1,0 +1,23 @@
+name=ruby
+version=3.3.0
+revision=1
+tarball_url="https://cache.ruby-lang.org/pub/ruby/3.3/ruby-${version}.tar.xz"
+tarball_blake2b="09ef6fb4b2768118207e7a9ece17c5c62c9f596b1c13ac6199245889fcc5d25f03336831ec3bf1367a460a8a26c4426c32bcd576b0da8bdafc90301032b4d2f0"
+builddeps="base"
+deps="core-libs libyaml tk libffi openssl"
+
+build() {
+    autotools_configure_lib \
+        --without-valgrind \
+        --without-baseruby \
+        --docdir=${prefix}/share/doc/ruby-${version} \
+        --disable-install-rdoc
+
+    make -j${parallelism}
+}
+
+package() {
+    make DESTDIR="${dest_dir}" install
+
+    post_package_strip
+}
