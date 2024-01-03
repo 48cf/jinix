@@ -1,0 +1,26 @@
+name=modemmanager
+version=1.18.12
+revision=1
+tarball_url="https://www.freedesktop.org/software/ModemManager/ModemManager-${version}.tar.xz"
+tarball_blake2b="e82db0a62d29753e22b9f9c09e60d8f5dca070cbac27b6df54ff8cd166cbb837dca3b162ac06afea0e75abdc8d407253a28cee58dacd739d4b485fa9f5485acb"
+builddeps="base gobject-introspection python vala"
+deps="core-libs libgudev libmbim libqmi polkit"
+
+build() {
+
+    if [ "$SYSTEMD" = "yes" ]; then
+        systemd_args="--with-systemd-journal --with-systemd-suspend-resume"
+    fi
+
+    autotools_configure_lib \
+        --disable-maintainer-mode \
+        ${systemd_args}
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
