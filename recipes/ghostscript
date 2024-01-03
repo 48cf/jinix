@@ -1,0 +1,32 @@
+name=ghostscript
+version=10.02.1
+revision=1
+tarball_url="https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10021/ghostscript-${version}.tar.xz"
+tarball_blake2b="b491473f0b3d50121e4373e21af3d8cdf55d9ca4390b240c4cb88d0d44e707e32570a7f1f05cb656d1b65443fcd7e37f5eab404d72a20f83d8fd87370a585467"
+builddeps="base"
+deps="core-libs cups fontconfig freetype lcms libjpeg-turbo libpng libtiff openjpeg cairo gtk+-3 libidn libpaper libwebp"
+
+regenerate() {
+    rm -rf freetype lcms2mt jpeg libpng openjpeg zlib
+}
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    configure_script_path=./configure \
+    autotools_configure \
+        --disable-compile-inits \
+        --with-system-libtiff 
+
+    make -j${parallelism}
+    make so -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+    DESTDIR="${dest_dir}" make soinstall
+    install -v -m644 base/*.h ${dest_dir}${prefix}/include/ghostscript &&
+    ln -sfvn ghostscript ${dest_dir}${prefix}/include/ps
+
+    post_package_strip
+}
