@@ -1,10 +1,10 @@
 name=libarchive
-version=3.6.2
+version=3.7.2
 revision=1
 tarball_url="https://github.com/libarchive/libarchive/releases/download/v${version}/libarchive-${version}.tar.xz"
-tarball_blake2b="355b5d402e352dee802513485ce7e047af58d6de5b9bf6a49f3fd8d7b94117007598820ac979585c0da79747e8b63b70ab151131182368a11f97a047cf9029d4"
+tarball_blake2b="7221db4811a965ee61d879a2603480363628a19995a351b572d099be9f35576d76f0b0822f9a5a47d9929bc094d4444fd8eafcb4a073e39bb3aa797d4b926ca5"
 builddeps="base"
-deps="core-libs zlib xz-utils zstd libexpat libxml"
+deps="core-libs zlib xz-utils zstd libexpat libxml nettle lzo"
 
 build() {
     autotools_configure_lib
