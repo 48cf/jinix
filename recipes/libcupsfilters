@@ -1,0 +1,21 @@
+name=libcupsfilters
+version=2.0.0
+revision=1
+tarball_url="https://github.com/OpenPrinting/libcupsfilters/releases/download/${version}/libcupsfilters-${version}.tar.xz"
+tarball_blake2b="ce9d839bb700017c303c1301c7a97fd02e3657a908e685377be49557d995574a7fc5a31d4fcbda5eeb9ba2d3cd07858224540dbf0bc9fa078cfd25a58ee15a41"
+builddeps="base"
+deps="core-libs cups glib ghostscript lcms poppler qpdf libexif libjpeg-turbo libpng libtiff"
+
+build() {
+    autotools_configure \
+        --docdir=${prefix}/share/doc/libcupsfilters-${version} \
+        --disable-mutool
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
