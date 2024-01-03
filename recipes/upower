@@ -1,0 +1,25 @@
+name=upower
+version=1.90.2
+revision=1
+tarball_url="https://gitlab.freedesktop.org/upower/upower/-/archive/v${version}/upower-v${version}.tar.bz2"
+tarball_blake2b="f00b3a584f5564a0edc7fadad2e005da5938e61005c0c84ed6bfb9e612a5964a1f4b0a051a2a78eb1b71666e4182ce2e01e16f1b32269ed2db848b570f71fd09"
+builddeps="base meson ninja gobject-introspection gettext"
+deps="core-libs libgudev libusb python-dbusmock python-gobject umockdev"
+
+regenerate() {
+    sed '/parse_version/d' -i ${source_dir}/src/linux/integration-test.py
+}
+
+build() {
+    meson_configure \
+        -Dgtk-doc=false \
+        -Dman=false
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
