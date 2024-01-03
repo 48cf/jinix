@@ -1,0 +1,53 @@
+name=usbutils
+version=017
+revision=1
+tarball_url="https://kernel.org/pub/linux/utils/usb/usbutils/usbutils-${version}.tar.xz"
+tarball_blake2b="868c646ed6d38a38b9bd3ab85ba3a5e9362a97e476aeed6576c1b175caaf4ee688cb2c33756f02c9bf0aef9e7d58657331fc1c3b3314d86145b3d4f37124537e"
+builddeps="base curl"
+deps="core-libs libusb"
+allow_network=yes
+
+build() {
+    autotools_configure_lib \
+        --datadir=${prefix}/share/hwdata
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    mkdir -pv ${dest_dir}${prefix}/share/hwdata/
+    curl -k https://raptor.dennisbonke.com/usb.ids > ${dest_dir}${prefix}/share/hwdata/usb.ids
+
+    if [ "$SYSTEMD" = "yes" ]; then
+        mkdir -pv ${dest_dir}${prefix}/lib/systemd/system/
+        cat > ${dest_dir}${prefix}/lib/systemd/system/update-usbids.service << "EOF"
+[Unit]
+Description=Update usb.ids file
+Documentation=man:lsusb(8)
+DefaultDependencies=no
+After=local-fs.target network-online.target
+Before=shutdown.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/wget http://www.linux-usb.org/usb.ids -O /usr/share/hwdata/usb.ids
+EOF
+
+cat > ${dest_dir}${prefix}/lib/systemd/system/update-usbids.timer << "EOF"
+[Unit]
+Description=Update usb.ids file weekly
+
+[Timer]
+OnCalendar=Sun 03:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+EOF
+    fi
+
+    post_package_strip
+}
