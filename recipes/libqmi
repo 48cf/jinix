@@ -1,0 +1,19 @@
+name=libqmi
+version=1.30.8
+revision=1
+tarball_url="https://www.freedesktop.org/software/libqmi/libqmi-${version}.tar.xz"
+tarball_blake2b="c8d98106783eb22571ee82c0012e1ce7ed79e94818350134b80853e16fa287c77bafb34d2913690ae593d02112dc5d2b0ff77606a24c4ce63733fd64245961a1"
+builddeps="base gobject-introspection python"
+deps="core-libs glib libgudev libmbim"
+
+build() {
+    PYTHON=python3 autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
