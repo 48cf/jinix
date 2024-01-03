@@ -1,0 +1,19 @@
+name=libyaml
+version=0.2.5
+revision=1
+tarball_url="https://github.com/yaml/libyaml/releases/download/${version}/yaml-${version}.tar.gz"
+tarball_blake2b="529791cf9e7e407f55962f227d678c2826892a94bbffab36146a5e48066ea0c0f9fac2884556cb7018a09640871ede779828d255846c28664e4cbfd934e62962"
+builddeps="base"
+deps="core-libs"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
