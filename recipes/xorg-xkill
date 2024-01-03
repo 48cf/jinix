@@ -1,0 +1,19 @@
+name=xorg-xkill
+version=1.0.6
+revision=1
+tarball_url="https://www.x.org/archive/individual/app/xkill-${version}.tar.xz"
+tarball_blake2b="405e78388359d7a6ee66e3f2039b37422a09995fcad56f637e1f8c63679504857512e7f7d9a88790522d183a71c98821e7c3a2e34314ff27c978d125651431ed"
+builddeps="base xorg-util-macros"
+deps="core-libs libx11 libxmu"
+
+build() {
+    autotools_configure
+
+    make -j${parallelism}
+}
+
+package() {
+    make install DESTDIR="${dest_dir}"
+
+    post_package_strip
+}
