@@ -1,0 +1,89 @@
+name=rustc
+version=1.75.0
+revision=1
+tarball_url="https://static.rust-lang.org/dist/rustc-${version}-src.tar.xz"
+tarball_blake2b="8937b80585eddaa3e1f1ef948899d14a170308518c6fef9fe569560cdd870053776956743f796055f2119399b9ca6c0df12fedd789ae46324d071e5126c4e495"
+builddeps="base python cmake"
+deps="core-libs curl libssh llvm"
+allow_network=yes
+
+regenerate() {
+    cat << EOF > ${source_dir}/config.toml
+# see config.toml.example for more possible options
+# See the 8.4 book for an old example using shipped LLVM
+# e.g. if not installing clang, or using a version before 13.0
+
+# Tell x.py the editors have reviewed the content of this file
+# and updated it to follow the major changes of the building system,
+# so x.py will not warn us to do such a review.
+change-id = 116881
+
+[llvm]
+# by default, rust will build for a myriad of architectures
+targets = "X86"
+
+# When using system llvm prefer shared libraries
+link-shared = true
+
+[build]
+# omit docs to save time and space (default is to build them)
+docs = false
+
+# install extended tools: cargo, clippy, etc
+extended = true
+
+# Do not query new versions of dependencies online.
+locked-deps = true
+
+# Specify which extended tools (those from the default install).
+tools = ["cargo", "clippy", "rustdoc", "rustfmt"]
+
+# Use the source code shipped in the tarball for the dependencies.
+# The combination of this and the "locked-deps" entry avoids downloading
+# many crates from Internet, and makes the Rustc build more stable.
+vendor = true
+
+[install]
+prefix = "/usr"
+docdir = "share/doc/rustc-1.75.0"
+
+[rust]
+channel = "stable"
+description = "for Jinix"
+
+# BLFS used to not install the FileCheck executable from llvm,
+# so disabled codegen tests.  The assembly tests rely on FileCheck
+# and cannot easily be disabled, so those will anyway fail if
+# FileCheck has not been installed.
+codegen-tests = false
+
+# Enable the same optimizations as the official upstream build.
+lto = "thin"
+codegen-units = 1
+
+[target.x86_64-unknown-linux-gnu]
+# NB the output of llvm-config (i.e. help options) may be
+# dumped to the screen when config.toml is parsed.
+llvm-config = "/usr/bin/llvm-config"
+
+[target.i686-unknown-linux-gnu]
+# NB the output of llvm-config (i.e. help options) may be
+# dumped to the screen when config.toml is parsed.
+llvm-config = "/usr/bin/llvm-config"
+EOF
+}
+
+build() {
+    cp -rp "${source_dir}/." ./
+
+        LIBSSH2_SYS_USE_PKG_CONFIG=1 \
+    python3 x.py build
+}
+
+package() {
+    DESTDIR="${dest_dir}" python3 x.py install
+
+    find ${dest_dir} -name "*.old" -delete
+
+    post_package_strip
+}
