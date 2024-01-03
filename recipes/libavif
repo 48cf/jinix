@@ -1,0 +1,25 @@
+name=libavif
+version=1.0.3
+revision=1
+tarball_url="https://github.com/AOMediaCodec/libavif/archive/v${version}/libavif-${version}.tar.gz"
+tarball_blake2b="220f5ebfcae82e521cb13231dca478f480987b8eb80451edb9f9769ac1561ee18ebaaaa7f552fe9cb9094d141815ac6cdba1f544ebfbcc932f60b8f1233d58c6"
+builddeps="base cmake ninja python"
+deps="core-libs libaom gdk-pixbuf"
+
+build() {
+    cmake \
+        -GNinja \
+        -DCMAKE_INSTALL_PREFIX=${prefix} \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DAVIF_CODEC_AOM=ON \
+        -DAVIF_BUILD_GDK_PIXBUF=ON \
+        ${source_dir}
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
