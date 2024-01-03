@@ -1,0 +1,21 @@
+name=gstreamer-plugins-libav
+version=1.22.7
+revision=1
+tarball_url="https://gstreamer.freedesktop.org/src/gst-libav/gst-libav-${version}.tar.xz"
+tarball_blake2b="a64b5b48cddcdae14a6591c5feafb7df5e61da07ded078fe30171bc134f90e046082d2ea00d81fd2acdfe63d2268329f550e88969e2b8d1b97f9827687061ea8"
+builddeps="base gettext meson ninja"
+deps="core-libs ffmpeg gstreamer-plugins-base"
+
+build() {
+    meson_configure \
+        --wrap-mode=nodownload \
+        -Dpackage-name="GStreamer ${version}"
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
