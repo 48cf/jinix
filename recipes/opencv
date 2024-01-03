@@ -1,0 +1,38 @@
+name=opencv
+version=4.9.0
+revision=1
+tarball_url="https://github.com/opencv/opencv/archive/${version}/opencv-${version}.tar.gz"
+tarball_blake2b="257478b0f5e19abca5b3676767dacd40765c645eb455080160b8b9dc54e66fba4880200b483829fc9050bc3f9b3e815f8ee784d7b41261877784536778fe3c96"
+builddeps="base cmake unzip"
+deps="core-libs ffmpeg gstreamer-plugins-base gtk+-3 jasper libexif libjpeg-turbo libpng libtiff libwebp openjpeg v4l-utils xine-lib"
+allow_network=yes
+
+regenerate() {
+    mkdir -pv ${source_dir}/.cache
+    touch ${source_dir}/.cache/.gitignore
+}
+
+# No extra modules for now
+build() {
+    cmake \
+        -DCMAKE_INSTALL_PREFIX=${prefix} \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DENABLE_CXX11=ON \
+        -DBUILD_PERF_TESTS=OFF \
+        -DWITH_XINE=ON \
+        -DBUILD_TESTS=OFF \
+        -DENABLE_PRECOMPILED_HEADERS=OFF \
+        -DCMAKE_SKIP_RPATH=ON \
+        -DBUILD_WITH_DEBUG_INFO=OFF \
+        -DENABLE_DOWNLOAD=OFF \
+        -Wno-dev \
+        ${source_dir}
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
