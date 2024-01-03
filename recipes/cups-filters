@@ -1,0 +1,22 @@
+name=cups-filters
+version=2.0.0
+revision=1
+tarball_url="https://github.com/OpenPrinting/cups-filters/releases/download/${version}/cups-filters-${version}.tar.xz"
+tarball_blake2b="be5e2aab4eb921aa67bfcc93aa5f95a9f1fe1a269ed73d18273a0e9a3e816187e9e32750ba6521c3ab083c3c7b7a60bb1fa679e16d4a5917f911a4ba8d4b7207"
+builddeps="base gettext"
+deps="core-libs libcupsfilters libppd"
+
+build() {
+    autotools_configure \
+        --docdir=${prefix}/share/doc/cups-filters-${version} \
+        --disable-avahi \
+        --disable-mutool
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
