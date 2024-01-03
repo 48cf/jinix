@@ -1,0 +1,20 @@
+name=enchant
+version=2.6.4
+revision=1
+tarball_url="https://github.com/AbiWord/enchant/releases/download/v${version}/enchant-${version}.tar.gz"
+tarball_blake2b="3f24b41fe7384585e8c94828a8eb5c44937020516e90adc79313bbb2fa69be218d239976587f4414fc2b0fb8752093f0a745ab8712980ea4b3fec47536d3703b"
+builddeps="base groff"
+deps="core-libs glib aspell-en"
+
+build() {
+    autotools_configure_lib \
+        --docdir=${prefix}/share/doc/enchant-${version}
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
