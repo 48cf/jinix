@@ -1,0 +1,19 @@
+name=libcloudproviders
+version=0.3.5
+revision=1
+tarball_url="https://download.gnome.org/sources/libcloudproviders/0.3/libcloudproviders-${version}.tar.xz"
+tarball_blake2b="653f1aa96692f97415b9c7f84ac15e8843210853b40323e65d22b3e2448732abb25695cf879356078997db22cd34ce34e72a542e6f1e1fec08ba83c482492b02"
+builddeps="base meson ninja gettext gobject-introspection vala"
+deps="core-libs"
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
