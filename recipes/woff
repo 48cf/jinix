@@ -1,0 +1,24 @@
+name=woff
+version=1.0.2
+revision=1
+tarball_url="https://github.com/google/woff2/archive/v${version}/woff2-${version}.tar.gz"
+tarball_blake2b="b4a762cb2377b896147d9ebdae97f17e80bdb94fa8ec1b04e28e9df48c2f3456f83fc548b10a49bbc271bead349348f7582a85c5011f60a9feb4dda84920b6f3"
+builddeps="base cmake ninja"
+deps="core-libs brotli"
+
+build() {
+    cmake \
+        -GNinja \
+        -DCMAKE_INSTALL_PREFIX=${prefix} \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DBUILD_SHARED_LIBS=ON \
+        ${source_dir}
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
