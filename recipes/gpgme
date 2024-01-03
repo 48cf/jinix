@@ -1,0 +1,19 @@
+name=gpgme
+version=1.23.2
+revision=1
+tarball_url="https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-${version}.tar.bz2"
+tarball_blake2b="563e470e861c7cc64ecb3e8dd0a0ed8436bc0867105093abcec09f4d1e1dd95cbf64c8161cf8500b9842583b57f6583efff63e5111234e36fda1e6fbedce2f78"
+builddeps="base"
+deps="core-libs libassuan gnupg swig"
+
+build() {
+    autotools_configure_lib
+
+    make PYTHONS= -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install PYTHONS= 
+
+    post_package_strip
+}
