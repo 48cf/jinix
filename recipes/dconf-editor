@@ -1,0 +1,19 @@
+name=dconf-editor
+version=45.0.1
+revision=1
+tarball_url="https://download.gnome.org/sources/dconf-editor/45/dconf-editor-${version}.tar.xz"
+tarball_blake2b="1a444022301b5e3140cc1f59c87c49efa830e09a2004b89ee1b05bf141a116bdac26d42fd791e2dfb1f8c864412c1cd43c9ce413e943d069882fb32491196bd9"
+builddeps="base meson gettext ninja gobject-introspection vala"
+deps="core-libs dconf gtk+-3 libhandy libxml desktop-file-utils"
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
