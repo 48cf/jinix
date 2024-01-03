@@ -1,0 +1,19 @@
+name=libidn
+version=1.41
+revision=1
+tarball_url="https://ftp.gnu.org/gnu/libidn/libidn-${version}.tar.gz"
+tarball_blake2b="6c632c2010f024792fd55d3c8e6f68e81152fa7421a4f65b6835d0dfd788707727381270c57bf46c6e252777e07ead501fdabdc55961c5c1604e81c53be5ab2b"
+builddeps="base"
+deps="core-libs pth"
+
+build() {
+    autotools_configure
+
+    make -j${parallelism}
+}
+
+package() {
+    make install DESTDIR="${dest_dir}"
+
+    post_package_strip
+}
