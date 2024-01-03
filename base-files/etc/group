@@ -17,6 +17,7 @@ adm:x:16:
 messagebus:x:18:
 systemd-journal:x:23:
 input:x:24:
+polkitd:x:27:
 mail:x:34:
 kvm:x:61:
 colord:x:71:
