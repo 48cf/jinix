@@ -1,0 +1,18 @@
+name=unifdef
+version=2.12
+revision=1
+tarball_url="https://dotat.at/prog/unifdef/unifdef-${version}.tar.gz"
+tarball_blake2b="d14072f79b9d8b17a033c7068a3c6a423c2e66570aac6d232e387ffd256bc66ad3c4c1467b6f101124bf494f2c12c7b8d37c64104623b0022e435a7e5aa78d5a"
+builddeps="base"
+deps="core-libs"
+
+build() {
+    cp -rp ${source_dir}/. ./
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make prefix=${prefix} install
+
+    post_package_strip
+}
