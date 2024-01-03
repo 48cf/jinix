@@ -1,0 +1,47 @@
+name=tcl
+version=8.6.13
+revision=1
+tarball_url="https://downloads.sourceforge.net/tcl/tcl${version}-src.tar.gz"
+tarball_blake2b="f7d895ee04bf2be2a327a957189a8a4400afae13d065163c4c7b6b5ee909bae2352114843d82d9475046eafd3d288da2c1649fe6285fdb26eb22f0b97e4227ab"
+builddeps="base"
+deps="core-libs"
+
+build() {
+    cp -rp ${source_dir}/. ./
+    SRCDIR=$(pwd)
+    cd unix
+    configure_script_path=./configure \
+    autotools_configure_lib \
+        --mandir=${prefix}/share/man
+
+    make -j${parallelism}
+
+    sed -e "s|$SRCDIR/unix|/usr/lib|" \
+    -e "s|$SRCDIR|/usr/include|"  \
+    -i tclConfig.sh
+
+sed -e "s|$SRCDIR/unix/pkgs/tdbc1.1.5|/usr/lib/tdbc1.1.5|" \
+    -e "s|$SRCDIR/pkgs/tdbc1.1.5/generic|/usr/include|"    \
+    -e "s|$SRCDIR/pkgs/tdbc1.1.5/library|/usr/lib/tcl8.6|" \
+    -e "s|$SRCDIR/pkgs/tdbc1.1.5|/usr/include|"            \
+    -i pkgs/tdbc1.1.5/tdbcConfig.sh
+
+sed -e "s|$SRCDIR/unix/pkgs/itcl4.2.3|/usr/lib/itcl4.2.3|" \
+    -e "s|$SRCDIR/pkgs/itcl4.2.3/generic|/usr/include|"    \
+    -e "s|$SRCDIR/pkgs/itcl4.2.3|/usr/include|"            \
+    -i pkgs/itcl4.2.3/itclConfig.sh
+    unset SRCDIR
+}
+
+package() {
+    cd unix
+    DESTDIR="${dest_dir}" make install
+
+    chmod -v u+w ${dest_dir}${prefix}/lib/libtcl8.6.so
+
+    DESTDIR="${dest_dir}" make install-private-headers
+    ln -sfv tclsh8.6 ${dest_dir}${prefix}/bin/tclsh
+    mv ${dest_dir}${prefix}/share/man/man3/{Thread,Tcl_Thread}.3
+
+    post_package_strip
+}
