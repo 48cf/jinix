@@ -1,0 +1,19 @@
+name=bubblewrap
+version=0.8.0
+revision=1
+tarball_url="https://github.com/containers/bubblewrap/releases/download/v${version}/bubblewrap-${version}.tar.xz"
+tarball_blake2b="5853cf42a7ab653540ec5134866c6f2459aa101e9eea724a4f283405cbcae2beb3551b7c1a7aa93d82016d4eb0d12f9c97c47df53a6d9b589db40483696253de"
+builddeps="base cmake meson ninja"
+deps="core-libs"
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
