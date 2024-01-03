@@ -4,7 +4,8 @@ revision=1
 tarball_url="https://github.com/OpenPrinting/cups/releases/download/v${version}/cups-${version}-source.tar.gz"
 tarball_blake2b="d81de62cff37c576ef8fb125b97568c2d86602cec6151d7030552fad421d7bc77a5df1e860d5ac5a241e739cc0d1fe5fcac44b8451ad2fc4dc675cf74fd41382"
 builddeps="base"
-deps="core-libs dbus gnutls pam zlib"
+deps="core-libs dbus gnutls pam zlib colord libusb avahi libpaper"
+# TODO: Runtime dep cups-filters
 
 build() {
     cp -rp "${source_dir}"/. ./
@@ -12,18 +13,32 @@ build() {
         configure_script_path=./configure \
     autotools_configure_lib \
         --disable-gssapi \
-        --disable-browsing \
         --with-rcdir=/tmp/cupsinit \
         --with-rundir=/run/cups \
         --with-system-groups=lpadmin \
         --with-docdir="${prefix}/share/cups/doc-${version}" \
-        --with-components=libcups
+        --enable-libpaper
 
     make -j${parallelism}
 }
 
 package() {
     DESTDIR="${dest_dir}" make install
+
+    mkdir -pv ${dest_dir}/etc/cups
+    rm -vf ${dest_dir}/etc/pam.d/cups
+
+    echo "ServerName /run/cups/cups.sock" > ${dest_dir}/etc/cups/client.conf
+
+cat > ${dest_dir}/etc/pam.d/cups << "EOF"
+# Begin /etc/pam.d/cups
+
+auth    include system-auth
+account include system-account
+session include system-session
+
+# End /etc/pam.d/cups
+EOF
 
     post_package_strip
 }
