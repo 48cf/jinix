@@ -1,0 +1,20 @@
+name=aspell-en
+version=2020.12.07
+revision=1
+tarball_url="https://ftp.gnu.org/gnu/aspell/dict/en/aspell6-en-${version}-0.tar.bz2"
+tarball_blake2b="2e200dd1d6d4277a73fa73207119546638d548e40936b5d4744b0d0955b87862257a026e382d344cd4b396099b503367815adc697788362529d9170c3cca6e8b"
+builddeps="base"
+deps="core-libs aspell which"
+
+build() {
+    cp -rp ${source_dir}/. ./
+    ./configure
+
+    make -j${parallelism}
+}
+
+package() {
+    make DESTDIR="${dest_dir}" install
+
+    post_package_strip
+}
