@@ -1,0 +1,19 @@
+name=libpcap
+version=1.10.4
+revision=1
+tarball_url="https://www.tcpdump.org/release/libpcap-${version}.tar.gz"
+tarball_blake2b="05a7eafc1e1817f7844008db89d8fb10cd2525c22f7ee6c9e3d582b14229412f38ccced5e9d80a96dd459ef9eab12eccb5c1dd4978ddc9f66267469212005e4c"
+builddeps="base flex bison"
+deps="core-libs bluez libnl libusb"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
