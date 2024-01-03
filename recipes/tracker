@@ -1,0 +1,25 @@
+name=tracker
+version=3.6.0
+revision=1
+tarball_url="https://download.gnome.org/sources/tracker/3.6/tracker-${version}.tar.xz"
+tarball_blake2b="f10720b624b2b00eb510961f7346bb6c1fdc278237126d1b5f4b9af2d0f67cc74896b65bce89de14a085e55441fe64985cb13da06242838fe43dd0739e8d5bce"
+builddeps="base meson ninja gettext gobject-introspection vala"
+deps="core-libs json-glib libseccomp icu libsoup3 libsoup python-gobject sqlite graphviz"
+
+regenerate() {
+    mv ${source_dir}/docs/reference/libtracker-sparql/doc/{Tracker-3.0,tracker-${version}}
+    sed '/docs_name/s/Tracker-3.0/tracker-${version}/' -i ${source_dir}/docs/reference/libtracker-sparql/meson.build
+}
+
+build() {
+    meson_configure \
+        -Dman=false
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
