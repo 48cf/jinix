@@ -1,0 +1,19 @@
+name=adwaita-icon-theme
+version=45.0
+revision=1
+tarball_url="https://download.gnome.org/sources/adwaita-icon-theme/45/adwaita-icon-theme-${version}.tar.xz"
+tarball_blake2b="b069b12a85cd4e0aa17e1e457ef2083c259723c41e018db360076111e0c68a08189110c0bcd0808f0b31068c1b7c37436fd695ce8daf73b89fe8e63c7ed381b1"
+builddeps="base gettext meson ninja"
+deps="core-libs gtk+-3 librsvg"
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
