@@ -1,0 +1,21 @@
+name=python-typing-extensions
+version=4.4.0
+revision=1
+tarball_url="https://files.pythonhosted.org/packages/source/t/typing_extensions/typing_extensions-${version}.tar.gz"
+tarball_blake2b="cec5c11109c0216ed13be6ef38a2f234c85de1f448c19615e561506480387ff3600db405b82f486549d6b46caa452b363606d1bf51154913a86422a378561967"
+builddeps="base python-build python-installer python-setuptools python-wheel"
+deps="core-libs"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python -m build \
+        --wheel \
+        --no-isolation
+}
+
+package() {
+    python -m installer \
+        --destdir="${dest_dir}" \
+        dist/*.whl
+}
