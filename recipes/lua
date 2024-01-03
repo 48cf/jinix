@@ -1,0 +1,52 @@
+name=lua
+version=5.4.6
+revision=1
+tarball_url="https://www.lua.org/ftp/lua-${version}.tar.gz"
+tarball_blake2b="b5d8dbc4b3ec1708b715be438c1a1f48d4f5f226885992af147c1aa6a8823bed318f77ef7cc92b265dadd26cf6088f0f39784fbfd2f9887c35de8e9def2c0558"
+builddeps="base"
+deps="core-libs"
+
+regenerate() {
+    cat > lua.pc << "EOF"
+V=5.4
+R=${version}
+
+prefix=/usr
+INSTALL_BIN=${prefix}/bin
+INSTALL_INC=${prefix}/include
+INSTALL_LIB=${prefix}/lib
+INSTALL_MAN=${prefix}/share/man/man1
+INSTALL_LMOD=${prefix}/share/lua/${V}
+INSTALL_CMOD=${prefix}/lib/lua/${V}
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: Lua
+Description: An Extensible Extension Language
+Version: ${R}
+Requires:
+Libs: -L${libdir} -llua -lm -ldl
+Cflags: -I${includedir}
+EOF
+}
+
+build() {
+    cp -rp ${source_dir}/. ./
+
+    make MYCFLAGS="$CFLAGS" MYLDFLAGS="$LDFLAGS" linux -j${parallelism}
+}
+
+package() {
+    mkdir -pv ${dest_dir}${prefix}/lib/pkgconfig
+
+    DESTDIR="${dest_dir}" make INSTALL_TOP=${dest_dir}${prefix} \
+        INSTALL_DATA="cp -d" \
+        INSTALL_MAN=${dest_dir}${prefix}/share/man/man1 \
+        TO_LIB="liblua.so liblua.so.5.4 liblua.so.${version}" \
+        install
+
+    install -v -m644 lua.pc ${dest_dir}${prefix}/lib/pkgconfig/lua.pc
+
+    post_package_strip
+}
