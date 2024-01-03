@@ -1,0 +1,21 @@
+name=python-dbusmock
+version=0.30.2
+revision=1
+tarball_url="https://files.pythonhosted.org/packages/source/p/python-dbusmock/python-dbusmock-${version}.tar.gz"
+tarball_blake2b="bfcac761933c2d433ddc7b53ca87ceb395dba23b73fc4478e0317cf1da6693b3b55cd7d5ca814425d74714f8b7544255f07a536fe7c1a1949dee30996a2761a0"
+builddeps="base python-build python-installer python-setuptools python-wheel python-setuptools-scm"
+deps="core-libs python-dbus-python"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python -m build \
+        --wheel \
+        --no-isolation
+}
+
+package() {
+    python -m installer \
+        --destdir="${dest_dir}" \
+        dist/*.whl
+}
