@@ -1,0 +1,21 @@
+name=iptables
+version=1.8.10
+revision=1
+tarball_url="https://www.netfilter.org/projects/iptables/files/iptables-${version}.tar.xz"
+tarball_blake2b="417b33fcfc7edeba169caef26ed0322798f6b82500840509f6c10b97b4ef3f11932c0393fc8dcc5946264442bf8ee959a594b6fbd5dc92012cfad30edf130520"
+builddeps="base"
+deps="core-libs libpcap"
+
+build() {
+    autotools_configure_lib \
+        --disable-nftables \
+        --enable-libipq
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
