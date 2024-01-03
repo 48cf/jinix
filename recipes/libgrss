@@ -1,0 +1,24 @@
+name=libgrss
+version=0.7.0
+revision=1
+tarball_url="https://download.gnome.org/sources/libgrss/0.7/libgrss-${version}.tar.xz"
+tarball_blake2b="d93337ab50edf9b5d0762a624fbf0db29faca556e5d13d51659c6199d9dcbf71bc8334b8a9c6a2830d9496b86d066949fc7b072439b63f3a528ef36b77c61bc0"
+source_imagedeps="autoconf automake pkg-config libtool gtk-doc"
+builddeps="base"
+deps="core-libs libsoup"
+
+regenerate() {
+    autoreconf -fvi
+}
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
