@@ -1,0 +1,23 @@
+name=libgsf
+version=1.14.51
+revision=1
+tarball_url="https://download.gnome.org/sources/libgsf/1.14/libgsf-${version}.tar.xz"
+tarball_blake2b="08012d4df8e9256579069518a54198b9aa8c21c3d0c4297eb4ff829af666287cc186d846eecb277609ffe5a89d02a36344cedc67f6ed00354d018a692a99f4fe"
+builddeps="base gobject-introspection"
+deps="core-libs glib libxml gdk-pixbuf"
+
+regenerate() {
+    sed -e '/tree\.h/i #include <libxml/parser.h>' -i ${source_dir}/gsf/gsf-libxml.h
+}
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    make DESTDIR="${dest_dir}" install
+
+    post_package_strip
+}
