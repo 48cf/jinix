@@ -1,0 +1,28 @@
+name=gtk4
+version=4.12.4
+revision=1
+tarball_url="https://download.gnome.org/sources/gtk/4.12/gtk-${version}.tar.xz"
+tarball_blake2b="ddac469b63f8f3a26b90c1ca0ad2f873d067102d5a3827c4b1a0561bf3e58646c042631ef11170cc062219bb54db39023a27d1bbbda839b1bd6fc8514eefb36d"
+builddeps="base gettext gobject-introspection meson ninja python-setuptools"
+deps="core-libs fribidi gdk-pixbuf graphene iso-codes libepoxy libxkbcommon pango python-gobject wayland-protocols adwaita-icon-theme gstreamer-plugins-bad gstreamer-plugins-good hicolor-icon-theme librsvg colord cups ffmpeg highlight libcloudproviders sassc tracker-miners"
+
+build() {
+    meson_configure \
+        -Dprint-cups=enabled \
+        -Dintrospection=enabled \
+        -Dx11-backend=true \
+        -Dbroadway-backend=true \
+        -Dwayland-backend=true \
+        -Ddocumentation=false \
+        -Dcolord=enabled \
+        -Dtracker=enabled \
+        -Dcloudproviders=enabled 
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
