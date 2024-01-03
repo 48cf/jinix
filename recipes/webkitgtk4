@@ -1,0 +1,37 @@
+name=webkitgtk4
+version=2.42.4
+revision=1
+tarball_url="https://webkitgtk.org/releases/webkitgtk-${version}.tar.xz"
+tarball_blake2b="3a8cd0818e0d989ab778cda63dd873d7e185ec20fbfe609b9da70041fe38ac30351046516600cb8eb86089e43136487d81c922690468daa70ed2a436561c2401"
+builddeps="base cmake ninja python gobject-introspection ruby unifdef perl gperf gettext"
+deps="core-libs cairo gstreamer-plugins-base gtk4 icu lcms libgudev libsecret libsoup3 libtasn1 libwebp mesa openjpeg sqlite which wpebackend-fdo bubblewrap enchant geoclue hicolor-icon-theme libavif libseccomp xdg-dbus-proxy harfbuzz wayland woff"
+
+build() {
+    cmake \
+        -GNinja \
+        -DCMAKE_INSTALL_PREFIX=${prefix} \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_SKIP_RPATH=ON \
+        -DPORT=GTK \
+        -DLIB_INSTALL_DIR=${prefix}/lib \
+        -DUSE_LIBHYPHEN=OFF \
+        -DENABLE_GAMEPAD=OFF \
+        -DENABLE_MINIBROWSER=ON \
+        -DENABLE_DOCUMENTATION=OFF \
+        -DUSE_WOFF2=ON \
+        -DUSE_GTK4=ON \
+        -DUSE_WPE_RENDERER=ON \
+        -DUSE_JPEGXL=OFF \
+        -DENABLE_BUBBLEWRAP_SANDBOX=ON \
+        -DUSE_GSTREAMER_TRANSCODER=OFF \
+        -Wno-dev \
+        ${source_dir}
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
