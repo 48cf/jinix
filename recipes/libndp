@@ -1,0 +1,19 @@
+name=libndp
+version=1.8
+revision=1
+tarball_url="http://libndp.org/files/libndp-${version}.tar.gz"
+tarball_blake2b="29fa41b40300b273d50aed4f1fe4a1c552023aa83d6f4b1bd6033cd0a41618b453bd1ec7ac5223fe7c123649f389587e89e635cb988b392f1af04cc1d6b79002"
+builddeps="base"
+deps="core-libs"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
