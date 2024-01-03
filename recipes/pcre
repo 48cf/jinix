@@ -1,0 +1,27 @@
+name=pcre
+version=8.45
+revision=1
+tarball_url="https://sourceforge.net/projects/pcre/files/pcre/${version}/pcre-${version}.tar.bz2"
+tarball_blake2b="3954e08cf3c67a5e2249bf72f8d4c1a90fe7a098fffa5a0a06d0d665d07899027cfd632eab2757fcf2b1b9b413a43d5c484c8e52d05b7ca113b3bbbc4dd3bb29"
+builddeps="base"
+deps="core-libs"
+
+build() {
+    autotools_configure_lib \
+        --docdir=/usr/share/doc/pcre-${version} \
+        --enable-unicode-properties \
+        --enable-pcre16 \
+        --enable-pcre32 \
+        --enable-pcregrep-libz \
+        --enable-pcregrep-libbz2 \
+        --enable-pcretest-libreadline \
+        --enable-jit
+
+    make -j${parallelism}
+}
+
+package() {
+    make DESTDIR="${dest_dir}" install
+
+    post_package_strip
+}
