@@ -1,0 +1,34 @@
+name=links
+version=2.29
+revision=1
+tarball_url="http://links.twibright.com/download/links-${version}.tar.bz2"
+tarball_blake2b="6ae2b0e4a4a314756ef74ca19888e4c8a9e89347767475000f4b3ea70eb7157430bb5a6721108585c122eb33f6b05ab5eab600e26c9e1d2b8bdafd85483c6d94"
+builddeps="base"
+deps="core-libs openssl libevent libavif libpng libjpeg-turbo libtiff brotli bzip2 fontconfig freetype xz-utils libwebp libxext zstd libxt"
+
+build() {
+    autotools_configure_lib \
+        --mandir=${prefix}share/man \
+        --enable-graphics \
+        --with-avif \
+        --with-brotli \
+        --with-bzip2 \
+        --with-freetype \
+        --with-jpeg \
+        --with-libevent \
+        --with-lzma \
+        --with-ssl \
+        --with-libtiff \
+        --with-libwebp \
+        --with-x \
+        --with-zlib \
+        --with-zstd
+
+    make -j${parallelism}
+}
+
+package() {
+    make DESTDIR="${dest_dir}" install
+
+    post_package_strip
+}
