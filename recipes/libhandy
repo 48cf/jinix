@@ -1,0 +1,19 @@
+name=libhandy
+version=1.8.2
+revision=1
+tarball_url="https://download.gnome.org/sources/libhandy/1.8/libhandy-${version}.tar.xz"
+tarball_blake2b="83b8316b22e7bd37436d5fdad0bd270dd5d64862bca97d358b0c2a1c6b7b0e18e0f472ce453719dfde982a427fd7c0c523b042d7721415602d3e7b9c57399509"
+builddeps="base meson gettext ninja gobject-introspection vala"
+deps="core-libs gtk+-3"
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
