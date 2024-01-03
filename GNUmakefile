@@ -1,7 +1,9 @@
 SYSTEMD ?= no
 
 QEMUFLAGS ?= -M q35,smm=off -m 2G -hdd image.hdd -smp 4 \
-    -device qemu-xhci,id=xhci -device usb-tablet,bus=xhci.0
+    -device qemu-xhci,id=xhci -device usb-tablet,bus=xhci.0 \
+    -device ich9-intel-hda,id=sound0,bus=pcie.0,addr=0x1b \
+    -device hda-duplex,id=sound0-codec0,bus=sound0.0,cad=0
 
 .PHONY: all
 all:
