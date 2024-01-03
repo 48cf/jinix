@@ -1,0 +1,19 @@
+name=xdg-dbus-proxy
+version=0.1.5
+revision=1
+tarball_url="https://github.com/flatpak/xdg-dbus-proxy/releases/download/${version}/xdg-dbus-proxy-${version}.tar.xz"
+tarball_blake2b="bb9e1c42826ebfab1a93351f43ab09d7280dc27883bfd23d00c8c919bd7b0ea12b87acffe8025d4c41301593c71a98af4ccf10b6c780479e84e020529a8d08bb"
+builddeps="base meson ninja"
+deps="core-libs glib"
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
