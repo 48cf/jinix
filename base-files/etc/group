@@ -30,6 +30,7 @@ systemd-timesync:x:78:
 systemd-coredump:x:79:
 uuidd:x:80:
 systemd-oom:x:81:
+avahi:x:84:
 netdev:x:86:
 wheel:x:97:
 users:x:999:
