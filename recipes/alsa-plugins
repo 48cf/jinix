@@ -1,0 +1,19 @@
+name=alsa-plugins
+version=1.2.7.1
+revision=1
+tarball_url="https://www.alsa-project.org/files/pub/plugins/alsa-plugins-${version}.tar.bz2"
+tarball_blake2b="6f7aa503eda879cd273f36a16eec702b4da9267a60835cb5acbbfe355a83b7ffa3e93eb6483c9946c1d0bcd845a8f574470e7b84c66f793d0d0c6c9883ad52ee"
+builddeps="base"
+deps="core-libs alsa-lib ffmpeg libsamplerate pulseaudio speex"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    make install DESTDIR="${dest_dir}"
+
+    post_package_strip
+}
