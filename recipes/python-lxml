@@ -1,0 +1,21 @@
+name=python-lxml
+version=4.9.4
+revision=1
+tarball_url="https://files.pythonhosted.org/packages/source/l/lxml/lxml-${version}.tar.gz"
+tarball_blake2b="22d2228fcf556fc9adb0f307947fc935a3fc496cb92528ae4da523e3927e3ec43b248c1c41c0363896af48aaad59af464c051739a31c42f4e05f3e3ee68fce4a"
+builddeps="base python-build python-installer python-setuptools python-wheel"
+deps="core-libs python libxslt"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python -m build \
+        --wheel \
+        --no-isolation
+}
+
+package() {
+    python -m installer \
+        --destdir="${dest_dir}" \
+        dist/*.whl
+}
