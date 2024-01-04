@@ -1,0 +1,23 @@
+name=libblockdev
+version=3.0.4
+revision=1
+tarball_url="https://github.com/storaged-project/libblockdev/releases/download/${version}-1/libblockdev-${version}.tar.gz"
+tarball_blake2b="e31ecb04310c2c66cbe432c1e003b3c3241f318f78916d5c61c0efca37fa677e5f857eab9b7c3bfc7c5a589350cdef12402940d28af68ab9fc95e5da6852ddf1"
+builddeps="base gobject-introspection"
+deps="core-libs glib cryptsetup keyutils libbytesize libnvme lvm2 btrfs-progs mdadm parted nss"
+
+build() {
+    autotools_configure_lib \
+        --with-python3 \
+        --without-escrow \
+        --without-gtk-doc \
+        --without-nvdimm
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR=${dest_dir} make install
+
+    post_package_strip
+}
