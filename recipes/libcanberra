@@ -8,13 +8,14 @@ deps="core-libs libvorbis alsa-lib gstreamer gtk+-3 pulseaudio"
 
 build() {
     autotools_configure_lib \
-        --disable-oss
+        --disable-oss \
+        --disable-gtk
 
     make -j${parallelism}
 }
 
 package() {
-    DESTDIR="${dest_dir}" make install
+    DESTDIR="${dest_dir}" make docdir=/usr/share/doc/libcanberra-${version} install
 
     post_package_strip
 }
