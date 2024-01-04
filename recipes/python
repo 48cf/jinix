@@ -3,8 +3,8 @@ version=3.11.7
 revision=1
 tarball_url="https://www.python.org/ftp/python/${version}/Python-${version}.tar.xz"
 tarball_blake2b="3414118d30076e4223571825b5c595c5795422244de20dc70d07389a03b2c2b03b98a9ff562a8fd164db8f776dd741a9d7beb1c2ae4087ec6af677619a9dfd80"
-builddeps="base"
-deps="core-libs libexpat libffi openssl sqlite"
+builddeps="base gettext"
+deps="core-libs libexpat libffi openssl sqlite util-linux gdbm readline tk"
 
 build() {
     mkdir -p ./build
