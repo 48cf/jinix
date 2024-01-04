@@ -1,0 +1,20 @@
+name=libwacom
+version=2.9.0
+revision=1
+tarball_url="https://github.com/linuxwacom/libwacom/releases/download/libwacom-${version}/libwacom-${version}.tar.xz"
+tarball_blake2b="c03463d5ccc872e2cdd7a931e939b585681038baf7587ada4dfe44870b012770920b44df034089a0f5d009d67b0fbc29e297d3d4c335aa551c97b6d1bf96a361"
+builddeps="base meson ninja"
+deps="core-libs librsvg libgudev libxml libevdev"
+
+build() {
+    meson_configure \
+        -Dtests=disabled
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
