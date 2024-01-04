@@ -1,0 +1,20 @@
+name=libgweather
+version=4.4.0
+revision=1
+tarball_url="https://download.gnome.org/sources/libgweather/4.4/libgweather-${version}.tar.xz"
+tarball_blake2b="d3bfabd7936a5dc5f6f77cbb5acb3a7b80cebe1f08ff48582e1609cad04051ce8b84959c27576c928233e4625db8831c99d049378908cbe562b48221b6f37392"
+builddeps="base gettext meson ninja gobject-introspection vala"
+deps="core-libs libsoup3 gtk+-3 geocode-glib python-gobject libxml llvm"
+
+build() {
+    meson_configure \
+        -Dgtk_doc=false
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR=${dest_dir} ninja install
+
+    post_package_strip
+}
