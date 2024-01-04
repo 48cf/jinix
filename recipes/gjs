@@ -1,0 +1,20 @@
+name=gjs
+version=1.78.1
+revision=1
+tarball_url="https://download.gnome.org/sources/gjs/1.78/gjs-${version}.tar.xz"
+tarball_blake2b="1d723ad2fd15e7ba6b9194cb90f0c0bc7b89c150604beb11ad95e1628ead2bea7ed8b423e1836736013a31e8ff8f3e2400458faa26dcc95d3a6dc36c65957583"
+builddeps="base gettext meson ninja gobject-introspection vala"
+deps="core-libs cairo dbus spidermonkey gtk+-3 gtk4"
+
+build() {
+    meson_configure \
+        --wrap-mode=nofallback
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR=${dest_dir} ninja install
+
+    post_package_strip
+}
