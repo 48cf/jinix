@@ -3,7 +3,7 @@ version=1.2.13
 revision=1
 tarball_url="https://downloads.sourceforge.net/xine/xine-lib-${version}.tar.xz"
 tarball_blake2b="eb25784ada186e8ab0c1aa6e7266db17896f048f7a067390856ed5ab1f72d5f550510d91425b331267c2a3778b4a54572debfcd1cce64646fa083f90063889bb"
-builddeps="base"
+builddeps="base perl"
 deps="core-libs ffmpeg alsa-lib pulseaudio libdvdnav faad flac gdk-pixbuf glu liba52 libdvdcss libmad libmng libnsl libtheora libva libvdpau libvorbis libvpx mesa speex v4l-utils libxv libssh"
 
 build() {
