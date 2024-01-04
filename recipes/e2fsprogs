@@ -1,0 +1,32 @@
+name=e2fsprogs
+version=1.47.0
+revision=1
+tarball_url="https://downloads.sourceforge.net/project/e2fsprogs/e2fsprogs/v${version}/e2fsprogs-${version}.tar.gz"
+tarball_blake2b="6bacfeffaed79bb01f14af0e1ca2e7db59c575987edc4635882ae8e8c16e677b39512590fc82cb184aa8935334a8750fa01f8b687f14e40b547272ea48f425e2"
+builddeps="base gettext"
+deps="core-libs util-linux"
+
+if [ "$SYSTEMD" = "yes" ]; then
+    deps="${deps} systemd"
+else
+    deps="${deps} eudev"
+fi
+
+build() {
+    autotools_configure_lib \
+        --enable-elf-shlibs \
+        --disable-libblkid \
+        --disable-libuuid \
+        --disable-uuidd \
+        --disable-fsck
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+    
+    rm -fv ${dest_dir}${prefix}/lib/{libcom_err,libe2p,libext2fs,libss}.a
+
+    post_package_strip
+}
