@@ -1,0 +1,19 @@
+name=gnome-video-effects
+version=0.6.0
+revision=1
+tarball_url="https://download.gnome.org/sources/gnome-video-effects/0.6/gnome-video-effects-${version}.tar.xz"
+tarball_blake2b="d08e2bc09dc85371290c059a9adc05b5ba602a38bc0884167f3afb4d731fbe78719270cd320203ed17fcc545d012b87b26d3f83cb6f48476e70f42d65a5861ca"
+builddeps="base gettext meson ninja gobject-introspection vala"
+deps="core-libs"
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR=${dest_dir} ninja install
+
+    post_package_strip
+}
