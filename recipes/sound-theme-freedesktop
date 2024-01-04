@@ -1,0 +1,19 @@
+name=sound-theme-freedesktop
+version=0.8
+revision=1
+tarball_url="https://people.freedesktop.org/~mccann/dist/sound-theme-freedesktop-${version}.tar.bz2"
+tarball_blake2b="3f4f5969bb4cf1b285df8bd79184dc49873a40bd0832d270bc36a9b72c1fb33034cce3595b784a2807954c9fd20fe29ec38d5ded68f02ed717e492ee09a83762"
+builddeps="base gettext intltool"
+deps="core-libs"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
