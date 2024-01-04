@@ -1,0 +1,29 @@
+name=btrfs-progs
+version=6.6.1
+revision=1
+tarball_url="https://www.kernel.org/pub/linux/kernel/people/kdave/btrfs-progs/btrfs-progs-v${version}.tar.xz"
+tarball_blake2b="9584f6e234bfc0fb65d970e6f079ff684064a8a90ac17867279f5694e094247fa53ceacf5f73811a9c559ba4d5c289ac1f44c9be69ec4bea9419387a9057aa45"
+builddeps="base"
+deps="core-libs lzo lvm2 e2fsprogs"
+
+build() {
+    cp -rp ${source_dir}/. ./
+
+    configure_script_path=./configure \
+    autotools_configure_lib \
+        --disable-documentation
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+    mkdir -pv ${dest_dir}${prefix}/share/man/man5
+    mkdir -pv ${dest_dir}${prefix}/share/man/man8
+
+    for i in 5 8; do
+       install ${source_dir}/Documentation/*.$i ${dest_dir}${prefix}/share/man/man$i
+    done
+
+    post_package_strip
+}
