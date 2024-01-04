@@ -67,6 +67,7 @@ perl_common() {
 
     build() {
         cp -rp "${source_dir}"/. ./
+        export PERL_MM_FALLBACK_SILENCE_WARNING=1
         perl Makefile.PL INSTALLDIRS=vendor
         make
     }
