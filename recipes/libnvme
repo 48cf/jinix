@@ -1,0 +1,20 @@
+name=libnvme
+version=1.7.1
+revision=1
+tarball_url="https://github.com/linux-nvme/libnvme/archive/refs/tags/v${version}/libnvme-${version}.tar.gz"
+tarball_blake2b="b02bf0914be73f5877f418bebdbed31dfb019484fb9f6e169c3474d90306706b8e787003a472f13bedb72e90eff39a30ba35df252a3cdf4ea08a362c3f9e221b"
+builddeps="base meson ninja gettext"
+deps="core-libs json-c keyutils swig dbus"
+
+build() {
+    meson_configure \
+        -Dlibdbus=auto
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
