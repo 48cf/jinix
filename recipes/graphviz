@@ -4,7 +4,7 @@ revision=1
 tarball_url="https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/${version}/graphviz-${version}.tar.xz"
 tarball_blake2b="a1fd4e0d8d25ade263fdc0d357078cd8bb7847e88746561a0cfe07d129d193c309c7f4cb25f41cebca9549c8486aae2b1e3ebca0eaca57a41cbe2304a418dbd3"
 builddeps="base"
-deps="core-libs pango cairo fontconfig libpng gtk+-3 libjpeg-turbo libwebp freeglut"
+deps="core-libs pango cairo fontconfig libpng libjpeg-turbo libwebp freeglut"
 
 build() {
     autotools_configure_lib \
