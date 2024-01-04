@@ -1,0 +1,25 @@
+name=nautilus
+version=45.2.1
+revision=1
+tarball_url="https://download.gnome.org/sources/nautilus/45/nautilus-${version}.tar.xz"
+tarball_blake2b="80adf7ace00c21d21eddf764595c3f981e6206b936996458e5c2cc9cc51536e759528bdc38d1cddfe1c87eb94eac0ef2ced714ae797db947b81199a4bfa41c9d"
+builddeps="base gettext gobject-introspection meson ninja vala"
+deps="core-libs bubblewrap gexiv gnome-autoar gnome-desktop libadwaita libnotify libportal libseccomp tracker-miners desktop-file-utils exempi gstreamer-plugins-base libcloudproviders libexif adwaita-icon-theme gvfs"
+
+regenerate() {
+    sed "/docdir =/s@\$@ / 'nautilus-${version}'@" -i meson.build
+}
+
+build() {
+    meson_configure \
+        -Dselinux=false \
+        -Dpackagekit=false
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
