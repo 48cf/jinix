@@ -1,0 +1,19 @@
+name=gtksourceview5
+version=5.10.0
+revision=1
+tarball_url="https://download.gnome.org/sources/gtksourceview/5.10/gtksourceview-${version}.tar.xz"
+tarball_blake2b="a105d118716f8e61beb4bb17b8e64dacdc42f1fcfac805a9b517431a4db4da92aea82ba7b042556bc222d8a6406cbe00281c5513c6e55b7517048dae17cf83a5"
+builddeps="base meson ninja gobject-introspection vala gettext"
+deps="core-libs gtk4 pcre2 libxml vulkan-loader"
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
