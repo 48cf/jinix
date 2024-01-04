@@ -1,0 +1,24 @@
+name=libei
+version=1.2.0
+revision=1
+tarball_url="https://gitlab.freedesktop.org/libinput/libei/-/archive/${version}/libei-${version}.tar.gz"
+tarball_blake2b="db4264eca7de659e4764ca6136e20405ca02c8adac48f9f1c9ffff2571e3c75d7bf08df5a0c56eb3ce16698e299535db6ddc35eabc15995740e1a847a4460fc4"
+builddeps="base meson ninja gettext"
+deps="core-libs python-attrs python-jinja libevdev libxkbcommon libxml"
+
+if [ "$SYSTEMD" = "yes" ]; then
+    deps="${deps} systemd"
+fi
+
+build() {
+    meson_configure \
+        -Dtests=disabled
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
