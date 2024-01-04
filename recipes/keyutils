@@ -1,0 +1,23 @@
+name=keyutils
+version=1.6.1
+revision=1
+tarball_url="https://people.redhat.com/~dhowells/keyutils/keyutils-${version}.tar.bz2"
+tarball_blake2b="11170e52641f73877af85fb071d8c17d89425380bde978beec0d0746ce5b9b7de4a61bd3594f67a25c43b2f7c5b3c77bcc7fbd6a20751f2c7764bceb0f6ab238"
+builddeps="base"
+deps="core-libs krb5"
+
+regenerate() {
+    sed -i 's:$(LIBDIR)/$(PKGCONFIG_DIR):/usr/lib/pkgconfig:' Makefile
+}
+
+build() {
+    cp -rp ${source_dir}/. ./
+
+    make -j${parallelism}
+}
+
+package() {
+    make DESTDIR=${dest_dir} NO_ARLIB=1 LIBDIR=${prefix}/lib BINDIR=${prefix}/bin SBINDIR=${prefix}/bin install
+
+    post_package_strip
+}
