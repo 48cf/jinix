@@ -1,0 +1,57 @@
+name=appstream
+version=1.0.1
+revision=1
+tarball_url="https://www.freedesktop.org/software/appstream/releases/AppStream-${version}.tar.xz"
+tarball_blake2b="fae90075737e2ef29f26f3428f2708d205974ceb49c4e1af8b69f14d5f388fd0dee2a69ab6f26bf83618d1ab5a5d439400f78da43206a4c7c0fa56f5000bf363"
+builddeps="base meson ninja itstool gobject-introspection gperf gettext vala"
+deps="core-libs curl libxml libxmlb libyaml zstd libxslt docbook-xsl"
+
+if [ "$SYSTEMD" = "yes" ]; then
+    deps="${deps} systemd"
+fi
+
+build() {
+    meson_configure \
+        -Dapidocs=false \
+        -Dstemming=false \
+        -Dvapi=true
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    mv -v ${dest_dir}${prefix}/share/doc/appstream{,-1.0.1}
+
+    install -vdm755 ${dest_dir}${prefix}/share/metainfo
+cat > ${dest_dir}${prefix}/share/metainfo/org.osdev.jinix.xml << EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="operating-system">
+  <id>org.osdev.jinix</id>
+  <name>Jinix</name>
+  <summary>A customized Linux system built entirely from source, using Jinix</summary>
+  <description>
+    <p>
+      Jinix is a project is a project that aims to build a modern
+      customized Linux system entirely from source, driven at build time by Jinx.
+    </p>
+  </description>
+  <url type="homepage">https://discord.gg/cmGz4UDsnw</url>
+  <metadata_license>All Rights Reserved</metadata_license>
+  <developer id='OSDev'>
+    <name>The Jinix Editors</name>
+  </developer>
+
+  <releases>
+    <release version="0.0.1" type="development" date="2024-04-01">
+      <description>
+        <p>The next release of Jinix.</p>
+      </description>
+    </release>
+  </releases>
+</component>
+EOF
+
+    post_package_strip
+}
