@@ -1,0 +1,21 @@
+name=python-urllib
+version=2.0.2
+revision=1
+tarball_url="https://files.pythonhosted.org/packages/source/u/urllib3/urllib3-${version}.tar.gz"
+tarball_blake2b="1c7935a6aca8e60ad212eb35ef76009b75a8d080b1a572fe229e94a200e75c352ab41d831dde3d4a4643ecbbe54c2128f9d9ca1850d978fd1730d6d730ce3ab0"
+builddeps="base python-build python-installer python-setuptools python-wheel"
+deps="core-libs python-hatchling"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python -m build \
+        --wheel \
+        --no-isolation
+}
+
+package() {
+    python -m installer \
+        --destdir="${dest_dir}" \
+        dist/*.whl
+}
