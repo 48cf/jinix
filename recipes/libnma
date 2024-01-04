@@ -1,0 +1,21 @@
+name=libnma
+version=1.10.6
+revision=1
+tarball_url="https://download.gnome.org/sources/libnma/1.10/libnma-${version}.tar.xz"
+tarball_blake2b="8f5b62f9522c8e7f16d6847d0e297d32fa8f62c9be2db68af596765dcfaa93c4eb9c3d3e03098ebd024d7f6ad788dd82eedc7b4841738d4278f64e3a1053d2d6"
+builddeps="base meson ninja gobject-introspection vala gettext"
+deps="core-libs gcr gtk+-3 gtk4 iso-codes networkmanager mobile-broadband-provider-info"
+
+build() {
+    meson_configure \
+        -Dgtk_doc=false \
+        -Dlibnma_gtk4=true
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
