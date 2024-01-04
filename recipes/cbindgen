@@ -1,0 +1,22 @@
+name=cbindgen
+version=0.26.0
+revision=1
+tarball_url="https://github.com/mozilla/cbindgen/archive/v${version}/cbindgen-${version}.tar.gz"
+tarball_blake2b="9fbdaa4af49cf090b254e38c072bd0e66d8ecbbadf9669849cf6761fb01ac65d3138068293f55d1146f27dafd6543419199ef33e9db4d7fec19fd7c74739d7fa"
+builddeps="base rustc"
+deps="core-libs"
+allow_network=yes
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    export CARGO_HOME=/tmp/cargo
+    cargo build --release
+}
+
+package() {
+    mkdir -pv "${dest_dir}${prefix}/bin/"
+    install -vm755 target/release/cbindgen "${dest_dir}${prefix}/bin/"
+
+    post_package_strip
+}
