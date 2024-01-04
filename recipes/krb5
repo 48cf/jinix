@@ -1,0 +1,29 @@
+name=krb5
+version=1.21.2
+revision=1
+tarball_url="https://kerberos.org/dist/krb5/1.21/krb5-${version}.tar.gz"
+tarball_blake2b="2afb3ff962a343bc07182fdab0c0ffb221632ff38baab74278cfc721ae72deacc260221470de36e420584f00b780e13221d2e511d4831bca8e1270b7f3d9e824"
+builddeps="base perl flex bison"
+deps="core-libs gnupg e2fsprogs"
+
+build() {
+    cp -rp ${source_dir}/. ./
+
+    cd src
+    configure_script_path=./configure \
+    autotools_configure_lib \
+        --runstatedir=/run \
+        --with-system-et \
+        --with-system-ss \
+        --with-system-verto=no \
+        --enable-dns-for-realm
+
+    make -j${parallelism}
+}
+
+package() {
+    cd src
+    DESTDIR=${dest_dir} make install
+
+    post_package_strip
+}
