@@ -1,0 +1,28 @@
+name=xfsprogs
+version=6.5.0
+revision=1
+tarball_url="https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/xfsprogs-${version}.tar.xz"
+tarball_blake2b="40d578bf5bf3da93c608d2a1c5af02f0ac3a99c695b8003f684b75ce01b8d89dc197620e724e5461da174e050068c352eff622e970ea748e53685ab942cc2e92"
+builddeps="base gettext"
+deps="core-libs inih liburcu"
+
+if [ "$SYSTEMD" = "yes" ]; then
+    deps="${deps} systemd"
+else
+    deps="${deps} eudev"
+fi
+
+build() {
+    cp -rp ${source_dir}/. ./
+
+    make DEBUG=-DNDEBUG INSTALL_USER=root INSTALL_GROUP=root -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make PKG_DOC_DIR=${dest_dir}${prefix}/share/doc/xfsprogs-${version} install
+    DESTDIR="${dest_dir}" make PKG_DOC_DIR=${dest_dir}${prefix}/share/doc/xfsprogs-${version} install-dev
+
+    rm -rfv ${dest_dir}${prefix}/lib/libhandle.{a,la}
+
+    post_package_strip
+}
