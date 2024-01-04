@@ -1,0 +1,23 @@
+name=libaio
+version=0.3.113
+revision=1
+tarball_url="https://pagure.io/libaio/archive/libaio-${version}/libaio-${version}.tar.gz"
+tarball_blake2b="6b54b2f094985d206fed50b59f2d2478a0d07cc2fe3f761e762b7f6801eb8be5d7128d70bbe0d5364b73c683b173c85aa01a6ba2293c52babd5faef5bb02488f"
+builddeps="base"
+deps="core-libs"
+
+regenerate() {
+    sed -i '/install.*libaio.a/s/^/#/' src/Makefile
+}
+
+build() {
+    cp -rp ${source_dir}/. ./
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
