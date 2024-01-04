@@ -1,0 +1,22 @@
+name=talloc
+version=2.4.1
+revision=1
+tarball_url="https://www.samba.org/ftp/talloc/talloc-${version}.tar.gz"
+tarball_blake2b="a7913b25930c77da53c17c2e0d71386402b1059f93c751084037c5068a035bd543c2d7e24a2d8dc989bb4eea13fa1a3c7a362e4d6c14af0b2030fbfb2f513801"
+builddeps="base python"
+deps="core-libs libnsl libtirpc"
+
+build() {
+    cp -rp ${source_dir}/. ./
+
+    ./configure \
+        --prefix=${prefix}
+
+    make -j${parallelism}
+}
+
+package() {
+    make install DESTDIR="${dest_dir}"
+
+    post_package_strip
+}
