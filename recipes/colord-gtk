@@ -1,0 +1,23 @@
+name=colord-gtk
+version=0.3.0
+revision=1
+tarball_url="https://www.freedesktop.org/software/colord/releases/colord-gtk-${version}.tar.xz"
+tarball_blake2b="e6fe56dfa969f18bd406d481dd13e83b689a820aeddaf1482ec97e89a3f78d4228544c79849d330962f3d45e3506f1c0b2540ed7bfab36ede04008877d503b94"
+builddeps="base meson ninja gettext gobject-introspection vala"
+deps="core-libs colord gtk+-3 gtk4"
+
+build() {
+    meson_configure \
+        -Dgtk4=true \
+        -Dvapi=true \
+        -Ddocs=false \
+        -Dman=false
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
