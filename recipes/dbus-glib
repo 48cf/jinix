@@ -1,0 +1,19 @@
+name=dbus-glib
+version=0.112
+revision=1
+tarball_url="https://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-${version}.tar.gz"
+tarball_blake2b="24e1c222f0116b32c109682816f6c35771647f4c63cab93a6621bd68b71ea4dca62fbf9e6bb360386b8658146dbf34b0d7dc471db7525585412d120340c4c969"
+builddeps="base"
+deps="core-libs dbus glib"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    make DESTDIR="${dest_dir}" install
+
+    post_package_strip
+}
