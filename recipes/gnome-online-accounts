@@ -1,0 +1,23 @@
+name=gnome-online-accounts
+version=3.48.0
+revision=1
+tarball_url="https://download.gnome.org/sources/gnome-online-accounts/3.48/gnome-online-accounts-${version}.tar.xz"
+tarball_blake2b="9b64329415118ca3d44f4662db31d82f262c27b4d8cda8ba9eb05b8e606081ae3eb06b5bf691c165b9bb7cf984fdeba8389390d72a4b3595a7d39b1d6ea11df1"
+builddeps="base gettext meson ninja gobject-introspection vala"
+deps="core-libs gcr json-glib rest webkitgtk3"
+
+build() {
+    # TODO: We should get our own -Dgoogle_* keys
+    meson_configure \
+        -Dkerberos=false \
+        -Dgoogle_client_secret=5ntt6GbbkjnTVXx-MSxbmx5e \
+        -Dgoogle_client_id=595013732528-llk8trb03f0ldpqq6nprjp1s79596646.apps.googleusercontent.com
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR=${dest_dir} ninja install
+
+    post_package_strip
+}
