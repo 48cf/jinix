@@ -1,0 +1,19 @@
+name=cups-pk-helper
+version=0.2.7
+revision=1
+tarball_url="https://www.freedesktop.org/software/cups-pk-helper/releases/cups-pk-helper-${version}.tar.xz"
+tarball_blake2b="e9107c18396e87bc8e385a32d00ac6d15bfcc6f53e9c04514bbc9e7bee6b4a87ba16b97da321c72fb01fa273a0fdcb396a0eed335e9e37eb98d7a299ec480ca1"
+builddeps="base meson ninja gettext"
+deps="core-libs cups polkit"
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
