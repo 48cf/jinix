@@ -1,0 +1,21 @@
+name=python-editables
+version=0.3
+revision=1
+tarball_url="https://files.pythonhosted.org/packages/source/e/editables/editables-${version}.tar.gz"
+tarball_blake2b="b7057f388a0a6424b67bdb13765fc28166ef13f2b13bf27b03348327aa8b0e96ac7914fd9deb64cd52c142119083bb156fdc8e91e8ee4d4f783a9bce3ddb9218"
+builddeps="base python-build python-installer python-setuptools python-wheel"
+deps="core-libs python"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python -m build \
+        --wheel \
+        --no-isolation
+}
+
+package() {
+    python -m installer \
+        --destdir="${dest_dir}" \
+        dist/*.whl
+}
