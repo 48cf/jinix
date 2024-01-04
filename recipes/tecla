@@ -1,0 +1,19 @@
+name=tecla
+version=45.0
+revision=1
+tarball_url="https://download.gnome.org/sources/tecla/45/tecla-${version}.tar.xz"
+tarball_blake2b="97bbbdf012a91303d86fb1fbb01dcee644ae7e612d88439465abf392c23fc232e33fbcd4403f02bc8193a6a8a9925fb7d45550d803e7835f5bbfded19fe18170"
+builddeps="base meson ninja gobject-introspection vala gettext"
+deps="core-libs libadwaita libxkbcommon"
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
