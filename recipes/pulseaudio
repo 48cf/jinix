@@ -4,7 +4,13 @@ revision=1
 tarball_url="https://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-${version}.tar.xz"
 tarball_blake2b="535706abcea2cae39834b23c8bdc37f71b0e633de2d8e43ea4425da97a850b57c2f980c318681cbc86cf1e746200609dad41f8b96ecf4568f86d94aa6831c9a1"
 builddeps="base fftw gettext libtool meson ninja perl perl-xml-parser"
-deps="core-libs alsa-lib dbus glib gtk+-3 libsamplerate libsndfile libxtst speex"
+deps="core-libs alsa-lib dbus glib gtk+-3 libsamplerate libsndfile libxtst speex bluez sbc avahi"
+
+if [ "$SYSTEMD" = "yes" ]; then
+    deps="${deps} systemd"
+else
+    deps="${deps} eudev elogind"
+fi
 
 build() {
     cp -rp "${source_dir}"/. ./
@@ -15,9 +21,8 @@ build() {
         meson_source_dir=../ \
     meson_configure \
         -Dudevrulesdir=${prefix}/lib/udev/rules.d \
-        -Ddatabase=simple \
+        -Ddatabase=gdbm \
         -Ddoxygen=false \
-        -Dbluez5=disabled \
         -Dtests=false
 
     ninja -j${parallelism}
