@@ -1,0 +1,9 @@
+_perl_package_version=4.10
+_perl_package_author=ISHIGAKI
+_perl_package_name=JSON
+
+name=perl-json
+revision=1
+tarball_blake2b="707f126c5b187b824e068ea81c19e9b1ec6e03e4f140403564925d5a1a5fca234ccc3153c1ed6c088d82db57b593e9a031d62aea0bfc7930b64d0e2266066aca"
+
+perl_common
