@@ -1,0 +1,36 @@
+name=accountsservice
+version=23.13.9
+revision=1
+tarball_url="https://www.freedesktop.org/software/accountsservice/accountsservice-${version}.tar.xz"
+tarball_blake2b="74dbbe816937e626ba0f6524b4293466ac2905f474396f5d23633e966d46e013de110671abcbfe2911fffa1e98872e2525b61594a967f917975ebf18d39b8547"
+builddeps="base meson ninja gettext gobject-introspection vala"
+deps="core-libs polkit python-dbusmock python-gobject"
+
+if [ "$SYSTEMD" = "yes" ]; then
+    deps="${deps} systemd"
+else
+    deps="${deps} elogind"
+fi
+
+build() {
+    export ACCOUNTSSERVICE_VERSION=${version}
+
+    meson_configure \
+        -Dadmin_group=adm
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    mkdir -pv ${dest_dir}/etc/polkit-1/rules.d
+
+cat > ${dest_dir}/etc/polkit-1/rules.d/40-adm.rules << "EOF"
+polkit.addAdminRule(function(action, subject) {
+   return ["unix-group:adm"];
+   });
+EOF
+
+    post_package_strip
+}

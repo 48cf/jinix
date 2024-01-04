@@ -1,0 +1,28 @@
+diff --git accountsservice-clean/generate-version.sh accountsservice-workdir/generate-version.sh
+index 3f88bff..ca23743 100755
+--- accountsservice-clean/generate-version.sh
++++ accountsservice-workdir/generate-version.sh
+@@ -1,5 +1,10 @@
+ #!/bin/sh
+ 
++if ! [ -z "$ACCOUNTSSERVICE_VERSION" ]; then
++    echo "$ACCOUNTSSERVICE_VERSION"
++    exit 0
++fi
++
+ exec 3>&2 2> /dev/null
+ SRCDIR=$(dirname "$0")
+ cd "$SRCDIR"
+diff --git accountsservice-clean/meson.build accountsservice-workdir/meson.build
+index 4a509e7..93eadf6 100644
+--- accountsservice-clean/meson.build
++++ accountsservice-workdir/meson.build
+@@ -232,7 +232,7 @@ if get_option('gtk_doc')
+   subdir('doc/libaccountsservice')
+ endif
+ 
+-subdir('tests')
++#subdir('tests')
+ 
+ configure_file(
+   output: 'config.h',
