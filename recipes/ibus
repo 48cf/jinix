@@ -1,0 +1,36 @@
+name=ibus
+version=1.5.29
+revision=1
+tarball_url="https://github.com/ibus/ibus/archive/refs/tags/${version}/ibus-${version}.tar.gz"
+tarball_blake2b="8544871b8c013460654ab6c5d5894bc17c1ac986c9784b78bfe0176e5c90bb9ba31629d2f14efe13edf32d571588f16c04f43b658bf7629fdebd03ccb259c046"
+source_imagedeps="autoconf automake pkg-config libtool"
+builddeps="base python vala gettext unzip gobject-introspection"
+deps="core-libs dconf iso-codes gtk+-3 gtk4 libnotify python-dbus-python python-gobject wayland libxkbcommon ucd dbus"
+
+regenerate() {
+    sed -e 's@/desktop/ibus@/org/freedesktop/ibus@g' -i data/dconf/org.freedesktop.ibus.gschema.xml
+    sed '/docs/d;/GTK_DOC/d' -i Makefile.am configure.ac
+    SAVE_DIST_FILES=1 NOCONFIGURE=1 ./autogen.sh
+}
+
+build() {
+    cp -rp ${source_dir}/. ./
+
+    configure_script_path=./configure \
+    PYTHON=python3 autotools_configure_lib \
+        --disable-python2 \
+        --disable-appindicator \
+        --disable-gtk2 \
+        --disable-emoji-dict \
+        --enable-gtk4 \
+        --enable-python-library \
+        --enable-wayland
+
+    make -j${parallelism}
+}
+
+package() {
+    make install DESTDIR="${dest_dir}"
+
+    post_package_strip
+}
