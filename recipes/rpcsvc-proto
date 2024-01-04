@@ -1,0 +1,19 @@
+name=rpcsvc-proto
+version=1.4.4
+revision=1
+tarball_url="https://github.com/thkukuk/rpcsvc-proto/releases/download/v${version}/rpcsvc-proto-${version}.tar.xz"
+tarball_blake2b="2cba39b0307d773133306c4222e43cc44d4189bb125f993634b2a5e7679e5f5b4d28b05b95db6e694d316b4fdd182cf91c2a01ed1c519a3ca7ced5ebf5da3d10"
+builddeps="base"
+deps="core-libs"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    make install DESTDIR="${dest_dir}"
+
+    post_package_strip
+}
