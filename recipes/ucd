@@ -1,0 +1,16 @@
+name=ucd
+from_source=base-files
+revision=1
+builddeps="base curl unzip"
+deps="core-libs"
+allow_network=yes
+
+build() {
+    true
+}
+
+package() {
+    curl https://www.unicode.org/Public/zipped/15.1.0/UCD.zip --output UCD.zip
+    mkdir -pv ${dest_dir}${prefix}/share/unicode/ucd
+    unzip -uo UCD.zip -d ${dest_dir}${prefix}/share/unicode/ucd
+}
