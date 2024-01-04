@@ -1,0 +1,21 @@
+name=python-hatch-vcs
+version=0.3.0
+revision=1
+tarball_url="https://files.pythonhosted.org/packages/source/h/hatch-vcs/hatch_vcs-${version}.tar.gz"
+tarball_blake2b="ca652916fcbcc7882ab10d07ff2661451b30f80ff2e26353e389a3e8e7b8839d11fec7b0640051c9062f8c457052d37c26d3240176d3aabf279016aa850fba3e"
+builddeps="base python-build python-installer python-setuptools python-setuptools-scm python-wheel"
+deps="core-libs python-hatchling"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python -m build \
+        --wheel \
+        --no-isolation
+}
+
+package() {
+    python -m installer \
+        --destdir="${dest_dir}" \
+        dist/*.whl
+}
