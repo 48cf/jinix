@@ -1,0 +1,23 @@
+name=pipewire
+version=1.0.0
+revision=1
+tarball_url="https://gitlab.freedesktop.org/pipewire/pipewire/-/archive/${version}/pipewire-${version}.tar.bz2"
+tarball_blake2b="de48de0f486a530ee060acdc6d35e27bf298e195e2c3d21a9444da7459ef02b44d97147b3bd3a820bdf28ebffbee910f77306a28ffb1b12eeaf8ce37f8d97a6f"
+builddeps="base meson ninja gettext"
+deps="core-libs bluez gstreamer gstreamer-plugins-base pulseaudio sbc v4l-utils alsa-lib avahi fdk-aac ffmpeg libcanberra libdrm libxcb libsndfile libusb opus sdl2 vulkan-loader"
+
+build() {
+    meson_configure \
+        -Dsession-managers="[]" \
+        -Dffmpeg=enabled \
+        -Dvulkan=enabled \
+        -Dudevrulesdir=${prefix}/lib/udev/rules.d
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
