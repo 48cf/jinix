@@ -1,0 +1,21 @@
+name=python-pyyaml
+version=6.0.1
+revision=1
+tarball_url="https://files.pythonhosted.org/packages/source/P/PyYAML/PyYAML-${version}.tar.gz"
+tarball_blake2b="0baec52a7aeede68dcddaf4c0a8fc39533287f3b65d0f6bcfc87ef2dbad347793b975e2fd6abd455f160dd4f62d9034288033b9b0c7d07269c6c588e5f20f8c1"
+builddeps="base python-build python-installer python-setuptools python-wheel"
+deps="core-libs python-cython libyaml"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python -m build \
+        --wheel \
+        --no-isolation
+}
+
+package() {
+    python -m installer \
+        --destdir="${dest_dir}" \
+        dist/*.whl
+}
