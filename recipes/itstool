@@ -1,0 +1,24 @@
+name=itstool
+version=2.0.7
+revision=1
+tarball_url="https://files.itstool.org/itstool/itstool-${version}.tar.bz2"
+tarball_blake2b="e2d27d7b0a772596a0fa02b157bbef65b132b839c908c114596d21a54c245a0c941419a3555a8b9b7255800f9ef65d557a5b0f6847103b0a3934c908d43128ab"
+builddeps="base python"
+deps="core-libs libxml"
+
+regenerate() {
+    sed -i 's/re.sub(/re.sub(r/' ${source_dir}/itstool.in
+    sed -i 's/re.compile(/re.compile(r/' ${source_dir}/itstool.in
+}
+
+build() {
+    PYTHON=python3 autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
