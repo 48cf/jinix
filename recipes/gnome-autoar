@@ -1,0 +1,21 @@
+name=gnome-autoar
+version=0.4.4
+revision=1
+tarball_url="https://download.gnome.org/sources/gnome-autoar/0.4/gnome-autoar-${version}.tar.xz"
+tarball_blake2b="db3390f771205166aaf9b6a90da15bd68c80ad5e874cc7ddc14b2a79d4dc2b3d41b9636acd6f44e4a6ce3590c3659c51cd8a910ab4e588aba41cdc7dbcf72725"
+builddeps="base gettext meson ninja gobject-introspection vala"
+deps="core-libs gtk+-3 libarchive"
+
+build() {
+    meson_configure \
+        -Dvapi=true \
+        -Dtests=true
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR=${dest_dir} ninja install
+
+    post_package_strip
+}
