@@ -1,0 +1,63 @@
+name=docbook-xsl
+version=1.79.2
+revision=1
+tarball_url="https://github.com/docbook/xslt10-stylesheets/releases/download/release/${version}/docbook-xsl-nons-${version}.tar.bz2"
+tarball_blake2b="28340cdebed77310cab08102905d1b00c04ae6ad5fba1eb22355f4094b2201cfbc61e1b1b56c5cb9c2c4429501cd98610eef9858d2edff3a268777cdc17db0b3"
+builddeps="base"
+deps="core-libs libxml libxslt"
+
+build() {
+    cp -rp ${source_dir}/. ./
+}
+
+package() {
+    install -v -m755 -d ${dest_dir}${prefix}/share/xml/docbook/xsl-stylesheets-nons-${version}
+
+    cp -v -R VERSION assembly common eclipse epub epub3 extensions fo        \
+             highlighting html htmlhelp images javahelp lib manpages params  \
+             profiling roundtrip slides template tests tools webhelp website \
+             xhtml xhtml-1_1 xhtml5                                          \
+        ${dest_dir}${prefix}/share/xml/docbook/xsl-stylesheets-nons-${version}
+
+    ln -s VERSION ${dest_dir}${prefix}/share/xml/docbook/xsl-stylesheets-nons-${version}/VERSION.xsl
+
+    install -v -m644 -D README \
+                        ${dest_dir}${prefix}/share/doc/docbook-xsl-nons-${version}/README.txt
+    install -v -m644    RELEASE-NOTES* NEWS* \
+                        ${dest_dir}${prefix}/share/doc/docbook-xsl-nons-${version}
+
+    install -v -m755 -d ${dest_dir}/etc/xml
+    xmlcatalog --noout --create ${dest_dir}/etc/xml/catalog
+
+    xmlcatalog --noout --add "rewriteSystem" \
+               "https://cdn.docbook.org/release/xsl-nons/${version}" \
+               "${dest_dir}${prefix}/share/xml/docbook/xsl-stylesheets-nons-${version}" \
+        ${dest_dir}/etc/xml/catalog
+
+    xmlcatalog --noout --add "rewriteURI" \
+               "https://cdn.docbook.org/release/xsl-nons/${version}" \
+               "${dest_dir}${prefix}/share/xml/docbook/xsl-stylesheets-nons-${version}" \
+        ${dest_dir}/etc/xml/catalog
+
+    xmlcatalog --noout --add "rewriteSystem" \
+               "https://cdn.docbook.org/release/xsl-nons/current" \
+               "${dest_dir}${prefix}/share/xml/docbook/xsl-stylesheets-nons-${version}" \
+        ${dest_dir}/etc/xml/catalog
+
+    xmlcatalog --noout --add "rewriteURI" \
+               "https://cdn.docbook.org/release/xsl-nons/current" \
+               "${dest_dir}${prefix}/share/xml/docbook/xsl-stylesheets-nons-${version}" \
+        ${dest_dir}/etc/xml/catalog
+
+    xmlcatalog --noout --add "rewriteSystem" \
+               "http://docbook.sourceforge.net/release/xsl/current" \
+               "${dest_dir}${prefix}/share/xml/docbook/xsl-stylesheets-nons-${version}" \
+        ${dest_dir}/etc/xml/catalog
+
+    xmlcatalog --noout --add "rewriteURI" \
+               "http://docbook.sourceforge.net/release/xsl/current" \
+               "${dest_dir}${prefix}/share/xml/docbook/xsl-stylesheets-nons-${version}" \
+        ${dest_dir}/etc/xml/catalog
+
+    post_package_strip
+}
