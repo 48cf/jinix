@@ -1,0 +1,21 @@
+name=python-pytest
+version=7.4.4
+revision=1
+tarball_url="https://files.pythonhosted.org/packages/source/p/pytest/pytest-${version}.tar.gz"
+tarball_blake2b="0bf281b3d4b7b2eb7805423a75c8c2befa820cc230318511e5a2d5ea35321a78a2603d5dbc033414ed73171525371efa9d9f54083d5638fc752c1c218e6d53aa"
+builddeps="base python-build python-installer python-setuptools python-setuptools-scm python-wheel"
+deps="core-libs python-iniconfig python-packaging python-pluggy python-py python-pygments python-requests"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python -m build \
+        --wheel \
+        --no-isolation
+}
+
+package() {
+    python -m installer \
+        --destdir="${dest_dir}" \
+        dist/*.whl
+}
