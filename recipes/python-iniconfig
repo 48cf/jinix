@@ -1,0 +1,21 @@
+name=python-iniconfig
+version=2.0.0
+revision=1
+tarball_url="https://files.pythonhosted.org/packages/source/i/iniconfig/iniconfig-${version}.tar.gz"
+tarball_blake2b="be4abb08c3f5c9b15aed22abea5c06420da5dc792d07c2c6b0e26856a9c750e667397ad1d6a80ac1b01fde216884e4a629ba71696b16e307282153a9d7402030"
+builddeps="base python-build python-installer python-setuptools python-setuptools-scm python-wheel python-hatch-vcs"
+deps="core-libs python-hatch-vcs"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python -m build \
+        --wheel \
+        --no-isolation
+}
+
+package() {
+    python -m installer \
+        --destdir="${dest_dir}" \
+        dist/*.whl
+}
