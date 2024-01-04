@@ -1,0 +1,21 @@
+name=python-pathspec
+version=0.10.3
+revision=1
+tarball_url="https://files.pythonhosted.org/packages/source/p/pathspec/pathspec-${version}.tar.gz"
+tarball_blake2b="ae7c29bbb58d896de555b142ac18879f8a82437a2a701abfb259d40e3a5f992989c274a24c8c70ee6cbe6dbbe6a5030c67c1164e7f3eaa5563ab54cdad403581"
+builddeps="base python-build python-installer python-setuptools python-wheel"
+deps="core-libs python"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python -m build \
+        --wheel \
+        --no-isolation
+}
+
+package() {
+    python -m installer \
+        --destdir="${dest_dir}" \
+        dist/*.whl
+}
