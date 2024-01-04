@@ -1,0 +1,24 @@
+name=wireplumber
+version=0.4.17
+revision=1
+tarball_url="https://gitlab.freedesktop.org/pipewire/wireplumber/-/archive/${version}/wireplumber-${version}.tar.bz2"
+tarball_blake2b="fec1cf75bec687bff1cb48416cf22503a79609cf11220ab9353d3b8038cae1db63da8aa269aca034c0c0afd474e2ba89b236bb7e778da111516e3b15d5449f02"
+builddeps="base meson ninja gettext lua gobject-introspection"
+deps="core-libs glib pipewire python-lxml"
+
+if [ "$SYSTEMD" = "yes" ]; then
+    deps="${deps} systemd"
+fi
+
+build() {
+    meson_configure \
+        -Dsystem-lua=true
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
