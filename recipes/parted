@@ -1,0 +1,19 @@
+name=parted
+version=3.6
+revision=1
+tarball_url="https://ftp.gnu.org/gnu/parted/parted-${version}.tar.xz"
+tarball_blake2b="99b6d096e4db05144c98e9f0a9a97c647aa911ee5df031244b03d5223f709d43d9302cef12dd4b2f97f42ec476510561b7f8b3b1ef7cb09d0a7c4d512e7a6739"
+builddeps="base"
+deps="core-libs lvm2 dosfstools pth"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR=${dest_dir} make install
+
+    post_package_strip
+}
