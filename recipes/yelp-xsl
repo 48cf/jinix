@@ -1,0 +1,17 @@
+name=yelp-xsl
+version=42.1
+revision=1
+tarball_url="https://download.gnome.org/sources/yelp-xsl/42/yelp-xsl-${version}.tar.xz"
+tarball_blake2b="45f19a6cc7a0ff9f3f31e0f33935d757c07e403c77d2adfa20fda46a7f22da5b6196e7dc40a3e83ef0604f6c681c5ca99d5565d070d3fdcbf732312aa73d34c8"
+builddeps="base python itstool"
+deps="core-libs libxslt"
+
+build() {
+    autotools_configure_lib
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
