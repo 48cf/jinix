@@ -1,0 +1,19 @@
+name=liboauth
+version=1.0.3
+revision=1
+tarball_url="https://downloads.sourceforge.net/liboauth/liboauth-${version}.tar.gz"
+tarball_blake2b="56cf10574af58995de9bf86bb7f00becb360cc899bf1ddb23804820d63ae2c7af29aa29031f68ce79a6cc441cbce27aebf5f1c9dfa029243d7732592d03620c7"
+builddeps="base perl"
+deps="core-libs curl openssl nss"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
