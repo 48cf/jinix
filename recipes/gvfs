@@ -1,0 +1,35 @@
+name=gvfs
+version=1.52.1
+revision=1
+tarball_url="https://download.gnome.org/sources/gvfs/1.52/gvfs-${version}.tar.xz"
+tarball_blake2b="7cffcdb38923cf9ceedad132bac9a7fb7a3cd44c7da369f39852ce9407700883e4a4ecd1cf79442eecb1610f3c96cbecf10e6dfa2a3e974ca170314c3ecdaedf"
+builddeps="base gettext gobject-introspection meson ninja"
+deps="core-libs dbus glib libusb libsecret gcr gtk+-3 libcdio-paranoia libsoup3 udisks avahi bluez fuse gnome-online-accounts libarchive libgcrypt libgdata libxml libxslt openssh openssl"
+
+if [ "$SYSTEMD" = "yes" ]; then
+    deps="${deps} systemd"
+else
+    deps="${deps} eudev elogind"
+fi
+
+build() {
+    meson_configure \
+        -Dfuse=true \
+        -Dgphoto2=false \
+        -Dafc=false \
+        -Dbluray=false \
+        -Dnfs=false \
+        -Dmtp=false \
+        -Dsmb=false \
+        -Ddnssd=true \
+        -Dgoa=true \
+        -Dgoogle=true
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
