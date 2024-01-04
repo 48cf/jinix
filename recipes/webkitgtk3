@@ -7,8 +7,11 @@ builddeps="base cmake ninja python gobject-introspection ruby unifdef perl gperf
 deps="core-libs cairo gstreamer-plugins-base gtk+-3 icu lcms libgudev libsecret libsoup3 libtasn1 libwebp mesa openjpeg sqlite which wpebackend-fdo bubblewrap enchant geoclue hicolor-icon-theme libavif libseccomp xdg-dbus-proxy harfbuzz wayland woff"
 
 build() {
+    cp -rp "${source_dir}"/. ./
+
     cmake \
         -GNinja \
+        -Bbuild \
         -DCMAKE_INSTALL_PREFIX=${prefix} \
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_SKIP_RPATH=ON \
@@ -24,21 +27,13 @@ build() {
         -DUSE_JPEGXL=OFF \
         -DENABLE_BUBBLEWRAP_SANDBOX=ON \
         -DUSE_GSTREAMER_TRANSCODER=OFF \
-        -Wno-dev \
-        ${source_dir}
+        -Wno-dev
 
-    ninja -j${parallelism}
+    ninja -C build -j${parallelism}
 }
 
 package() {
-    DESTDIR="${dest_dir}" ninja install
-
-    install -vdm755 ${dest_dir}${prefix}/share/gtk-doc/html/{jsc-glib,webkit2gtk{,-web-extension}}-4.1
-    install -vm644  ../Documentation/jsc-glib-4.1/* ${dest_dir}${prefix}share/gtk-doc/html/jsc-glib-4.1         
-    install -vm644  ../Documentation/webkit2gtk-4.1/*            \
-                ${dest_dir}${prefix}/share/gtk-doc/html/webkit2gtk-4.1       &&
-    install -vm644  ../Documentation/webkit2gtk-web-extension-4.1/* \
-                ${dest_dir}${prefix}/share/gtk-doc/html/webkit2gtk-web-extension-4.1
+    DESTDIR="${dest_dir}" ninja -C build install
 
     post_package_strip
 }
