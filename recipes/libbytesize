@@ -1,0 +1,19 @@
+name=libbytesize
+version=2.10
+revision=1
+tarball_url="https://github.com/storaged-project/libbytesize/releases/download/${version}/libbytesize-${version}.tar.gz"
+tarball_blake2b="413a45bebf8394e0557c2e1ef7e1f4348fa6dfa52c697599886d70292ea8b2e1b17402e787afaeb8fecd84e3a37a6c0c39440fa22a556dcaba3f419ee17e1b0e"
+builddeps="base gettext"
+deps="core-libs pcre2 python-pygments python-six"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
