@@ -1,0 +1,17 @@
+name=uhttpmock
+version=0.5.3
+revision=1
+tarball_url="https://tecnocode.co.uk/downloads/uhttpmock/uhttpmock-${version}.tar.xz"
+tarball_blake2b="7bd257fbc8869ce2d55070bc1f84f0d34c999cd55ba5e09a54031ea391c3c65bb149d48f2ab1ab9de93acac98783ad0e7d5fca4d86dda055d4a5a3407f5ba4ee"
+builddeps="base gobject-introspection vala gettext"
+deps="core-libs libsoup"
+
+build() {
+    autotools_configure_lib
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
