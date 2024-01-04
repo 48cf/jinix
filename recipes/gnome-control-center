@@ -1,0 +1,19 @@
+name=gnome-control-center
+version=45.2
+revision=1
+tarball_url="https://download.gnome.org/sources/gnome-control-center/45/gnome-control-center-${version}.tar.xz"
+tarball_blake2b="5b0b42cf8b1e4e908cbf4dc24018fd645cf4e9643f0233e953bcce5975302eb103306dae37270cce11f0fbe059fbd5dfd6b10cb6dcc08cf4765f648f8f73b32b"
+builddeps="base meson ninja gettext gobject-introspection vala"
+deps="core-libs accountsservice colord-gtk gnome-online-accounts gnome-settings-daemon gsound libadwaita libgtop libpwquality krb5 shared-mime-info tecla udisks cups samba gnome-bluetooth ibus modemmanager libnma python-dbusmock cups-pk-helper gnome-color-manager sound-theme-freedesktop xorg-setxkbmap"
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
