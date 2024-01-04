@@ -1,0 +1,25 @@
+name=mdadm
+version=4.2
+revision=1
+tarball_url="https://www.kernel.org/pub/linux/utils/raid/mdadm/mdadm-${version}.tar.xz"
+tarball_blake2b="de7c4318dc5479de41378233869ab84ca2cd0e8a42310157b1acb969e7152af61556fbbe6f17bf6af4dfaf5543e49b1c982d2baeedf1c39b000032f4db7f5502"
+builddeps="base"
+deps="core-libs"
+
+if [ "$SYSTEMD" = "yes" ]; then
+    deps="${deps} systemd"
+else
+    deps="${deps} eudev"
+fi
+
+build() {
+    cp -rp ${source_dir}/. ./
+
+    make -j${parallelism}
+}
+
+package() {
+    make DESTDIR="${dest_dir}" BINDIR=${prefix}/bin install
+
+    post_package_strip
+}
