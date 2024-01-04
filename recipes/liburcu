@@ -1,0 +1,20 @@
+name=liburcu
+version=0.14.0
+revision=1
+tarball_url="https://lttng.org/files/urcu/userspace-rcu-${version}.tar.bz2"
+tarball_blake2b="ba9fa4c6dec693d2616234187db531f00fc0ade65f7e2a57182d9441728ddfa6f3e9d4544b824ca5edf7c027a43c9231d998a309c01f4bbab1eeefe856344f77"
+builddeps="base"
+deps="core-libs"
+
+build() {
+    autotools_configure_lib \
+        --docdir=${prefix}/share/doc/liburcu-${version}
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
