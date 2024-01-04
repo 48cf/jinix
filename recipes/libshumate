@@ -1,0 +1,21 @@
+name=libshumate
+version=1.1.2
+revision=1
+tarball_url="https://download.gnome.org/sources/libshumate/1.1/libshumate-${version}.tar.xz"
+tarball_blake2b="8ccd692af5404c694198e41adc2543a140ef02abbe4b044f71575022aad027357a67f6a9f57c195e7fad6d2e619f91bfc06d9b9c5af68d57d3c11ac118ea6151"
+builddeps="base gettext meson ninja gobject-introspection vala"
+deps="core-libs gtk4 libsoup3"
+
+build() {
+    meson_configure \
+        --wrap-mode=nofallback \
+        -Dgtk_doc=false
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR=${dest_dir} ninja install
+
+    post_package_strip
+}
