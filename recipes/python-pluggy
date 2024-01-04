@@ -1,0 +1,21 @@
+name=python-pluggy
+version=1.0.0
+revision=1
+tarball_url="https://files.pythonhosted.org/packages/source/p/pluggy/pluggy-${version}.tar.gz"
+tarball_blake2b="8107df9a91a843166a602e7518dd1d4167304464a8cc80180b60b03a2ac803be9b1ba190df9189907addd34a92b93a6b271d3d6b7485aa563203ce733c6a656c"
+builddeps="base python-build python-installer python-setuptools python-wheel python-setuptools-scm"
+deps="core-libs python"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python -m build \
+        --wheel \
+        --no-isolation
+}
+
+package() {
+    python -m installer \
+        --destdir="${dest_dir}" \
+        dist/*.whl
+}
