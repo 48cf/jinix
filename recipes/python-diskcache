@@ -1,0 +1,20 @@
+name=python-diskcache
+version=5.6.3
+revision=1
+tarball_url="https://github.com/grantjenks/python-diskcache/archive/refs/tags/v${version}.tar.gz"
+tarball_blake2b="bc2495862fec7dfffd50e84a7d68e04f42ae8f29c2273466a81e1ec8e82af33a8af3a1f40ac06563c656e48ea24e936402f6269ac498f8521b096e6457aa8df8"
+builddeps="base python-setuptools"
+deps="core-libs"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python setup.py build
+}
+
+package() {
+    # XXX enable optimizations
+    python setup.py install \
+        --prefix="${prefix}" \
+        --root="${dest_dir}"
+}
