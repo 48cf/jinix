@@ -1,17 +1,18 @@
 name=libinput
-version=1.18.2
+version=1.24.0
 revision=1
-tarball_url="https://www.freedesktop.org/software/libinput/libinput-${version}.tar.xz"
-tarball_blake2b="8058a51b896d06360a7ea607ec6640a9e65094b6a9322e5d2c631a4ea131d56d1d6eb0b174545f43dc25267ddab1b4a35d9ed794c6a9e938425b2aba99e770c4"
+tarball_url="https://gitlab.freedesktop.org/libinput/libinput/-/archive/${version}/libinput-${version}.tar.gz"
+tarball_blake2b="e660f012aebf65ef6232343db00534c86bf8ae0c4db2dee38cb82e6745a6e3ecb75861fc6862985464db61e05f7f5c9c30bcffcc43e75d927e37cc53e0371859"
 builddeps="base meson ninja"
-deps="core-libs libevdev mtdev"
+deps="core-libs libevdev mtdev libwacom"
 
 build() {
     meson_configure \
         -Ddebug-gui=false \
         -Ddocumentation=false \
-        -Dlibwacom=false \
-        -Dtests=false
+        -Dlibwacom=true \
+        -Dtests=false \
+        -Dudev-dir=${prefix}/lib/udev
 
     ninja -j${parallelism}
 }
