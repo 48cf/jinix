@@ -1,0 +1,21 @@
+name=python-markdown
+version=3.4.1
+revision=1
+tarball_url="https://files.pythonhosted.org/packages/source/M/Markdown/Markdown-${version}.tar.gz"
+tarball_blake2b="fd7c8b930097f9b1a52d210e22d49311579b952f758d071ac3105badcbca19f798bcb195cc35acbe6224e1f7ac916ae5fb1baa35b30464e4c243b08168007be3"
+builddeps="base python-build python-installer python-setuptools python-wheel"
+deps="core-libs python-pyyaml python-pytest"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python -m build \
+        --wheel \
+        --no-isolation
+}
+
+package() {
+    python -m installer \
+        --destdir="${dest_dir}" \
+        dist/*.whl
+}
