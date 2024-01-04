@@ -18,9 +18,9 @@ diff -Naur gptfdisk-1.0.3.old/Makefile gptfdisk-1.0.3.new/Makefile
  	rm -f core *.o *~ gdisk sgdisk cgdisk fixparts
  
 +install: gdisk cgdisk sgdisk fixparts
-+	install -dm 755 $(DESTDIR)/bin $(DESTDIR)/usr/share/man/man8
-+	install -m755 gdisk cgdisk sgdisk fixparts $(DESTDIR)/bin
-+	install -m644 *.8 $(DESTDIR)/usr/share/man/man8
++	install -dm 755 $(DESTDIR)/$(PREFIX)/bin $(DESTDIR)/$(PREFIX)/share/man/man8
++	install -m755 gdisk cgdisk sgdisk fixparts $(DESTDIR)/$(PREFIX)/bin
++	install -m644 *.8 $(DESTDIR)/$(PREFIX)/share/man/man8
 +
  # what are the source dependencies
  depend: $(SRCS)

@@ -20,7 +20,7 @@ build() {
 }
 
 package() {
-    DESTDIR="${dest_dir}" make install
+    DESTDIR="${dest_dir}" make PREFIX=${prefix} install
 
     post_package_strip
 }
