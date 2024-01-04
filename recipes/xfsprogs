@@ -19,8 +19,16 @@ build() {
 }
 
 package() {
-    DESTDIR="${dest_dir}" make PKG_DOC_DIR=${dest_dir}${prefix}/share/doc/xfsprogs-${version} install
-    DESTDIR="${dest_dir}" make PKG_DOC_DIR=${dest_dir}${prefix}/share/doc/xfsprogs-${version} install-dev
+    DESTDIR="${dest_dir}" make BINDIR=${dest_dir}${prefix}/bin PKG_DOC_DIR=${prefix}/share/doc/xfsprogs-${version} install
+    DESTDIR="${dest_dir}" make BINDIR=${dest_dir}${prefix}/bin PKG_DOC_DIR=${prefix}/share/doc/xfsprogs-${version} install-dev
+
+    mkdir -pv ${dest_dir}${prefix}/bin
+    mv -v ${dest_dir}/lib/* ${dest_dir}/usr/lib
+    mv -v ${dest_dir}/usr/sbin/* ${dest_dir}/usr/bin
+    mv -v ${dest_dir}/sbin/* ${dest_dir}/usr/bin
+    rm -rv ${dest_dir}/sbin
+    rm -rv ${dest_dir}/usr/sbin
+    rm -rv ${dest_dir}/lib
 
     rm -rfv ${dest_dir}${prefix}/lib/libhandle.{a,la}
 
