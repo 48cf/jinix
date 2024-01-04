@@ -1,0 +1,20 @@
+name=libxmlb
+version=0.3.14
+revision=1
+tarball_url="https://github.com/hughsie/libxmlb/releases/download/${version}/libxmlb-${version}.tar.xz"
+tarball_blake2b="a8762d13f570ad9a18e85363d8f12cfbb0b2180258e1e2eb3b338863a6fc332e8007c64e6414a6ffe95017ceb6abd27d5f96394ee9a210973fdce4472e9dea72"
+builddeps="base meson ninja gobject-introspection"
+deps="core-libs glib"
+
+build() {
+    meson_configure \
+        -Dgtkdoc=false
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
