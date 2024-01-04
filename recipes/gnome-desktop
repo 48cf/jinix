@@ -1,0 +1,19 @@
+name=gnome-desktop
+version=44.0
+revision=1
+tarball_url="https://download.gnome.org/sources/gnome-desktop/44/gnome-desktop-${version}.tar.xz"
+tarball_blake2b="3859b95c7cae0a46190335e707b07b0f9ca47238f9ebe2109c260d04627e8034ddaa7408b8bfb91d258d608279c32fd09a1477f860ccaf324f5a63da4b18a214"
+builddeps="base gettext meson ninja gobject-introspection vala itstool"
+deps="core-libs gsettings-desktop-schemas gtk+-3 gtk4 iso-codes libseccomp libxml xkeyboard-config bubblewrap"
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR=${dest_dir} ninja install
+
+    post_package_strip
+}
