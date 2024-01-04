@@ -1,0 +1,25 @@
+name=libatasmart
+version=0.19
+revision=1
+tarball_url="https://0pointer.de/public/libatasmart-${version}.tar.xz"
+tarball_blake2b="7e2a9823c27eee5a41f93464b28236239891349639162c5fdc114c241a70fb39a3046c3de16ce402787cd86e13609fff0578bd26f7a2c994fefe3c9756d45968"
+builddeps="base"
+deps="core-libs"
+
+if [ "$SYSTEMD" = "yes" ]; then
+    deps="${deps} systemd"
+else
+    deps="${deps} eudev"
+fi
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR=${dest_dir} make docdir=${prefix}/share/doc/libatasmart-${version} install
+
+    post_package_strip
+}
