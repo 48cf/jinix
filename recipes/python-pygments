@@ -1,0 +1,21 @@
+name=python-pygments
+version=2.17.2
+revision=1
+tarball_url="https://files.pythonhosted.org/packages/source/P/Pygments/pygments-${version}.tar.gz"
+tarball_blake2b="7e6db51ff35ec35981fcdd6f4a1f0a242c29e8b0947a5a3febdee35a0e4047414d49d6883b8fbf9de78b149323f0b3c86b315b03eaada557b4cd70e67917aab8"
+builddeps="base python-build python-installer python-setuptools python-wheel"
+deps="core-libs python python-hatchling"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python -m build \
+        --wheel \
+        --no-isolation
+}
+
+package() {
+    python -m installer \
+        --destdir="${dest_dir}" \
+        dist/*.whl
+}
