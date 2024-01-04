@@ -1,0 +1,45 @@
+name=fuse
+version=3.16.2
+revision=1
+tarball_url="https://github.com/libfuse/libfuse/releases/download/fuse-${version}/fuse-${version}.tar.gz"
+tarball_blake2b="04f0037f924ef7b7cc90cb4c26afd1e942da69efebd93f3114774f2101550729379a0256ba190d7c99249fbce4ead5902133c01b29d8d75f41777d148540f521"
+builddeps="base gettext meson ninja"
+deps="core-libs"
+
+if [ "$SYSTEMD" = "yes" ]; then
+    deps="${deps} systemd"
+else
+    deps="${deps} eudev"
+fi
+
+regenerate() {
+    sed -i '/^udev/,$ s/^/#/' util/meson.build
+}
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    chmod u+s ${dest_dir}${prefix}/bin/fusermount3
+
+    mkdir -pv ${dest_dir}/etc
+
+cat > ${dest_dir}/etc/fuse.conf << "EOF"
+# Set the maximum number of FUSE mounts allowed to non-root users.
+# The default is 1000.
+#
+#mount_max = 1000
+
+# Allow non-root users to specify the 'allow_other' or 'allow_root'
+# mount options.
+#
+#user_allow_other
+EOF
+
+    post_package_strip
+}
