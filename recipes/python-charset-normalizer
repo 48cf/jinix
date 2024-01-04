@@ -1,0 +1,21 @@
+name=python-charset-normalizer
+version=3.0.1
+revision=1
+tarball_url="https://files.pythonhosted.org/packages/source/c/charset-normalizer/charset-normalizer-${version}.tar.gz"
+tarball_blake2b="f30b993be91578c9bb9c292a4ec5b014f1f77b78ddd2ac5ecbe746342a02317c9df3f8c1ed06d2b8786eb32dc0834fe6bae6b70a72b3b84040313727330f75dd"
+builddeps="base python-build python-installer python-setuptools python-wheel"
+deps="core-libs python"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python -m build \
+        --wheel \
+        --no-isolation
+}
+
+package() {
+    python -m installer \
+        --destdir="${dest_dir}" \
+        dist/*.whl
+}
