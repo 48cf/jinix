@@ -1,0 +1,19 @@
+name=libadwaita
+version=1.4.2
+revision=1
+tarball_url="https://download.gnome.org/sources/libadwaita/1.4/libadwaita-${version}.tar.xz"
+tarball_blake2b="5c4bfc939698ef7413dd60d2818c7e1041b6fe5af4b619063c24379a730e62903ed22c10d7741f31fb39ae846e18ff1af983566017a23a6b524d25353dca4e32"
+builddeps="base meson ninja gobject-introspection vala gettext"
+deps="core-libs appstream gtk4"
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
