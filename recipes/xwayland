@@ -1,0 +1,37 @@
+name=xwayland
+version=23.2.3
+revision=1
+tarball_url="https://www.x.org/pub/individual/xserver/xwayland-${version}.tar.xz"
+tarball_blake2b="65a0517fdee19f9144f8e661e17227d838dff0b040f383cf940623492919574d60c032d7ba84f13f35c8a259ca4783ffc3519cc35768946b5b2014e25d4ec93e"
+builddeps="base meson ninja gettext xorg-font-util"
+deps="core-libs libxcvt pixman wayland-protocols libepoxy libtirpc mesa libgcrypt nettle xkbcomp libxfont2"
+
+if [ "$SYSTEMD" = "yes" ]; then
+    deps="${deps} systemd"
+fi
+
+regenerate() {
+    sed -i '/install_man/,$d' meson.build
+}
+
+build() {
+    meson_configure \
+        -Dxvfb=false \
+        -Dxdmcp=false \
+        -Dxcsecurity=true \
+        -Ddri3=true \
+        -Dxwayland_eglstream=false \
+        -Dglamor=true \
+        -Dxkb_dir=${prefix}/share/X11/xkb \
+        -Dxkb_output_dir=/var/lib/xkb
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    rm -rv ${dest_dir}${prefix}/lib/xorg
+
+    post_package_strip
+}
