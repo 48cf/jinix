@@ -1,0 +1,31 @@
+name=evolution-data-server
+version=3.50.2
+revision=1
+tarball_url="https://download.gnome.org/sources/evolution-data-server/3.50/evolution-data-server-${version}.tar.xz"
+tarball_blake2b="7279a5bcb0399fdcce723336a052dca13efa6f0af6ef7371b7cb8e76fbd7e1b0313e7f677cea530de62a93770c35887fd70bac551338f9a89860e2529b1f1519"
+builddeps="base cmake ninja python gobject-introspection vala gettext gperf"
+deps="core-libs libical libsecret nss sqlite gnome-online-accounts gtk+-3 icu libcanberra libgweather webkitgtk4"
+
+build() {
+    cmake \
+        -GNinja \
+        -DCMAKE_INSTALL_PREFIX=${prefix} \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DBUILD_SHARED_LIBS=ON \
+        -DENABLE_VALA_BINDINGS=ON \
+        -DENABLE_INSTALLED_TESTS=ON \
+        -DWITH_OPENLDAP=OFF \
+        -DWITH_KRB5=OFF \
+        -DENABLE_INTROSPECTION=ON \
+        -DENABLE_GTK_DOC=OFF \
+        -DWITH_LIBDB=OFF \
+        ${source_dir}
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
