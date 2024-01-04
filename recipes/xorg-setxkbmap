@@ -1,0 +1,19 @@
+name=xorg-setxkbmap
+version=1.3.4
+revision=1
+tarball_url="https://www.x.org/archive/individual/app/setxkbmap-${version}.tar.xz"
+tarball_blake2b="693f910efcd6f4cb26abd59f6197d77fc958e2b21ab4525e095d966a80186ad95792143ea25cf2822436b57838efbcb66c700ecf8341f3eb6ebce0f636760f37"
+builddeps="base xorg-util-macros"
+deps="core-libs libxrandr libxkbfile"
+
+build() {
+    autotools_configure
+
+    make -j${parallelism}
+}
+
+package() {
+    make install DESTDIR="${dest_dir}"
+
+    post_package_strip
+}
