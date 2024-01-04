@@ -1,0 +1,20 @@
+name=libportal
+version=0.7.1
+revision=1
+tarball_url="https://github.com/flatpak/libportal/releases/download/${version}/libportal-${version}.tar.xz"
+tarball_blake2b="b519fa88735d640a74e18cc791ec69862f136b793a7c855b1f3873cf6b15626d69088747f1a7ff54f8cd96f79e82e3df31e5349e3da57906e769b8f809f4ba34"
+builddeps="base gettext gobject-introspection meson ninja vala"
+deps="core-libs gtk+-3 gtk4 python-dbusmock"
+
+build() {
+    meson_configure \
+        -Ddocs=false
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
