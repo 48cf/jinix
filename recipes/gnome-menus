@@ -1,0 +1,17 @@
+name=gnome-menus
+version=3.36.0
+revision=1
+tarball_url="https://download.gnome.org/sources/gnome-menus/3.36/gnome-menus-${version}.tar.xz"
+tarball_blake2b="8bf1b0d4ac30a1e7f4c4e1b14ad3e2f718e974ec58fe8e8ab3c0d030c1cd1841a9cceb86d8909c0d0dcf128f19aecdd64350840f0cb25ed7cacdc2c95786f118"
+builddeps="base python gobject-introspection vala gettext"
+deps="core-libs glib"
+
+build() {
+    autotools_configure_lib
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
