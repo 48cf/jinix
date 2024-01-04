@@ -1,0 +1,19 @@
+name=libgee
+version=0.20.6
+revision=1
+tarball_url="https://download.gnome.org/sources/libgee/0.20/libgee-${version}.tar.xz"
+tarball_blake2b="cdb88719e0e1bceccefd6a824823e6e514bf1f4d6b8cf5330d6d83f781649312b23554c7dfc4a6b4eeb3bbcd81ca42843666d596b85634ff95fc90e90fea44bd"
+builddeps="base gettext gobject-introspection vala"
+deps="core-libs glib"
+
+build() {
+    autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR=${dest_dir} make install
+
+    post_package_strip
+}
