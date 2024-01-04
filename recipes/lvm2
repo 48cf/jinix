@@ -1,0 +1,38 @@
+name=lvm2
+version=2.03.23
+revision=1
+tarball_url="https://sourceware.org/ftp/lvm2/LVM2.${version}.tgz"
+tarball_blake2b="00d215d395d92fa23743fc77d91a6bd14df29bc4fb334e1e8c4deb8d34007bfdb4e188821ec1789b5f0bca39fe944923050e401ddae0d25e4932cffb109a0dda"
+builddeps="base"
+deps="core-libs libaio mdadm which xfsprogs"
+
+if [ "$SYSTEMD" = "yes" ]; then
+    deps="${deps} systemd"
+else
+    deps="${deps} eudev"
+fi
+
+build() {
+    cp -rp ${source_dir}/. ./
+
+    configure_script_path=./configure \
+    autotools_configure_lib \
+        --enable-cmdlib \
+        --enable-pkgconfig \
+        --enable-udev_sync \
+        --enable-dmeventd
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    if [ "$SYSTEMD" = "yes" ]; then
+        DESTDIR="${dest_dir}" make install_systemd_units
+    fi
+
+    sed -e '/locking_dir =/{s/#//;s/var/run/}' -i ${dest_dir}/etc/lvm/lvm.conf
+
+    post_package_strip
+}
