@@ -1,0 +1,19 @@
+name=gnome-backgrounds
+version=45.0
+revision=1
+tarball_url="https://download.gnome.org/sources/gnome-backgrounds/45/gnome-backgrounds-${version}.tar.xz"
+tarball_blake2b="f8ac82069fb6beb71c7776356c7d87e6b57c9de1c8dd1becdff6a60f22b73284b0231c10c6af5a64addb4a890704808c00757b5f71d6f3a9deeaf59d97441d88"
+builddeps="base gettext gobject-introspection meson ninja vala"
+deps="core-libs"
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
