@@ -1,0 +1,24 @@
+name=gnome-keyring
+version=42.1
+revision=1
+tarball_url="https://download.gnome.org/sources/gnome-keyring/42/gnome-keyring-${version}.tar.xz"
+tarball_blake2b="ff6093cc16c649cda1e6cc2848c2198a502d8aa20a56f0a4dca00550e99f18820028427a7ec3979b6871648a7931da19fced3210558d5ca3de47983b7c94452d"
+builddeps="base gettext gobject-introspection vala"
+deps="core-libs dbus gcr pam libxslt openssh gnupg"
+
+regenerate() {
+    sed -i 's:"/desktop:"/org:' schema/*.xml
+}
+
+build() {
+    autotools_configure_lib \
+        --disable-doc
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
