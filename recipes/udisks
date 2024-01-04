@@ -1,0 +1,27 @@
+name=udisks
+version=2.10.1
+revision=1
+tarball_url="https://github.com/storaged-project/udisks/releases/download/udisks-${version}/udisks-${version}.tar.bz2"
+tarball_blake2b="41282e4dbbd93e6bda2a10a6ff2f2fb82bfc83b3ccbed9450cca7888c634cde9300fcd0b7d055e0d8e4c8fc0b431a75d5612a24132ea9b2677d194529732178d"
+builddeps="base gobject-introspection gettext"
+deps="core-libs libatasmart libblockdev libgudev libxslt polkit python-dbus-python lvm2 python-gobject"
+
+if [ "$SYSTEMD" = "yes" ]; then
+    deps="${deps} systemd"
+else
+    deps="${deps} elogind"
+fi
+
+build() {
+    autotools_configure_lib \
+        --enable-available-modules \
+        --disable-man
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR=${dest_dir} make install
+
+    post_package_strip
+}
