@@ -13,7 +13,7 @@ build() {
 }
 
 package() {
-    make PREFIX=${dest_dir}${prefix} INSTALL_MAN=${dest_dir}${prefix}/share/man install
+    make PREFIX=${dest_dir}${prefix} INSTALL_MAN=${dest_dir}${prefix}/share/man INSTALL_DIR=${dest_dir}${prefix}/bin install
 
     post_package_strip
 }
