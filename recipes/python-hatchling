@@ -1,0 +1,21 @@
+name=python-hatchling
+version=1.12.2
+revision=1
+tarball_url="https://files.pythonhosted.org/packages/source/h/hatchling/hatchling-${version}.tar.gz"
+tarball_blake2b="c111d41ee7d09709288e066922fc9829492a5c432110f7de838275d001cda6391ebb2ea12a9d2f8a8f17f7aea7db16a5571d2f2dc5e783707b0daa23aee6d59d"
+builddeps="base python-build python-installer python-setuptools python-wheel"
+deps="core-libs python python-editables python-packaging python-pathspec python-pluggy"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python -m build \
+        --wheel \
+        --no-isolation
+}
+
+package() {
+    python -m installer \
+        --destdir="${dest_dir}" \
+        dist/*.whl
+}
