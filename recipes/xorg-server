@@ -4,7 +4,13 @@ revision=1
 tarball_url="https://www.x.org/releases/individual/xserver/xorg-server-${version}.tar.xz"
 tarball_blake2b="8e0a2e0f5fc4d06a08c1424fe618da9822e951f5b744b4cac1b1e14305ab598b162e4f08fb53ba5e60d0001257216755a576b470c961c26a909d66e9a46d1c77"
 builddeps="base"
-deps="core-libs eudev xorg-util-macros xorg-proto xcb-proto libdrm libpciaccess libxtrans libxshmfence libx11 libxcvt libxxf86vm libxkbfile libxfont2 libepoxy libxi libxv libxdamage libxrender libxrandr libxcb libxfixes libxext mesa nettle xkbcomp pixman"
+deps="core-libs xorg-util-macros xorg-proto xcb-proto libdrm libpciaccess libxtrans libxshmfence libx11 libxcvt libxxf86vm libxkbfile libxfont2 libepoxy libxi libxv libxdamage libxrender libxrandr libxcb libxfixes libxext mesa nettle xkbcomp pixman"
+
+if [ "$SYSTEMD" = "yes" ]; then
+    deps="${deps} systemd"
+else
+    deps="${deps} eudev"
+fi
 
 build() {
     export CFLAGS=${CFLAGS/-fno-plt}
