@@ -1,0 +1,19 @@
+name=gnome-color-manager
+version=3.36.0
+revision=1
+tarball_url="https://download.gnome.org/sources/gnome-color-manager/3.36/gnome-color-manager-${version}.tar.xz"
+tarball_blake2b="263bc58c2a4ebafabebeba958279e4ad607eeca986dda9093c3e9d1a0870f44eefec7248aab11e6b408b063c5d5a28a3cdb88c96a58e3a0a5064055c44989143"
+builddeps="base meson ninja gettext itstool gobject-introspection vala"
+deps="core-libs colord gtk+-3 lcms libcanberra libexif desktop-file-utils"
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
