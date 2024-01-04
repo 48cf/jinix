@@ -1,0 +1,21 @@
+name=python-idna
+version=3.4
+revision=1
+tarball_url="https://files.pythonhosted.org/packages/source/i/idna/idna-${version}.tar.gz"
+tarball_blake2b="dd6c94104e17b441a7a63aec4e28f1969278996964c402865da8ad1040878539f798956e26532281cc44934544fd6fa33407949caf4a34fa2b48d7aafbb8fb5e"
+builddeps="base python-build python-installer python-setuptools python-wheel"
+deps="core-libs python"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python -m build \
+        --wheel \
+        --no-isolation
+}
+
+package() {
+    python -m installer \
+        --destdir="${dest_dir}" \
+        dist/*.whl
+}
