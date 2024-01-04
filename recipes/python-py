@@ -1,0 +1,21 @@
+name=python-py
+version=1.11.0
+revision=1
+tarball_url="https://files.pythonhosted.org/packages/source/p/py/py-${version}.tar.gz"
+tarball_blake2b="becaafa6b9094790693bb99079a59c5a206d05dd42db1bbd75d1f9527a7a089ef3098a8b16da2c8f7aac6b682cd0687ddd454dc50930f13a860c118e9306cc94"
+builddeps="base python-build python-installer python-setuptools python-setuptools-scm python-wheel"
+deps="core-libs python"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python -m build \
+        --wheel \
+        --no-isolation
+}
+
+package() {
+    python -m installer \
+        --destdir="${dest_dir}" \
+        dist/*.whl
+}
