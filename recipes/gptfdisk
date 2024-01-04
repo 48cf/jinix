@@ -1,0 +1,26 @@
+name=gptfdisk
+version=1.0.9
+revision=1
+tarball_url="https://downloads.sourceforge.net/gptfdisk/gptfdisk-${version}.tar.gz"
+tarball_blake2b="1939ffd75972a4d7f92af2bfab90c7b0223825b5478b6b808dd35af943c687d38ba81663cd7ba5e0f9400656db4dac019c13a9f75d90b7bd716568c676c24dd2"
+builddeps="base"
+deps="core-libs popt icu"
+
+regenerate() {
+    sed -i 's|ncursesw/||' gptcurses.cc
+    sed -i 's|sbin|usr/sbin|' Makefile
+    sed -i '/UUID_H/s/^.*$/#if defined (_UUID_UUID_H) || defined (_UL_LIBUUID_UUID_H)/' guid.cc
+    sed -i "/device =/s/= \(.*\);/= strdup(\1);/" gptcl.cc
+}
+
+build() {
+    cp -rp ${source_dir}/. ./
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
