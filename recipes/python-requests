@@ -1,0 +1,21 @@
+name=python-requests
+version=2.31.0
+revision=1
+tarball_url="https://files.pythonhosted.org/packages/source/r/requests/requests-${version}.tar.gz"
+tarball_blake2b="e4e2781b272ccd94230c5b8c1bea83901bc8c28a34880709dbb95b887417b47833512e25045dab6e4226295294e2bf56fc821b6f636ae28aefdeee6039f53d44"
+builddeps="base python-build python-installer python-setuptools python-wheel"
+deps="core-libs python-charset-normalizer python-idna python-urllib p11-kit"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python -m build \
+        --wheel \
+        --no-isolation
+}
+
+package() {
+    python -m installer \
+        --destdir="${dest_dir}" \
+        dist/*.whl
+}
