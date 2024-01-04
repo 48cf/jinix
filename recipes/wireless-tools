@@ -1,0 +1,19 @@
+name=wireless-tools
+version=29
+revision=1
+tarball_url="https://hewlettpackard.github.io/wireless-tools/wireless_tools.${version}.tar.gz"
+tarball_blake2b="88e3242fe9d1dd1c28aad56b9fe2d2323f9d1fab190fd0fda1038097e9d18dfa16234db7807b5fe1ce88eedc40a2d12e7ff109de07022cb90c330144c0a15b63"
+builddeps="base"
+deps="core-libs"
+
+build() {
+    cp -rp ${source_dir}/. ./
+
+    make -j${parallelism}
+}
+
+package() {
+    make PREFIX=${dest_dir}${prefix} INSTALL_MAN=${dest_dir}${prefix}/share/man install
+
+    post_package_strip
+}
