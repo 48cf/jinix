@@ -1,0 +1,22 @@
+name=libgdata
+version=0.18.1
+revision=1
+tarball_url="https://download.gnome.org/sources/libgdata/0.18/libgdata-${version}.tar.xz"
+tarball_blake2b="860cc42c4d0bdbdd6ca1a1001ec7ea5acc26dd1339052365554123e6524fddce65704a11614c8a081eb3eef10395fb1b4d2dfd3cf942dd1ae3556507af4c7c52"
+builddeps="base gettext meson ninja gobject-introspection vala"
+deps="core-libs libsoup gnome-online-accounts gtk+-3 json-glib gcr liboauth uhttpmock"
+
+build() {
+    meson_configure \
+        -Dgtk_doc=false \
+        -Dalways_build_tests=false \
+        -Doauth1=enabled
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR=${dest_dir} ninja install
+
+    post_package_strip
+}
