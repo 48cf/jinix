@@ -1,0 +1,21 @@
+name=python-attrs
+version=22.2.0
+revision=1
+tarball_url="https://files.pythonhosted.org/packages/source/a/attrs/attrs-${version}.tar.gz"
+tarball_blake2b="9cb96cec022735ecdd7577f9ee06b2e16b9be05e9df1183c101bef186a66f2c4505224f1047b4b4cdca2a05641279199ab54c7b2e26a9599c3cd8b9ab4543845"
+builddeps="base python-build python-installer python-setuptools python-wheel"
+deps="core-libs python"
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+    python -m build \
+        --wheel \
+        --no-isolation
+}
+
+package() {
+    python -m installer \
+        --destdir="${dest_dir}" \
+        dist/*.whl
+}
