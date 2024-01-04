@@ -9,7 +9,7 @@ deps="core-libs"
 regenerate() {
     cat > lua.pc << "EOF"
 V=5.4
-R=${version}
+R=5.4.6
 
 prefix=/usr
 INSTALL_BIN=${prefix}/bin
