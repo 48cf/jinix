@@ -1,0 +1,52 @@
+name=samba
+version=4.19.3
+revision=1
+tarball_url="https://download.samba.org/pub/samba/stable/samba-${version}.tar.gz"
+tarball_blake2b="f83af3b50d795bdc4a250fe96040721150acc3b8effddd473e3cfa3ef6eeec99928b1307a18a472be45049e1d0b74650b9f6dd4bf5c434277c94ab88cb493b3b"
+builddeps="base python vala flex bison"
+deps="core-libs gnutls jansson perl-json libtirpc perl-parse-yapp rpcsvc-proto fuse gpgme icu libtasn1 libxslt pam avahi cups gnupg libaio libarchive libcap libgcrypt libnsl libunwind lmdb python-markdown krb5 nss popt talloc xfsprogs"
+
+build() {
+    cp -rp ${source_dir}/. ./
+
+    ./configure \
+        --prefix=${prefix} \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --with-piddir=/run/samba \
+        --with-pammodulesdir=${prefix}/lib/security \
+        --enable-fhs \
+        --without-ad-dc \
+        --without-acl-support \
+        --without-ldap \
+        --without-ads
+
+    make -j${parallelism}
+
+    sed '1s@^.*$@#!/usr/bin/python3@' -i ./bin/default/source4/scripting/bin/*.inst
+}
+
+package() {
+    make install DESTDIR="${dest_dir}"
+
+    mkdir -pv ${dest_dir}/etc/samba
+
+    install -v -m644    ${source_dir}/examples/smb.conf.default ${dest_dir}/etc/samba
+
+    sed -e "s;log file =.*;log file = /var/log/samba/%m.log;" \
+        -e "s;path = /usr/spool/samba;path = /var/spool/samba;" \
+        -i ${dest_dir}/etc/samba/smb.conf.default
+
+    mkdir -pv ${dest_dir}/etc/openldap/schema
+
+    install -v -m644    ${source_dir}/examples/LDAP/README \
+                        ${dest_dir}/etc/openldap/schema/README.samba
+
+    install -v -m644    ${source_dir}/examples/LDAP/samba* \
+                        ${dest_dir}/etc/openldap/schema
+
+    install -v -m755    ${source_dir}/examples/LDAP/{get*,ol*} \
+                        ${dest_dir}/etc/openldap/schema
+
+    post_package_strip
+}
