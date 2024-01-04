@@ -1,0 +1,18 @@
+diff --git firefox-esr-clean/js/src/wasm/WasmGcObject.cpp firefox-esr-workdir/js/src/wasm/WasmGcObject.cpp
+index 6b2e5d4..562c77b 100644
+--- firefox-esr-clean/js/src/wasm/WasmGcObject.cpp
++++ firefox-esr-workdir/js/src/wasm/WasmGcObject.cpp
+@@ -750,6 +750,13 @@ WasmStructObject* WasmStructObject::createStructOOL(
+   return structObj;
+ }
+ 
++template WasmStructObject* WasmStructObject::createStructOOL<true>(
++    JSContext* cx, wasm::TypeDefInstanceData* typeDefData,
++    js::gc::Heap initialHeap, uint32_t inlineBytes, uint32_t outlineBytes);
++template WasmStructObject* WasmStructObject::createStructOOL<false>(
++    JSContext* cx, wasm::TypeDefInstanceData* typeDefData,
++    js::gc::Heap initialHeap, uint32_t inlineBytes, uint32_t outlineBytes);
++
+ template WasmStructObject* WasmStructObject::createStruct<true>(
+     JSContext* cx, wasm::TypeDefInstanceData* typeDefData,
+     js::gc::Heap initialHeap);
