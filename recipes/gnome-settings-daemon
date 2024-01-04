@@ -1,0 +1,19 @@
+name=gnome-settings-daemon
+version=45.1
+revision=1
+tarball_url="https://download.gnome.org/sources/gnome-settings-daemon/45/gnome-settings-daemon-${version}.tar.xz"
+tarball_blake2b="25c114cc1918975247db360f24a9041d019546dd0a0714d19f2409b78ee6e2712d6dc1272eb9a40afb7ed4e973eaa45854322947567b5d54d2761b48a2e812b9"
+builddeps="base meson ninja gobject-introspection vala gettext"
+deps="core-libs alsa-lib colord fontconfig gcr4 geoclue geocode-glib gnome-desktop lcms libcanberra libgweather libnotify libwacom pulseaudio upower cups networkmanager nss wayland umockdev python-dbusmock"
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
