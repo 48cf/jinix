@@ -1,0 +1,20 @@
+name=grilo
+version=0.3.16
+revision=1
+tarball_url="https://download.gnome.org/sources/grilo/0.3/grilo-${version}.tar.xz"
+tarball_blake2b="ca04eceef12e103667690ed9f5493cf15c036ee105fb590191fb10b58f1c042f255053e528b52eab1d3ec2c455cc82bcab69d2215b7ac70415b700d21c811905"
+builddeps="base gettext meson ninja gobject-introspection vala"
+deps="core-libs glib libxml gtk+-3 libsoup3 totem-pl-parser liboauth"
+
+build() {
+    meson_configure \
+        -Denable-gtk-doc=false
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR=${dest_dir} ninja install
+
+    post_package_strip
+}
