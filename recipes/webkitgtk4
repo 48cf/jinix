@@ -33,5 +33,7 @@ build() {
 package() {
     DESTDIR="${dest_dir}" ninja install
 
+    mv -v ${dest_dir}${prefix}/bin/WebKitWebDriver{,4}
+
     post_package_strip
 }
