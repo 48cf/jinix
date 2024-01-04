@@ -30,6 +30,8 @@ package() {
     make install DESTDIR="${dest_dir}"
 
     mkdir -pv ${dest_dir}/etc/samba
+    mv -v ${dest_dir}${prefix}/sbin/* ${dest_dir}${prefix}/bin/
+    rm -rv ${dest_dir}${prefix}/sbin
 
     install -v -m644    ${source_dir}/examples/smb.conf.default ${dest_dir}/etc/samba
 
