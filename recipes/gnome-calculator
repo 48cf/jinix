@@ -1,0 +1,19 @@
+name=gnome-calculator
+version=45.0.2
+revision=1
+tarball_url="https://download.gnome.org/sources/gnome-calculator/45/gnome-calculator-${version}.tar.xz"
+tarball_blake2b="a013985dc6227ae1a3bff30d92740ea4b18765ce5486171a0d0aaf3feae89357f1fe47ede26175a546a01e5b49206a2768de9f5cd62de8f1ee01645bae213614"
+builddeps="base meson ninja gettext gobject-introspection itstool vala"
+deps="core-libs gtksourceview5 libadwaita libgee libsoup3"
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
