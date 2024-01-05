@@ -1,0 +1,21 @@
+name=mutter
+version=45.2
+revision=1
+tarball_url="https://download.gnome.org/sources/mutter/45/mutter-${version}.tar.xz"
+tarball_blake2b="c4107840b8bd0f75a9c76300f324bfff6aac3195f526ab88102c831df693cb8dfa5b55bb1590a54e68f41eab392e69bb833221480578a2fba4b1e4bdc5ed030d"
+builddeps="base meson ninja gettext gobject-introspection"
+deps="core-libs gnome-settings-daemon graphene libei libxcvt libxkbcommon wireplumber desktop-file-utils startup-notification libinput wayland wayland-protocols xwayland python-dbusmock xorg-server"
+
+build() {
+    meson_configure \
+        -Dtests=false \
+        -Dprofiler=false
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
