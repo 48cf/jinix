@@ -1,0 +1,26 @@
+name=gnome-shell
+version=45.2
+revision=1
+tarball_url="https://download.gnome.org/sources/gnome-shell/45/gnome-shell-${version}.tar.xz"
+tarball_blake2b="b1ee0ecb7babadad1b9abed3c9bb2fda4c47e5bff080cfd92db35530b211449a9e3c8db0f63ccf87ae9df05337b9a69546b880c71d7a4a1fca08b773490bbce1"
+builddeps="base meson ninja gettext gobject-introspection xmlto"
+deps="core-libs evolution-data-server gcr4 gjs gnome-desktop ibus mutter polkit sassc startup-notification desktop-file-utils gnome-autoar gnome-bluetooth gstreamer-plugins-base networkmanager adwaita-icon-theme dconf gnome-backgrounds gnome-control-center libgweather telepathy-mission-control"
+
+if [ "$SYSTEMD" = "yes" ]; then
+    deps="${deps} systemd"
+else
+    deps="${deps} elogind"
+fi
+
+build() {
+    meson_configure \
+        -Dtests=false
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
