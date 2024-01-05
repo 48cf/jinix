@@ -29,12 +29,12 @@ build() {
         --disable-xephyr \
         --disable-xwayland \
         --disable-xnest \
-        --disable-dmx \
+        --enable-dmx \
         --disable-suid-wrapper \
-        --disable-dpms \
-        --disable-screensaver \
-        --disable-xres \
-        --disable-xvmc \
+        --enable-dpms \
+        --enable-screensaver \
+        --enable-xres \
+        --enable-xvmc \
         --disable-systemd-logind \
         --disable-secure-rpc
 
