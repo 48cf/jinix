@@ -1,8 +1,8 @@
 name=mesa
-version=23.3.0
+version=23.2.1
 revision=1
 tarball_url="https://archive.mesa3d.org/mesa-${version}.tar.xz"
-tarball_blake2b="1b87d15cbe1b4c761653b7042c46eac3036f08dfcf3a0a81aa7bf6c1c0c402b05f37ce8da9d88df72e1745d66a648c2b8c161b04bf558107f548f6d8167cc798"
+tarball_blake2b="51e44c2e9b7dfe17cf4cb7252e169109d03a006caa8ec34036fb594c0c44e9278d0088170894c1a9debdea911f746470e1d256576e0635cae5c3e670ab49161b"
 builddeps="base bison cmake flex meson ninja python-mako python-setuptools"
 deps="core-libs elfutils libglvnd libxshmfence libxrandr libxdamage libxxf86vm libxfixes libx11 libxext libxcb libexpat libva libvdpau llvm zlib wayland-protocols glslang vulkan-loader"
 
