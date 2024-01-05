@@ -1,0 +1,23 @@
+name=gnome-terminal
+version=3.50.1
+revision=1
+tarball_url="https://gitlab.gnome.org/GNOME/gnome-terminal/-/archive/${version}/gnome-terminal-${version}.tar.gz"
+tarball_blake2b="70bc220b9090b61a41048f5b8ee3e4d91b41884b677eb597abb8392f5742a53ab847112ab63ef96577bf615b7d44cc37bb508ed420d08f7c282ee75613ae466b"
+builddeps="base meson ninja gettext gobject-introspection itstool"
+deps="core-libs dconf gnome-shell gsettings-desktop-schemas libhandy vte3 pcre2 nautilus desktop-file-utils"
+
+regenerate() {
+    sed -i -r 's:"(/system):"/org/gnome\1:g' src/external.gschema.xml
+}
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
