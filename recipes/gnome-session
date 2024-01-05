@@ -1,0 +1,33 @@
+name=gnome-session
+version=45.0
+revision=1
+tarball_url="https://download.gnome.org/sources/gnome-session/45/gnome-session-${version}.tar.xz"
+tarball_blake2b="473f0b3d94ffa8c1e2bf45884d053c753e5d5ad791b7cd9f889ce7952a273c4631c9867f038edaa6fe8e6ce16b9659c479755ce8028076016a658ad23291eeb7"
+builddeps="base meson ninja gettext gobject-introspection xmlto"
+deps="core-libs gnome-desktop json-glib mesa upower docbook-xsl"
+
+if [ "$SYSTEMD" = "yes" ]; then
+    deps="${deps} systemd"
+else
+    deps="${deps} elogind"
+fi
+
+regenerate() {
+    sed 's@/bin/sh@/bin/sh -l@' -i gnome-session/gnome-session.in
+}
+
+build() {
+    meson_configure \
+        -Ddocbook=false
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    rm -v ${dest_dir}${prefix}/share/xsessions/gnome.desktop
+    rm -v ${dest_dir}${prefix}/share/wayland-sessions/gnome.desktop
+
+    post_package_strip
+}
