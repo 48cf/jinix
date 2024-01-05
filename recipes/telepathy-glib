@@ -1,0 +1,24 @@
+name=telepathy-glib
+version=0.24.2
+revision=1
+tarball_url="https://telepathy.freedesktop.org/releases/telepathy-glib/telepathy-glib-${version}.tar.gz"
+tarball_blake2b="b98701e4897da5f1e1791af1d36f0f8e98fc0a043406a2e1e6c56437acfc7ed83701163a8c30d1ec2506cea4ca9a64827fca96ea0c3ea1566d38519b63a3a201"
+builddeps="base gobject-introspection vala python"
+deps="core-libs dbus-glib libxslt"
+
+regenerate() {
+    sed -i 's%/usr/bin/python%&3%' tests/all-errors-documented.py
+}
+
+build() {
+    PYTHON=/usr/bin/python3 autotools_configure_lib \
+        --enable-vala-bindings
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
