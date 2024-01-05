@@ -1,0 +1,19 @@
+name=gnome-shell-extensions
+version=45.2
+revision=1
+tarball_url="https://download.gnome.org/sources/gnome-shell-extensions/45/gnome-shell-extensions-${version}.tar.xz"
+tarball_blake2b="b93257a6e535b0f58a9671b0000c3f98af9b99204202403ca38a5a6a367c972320e64a65d87608d34472a1387f0ed4c04b7d80afa77f414f55ac9e9c17063a17"
+builddeps="base meson ninja gettext gobject-introspection"
+deps="core-libs libgtop sassc gnome-menus"
+
+build() {
+    meson_configure
+
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
