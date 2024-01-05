@@ -1,0 +1,16 @@
+diff --git bash-clean/builtins/common.c bash-workdir/builtins/common.c
+index 19b00c4..6256734 100644
+--- bash-clean/builtins/common.c
++++ bash-workdir/builtins/common.c
+@@ -639,9 +639,11 @@ get_working_directory (for_whom)
+ #endif
+       if (the_current_working_directory == 0)
+ 	{
++	if (errno != 0) {
+ 	  fprintf (stderr, _("%s: error retrieving current directory: %s: %s\n"),
+ 		   (for_whom && *for_whom) ? for_whom : get_name_for_error (),
+ 		   _(bash_getcwd_errstr), strerror (errno));
++	}
+ 	  return (char *)NULL;
+ 	}
+     }
