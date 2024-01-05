@@ -1,0 +1,26 @@
+diff --git sudo-clean/Makefile.in sudo-workdir/Makefile.in
+index 3caa667..2e6e183 100644
+--- sudo-clean/Makefile.in
++++ sudo-workdir/Makefile.in
+@@ -75,7 +75,7 @@ EGREP = @EGREP@
+ SED = @SED@
+ 
+ INSTALL = $(SHELL) $(scriptdir)/install-sh -c
+-INSTALL_OWNER = -o $(install_uid) -g $(install_gid)
++# INSTALL_OWNER = -o $(install_uid) -g $(install_gid)
+ 
+ ECHO_N = @ECHO_N@
+ ECHO_C = @ECHO_C@
+diff --git sudo-clean/src/Makefile.in sudo-workdir/src/Makefile.in
+index e2ff919..14842a8 100644
+--- sudo-clean/src/Makefile.in
++++ sudo-workdir/src/Makefile.in
+@@ -41,7 +41,7 @@ AWK = @AWK@
+ 
+ # Our install program supports extra flags...
+ INSTALL = $(SHELL) $(scriptdir)/install-sh -c
+-INSTALL_OWNER = -o $(install_uid) -g $(install_gid)
++# INSTALL_OWNER = -o $(install_uid) -g $(install_gid)
+ INSTALL_BACKUP = @INSTALL_BACKUP@
+ 
+ # Libraries
