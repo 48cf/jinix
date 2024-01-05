@@ -16,6 +16,7 @@ cdrom:x:15:
 adm:x:16:
 messagebus:x:18:
 lpadmin:x:19:
+gdm:x:21:
 systemd-journal:x:23:
 input:x:24:
 polkitd:x:27:
