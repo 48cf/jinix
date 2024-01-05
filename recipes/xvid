@@ -15,7 +15,7 @@ build() {
 
     cd build/generic
     configure_script_path=./configure \
-    autotools_configure_lib
+    autotools_configure
 
     make -j${parallelism}
 }

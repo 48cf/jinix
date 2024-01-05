@@ -11,12 +11,11 @@ build() {
     cp -rp "${source_dir}"/. ./
 
         configure_script_path=./configure \
-    autotools_configure_lib \
+    autotools_configure \
         --disable-gssapi \
         --with-rcdir=/tmp/cupsinit \
         --with-rundir=/run/cups \
         --with-system-groups=lpadmin \
-        --with-docdir="${prefix}/share/cups/doc-${version}" \
         --enable-libpaper
 
     make -j${parallelism}

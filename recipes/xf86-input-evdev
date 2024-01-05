@@ -7,7 +7,7 @@ builddeps="base"
 deps="core-libs libevdev xorg-server xorg-proto"
 
 build() {
-    autotools_configure_lib
+    autotools_configure
 
     make -j${parallelism}
 }

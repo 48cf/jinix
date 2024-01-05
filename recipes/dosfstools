@@ -7,10 +7,8 @@ builddeps="base"
 deps="core-libs"
 
 build() {
-    autotools_configure_lib \
-        --enable-compat-symlinks \
-        --mandir=${prefix}/share/man \
-        --docdir=${prefix}/share/doc/dosfstools-${version}
+    autotools_configure \
+        --enable-compat-symlinks
 
     make -j${parallelism}
 }

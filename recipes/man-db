@@ -14,9 +14,7 @@ build() {
         configure_flags="--with-systemdsystemunitdir=no"
     fi
 
-    autotools_configure_lib \
-        --docdir=${prefix}/share/doc/man-db-${version} \
-        --sysconfdir=/etc \
+    autotools_configure \
         --disable-setuid \
         --enable-cache-owner=bin \
         --with-browser=${prefix}/bin/lynx \

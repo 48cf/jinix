@@ -18,7 +18,7 @@ build() {
     fi
 
         configure_script_path=./configure \
-    autotools_configure_lib \
+    autotools_configure \
         --disable-alsaconf \
         --with-udev-rules-dir="${prefix}/lib/udev/rules.d" \
         ${configure_flags}

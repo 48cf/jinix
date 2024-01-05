@@ -7,10 +7,9 @@ builddeps="base perl"
 deps="core-libs ffmpeg alsa-lib pulseaudio libdvdnav faad flac gdk-pixbuf glu liba52 libdvdcss libmad libmng libnsl libtheora libva libvdpau libvorbis libvpx mesa speex v4l-utils libxv libssh"
 
 build() {
-    autotools_configure_lib \
+    autotools_configure \
         --disable-vcd \
-        --with-external-dvdnav \
-        --docdir=/usr/share/doc/xine-lib-${version}
+        --with-external-dvdnav
 
     make -j${parallelism}
 }

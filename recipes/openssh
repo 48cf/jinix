@@ -7,8 +7,7 @@ builddeps="base"
 deps="core-libs pam openssl"
 
 build() {
-    autotools_configure_lib \
-        --sysconfdir=/etc/ssh \
+    autotools_configure \
         --with-privsep-path=/var/lib/sshd \
         --with-default-path=/usr/bin \
         --with-superuser-path=/usr/sbin:/usr/bin \

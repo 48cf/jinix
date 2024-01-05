@@ -7,7 +7,7 @@ builddeps="base"
 deps="core-libs pcre2 boost perl python" # Add more languages here as available
 
 build() {
-    autotools_configure_lib \
+    autotools_configure \
         --without-javascript \
         --without-maximum-compile-warnings
 

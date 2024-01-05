@@ -7,8 +7,7 @@ builddeps="base groff"
 deps="core-libs glib aspell-en"
 
 build() {
-    autotools_configure_lib \
-        --docdir=${prefix}/share/doc/enchant-${version}
+    autotools_configure
 
     make -j${parallelism}
 }

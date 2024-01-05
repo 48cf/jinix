@@ -8,8 +8,6 @@ imagedeps="gcc"
 deps="glibc libgcc libstdc++"
 
 build() {
-    true
-
     cd "${base_dir}"/host-builds/gcc/build
 
     make -j${parallelism} all-target-libatomic
@@ -21,7 +19,7 @@ package() {
     rm -rf tmp_libatomic_dir
     mkdir tmp_libatomic_dir
 
-    DESTDIR="$(realpath tmp_libatomic_dir)" make install-strip-target-libatomic
+    DESTDIR="$(realpath tmp_libatomic_dir)" make install-target-libatomic
 
     mkdir -p "${dest_dir}${prefix}"
     cp -r tmp_libatomic_dir/usr/local/${OS_TRIPLET}/* "${dest_dir}${prefix}"/

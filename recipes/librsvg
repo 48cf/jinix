@@ -9,9 +9,8 @@ allow_network=yes
 
 build() {
     export CARGO_HOME=/tmp/cargo
-    autotools_configure_lib \
-        --with-vala \
-        --docdir=/usr/share/doc/librsvg-${version}
+    autotools_configure \
+        --with-vala
 
     make -j${parallelism}
 }

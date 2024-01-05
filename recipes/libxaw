@@ -7,7 +7,7 @@ builddeps="base"
 deps="core-libs xorg-util-macros xorg-proto libx11 libxext libxt libxmu libxpm"
 
 build() {
-    autotools_configure_lib
+    autotools_configure
 
     make -j${parallelism}
 }

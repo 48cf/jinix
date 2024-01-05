@@ -8,9 +8,7 @@ deps="core-libs"
 
 build() {
 
-    autotools_configure_lib \
-        --bindir=/usr/bin \
-        --localstatedir=/var \
+    autotools_configure \
         --disable-logger \
         --disable-whois \
         --disable-rcp \

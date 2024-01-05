@@ -7,8 +7,7 @@ builddeps="base"
 deps="core-libs xorg-util-macros xorg-proto libx11 libxtrans libsm libice"
 
 build() {
-    autotools_configure_lib \
-        --disable-malloc0returnsnull  \
+    autotools_configure \
         --with-appdefaultdir=/etc/X11/app-defaults
 
     make -j${parallelism}

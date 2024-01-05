@@ -7,8 +7,7 @@ builddeps="base"
 deps="core-libs libogg"
 
 build() {
-    autotools_configure_lib \
-        --docdir="${prefix}/share/doc/speexdsp-${version}"
+    autotools_configure
 
     make -j${parallelism}
 }

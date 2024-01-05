@@ -6,10 +6,6 @@ tarball_blake2b="80adf7ace00c21d21eddf764595c3f981e6206b936996458e5c2cc9cc51536e
 builddeps="base gettext gobject-introspection meson ninja vala"
 deps="core-libs bubblewrap gexiv gnome-autoar gnome-desktop libadwaita libnotify libportal libseccomp tracker-miners desktop-file-utils exempi gstreamer-plugins-base libcloudproviders libexif adwaita-icon-theme gvfs"
 
-regenerate() {
-    sed "/docdir =/s@\$@ / 'nautilus-${version}'@" -i meson.build
-}
-
 build() {
     meson_configure \
         -Dselinux=false \

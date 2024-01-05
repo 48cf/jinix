@@ -13,9 +13,6 @@ regenerate() {
 
 build() {
     autotools_configure \
-        --disable-static \
-        --disable-docs \
-        --disable-nls \
         --enable-libxml2
 
     make -j${parallelism}

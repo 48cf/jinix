@@ -7,7 +7,7 @@ builddeps="base"
 deps="core-libs perl"
 
 build() {
-    PAGE=A4 autotools_configure_lib
+    PAGE=A4 autotools_configure
 
     make -j${parallelism}
 }

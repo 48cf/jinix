@@ -10,7 +10,7 @@ build() {
     cp -rp ${source_dir}/. ./
     cd unix
     configure_script_path=./configure \
-    autotools_configure_lib \
+    autotools_configure \
         --mandir=${prefix}/share/man \
         --enable-64bit
 

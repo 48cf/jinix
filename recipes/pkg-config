@@ -7,7 +7,7 @@ hostdeps="gcc pkg-config"
 deps="core-libs"
 
 build() {
-    autotools_configure_lib
+    autotools_configure
 
     make -j${parallelism}
 }

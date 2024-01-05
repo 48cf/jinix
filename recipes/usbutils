@@ -8,7 +8,7 @@ deps="core-libs libusb"
 allow_network=yes
 
 build() {
-    autotools_configure_lib \
+    autotools_configure \
         --datadir=${prefix}/share/hwdata
 
     make -j${parallelism}

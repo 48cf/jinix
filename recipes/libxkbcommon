@@ -8,7 +8,6 @@ deps="core-libs libxcb libxml xkeyboard-config"
 
 build() {
     meson_configure \
-        -Denable-docs=false \
         -Denable-x11=true \
         -Denable-wayland=false
 

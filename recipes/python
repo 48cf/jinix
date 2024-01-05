@@ -22,7 +22,7 @@ build() {
     cd -
 
         _PYTHON_HOST_PLATFORM="linux-x86_64" \
-    autotools_configure_lib \
+    autotools_configure \
         --without-static-libpython \
         --infodir=${prefix}/share/info \
         --mandir=${prefix}/share/man \

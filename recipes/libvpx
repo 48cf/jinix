@@ -7,10 +7,7 @@ builddeps="base nasm which perl"
 deps="core-libs"
 
 build() {
-    ${source_dir}/configure \
-        --prefix=${prefix} \
-        --enable-shared \
-        --disable-static
+    autotools_configure
 
     make -j${parallelism}
 }

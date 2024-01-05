@@ -7,7 +7,7 @@ builddeps="base perl"
 deps="core-libs curl openssl nss"
 
 build() {
-    autotools_configure_lib
+    autotools_configure
 
     make -j${parallelism}
 }

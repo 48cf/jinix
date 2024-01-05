@@ -11,7 +11,6 @@ build() {
         --with-secure-path \
         --with-env-editor \
         --with-editor=${prefix}/bin/nano \
-        --docdir=/usr/share/doc/sudo-${version} \
         --with-passprompt="[sudo] password for %p: " \
         --with-all-insults
 

@@ -21,8 +21,7 @@ build() {
         -Dpam=true \
         -Dpamconfdir=/etc/pam.d \
         -Ddev-kvm-mode=0660 \
-        -Dnobody-group=nogroup \
-        -Ddocdir="${prefix}/share/doc/systemd-${version}"
+        -Dnobody-group=nogroup
 
     ninja -j${parallelism}
 }

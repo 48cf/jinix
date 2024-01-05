@@ -7,7 +7,7 @@ builddeps="base"
 deps="core-libs pam sqlite gdbm openssl"
 
 build() {
-    autotools_configure_lib \
+    autotools_configure \
         --enable-auth-sasldb \
         --with-dblib=gdbm \
         --with-dbpath=/var/lib/sasl/sasldb2 \

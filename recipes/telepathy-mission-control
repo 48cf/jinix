@@ -7,7 +7,7 @@ builddeps="base gobject-introspection vala python"
 deps="core-libs telepathy-glib python-dbus-python networkmanager upower"
 
 build() {
-    PYTHON=/usr/bin/python3 autotools_configure_lib
+    PYTHON=/usr/bin/python3 autotools_configure
 
     make -j${parallelism}
 }

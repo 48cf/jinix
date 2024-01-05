@@ -1,15 +1,12 @@
 cross_compile=yes
 
 name=libstdc++
-from_source=gcc-host
 revision=1
 hostdeps="gcc pkg-config"
 imagedeps="gcc"
 deps="glibc libgcc"
 
 build() {
-    true
-
     cd "${base_dir}"/host-builds/gcc/build
 
     make -j${parallelism} all-target-libstdc++-v3
@@ -21,7 +18,11 @@ package() {
     rm -rf tmp_libstdc++_dir
     mkdir tmp_libstdc++_dir
 
-    DESTDIR="$(realpath tmp_libstdc++_dir)" make install-strip-target-libstdc++-v3
+    DESTDIR="$(realpath tmp_libstdc++_dir)" make install-target-libstdc++-v3
+
+    # For some reason this also installs libgcc even though it shouldn't...
+    # Remove it.
+    rm -fv tmp_libstdc++_dir/usr/local/${OS_TRIPLET}/lib/libgcc*
 
     mkdir -p "${dest_dir}${prefix}"
 

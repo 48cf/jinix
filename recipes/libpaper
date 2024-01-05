@@ -8,8 +8,7 @@ deps="core-libs"
 
 build() {
     autotools_configure \
-        --enable-relocatable \
-        --docdir=${prefix}/share/doc/libpaper-${version}
+        --enable-relocatable
 
     make -j${parallelism}
 }

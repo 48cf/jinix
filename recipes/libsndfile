@@ -7,8 +7,7 @@ builddeps="base python"
 deps="core-libs alsa-lib flac libvorbis opus sqlite"
 
 build() {
-    autotools_configure_lib \
-        --docdir=${prefix}/share/doc/libsndfile-${version}
+    autotools_configure
 
     make -j${parallelism}
 }

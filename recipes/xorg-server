@@ -19,7 +19,6 @@ build() {
 
         CFLAGS="-Wno-error=array-bounds ${common_flags}" \
     autotools_configure \
-        --disable-static \
         --with-xkb-output=/var/lib/xkb \
         --with-fontrootdir=/usr/share/fonts/X11 \
         --enable-xorg \

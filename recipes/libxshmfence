@@ -7,7 +7,7 @@ builddeps="base"
 deps="core-libs xorg-util-macros xorg-proto libx11 libxtrans"
 
 build() {
-    autotools_configure_lib \
+    autotools_configure \
         --disable-futex
 
     make -j${parallelism}

@@ -8,8 +8,7 @@ deps="core-libs"
 
 build() {
     autotools_configure \
-        --disable-gcc-Werror \
-        --disable-static
+        --disable-gcc-Werror
 
     make -j${parallelism}
 }

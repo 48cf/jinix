@@ -7,7 +7,7 @@ builddeps="base nasm"
 deps="core-libs"
 
 build() {
-    autotools_configure_lib \
+    autotools_configure \
         --disable-cli
 
     make -j${parallelism}

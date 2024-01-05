@@ -8,7 +8,6 @@ deps="core-libs xorg-proto libx11"
 
 build() {
     autotools_configure \
-        --disable-nls \
         --with-xkb-rules-symlink=xorg
 
     make -j${parallelism}

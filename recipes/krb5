@@ -11,7 +11,7 @@ build() {
 
     cd src
     configure_script_path=./configure \
-    autotools_configure_lib \
+    autotools_configure \
         --runstatedir=/run \
         --with-system-et \
         --with-system-ss \

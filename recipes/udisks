@@ -13,7 +13,7 @@ else
 fi
 
 build() {
-    autotools_configure_lib \
+    autotools_configure \
         --enable-available-modules \
         --disable-man
 

@@ -7,7 +7,7 @@ builddeps="base"
 deps="core-libs libassuan gnupg swig"
 
 build() {
-    autotools_configure_lib
+    autotools_configure
 
     make PYTHONS= -j${parallelism}
 }

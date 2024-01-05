@@ -9,7 +9,7 @@ hostdeps="gcc pkg-config"
 deps="core-libs ncurses"
 
 build() {
-    autotools_configure_lib \
+    autotools_configure \
         --enable-multibyte \
         --with-curses
 

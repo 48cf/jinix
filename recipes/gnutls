@@ -7,8 +7,7 @@ builddeps="base"
 deps="core-libs libffi libunistring libtasn1 nettle p11-kit"
 
 build() {
-    autotools_configure_lib \
-        --docdir=/usr/share/doc/gnutls-${version} \
+    autotools_configure \
         --with-default-trust-store-pkcs11="pkcs11:"
 
     make -j${parallelism}

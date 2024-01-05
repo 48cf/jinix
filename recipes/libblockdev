@@ -7,7 +7,7 @@ builddeps="base gobject-introspection"
 deps="core-libs glib cryptsetup keyutils libbytesize libnvme lvm2 btrfs-progs mdadm parted nss"
 
 build() {
-    autotools_configure_lib \
+    autotools_configure \
         --with-python3 \
         --without-escrow \
         --without-gtk-doc \

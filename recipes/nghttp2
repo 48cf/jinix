@@ -7,9 +7,8 @@ builddeps="base"
 deps="core-libs libxml"
 
 build() {
-    autotools_configure_lib \
-        -enable-lib-only \
-        --docdir=${prefix}/share/doc/nghttp2-${version}
+    autotools_configure \
+        -enable-lib-only
 
     make -j${parallelism}
 }

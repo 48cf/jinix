@@ -7,7 +7,7 @@ builddeps="base gettext intltool"
 deps="core-libs libxfce4ui vte3"
 
 build() {
-    autotools_configure_lib
+    autotools_configure
 
     make -j${parallelism}
 }

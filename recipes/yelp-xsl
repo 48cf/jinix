@@ -7,7 +7,7 @@ builddeps="base python itstool"
 deps="core-libs libxslt"
 
 build() {
-    autotools_configure_lib
+    autotools_configure
 }
 
 package() {

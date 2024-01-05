@@ -1,19 +1,10 @@
 cross_compile=yes
 
 name=base-files
-from_source=base-files
+version=0.0
 revision=1
-
-build() {
-    true
-}
+source_dir="base-files"
 
 package() {
-    cp -rv ${source_dir}/. "${dest_dir}"/
-    ln -s usr/bin "${dest_dir}"/bin
-    ln -s usr/bin "${dest_dir}"/sbin
-    ln -s usr/lib "${dest_dir}"/lib
-    ln -s usr/lib "${dest_dir}"/lib64
-    ln -s bin "${dest_dir}"/usr/sbin
-    ln -s lib "${dest_dir}"/usr/lib64
+    cp -rpv ${source_dir}/. "${dest_dir}"/
 }

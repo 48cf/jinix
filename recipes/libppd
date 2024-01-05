@@ -8,7 +8,6 @@ deps="core-libs libcupsfilters"
 
 build() {
     autotools_configure \
-        --docdir=${prefix}/share/doc/libppd-${version} \
         --with-cups-rundir=/run/cups \
         --disable-mutool
 

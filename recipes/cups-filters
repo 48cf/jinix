@@ -8,7 +8,6 @@ deps="core-libs libcupsfilters libppd"
 
 build() {
     autotools_configure \
-        --docdir=${prefix}/share/doc/cups-filters-${version} \
         --disable-avahi \
         --disable-mutool
 

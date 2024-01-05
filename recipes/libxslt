@@ -7,8 +7,7 @@ builddeps="base python"
 deps="core-libs libxml"
 
 build() {
-    autotools_configure_lib \
-        --docdir=${prefix}/share/doc/libxslt-${version}
+    autotools_configure
 
     make -j${parallelism}
 }

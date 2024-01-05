@@ -7,7 +7,7 @@ builddeps="base gobject-introspection vala gettext"
 deps="core-libs libsoup"
 
 build() {
-    autotools_configure_lib
+    autotools_configure
 }
 
 package() {

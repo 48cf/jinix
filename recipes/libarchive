@@ -7,7 +7,7 @@ builddeps="base"
 deps="core-libs zlib xz-utils zstd libexpat libxml nettle lzo"
 
 build() {
-    autotools_configure_lib
+    autotools_configure
 
     make -j${parallelism}
 }

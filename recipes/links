@@ -7,7 +7,7 @@ builddeps="base"
 deps="core-libs openssl libevent libavif libpng libjpeg-turbo libtiff brotli bzip2 fontconfig freetype xz-utils libwebp libxext zstd libxt"
 
 build() {
-    autotools_configure_lib \
+    autotools_configure \
         --mandir=${prefix}/share/man \
         --enable-graphics \
         --with-avif \

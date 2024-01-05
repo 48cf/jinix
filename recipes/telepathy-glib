@@ -11,7 +11,7 @@ regenerate() {
 }
 
 build() {
-    PYTHON=/usr/bin/python3 autotools_configure_lib \
+    PYTHON=/usr/bin/python3 autotools_configure \
         --enable-vala-bindings
 
     make -j${parallelism}

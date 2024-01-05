@@ -7,7 +7,7 @@ builddeps="base"
 deps="core-libs bzip2 freetype libjpeg-turbo libpng libtiff libxext xz-utils"
 
 build() {
-    autotools_configure_lib \
+    autotools_configure \
         --enable-amd64
 
     make -j${parallelism}

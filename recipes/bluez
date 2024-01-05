@@ -15,7 +15,7 @@ fi
 build() {
 
     CFLAGS="$CFLAGS -Wl,--copy-dt-needed-entries" \
-    autotools_configure_lib \
+    autotools_configure \
         --disable-manpages \
         --enable-library 
 

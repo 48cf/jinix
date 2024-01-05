@@ -12,7 +12,7 @@ build() {
     DRACUT_VERSION="${version}" make dracut-version.sh
 
         configure_script_path=./configure \
-    autotools_configure_lib \
+    autotools_configure \
         --disable-documentation
 
     make -j${parallelism}

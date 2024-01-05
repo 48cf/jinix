@@ -7,7 +7,7 @@ builddeps="base"
 deps="core-libs dbus glib"
 
 build() {
-    autotools_configure_lib
+    autotools_configure
 
     make -j${parallelism}
 }

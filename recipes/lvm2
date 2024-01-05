@@ -16,7 +16,7 @@ build() {
     cp -rp ${source_dir}/. ./
 
     configure_script_path=./configure \
-    autotools_configure_lib \
+    autotools_configure \
         --enable-cmdlib \
         --enable-pkgconfig \
         --enable-udev_sync \

@@ -7,7 +7,7 @@ builddeps="base"
 deps="core-libs libsndfile"
 
 build() {
-    autotools_configure_lib \
+    autotools_configure \
         --enable-mp3rtp
 
     make -j${parallelism}

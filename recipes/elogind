@@ -9,7 +9,6 @@ deps="core-libs dbus eudev libcap libxslt pam"
 build() {
     meson_configure \
         -Dman=false \
-        -Ddocdir=${prefix}/share/doc/elogind-${version} \
         -Dcgroup-controller=elogind \
         -Ddev-kvm-mode=0660 \
         -Ddbuspolicydir=/etc/dbus-1/system.d

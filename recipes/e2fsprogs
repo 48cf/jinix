@@ -13,7 +13,7 @@ else
 fi
 
 build() {
-    autotools_configure_lib \
+    autotools_configure \
         --enable-elf-shlibs \
         --disable-libblkid \
         --disable-libuuid \

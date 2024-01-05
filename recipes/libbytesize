@@ -7,7 +7,7 @@ builddeps="base gettext"
 deps="core-libs pcre2 python-pygments python-six"
 
 build() {
-    autotools_configure_lib
+    autotools_configure
 
     make -j${parallelism}
 }

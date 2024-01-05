@@ -8,8 +8,7 @@ deps="core-libs libtirpc libnsl"
 
 build() {
     autotools_configure \
-        --enable-securedir=${prefix}/lib/security \
-        --docdir=${prefix}/share/doc/Linux-PAM-${version}
+        --enable-securedir=${prefix}/lib/security
 
     make -j${parallelism}
 }

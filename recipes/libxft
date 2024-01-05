@@ -7,7 +7,7 @@ builddeps="base"
 deps="core-libs xorg-util-macros xorg-proto libx11 libxrender freetype fontconfig"
 
 build() {
-    autotools_configure_lib
+    autotools_configure
 
     make -j${parallelism}
 }

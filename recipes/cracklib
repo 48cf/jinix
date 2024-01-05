@@ -13,7 +13,7 @@ regenerate() {
 
 build() {
 
-    PYTHON=python3 autotools_configure_lib \
+    PYTHON=python3 autotools_configure \
         --with-default-dict=/usr/lib/cracklib/pw_dict
 
     make -j${parallelism}

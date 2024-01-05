@@ -15,7 +15,6 @@ build() {
         -DCMAKE_SKIP_INSTALL_RPATH=YES \
         -DJAS_ENABLE_DOC=NO \
         -DALLOW_IN_SOURCE_BUILD=YES \
-        -DCMAKE_INSTALL_DOCDIR=${prefix}/share/doc/jasper-${version} \
         ${source_dir}
 
     ninja -j${parallelism}

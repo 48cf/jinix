@@ -22,7 +22,7 @@ build() {
         "
     fi
 
-    autotools_configure_lib \
+    autotools_configure \
         --disable-doxygen-docs \
         --disable-xml-docs \
         --with-system-pid-file=/run/dbus/pid \

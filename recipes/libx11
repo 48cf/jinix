@@ -7,9 +7,8 @@ builddeps="base"
 deps="core-libs xorg-util-macros xorg-proto libxcb libxtrans"
 
 build() {
-    autotools_configure_lib \
-        --disable-ipv6 \
-        --disable-malloc0returnsnull
+    autotools_configure \
+        --disable-ipv6
 
     make -j${parallelism}
 }

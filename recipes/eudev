@@ -8,7 +8,7 @@ builddeps="base gperf"
 deps="core-libs kmod"
 
 build() {
-    autotools_configure_lib \
+    autotools_configure \
         --disable-selinux
 
     make -j${parallelism}

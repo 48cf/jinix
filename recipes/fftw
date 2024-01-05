@@ -21,7 +21,7 @@ build() {
 
         mkdir -p "${_build_dir}/build-$x"
         cd "${_build_dir}/build-$x"
-        autotools_configure_lib $configure_flags
+        autotools_configure $configure_flags
         make -j${parallelism}
     done
 }

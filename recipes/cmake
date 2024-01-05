@@ -18,8 +18,7 @@ build() {
         --mandir=/share/man \
         --no-system-jsoncpp \
         --no-system-cppdap \
-        --no-system-librhash \
-        --docdir=/share/doc/cmake-${version}
+        --no-system-librhash
 
     make -j${parallelism}
 }

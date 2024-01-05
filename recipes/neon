@@ -9,7 +9,7 @@ deps="core-libs libxml nss openssl"
 build() {
     cp -rp ${source_dir}/. ./
 
-    autotools_configure_lib \
+    autotools_configure \
         --with-ssl
 
     make -j${parallelism}

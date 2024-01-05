@@ -11,7 +11,7 @@ build() {
     export CXXFLAGS=${CXXFLAGS/-fno-plt}
     export LDFLAGS=${LDFLAGS/,-z,now}
 
-    autotools_configure_lib
+    autotools_configure
 
     make -j${parallelism}
 }

@@ -8,7 +8,6 @@ deps="core-libs freetype mesa glu libx11 libxext"
 
 build() {
     autotools_configure \
-        --disable-static \
         --enable-autotools \
         --disable-gles1 \
         --disable-osmesa \

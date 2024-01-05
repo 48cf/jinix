@@ -10,7 +10,8 @@ hostdeps="gcc pkg-config"
 deps="core-libs gmp mpfr"
 
 build() {
-    autotools_configure_lib
+    autotools_configure
+
     make -j${parallelism}
 }
 

@@ -12,7 +12,7 @@ build() {
         systemd_args="--with-systemd-journal --with-systemd-suspend-resume"
     fi
 
-    autotools_configure_lib \
+    autotools_configure \
         --disable-maintainer-mode \
         --with-udev-base-dir=${prefix}/lib/udev \
         ${systemd_args}

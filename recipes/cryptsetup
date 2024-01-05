@@ -7,7 +7,7 @@ builddeps="base"
 deps="core-libs lvm2 json-c popt libpwquality"
 
 build() {
-    autotools_configure_lib \
+    autotools_configure \
         --disable-ssh-token \
         --disable-asciidoc
 

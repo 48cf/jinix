@@ -7,8 +7,7 @@ builddeps="base"
 deps="core-libs ncurses"
 
 build() {
-    autotools_configure \
-        --disable-nls
+    autotools_configure
 
     make -j${parallelism}
 }

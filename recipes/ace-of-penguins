@@ -7,8 +7,7 @@ builddeps="base"
 deps="core-libs libx11 libxpm libpng zlib"
 
 build() {
-    autotools_configure \
-        --disable-static
+    autotools_configure
 
     make -j${parallelism}
 }

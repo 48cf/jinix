@@ -9,7 +9,8 @@ deps="core-libs"
 build() {
     cp -rp "${source_dir}"/. ./
 
-    configure_script_path=./configure autotools_configure
+        configure_script_path=./configure \
+    autotools_configure
 
     make
 }

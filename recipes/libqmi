@@ -7,7 +7,7 @@ builddeps="base gobject-introspection python"
 deps="core-libs glib libgudev libmbim"
 
 build() {
-    PYTHON=python3 autotools_configure_lib
+    PYTHON=python3 autotools_configure
 
     make -j${parallelism}
 }

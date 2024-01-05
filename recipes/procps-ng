@@ -10,7 +10,6 @@ deps="core-libs ncurses"
 
 build() {
     autotools_configure \
-        --disable-static \
         --disable-kill
 
     make -j${parallelism}

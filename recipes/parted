@@ -7,7 +7,7 @@ builddeps="base"
 deps="core-libs lvm2 dosfstools pth"
 
 build() {
-    autotools_configure_lib
+    autotools_configure
 
     make -j${parallelism}
 }

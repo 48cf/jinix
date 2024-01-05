@@ -8,11 +8,3 @@ tarball_url="https://files.pythonhosted.org/packages/4b/d9/d0cf66484b7e28a9c42db
 tarball_blake2b="8873ce1eb0a04a8f561eaa9ea8332eb37ca8646e9ed2bb2f4723df0351b01d60ab94172ea34963b0084839b713b9a47e09ee00f82ec46297c7646565e4189ee4"
 builddeps="base"
 deps="python"
-
-build() {
-    true
-}
-
-package() {
-    true
-}

@@ -7,7 +7,8 @@ builddeps="base"
 deps="core-libs"
 
 build() {
-    configure_script_path=${source_dir}/source/configure autotools_configure_lib
+        configure_script_path=${source_dir}/source/configure \
+    autotools_configure
 
     make -j${parallelism}
 }
@@ -15,10 +16,5 @@ build() {
 package() {
     DESTDIR="${dest_dir}" make install
 
-    # figure out if we can call post_package_strip instead
-    mv "${dest_dir}${prefix}"/bin/icu-config ./icu-config.bak
-    strip "${dest_dir}${prefix}"/bin/*
-    mv ./icu-config.bak "${dest_dir}${prefix}"/bin/icu-config
-
-    strip "${dest_dir}${prefix}"/lib/*so.73.1
+    post_package_strip
 }

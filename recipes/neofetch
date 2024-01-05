@@ -6,10 +6,6 @@ tarball_blake2b="0739dc7bc2a90989dcd4dbdd6d14ce8ba62def2a9e069ae16a3a1435118e363
 builddeps="base"
 deps="bash"
 
-build() {
-    true
-}
-
 package() {
     mkdir -p "${dest_dir}"/usr/bin
     cp -pv "${source_dir}"/neofetch "${dest_dir}"/usr/bin/neofetch

@@ -7,8 +7,7 @@ builddeps="base"
 deps="core-libs pango cairo fontconfig libpng libjpeg-turbo libwebp freeglut"
 
 build() {
-    autotools_configure_lib \
-        --docdir="${prefix}/share/doc/graphviz-${version}"
+    autotools_configure
 
     make -j${parallelism}
 }

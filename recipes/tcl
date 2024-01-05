@@ -11,7 +11,7 @@ build() {
     SRCDIR=$(pwd)
     cd unix
     configure_script_path=./configure \
-    autotools_configure_lib \
+    autotools_configure \
         --mandir=${prefix}/share/man
 
     make -j${parallelism}

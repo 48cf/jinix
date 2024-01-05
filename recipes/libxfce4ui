@@ -7,7 +7,7 @@ builddeps="base gettext gobject-introspection perl python"
 deps="core-libs glib gtk+-3 libepoxy libice libx11 libxfce4util xfconf"
 
 build() {
-    autotools_configure_lib \
+    autotools_configure \
         --enable-epoxy \
         --with-vendor-info="Jinix"
 

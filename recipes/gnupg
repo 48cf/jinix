@@ -7,10 +7,7 @@ builddeps="base"
 deps="core-libs libassuan libgcrypt libksba npth gnutls libusb sqlite"
 
 build() {
-    autotools_configure_lib \
-        --localstatedir=/var \
-        --sysconfdir=/etc \
-        --docdir=${prefix}/share/doc/gnupg-${version} \
+    autotools_configure \
         --without-ldap
 
     make -j${parallelism}

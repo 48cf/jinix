@@ -7,7 +7,7 @@ builddeps="base gettext gobject-introspection perl vala"
 deps="core-libs glib libx11"
 
 build() {
-    autotools_configure_lib
+    autotools_configure
 
     make -j${parallelism}
 }

@@ -7,10 +7,9 @@ builddeps="base"
 deps="core-libs libpng"
 
 build() {
-    LIBS=-lm \
-    autotools_configure_lib \
-        --without-doxygen \
-        --docdir=/usr/share/doc/gavl-${version}
+        LIBS=-lm \
+    autotools_configure \
+        --without-doxygen
 
     make -j${parallelism}
 }

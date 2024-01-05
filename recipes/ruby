@@ -7,10 +7,9 @@ builddeps="base"
 deps="core-libs libyaml tk libffi openssl"
 
 build() {
-    autotools_configure_lib \
+    autotools_configure \
         --without-valgrind \
         --without-baseruby \
-        --docdir=${prefix}/share/doc/ruby-${version} \
         --disable-install-rdoc
 
     make -j${parallelism}

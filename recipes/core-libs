@@ -1,14 +1,5 @@
 cross_compile=yes
 
 name=core-libs
-from_source=glibc
 revision=1
 deps="glibc libgcc libstdc++ libatomic libxcrypt"
-
-build() {
-    true
-}
-
-package() {
-    true
-}

@@ -7,8 +7,7 @@ builddeps="base"
 deps="core-libs"
 
 build() {
-    autotools_configure_lib \
-        --docdir=/usr/share/doc/pcre-${version} \
+    autotools_configure \
         --enable-unicode-properties \
         --enable-pcre16 \
         --enable-pcre32 \

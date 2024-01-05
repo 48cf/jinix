@@ -9,8 +9,7 @@ hostdeps="gcc pkg-config"
 deps="core-libs zlib"
 
 build() {
-    autotools_configure \
-        --disable-static
+    autotools_configure
 
     make -j${parallelism}
 }

@@ -10,7 +10,7 @@ deps="glibc libgcc libstdc++"
 imagedeps="python-passlib"
 
 build() {
-    autotools_configure_lib \
+    autotools_configure \
         --enable-obsolete-api=yes \
         --disable-xcrypt-compat-files
 

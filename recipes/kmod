@@ -7,7 +7,7 @@ builddeps="base"
 deps="core-libs openssl xz-utils zlib zstd"
 
 build() {
-    autotools_configure_lib \
+    autotools_configure \
         --with-xz \
         --with-zlib \
         --with-zstd \

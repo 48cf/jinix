@@ -30,7 +30,7 @@ build() {
     cd ..
 
         FILE=${base_dir}/builds/file/build/src/file \
-    autotools_configure_lib \
+    autotools_configure \
         --enable-fsect-man5 \
         --enable-bzlib \
         --enable-xzlib \

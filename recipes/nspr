@@ -8,7 +8,7 @@ deps="core-libs"
 
 build() {
         configure_script_path=${source_dir}/nspr/configure \
-    autotools_configure_lib \
+    autotools_configure \
         --includedir=${prefix}/include/nspr \
         --enable-optimize \
         --disable-debug \

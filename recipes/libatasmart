@@ -13,13 +13,13 @@ else
 fi
 
 build() {
-    autotools_configure_lib
+    autotools_configure
 
     make -j${parallelism}
 }
 
 package() {
-    DESTDIR=${dest_dir} make docdir=${prefix}/share/doc/libatasmart-${version} install
+    DESTDIR=${dest_dir} make install
 
     post_package_strip
 }

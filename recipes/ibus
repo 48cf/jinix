@@ -17,7 +17,7 @@ build() {
     cp -rp ${source_dir}/. ./
 
     configure_script_path=./configure \
-    PYTHON=python3 autotools_configure_lib \
+    PYTHON=python3 autotools_configure \
         --disable-python2 \
         --disable-appindicator \
         --disable-gtk2 \

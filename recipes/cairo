@@ -7,7 +7,7 @@ builddeps="base"
 deps="core-libs freetype fontconfig libpng pixman libxcb libx11 libxext mesa libxrender glib"
 
 build() {
-    autotools_configure_lib \
+    autotools_configure \
         --enable-xlib-xcb \
         --enable-xml \
         --enable-tee \

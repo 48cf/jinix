@@ -7,7 +7,7 @@ builddeps="base"
 deps="core-libs libjpeg-turbo libpng freeglut sdl2 libtiff"
 
 build() {
-    autotools_configure_lib \
+    autotools_configure \
         --enable-libwebpmux \
         --enable-libwebpdemux \
         --enable-libwebpdecoder \

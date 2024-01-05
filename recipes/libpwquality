@@ -8,7 +8,7 @@ deps="core-libs pam cracklib"
 
 build() {
 
-    autotools_configure_lib \
+    autotools_configure \
         --with-securedir=/usr/lib/security \
         --disable-python-bindings
 

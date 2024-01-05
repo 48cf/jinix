@@ -12,17 +12,20 @@ OS_TRIPLET=x86_64-jinix-linux-gnu
 BUILD_MACHINE="$(${base_dir}/build-support/config.guess)"
 
 post_package_strip() {
-    strip_command="strip"
-    if [ "$cross_compile" = "yes" ]; then
-        strip_command="${OS_TRIPLET}-strip"
+    if [ -z "$strip_command" ]; then
+        strip_command="strip"
+        if [ "$cross_compile" = "yes" ]; then
+            strip_command="${OS_TRIPLET}-strip"
+        fi
     fi
 
     for f in $(find "${dest_dir}"); do
         if file "$f" | grep 'not stripped' >/dev/null; then
-            tmp=$(mktemp)
-            ${strip_command} "$f" -o "$tmp"
-            chmod --reference="$f" "$tmp"
-            mv -f "$tmp" "$f"
+            echo "* stripping '$f'..."
+            stripped_file="$(mktemp)"
+            ${strip_command} "$f" -o "$stripped_file"
+            chmod --reference="$f" "$stripped_file"
+            mv -f "$stripped_file" "$f"
         fi
     done
 }
@@ -49,11 +52,6 @@ autotools_configure() {
         --bindir=${prefix}/bin \
         --sbindir=${prefix}/bin \
         --libdir=${prefix}/lib \
-        "$@"
-}
-
-autotools_configure_lib() {
-    autotools_configure \
         --disable-static \
         --enable-shared \
         "$@"
@@ -85,11 +83,17 @@ meson_configure() {
         meson_source_dir="${source_dir}"
     fi
 
+    if [ "$cross_compile" = "yes" ]; then
+        cross_compile_meson_flags="--cross-file \"${base_dir}/build-support/cross_file.txt\""
+    fi
+
     meson setup "${meson_source_dir}" \
+        ${cross_compile_meson_flags} \
         --prefix=${prefix} \
         --sysconfdir=/etc \
         --libdir=lib \
         --sbindir=bin \
         --buildtype=release \
+        -Ddefault_library=shared \
         "$@"
 }

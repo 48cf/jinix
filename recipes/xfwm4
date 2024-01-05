@@ -8,7 +8,7 @@ deps="core-libs glib gtk+-3 libepoxy libwnck libx11 libxcomposite libxdamage lib
 
 build() {
         CFLAGS="$CFLAGS -Wl,--copy-dt-needed-entries"
-    autotools_configure_lib \
+    autotools_configure \
         --enable-epoxy \
         --enable-compositor \
         --enable-xpresent \

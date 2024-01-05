@@ -10,7 +10,6 @@ deps="core-libs bzip2 ncurses readline zlib"
 
 build() {
     autotools_configure \
-        --disable-static \
         --enable-unicode \
         --enable-jit \
         --enable-pcre2-16 \

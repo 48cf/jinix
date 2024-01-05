@@ -15,7 +15,6 @@ build() {
     cp -rp "${source_dir}"/. ./
 
     ./configure \
-        --docdir ${prefix}/share/doc/asciidoc \
         --prefix ${prefix}
 
     make build

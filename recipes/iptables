@@ -7,7 +7,7 @@ builddeps="base"
 deps="core-libs libpcap"
 
 build() {
-    autotools_configure_lib \
+    autotools_configure \
         --disable-nftables \
         --enable-libipq
 

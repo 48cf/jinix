@@ -7,7 +7,7 @@ builddeps="base gettext"
 deps="core-libs bzip2 xz-utils zlib zstd"
 
 build() {
-    autotools_configure_lib \
+    autotools_configure \
         --disable-libdebuginfod \
         --disable-debuginfod \
         --program-prefix="eu-" \

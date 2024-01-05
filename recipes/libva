@@ -7,7 +7,7 @@ builddeps="base"
 deps="core-libs libdrm libx11 libxcb libxext libxfixes wayland"
 
 build() {
-    autotools_configure_lib \
+    autotools_configure \
         --enable-drm \
         --enable-x11 \
         --enable-wayland

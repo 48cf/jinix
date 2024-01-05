@@ -7,7 +7,7 @@ builddeps="base flex bison"
 deps="core-libs bluez libnl libusb"
 
 build() {
-    autotools_configure_lib
+    autotools_configure
 
     make -j${parallelism}
 }

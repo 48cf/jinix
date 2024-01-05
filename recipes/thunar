@@ -7,8 +7,7 @@ builddeps="base gettext intltool"
 deps="core-libs exo libgudev pcre2"
 
 build() {
-    autotools_configure \
-        --docdir="${prefix}/share/doc/thunar-${version}"
+    autotools_configure
 
     make -j${parallelism}
 }

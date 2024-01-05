@@ -8,7 +8,6 @@ deps="core-libs cups glib ghostscript lcms poppler qpdf libexif libjpeg-turbo li
 
 build() {
     autotools_configure \
-        --docdir=${prefix}/share/doc/libcupsfilters-${version} \
         --disable-mutool
 
     make -j${parallelism}

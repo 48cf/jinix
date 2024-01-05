@@ -14,7 +14,7 @@ build() {
     echo "sbindir=${prefix}/bin" >> configparms
     echo "rootsbindir=${prefix}/bin" >> configparms
 
-    autotools_configure_lib \
+    autotools_configure \
         --with-headers=${sysroot}${prefix}/include \
         --enable-bind-now \
         --enable-cet \

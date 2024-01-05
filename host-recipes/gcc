@@ -45,5 +45,8 @@ build() {
 
 package() {
     cd build
-    DESTDIR="${dest_dir}" make install-strip-gcc
+    DESTDIR="${dest_dir}" make install-gcc
+
+        strip_command=strip \
+    post_package_strip
 }

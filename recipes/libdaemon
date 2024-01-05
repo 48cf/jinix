@@ -13,7 +13,7 @@ build() {
 }
 
 package() {
-    DESTDIR="${dest_dir}" make docdir=${prefix}/share/doc/libdaemon-${version} install
+    DESTDIR="${dest_dir}" make install
 
     post_package_strip
 }

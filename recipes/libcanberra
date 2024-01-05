@@ -7,7 +7,7 @@ builddeps="base libtool"
 deps="core-libs libvorbis alsa-lib gstreamer gtk+-3 pulseaudio libtool"
 
 build() {
-    autotools_configure_lib \
+    autotools_configure \
         --disable-oss \
         --disable-gtk
 
@@ -15,7 +15,7 @@ build() {
 }
 
 package() {
-    DESTDIR="${dest_dir}" make docdir=/usr/share/doc/libcanberra-${version} install
+    DESTDIR="${dest_dir}" make install
 
     post_package_strip
 }

@@ -7,7 +7,7 @@ builddeps="base python gobject-introspection vala gettext"
 deps="core-libs glib"
 
 build() {
-    autotools_configure_lib
+    autotools_configure
 }
 
 package() {
