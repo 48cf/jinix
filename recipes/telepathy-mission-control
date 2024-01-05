@@ -1,0 +1,19 @@
+name=telepathy-mission-control
+version=5.16.6
+revision=1
+tarball_url="https://telepathy.freedesktop.org/releases/telepathy-mission-control/telepathy-mission-control-${version}.tar.gz"
+tarball_blake2b="82055a86d102292dec44ddeadd99458b1cf083f5d74be09326cfae41d627f1792468a180b5cb9f5bb5712989198cc46116f39e41343ca35b3bac101e3db6003a"
+builddeps="base gobject-introspection vala python"
+deps="core-libs telepathy-glib python-dbus-python networkmanager upower"
+
+build() {
+    PYTHON=/usr/bin/python3 autotools_configure_lib
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
