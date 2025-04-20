@@ -1,0 +1,93 @@
+diff --git xbps-clean/configure xbps-workdir/configure
+index 57df730..86c58c2 100755
+--- xbps-clean/configure
++++ xbps-workdir/configure
+@@ -677,7 +677,9 @@ fi
+ # pkg-config is required to know dependencies for static linking.
+ #
+ printf "Checking for pkg-config ... "
+-PKGCONFIG_BIN=$(_which pkg-config)
++
++PKGCONFIG_FOR_TARGET="${TARGET}-pkg-config"
++PKGCONFIG_BIN=$(_which $PKGCONFIG_FOR_TARGET)
+ if [ -z "$PKGCONFIG_BIN" ]; then
+ 	echo "not found, exiting."
+ 	exit 1
+@@ -691,14 +693,14 @@ fi
+ LIBARCHIVE_REQVER=3.3.3
+ 
+ printf "Checking for libarchive >= ${LIBARCHIVE_REQVER}  via pkg-config ... "
+-if ! pkg-config --atleast-version=${LIBARCHIVE_REQVER} libarchive; then
++if ! $PKGCONFIG_FOR_TARGET --atleast-version=${LIBARCHIVE_REQVER} libarchive; then
+ 	echo "libarchive.pc file not found, exiting."
+ 	exit 1
+ else
+-	echo "found version $(pkg-config --modversion libarchive)."
+-	echo "CFLAGS += $(pkg-config --cflags libarchive)" >>$CONFIG_MK
+-	echo "LDFLAGS +=        $(pkg-config --libs libarchive)" >>$CONFIG_MK
+-	echo "STATIC_LIBS +=    $(pkg-config --libs --static libarchive)" \
++	echo "found version $($PKGCONFIG_FOR_TARGET --modversion libarchive)."
++	echo "CFLAGS += $($PKGCONFIG_FOR_TARGET --cflags libarchive)" >>$CONFIG_MK
++	echo "LDFLAGS +=        $($PKGCONFIG_FOR_TARGET --libs libarchive)" >>$CONFIG_MK
++	echo "STATIC_LIBS +=    $($PKGCONFIG_FOR_TARGET --libs --static libarchive)" \
+ 		>>$CONFIG_MK
+ fi
+ 
+@@ -706,17 +708,17 @@ fi
+ # libssl with pkg-config support is required.
+ #
+ printf "Checking for libssl via pkg-config ... "
+-if pkg-config --exists 'libssl' && ! pkg-config --exists libtls ; then
+-	echo "found OpenSSL version $(pkg-config --modversion libssl)."
+-elif pkg-config --exists libssl libtls; then
+-	echo "found LibreSSL version $(pkg-config --modversion libssl)."
++if $PKGCONFIG_FOR_TARGET --exists 'libssl' && ! $PKGCONFIG_FOR_TARGET --exists libtls ; then
++	echo "found OpenSSL version $($PKGCONFIG_FOR_TARGET --modversion libssl)."
++elif $PKGCONFIG_FOR_TARGET --exists libssl libtls; then
++	echo "found LibreSSL version $($PKGCONFIG_FOR_TARGET --modversion libssl)."
+ else
+ 	echo "libssl.pc file not found or incompatible version detected, exiting."
+ 	exit 1
+ fi
+-echo "CFLAGS += $(pkg-config --cflags libssl)" >>$CONFIG_MK
+-echo "LDFLAGS +=        $(pkg-config --libs libssl)" >>$CONFIG_MK
+-echo "STATIC_LIBS +=    $(pkg-config --libs --static libssl)" \
++echo "CFLAGS += $($PKGCONFIG_FOR_TARGET --cflags libssl)" >>$CONFIG_MK
++echo "LDFLAGS +=        $($PKGCONFIG_FOR_TARGET --libs libssl)" >>$CONFIG_MK
++echo "STATIC_LIBS +=    $($PKGCONFIG_FOR_TARGET --libs --static libssl)" \
+ 	>>$CONFIG_MK
+ 
+ #
+@@ -734,13 +736,13 @@ fi
+ #
+ if [ "$BUILD_TESTS" = "yes" ]; then
+ 	printf "Checking for ATF via pkg-config ... "
+-	if ! pkg-config --atleast-version=0.15 atf-c; then
++	if ! $PKGCONFIG_FOR_TARGET --atleast-version=0.15 atf-c; then
+ 		echo "ATF >= 0.15 not found in PKG_CONFIG_LIBDIR, exiting."
+ 		exit 1
+ 	fi
+-	echo "found version $(pkg-config --modversion atf-c)."
+-	echo "TEST_CFLAGS += $(pkg-config --cflags atf-c)" >>$CONFIG_MK
+-	echo "TEST_LDFLAGS += $(pkg-config --libs atf-c)" >>$CONFIG_MK
++	echo "found version $($PKGCONFIG_FOR_TARGET --modversion atf-c)."
++	echo "TEST_CFLAGS += $($PKGCONFIG_FOR_TARGET --cflags atf-c)" >>$CONFIG_MK
++	echo "TEST_LDFLAGS += $($PKGCONFIG_FOR_TARGET --libs atf-c)" >>$CONFIG_MK
+ 	echo "BUILD_TESTS = yes" >>$CONFIG_MK
+ 	BUILD_TESTS_VALUE=yes
+ else
+diff --git xbps-clean/lib/Makefile xbps-workdir/lib/Makefile
+index 847bfdd..4342225 100644
+--- xbps-clean/lib/Makefile
++++ xbps-workdir/lib/Makefile
+@@ -93,8 +93,8 @@ install: all
+ 	install -d $(DESTDIR)$(LIBDIR)
+ 	install -m 644 libxbps.a $(DESTDIR)$(LIBDIR)
+ 	install -m 755 $(LIBXBPS_SHLIB) $(DESTDIR)$(LIBDIR)
+-	cp -a libxbps.so $(DESTDIR)$(LIBDIR)
+-	cp -a libxbps.so.$(LIBXBPS_MAJOR) $(DESTDIR)$(LIBDIR)
++	cp libxbps.so $(DESTDIR)$(LIBDIR)
++	cp libxbps.so.$(LIBXBPS_MAJOR) $(DESTDIR)$(LIBDIR)
+ 
+ .PHONY: uninstall
+ uninstall:
