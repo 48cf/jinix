@@ -1,7 +1,5 @@
 #! /bin/sh
 
-cross_compile=yes
-
 name=procps-ng
 version=4.0.5
 revision=1

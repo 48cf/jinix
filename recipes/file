@@ -1,7 +1,5 @@
 #! /bin/sh
 
-cross_compile=yes
-
 name=file
 version=5.46
 revision=1
