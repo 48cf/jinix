@@ -1,0 +1,12 @@
+diff --git llvm-clean/llvm/tools/llvm-exegesis/lib/SubprocessMemory.cpp llvm-workdir/llvm/tools/llvm-exegesis/lib/SubprocessMemory.cpp
+index ce0ce91..6e2b612 100644
+--- llvm-clean/llvm/tools/llvm-exegesis/lib/SubprocessMemory.cpp
++++ llvm-workdir/llvm/tools/llvm-exegesis/lib/SubprocessMemory.cpp
+@@ -16,6 +16,7 @@
+ #ifdef __linux__
+ #include <fcntl.h>
+ #include <sys/mman.h>
++#include <sys/stat.h>
+ #include <sys/syscall.h>
+ #include <unistd.h>
+ #endif
