@@ -1,3 +1,16 @@
+diff --git mlibc-clean/abis/linux/fcntl.h mlibc-workdir/abis/linux/fcntl.h
+index b2215a2..34cbe85 100644
+--- mlibc-clean/abis/linux/fcntl.h
++++ mlibc-workdir/abis/linux/fcntl.h
+@@ -103,6 +103,8 @@ struct f_owner_ex {
+ #endif /* _GNU_SOURCE */
+ 
+ #define F_OWNER_TID 0
++#define F_OWNER_PID 1
++#define F_OWNER_PGRP 2
+ 
+ #define POSIX_FADV_NORMAL 0
+ #define POSIX_FADV_RANDOM 1
 diff --git mlibc-clean/abis/linux/ipc.h mlibc-workdir/abis/linux/ipc.h
 index b5f9f11..46abff4 100644
 --- mlibc-clean/abis/linux/ipc.h
