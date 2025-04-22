@@ -4,4 +4,4 @@ name=base
 skip_pkg_check=yes
 version=0.0
 revision=1
-deps="base-files bash binutils core-libs coreutils linux"
+deps="base-files bash binutils core-libs coreutils linux ca-certificates"
