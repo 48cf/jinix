@@ -10,7 +10,7 @@ imagedeps="build-essential cmake ninja-build git"
 hostdeps="gcc pkg-config"
 deps="core-libs ncurses zlib zstd libffi binutils"
 
-build() {
+configure() {
         cmake_source_dir="${source_dir}/llvm" \
     cmake_configure \
         -UBUILD_SHARED_LIBS \
@@ -29,7 +29,9 @@ build() {
         -DCLANG_CONFIG_FILE_SYSTEM_DIR=/etc/clang \
         -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;lld" \
         -Wno-dev
+}
 
+build() {
     ninja -j${parallelism}
 }
 
