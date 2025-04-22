@@ -3,46 +3,21 @@
 name=file
 version=5.46
 revision=1
-tarball_url="http://ftp.astron.com/pub/file/file-${version}.tar.gz"
+tarball_url="https://astron.com/pub/file/file-${version}.tar.gz"
 tarball_blake2b="2b1df136f01c253cc490b483c644403da0674692ef97ef9e1239878328cfb8ce2bc418c14626145719c69acab00d56b63b5340a2b56c276c996b1e6ad1bfe9b6"
 source_hostdeps="automake autoconf libtool pkg-config"
-imagedeps="gcc"
-hostdeps="gcc pkg-config"
+hostdeps="gcc autoconf automake libtool pkg-config file"
 deps="core-libs bzip2 xz zlib zstd"
 
 prepare() {
-    autoreconf -fvi
+    autotools_recursive_regen
+}
+
+configure() {
+    autotools_configure
 }
 
 build() {
-    mkdir -p ./build
-    cd ./build
-
-    if ! [ -f built ]; then
-        # Build a host version of file
-        autotools_configure \
-            --disable-shared \
-            --disable-libseccomp \
-            --disable-bzlib \
-            --disable-xzlib \
-            --disable-zlib
-
-        make -j${parallelism} -C src magic.h
-        make -j${parallelism} -C src file
-        touch built
-    fi
-
-    cd ..
-
-        FILE=${base_dir}/builds/file/build/src/file \
-    autotools_configure \
-        --enable-fsect-man5 \
-        --enable-bzlib \
-        --enable-xzlib \
-        --enable-zlib \
-        --enable-zstdlib \
-        --disable-libseccomp
-
     make -j${parallelism}
 }
 

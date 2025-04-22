@@ -22,6 +22,7 @@ prepare() {
 }
 
 configure() {
+    autotools_configure \
         CFLAGS_FOR_BUILD="$HOST_CFLAGS" \
         CPPFLAGS_FOR_BUILD="$HOST_CPPFLAGS" \
         CXXFLAGS_FOR_BUILD="$HOST_CXXFLAGS" \
@@ -30,7 +31,6 @@ configure() {
         CPPFLAGS_FOR_TARGET="$TARGET_CPPFLAGS" \
         CXXFLAGS_FOR_TARGET="$TARGET_CXXFLAGS" \
         LDFLAGS_FOR_TARGET="$TARGET_LDFLAGS" \
-    autotools_configure \
         --target=${OS_TRIPLET} \
         --with-sysroot=/ \
         --with-build-sysroot=${sysroot_dir} \

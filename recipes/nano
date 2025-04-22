@@ -13,17 +13,20 @@ prepare() {
     autotools_recursive_regen
 }
 
-build() {
-    gl_cv_func_strcasecmp_works=yes autotools_configure \
-		--docdir=/usr/share/doc/nano-8.4 \
-		--enable-cross-guesses=risky \
-        CFLAGS=-DSLOW_BUT_NO_HACKS
+configure() {
+        gl_cv_func_strcasecmp_works=yes \
+    autotools_configure
+}
 
+build() {
     make -j${parallelism}
 }
 
 package() {
     DESTDIR="${dest_dir}" make install
+
+    mkdir -p "${dest_dir}"/etc
+    cp -v "${base_dir}"/build-support/nano/nanorc "${dest_dir}"/etc/
 
     post_package_strip
 }

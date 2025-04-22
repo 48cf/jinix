@@ -1,7 +1,5 @@
 #! /bin/sh
 
-#! /bin/sh
-
 name=python
 repology_srcname=python
 version=3.13.3
