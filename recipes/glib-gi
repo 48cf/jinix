@@ -5,8 +5,8 @@ skip_pkg_check=yes
 from_source=glib
 revision=1
 imagedeps="meson ninja-build python3-docutils python3"
-hostdeps="gcc pkg-config"
-deps="core-libs gobject-introspection"
+hostdeps="gcc pkg-config gobject-introspection glib"
+deps="core-libs pcre2 libffi gobject-introspection"
 
 configure() {
     meson_configure \
