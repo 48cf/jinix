@@ -1,0 +1,27 @@
+#! /bin/sh
+
+name=glib-gi
+skip_pkg_check=yes
+from_source=glib
+revision=1
+imagedeps="meson ninja-build python3-docutils python3"
+hostdeps="gcc pkg-config"
+deps="core-libs gobject-introspection"
+
+configure() {
+    meson_configure \
+        -Dglib_debug=disabled \
+        -Dman-pages=enabled \
+        -Dsysprof=disabled \
+        -Dintrospection=enabled
+}
+
+build() {
+    gi_env ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
