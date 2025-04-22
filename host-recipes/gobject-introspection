@@ -1,0 +1,31 @@
+#! /bin/sh
+
+name=gobject-introspection
+revision=1
+from_source="gobject-introspection"
+imagedeps="build-essential bison flex git meson ninja-build python3 libpython3-dev pkg-config libpcre2-dev libffi-dev"
+hostdeps="gcc glib"
+
+configure() {
+    meson setup "${source_dir}" \
+        --prefix=${prefix} \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --libdir=lib \
+        --sbindir=bin \
+        --buildtype=release \
+        -Ddefault_library=shared \
+        -Dgtk_doc=false \
+        -Dbuild_introspection_data=false
+}
+
+build() {
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    strip_command=strip \
+        post_package_strip
+}
