@@ -1,5 +1,8 @@
 #! /bin/bash
 
+export LD_PRELOAD=""
+export LD_LIBRARY_PATH=""
+
 binpath="$1"
 shift
 
@@ -12,8 +15,6 @@ if [ ! -x "$binpath" ]; then
     echo "Error: $binpath is not an executable file." >&2
     exit 1
 fi
-
-# readelf -a "$binpath"
 
 if ! readelf -h "$binpath" >/dev/null 2>&1; then
         LD_PRELOAD="${RUN_WRAPPER_LD_PRELOAD}" \
