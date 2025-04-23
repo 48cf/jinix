@@ -6,9 +6,9 @@ version_short=1.10
 revision=1
 tarball_url="https://download.gnome.org/sources/json-glib/${version_short}/json-glib-${version}.tar.xz"
 tarball_blake2b="125ba305d5d33ecb1a1fbe46322c5035c7f97bd49e8eeef26e3c9c5d829693978fdc10bbe3d926cd4d07f8fd80c9df282d5ff7fe80ab4a6ab8e17c93e9d362d4"
-imagedeps="build-essential meson ninja-build patchelf python3 libglib2.0-dev-bin"
-hostdeps="gcc pkg-config"
-deps="core-libs mlibc-run-wrapper glib gobject-introspection"
+imagedeps="build-essential meson ninja-build patchelf python3"
+hostdeps="gcc pkg-config glib gobject-introspection"
+deps="core-libs mlibc-run-wrapper glib glib-gi gobject-introspection"
 
 configure() {
     meson_configure

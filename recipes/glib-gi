@@ -4,7 +4,7 @@ name=glib-gi
 skip_pkg_check=yes
 from_source=glib
 revision=1
-imagedeps="meson ninja-build python3-docutils python3"
+imagedeps="build-essential meson ninja-build python3-docutils python3 patchelf"
 hostdeps="gcc pkg-config gobject-introspection glib"
 deps="core-libs pcre2 libffi gobject-introspection"
 
@@ -21,7 +21,13 @@ build() {
 }
 
 package() {
-    DESTDIR="${dest_dir}" ninja install
+    temp_dest_dir=$(mktemp -d)
 
-    post_package_strip
+    DESTDIR="${temp_dest_dir}" ninja install
+
+    mkdir -p "${dest_dir}${prefix}/share/gir-1.0"
+    mkdir -p "${dest_dir}${prefix}/lib/girepository-1.0"
+
+    cp -rpv "${temp_dest_dir}${prefix}/share/gir-1.0/"* "${dest_dir}${prefix}/share/gir-1.0/"
+    cp -rpv "${temp_dest_dir}${prefix}/lib/girepository-1.0/"* "${dest_dir}${prefix}/lib/girepository-1.0/"
 }
