@@ -149,7 +149,7 @@ gi_env() {
 }
 
 vala_env() {
-        GI_GIR_PATH="${sysroot_dir}${prefix}share/gir-1.0" \
+        GI_GIR_PATH="${sysroot_dir}${prefix}/share/gir-1.0" \
         VALADIR="${sysroot_dir}${prefix}/share/vala/vapi" \
         VAPIGEN="${build_dir}/build-support/cross-vapigen" \
         VALAC="${build_dir}/build-support/cross-valac" \
