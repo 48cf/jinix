@@ -15,8 +15,7 @@ prepare() {
 }
 
 configure() {
-    autotools_configure \
-        --docdir=${prefix}/share/doc/libxext
+    autotools_configure
 }
 
 build() {

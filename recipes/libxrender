@@ -15,8 +15,7 @@ prepare() {
 }
 
 configure() {
-    autotools_configure \
-        --docdir=${prefix}/share/doc/libxrender
+    autotools_configure
 }
 
 build() {

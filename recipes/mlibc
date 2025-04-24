@@ -21,7 +21,7 @@ configure() {
         -Ddefault_library=both \
         -Dlibgcc_dependency=false \
         -Duse_freestnd_hdrs=enabled \
-        -Dlinux_kernel_headers=${sysroot_dir}/usr/include
+        -Dlinux_kernel_headers=${sysroot_dir}${prefix}/include
 }
 
 build() {

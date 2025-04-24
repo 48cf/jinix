@@ -19,7 +19,7 @@ configure() {
 }
 
 build() {
-    make -j${parallelism} GROFFBIN=groff GROFF_BIN_PATH=${prefix}/bin
+    make -j${parallelism} GROFFBIN=groff GROFF_BIN_PATH=/usr/bin
 }
 
 package() {

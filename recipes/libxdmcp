@@ -15,8 +15,7 @@ prepare() {
 }
 
 configure() {
-    autotools_configure \
-        --docdir=${prefix}/share/doc/libxdmcp
+    autotools_configure
 }
 
 build() {

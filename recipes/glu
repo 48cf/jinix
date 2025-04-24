@@ -10,8 +10,8 @@ hostdeps="gcc pkg-config"
 deps="core-libs mesa"
 
 configure() {
-	meson_configure \
-		-Dgl_provider=gl
+    meson_configure \
+        -Dgl_provider=gl
 }
 
 build() {
