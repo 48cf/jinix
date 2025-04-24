@@ -13,9 +13,11 @@ prepare() {
     autoreconf -fvi
 }
 
-build() {
+configure() {
     autotools_configure
+}
 
+build() {
     make -j${parallelism}
 }
 

@@ -9,13 +9,13 @@ source_hostdeps="automake autoconf libtool pkg-config"
 hostdeps="gcc pkg-config"
 deps="core-libs libffi libunistring libtasn1 nettle p11-kit zlib brotli zstd libidn2"
 
-regenerate() {
+prepare() {
     autotools_recursive_regen
 }
 
 configure() {
     autotools_configure \
-        --docdir=/usr/share/doc/gnutls-${version} \
+        --docdir=${prefix}/share/doc/gnutls-${version} \
         --with-default-trust-store-pkcs11="pkcs11:" \
         --enable-openssl-compatibility
 }

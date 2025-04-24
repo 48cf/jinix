@@ -13,14 +13,14 @@ deps="core-libs readline"
 prepare() {
     autotools_recursive_regen
 
-	# # libgpg-error does not know about mlibc, teach it
-	cp -v ${source_dir}/src/syscfg/lock-obj-pub.x86_64-unknown-linux-gnu.h \
-		${source_dir}/src/syscfg/lock-obj-pub.linux-mlibc.h
+    # libgpg-error does not know about mlibc, teach it
+    cp -v ${source_dir}/src/syscfg/lock-obj-pub.x86_64-unknown-linux-gnu.h \
+        ${source_dir}/src/syscfg/lock-obj-pub.linux-mlibc.h
 }
 
 configure() {
-	autotools_configure \
-		--enable-threads \
+    autotools_configure \
+        --enable-threads \
         --enable-install-gpg-error-config
 }
 

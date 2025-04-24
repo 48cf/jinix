@@ -15,9 +15,9 @@ prepare() {
 }
 
 configure() {
-	autotools_configure \
-		--disable-gtk-doc \
-		--disable-doc
+    autotools_configure \
+        --disable-gtk-doc \
+        --disable-doc
 }
 
 build() {
@@ -27,7 +27,7 @@ build() {
 package() {
     DESTDIR=${dest_dir} make install
 
-	DESTDIR=${dest_dir} make -C doc/reference install-data-local
+    DESTDIR=${dest_dir} make -C doc/reference install-data-local
 
     post_package_strip
 }

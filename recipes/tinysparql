@@ -10,8 +10,8 @@ hostdeps="gcc pkg-config glib gobject-introspection vala"
 deps="core-libs mlibc-run-wrapper glib glib-gi gobject-introspection vala json-glib icu sqlite dbus libsoup3"
 
 prepare() {
-    sed -e "s/'generate'/&, '--no-namespace-dir'/"         \
-        -e "/--output-dir/s/@OUTPUT@/&\/tinysparql-3.9.2/" \
+    sed -e "s/'generate'/&, '--no-namespace-dir'/" \
+        -e "/--output-dir/s/@OUTPUT@/&\/tinysparql-${version}/" \
         -i ${source_dir}/docs/reference/meson.build
 }
 

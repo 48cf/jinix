@@ -13,12 +13,14 @@ prepare() {
     autotools_recursive_regen
 }
 
-build() {
+configure() {
     autotools_configure \
         --disable-kill \
-		--enable-watch8bit \
-		--docdir=/usr/share/doc/procps-ng-4.0.5
+        --enable-watch8bit \
+        --docdir=${prefix}/share/doc/procps-ng-${version}
+}
 
+build() {
     make -j${parallelism}
 }
 

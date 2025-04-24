@@ -9,13 +9,13 @@ source_hostdeps="automake autoconf libtool pkg-config"
 hostdeps="gcc autoconf automake libtool pkg-config"
 deps="core-libs"
 
-regenerate() {
+prepare() {
     autotools_recursive_regen
 }
 
 configure() {
     autotools_configure \
-        --docdir=/usr/share/doc/libunistring-${version}
+        --docdir=${prefix}/share/doc/libunistring-${version}
 }
 
 build() {

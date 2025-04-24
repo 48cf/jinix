@@ -16,7 +16,7 @@ prepare() {
 
 build() {
     autotools_configure \
-        --docdir=/usr/share/doc/libxslt-1.1.43 \
+        --docdir=${prefix}/share/doc/libxslt-${version} \
         --without-python
 
     make -j${parallelism}

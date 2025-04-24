@@ -10,22 +10,24 @@ imagedeps="build-essential meson ninja-build"
 hostdeps="gcc autoconf automake libtool pkg-config"
 deps="core-libs libintl"
 
-build() {
+configure() {
     meson_configure \
-		-Ddocdir=/usr/share/doc/Linux-PAM-1.7.0 \
-		-Ddocs=disabled
+        -Ddocdir=${prefix}/share/doc/Linux-PAM-${version} \
+        -Ddocs=disabled
+}
 
-    ninja
+build() {
+    ninja -j${parallelism}
 }
 
 package() {
     DESTDIR=${dest_dir} ninja install
 
     rm -fv ${dest_dir}/etc/pam.d/other
-    chmod -v 4755 ${dest_dir}/usr/bin/unix_chkpwd
+    chmod -v 4755 ${dest_dir}${prefix}/bin/unix_chkpwd
 
-	mkdir -pv ${dest_dir}/etc/pam.d/
-	cp -v "${base_dir}"/build-support/pam/* "${dest_dir}"/etc/pam.d/
+    mkdir -pv ${dest_dir}/etc/pam.d/
+    cp -v "${base_dir}"/build-support/pam/* "${dest_dir}"/etc/pam.d/
 
     post_package_strip
 }

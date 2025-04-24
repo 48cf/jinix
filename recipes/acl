@@ -15,7 +15,7 @@ prepare() {
 
 configure() {
     autotools_configure \
-		--docdir=/usr/share/doc/acl-2.3.2
+        --docdir=${prefix}/share/doc/acl-${version}
 }
 
 build() {

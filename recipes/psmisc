@@ -13,9 +13,11 @@ prepare() {
     autotools_recursive_regen
 }
 
-build() {
+configure() {
     autotools_configure
+}
 
+build() {
     make -j${parallelism}
 }
 

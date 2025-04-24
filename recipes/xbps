@@ -22,7 +22,9 @@ configure() {
 }
 
 build() {
-    make AR="$ARCHITECTURE-linux-mlibc-ar" RANLIB="$ARCHITECTURE-linux-mlibc-ranlib" -j${parallelism}
+        AR="$ARCHITECTURE-linux-mlibc-ar" \
+        RANLIB="$ARCHITECTURE-linux-mlibc-ranlib" \
+    make -j${parallelism}
 }
 
 package() {

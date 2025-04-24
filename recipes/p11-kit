@@ -9,7 +9,7 @@ imagedeps="build-essential meson ninja-build"
 hostdeps="gcc pkg-config"
 deps="core-libs libtasn1"
 
-regenerate() {
+prepare() {
     sed '20,$ d' -i ${source_dir}/trust/trust-extract-compat
 
     cat >> ${source_dir}/trust/trust-extract-compat << "EOF"
@@ -21,10 +21,12 @@ regenerate() {
 EOF
 }
 
-build() {
+configure() {
     meson_configure \
         -Dtrust_paths=/etc/pki/anchors
+}
 
+build() {
     ninja -j${parallelism}
 }
 

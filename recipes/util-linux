@@ -18,12 +18,12 @@ build() {
         --disable-su \
         --disable-setpriv \
         --disable-runuser \
-		--disable-lscpu \
+        --disable-lscpu \
         --disable-pylibmount \
         --without-python \
-		--disable-liblastlog2 \
-		ADJTIME_PATH=/var/lib/hwclock/adjtime \
-        --docdir=/usr/share/doc/util-linux-2.41
+        --disable-liblastlog2 \
+        ADJTIME_PATH=/var/lib/hwclock/adjtime \
+        --docdir=${prefix}/share/doc/util-linux-${version}
 
     make -j${parallelism}
 }

@@ -8,12 +8,14 @@ tarball_blake2b="14257918034500fb35ba559f53c15bdb04bf632e5710a40fe19a2b4d3621b70
 hostdeps="gcc pkg-config"
 deps="core-libs"
 
-build() {
+configure() {
     cp -rp "${source_dir}"/. ./
 
         configure_script_path=./configure \
     autotools_configure
+}
 
+build() {
     make -j${parallelism}
 }
 

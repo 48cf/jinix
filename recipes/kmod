@@ -7,11 +7,13 @@ imagedeps="build-essential meson ninja-build"
 hostdeps="gcc pkg-config"
 deps="core-libs openssl xz zlib zstd"
 
-build() {
+configure() {
     meson_configure \
-		-Dmanpages=false
+        -Dmanpages=false
+}
 
-    ninja
+build() {
+    ninja -j${parallelism}
 }
 
 package() {

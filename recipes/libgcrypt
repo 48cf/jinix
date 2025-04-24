@@ -14,13 +14,15 @@ prepare() {
     autotools_recursive_regen
 }
 
-build() {
+configure() {
     autotools_configure \
         --disable-doc \
         --disable-dev-random \
         --disable-asm \
         --with-libgpg-error-prefix=${sysroot_dir}/${prefix}
+}
 
+build() {
     make -j${parallelism}
 }
 

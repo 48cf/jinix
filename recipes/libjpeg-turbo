@@ -11,7 +11,7 @@ deps="core-libs"
 
 configure() {
     cmake_configure \
-        -DCMAKE_INSTALL_DOCDIR=/usr/share/doc/libjpeg-turbo-${version} \
+        -DCMAKE_INSTALL_DOCDIR=${prefix}/share/doc/libjpeg-turbo-${version} \
         -DWITH_JPEG8=ON
 }
 

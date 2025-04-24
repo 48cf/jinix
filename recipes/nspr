@@ -30,7 +30,7 @@ configure() {
 }
 
 build() {
-	# Build a native nsinstall to use during the build
+    # Build a native nsinstall to use during the build
     make CC=gcc CXX=g++ -C config/ -j${parallelism}
     mv -v config/nsinstall config/native-nsinstall
     sed -s 's#/nsinstall$#/native-nsinstall#' -i config/autoconf.mk

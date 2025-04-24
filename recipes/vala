@@ -14,8 +14,8 @@ prepare() {
 }
 
 configure() {
-	autotools_configure \
-		--disable-valadoc
+    autotools_configure \
+        --disable-valadoc
 }
 
 build() {
