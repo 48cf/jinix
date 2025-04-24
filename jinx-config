@@ -155,3 +155,15 @@ vala_env() {
         VALAC="${build_dir}/build-support/cross-valac" \
     "$@"
 }
+
+python_site_dir() {
+    if ! [ -f ${base_dir}/recipes/python ]; then
+        echo "Python recipe not found" >&2
+        return 1
+    fi
+
+    python_version="$(. ${base_dir}/recipes/python && echo $version)"
+    python_site_dir="${prefix}/lib/python${python_version%*.*}/site-packages"
+
+    echo "$python_site_dir"
+}
