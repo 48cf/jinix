@@ -28,5 +28,8 @@ build() {
 package() {
     DESTDIR="${dest_dir}" ninja install
 
+    # Move documentation to the correct location
+    mv ${dest_dir}${prefix}/share/doc/Tsparql-3.0 ${dest_dir}${prefix}/share/doc/tinysparql
+
     post_package_strip
 }
