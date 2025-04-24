@@ -1,10 +1,10 @@
 #! /bin/sh
 
 name=libjpeg-turbo
-version=3.0.1
+version=3.1.0
 revision=1
-tarball_url="https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-${version}.tar.gz"
-tarball_blake2b="9d2c784edd6493c4d9e2379fc4a8f0844e440d7afe774b231f611034d481dcf1be35979fb7d731a5a8f99000780f1343b7934a59df22c1dcaef295b6294ea494"
+tarball_url="https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/tags/${version}.tar.gz"
+tarball_blake2b="cd02ff01525a8a720f28a3766f18941244cd8e6776ae22735730e0392dc9e9e0659c075aaad7e3371d7e3f9306a4dc8e4514fcb90a00e5ce442f0534ec393862"
 imagedeps="cmake ninja-build"
 hostdeps="gcc pkg-config"
 deps="core-libs"
@@ -13,7 +13,6 @@ configure() {
     cmake_configure \
         -DCMAKE_INSTALL_DOCDIR=/usr/share/doc/libjpeg-turbo-${version} \
         -DWITH_JPEG8=ON
-        # -DCMAKE_SYSTEM_PROCESSOR=x86_64
 }
 
 build() {
