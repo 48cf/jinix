@@ -18,7 +18,7 @@ build() {
 }
 
 package() {
-    DESTDIR="${dest_dir}" ninja install
+    DESTDIR="${dest_dir}" gi_env vala_env ninja install
 
     post_package_strip
 }
