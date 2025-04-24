@@ -6,8 +6,8 @@ revision=1
 tarball_url="https://ftp.gnu.org/gnu/nettle/nettle-${version}.tar.gz"
 tarball_blake2b="da2e82e647904e855a0e0bd1efee3b610b33de1a722f5d652deeca083d1983c5ee66754233a0917d3bb91bb5a527a3e80cd5fe18f7c25986076b2388910995b5"
 source_hostdeps="automake autoconf libtool pkg-config"
-hostdeps="gcc pkg-config"
 imagedeps="build-essential"
+hostdeps="gcc autoconf automake libtool pkg-config"
 deps="core-libs gmp"
 
 prepare() {
@@ -24,8 +24,6 @@ build() {
 
 package() {
     DESTDIR="${dest_dir}" make install
-
-    chmod -v 755 "${dest_dir}"/usr/lib/lib{hogweed,nettle}.so
 
     post_package_strip
 }

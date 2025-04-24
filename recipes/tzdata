@@ -16,11 +16,9 @@ prepare() {
     sed -i 's/sbin/bin/g' Makefile
 }
 
-configure() {
-    cp -rp ${source_dir}/. ./
-}
-
 build() {
+    cp -rp ${source_dir}/. ./
+
     make \
         CC="$OS_TRIPLET-gcc" \
         AR="$OS_TRIPLET-ar" \

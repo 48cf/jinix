@@ -8,11 +8,9 @@ tarball_blake2b="4c197c7d630edc7184b57fd2b33fb422a69120e2db2994bc326e772278bca9f
 hostdeps="gcc pkg-config"
 deps="core-libs"
 
-configure() {
-    cp -rp "${source_dir}"/. ./
-}
-
 build() {
+    cp -rp "${source_dir}"/. ./
+
     make \
         CC=${OS_TRIPLET}-gcc \
         CFLAGS="$TARGET_CFLAGS -std=c99" \
