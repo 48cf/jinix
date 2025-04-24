@@ -1,0 +1,25 @@
+#! /bin/sh
+
+name=wayland
+version=1.23.1
+revision=1
+tarball_url="https://gitlab.freedesktop.org/wayland/wayland/-/releases/${version}/downloads/wayland-${version}.tar.xz"
+tarball_blake2b="74784b537a6e28610466ff1549286cea9ff8b9ca914afa26a07f177bbe0be56b80de037d5eb5d07a38bf02a9041c32e62c896facd5417c1435571640ad8f87b2"
+imagedeps="meson ninja-build libwayland-bin pkg-config"
+hostdeps="gcc pkg-config"
+deps="core-libs libxml libffi libexpat"
+
+configure() {
+	meson_configure \
+        -Ddocumentation=false
+}
+
+build() {
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
