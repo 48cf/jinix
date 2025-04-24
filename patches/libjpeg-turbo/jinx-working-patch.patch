@@ -1,0 +1,73 @@
+diff --git libjpeg-turbo-clean/example.c libjpeg-turbo-workdir/example.c
+index 4a82695..80cb011 100644
+--- libjpeg-turbo-clean/example.c
++++ libjpeg-turbo-workdir/example.c
+@@ -31,6 +31,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
++#include <strings.h>
+ 
+ #ifdef _WIN32
+ #define strcasecmp  stricmp
+diff --git libjpeg-turbo-clean/md5/md5cmp.c libjpeg-turbo-workdir/md5/md5cmp.c
+index 42b94ce..0c8a44f 100644
+--- libjpeg-turbo-clean/md5/md5cmp.c
++++ libjpeg-turbo-workdir/md5/md5cmp.c
+@@ -28,6 +28,7 @@
+ 
+ #include <stdio.h>
+ #include <string.h>
++#include <strings.h>
+ #include "./md5.h"
+ #include "../tjutil.h"
+ 
+diff --git libjpeg-turbo-clean/tjbench.c libjpeg-turbo-workdir/tjbench.c
+index e053dc6..500c838 100644
+--- libjpeg-turbo-clean/tjbench.c
++++ libjpeg-turbo-workdir/tjbench.c
+@@ -33,6 +33,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
++#include <strings.h>
+ #include <ctype.h>
+ #include <math.h>
+ #include <errno.h>
+diff --git libjpeg-turbo-clean/tjexample.c libjpeg-turbo-workdir/tjexample.c
+index 579ebe5..568d5b2 100644
+--- libjpeg-turbo-clean/tjexample.c
++++ libjpeg-turbo-workdir/tjexample.c
+@@ -39,6 +39,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
++#include <strings.h>
+ #include <errno.h>
+ #include <turbojpeg.h>
+ 
+diff --git libjpeg-turbo-clean/tjunittest.c libjpeg-turbo-workdir/tjunittest.c
+index dcd5006..9a033b7 100644
+--- libjpeg-turbo-clean/tjunittest.c
++++ libjpeg-turbo-workdir/tjunittest.c
+@@ -38,6 +38,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
++#include <strings.h>
+ #include <limits.h>
+ #include <errno.h>
+ #include "tjutil.h"
+diff --git libjpeg-turbo-clean/turbojpeg-mp.c libjpeg-turbo-workdir/turbojpeg-mp.c
+index 5699869..1cd926a 100644
+--- libjpeg-turbo-clean/turbojpeg-mp.c
++++ libjpeg-turbo-workdir/turbojpeg-mp.c
+@@ -29,6 +29,8 @@
+ /* TurboJPEG API functions that must be compiled for multiple data
+    precisions */
+ 
++#include <strings.h>
++
+ #if BITS_IN_JSAMPLE == 8
+ #define _JSAMPLE  JSAMPLE
+ #define _JSAMPROW  JSAMPROW
