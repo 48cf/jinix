@@ -16,8 +16,7 @@ prepare() {
 configure() {
     autotools_configure \
         --disable-kill \
-        --enable-watch8bit \
-        --docdir=${prefix}/share/doc/procps-ng-${version}
+        --enable-watch8bit
 }
 
 build() {

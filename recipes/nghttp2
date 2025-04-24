@@ -15,8 +15,7 @@ prepare() {
 
 configure() {
     autotools_configure \
-        --enable-lib-only \
-        --docdir=${prefix}/share/doc/nghttp2-${version}
+        --enable-lib-only
 }
 
 build() {

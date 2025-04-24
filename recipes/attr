@@ -14,8 +14,7 @@ prepare() {
 }
 
 configure() {
-    autotools_configure \
-        --docdir=${prefix}/share/doc/attr-${version}
+    autotools_configure
 }
 
 build() {

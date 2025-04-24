@@ -29,7 +29,6 @@ configure() {
         -Dnobody-group=nogroup \
         -Dsysupdate=disabled \
         -Dukify=disabled \
-        -Ddocdir=${prefix}/share/doc/systemd-${version} \
         -Dcoredump=false \
         -Dfirstboot=false \
         -Dtimesyncd=false \

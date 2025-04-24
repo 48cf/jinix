@@ -19,7 +19,6 @@ configure() {
 
         configure_script_path=./configure \
     autotools_configure \
-        --docdir=${prefix}/share/doc/gnutls-${version} \
         --with-default-trust-store-pkcs11="pkcs11:" \
         --enable-openssl-compatibility
 }
