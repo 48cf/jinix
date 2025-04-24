@@ -1,0 +1,50 @@
+#! /bin/sh
+
+name=sdl2
+version=2.30.11
+revision=1
+tarball_url="https://github.com/libsdl-org/SDL/releases/download/release-${version}/SDL2-${version}.tar.gz"
+tarball_blake2b="e6038cbf79bec299fae9cfdc4b84ff3e28343abe782942af17e052d7da93111ea04a2ae15b063bfa0ad0d13a1810890dd29d895189f7f417f1bccce715badde1"
+imagedeps="cmake ninja-build libwayland-bin"
+hostdeps="gcc pkg-config"
+# TODO: Add more dependencies here and make it a more complete build
+deps="core-libs libx11 libxext libxcursor libxi libxfixes libxrandr libxrender libxxf86vm mesa dbus libxkbcommon"
+
+configure() {
+    cmake_configure \
+        -DSDL_ALTIVEC=OFF \
+        -DSDL_DISKAUDIO=OFF \
+        -DSDL_VIDEO_OPENGL=ON \
+        -DSDL_PTHREADS=ON \
+        -DSDL_PTHREADS_SEM=OFF \
+        -DSDL_OSS=OFF \
+        -DSDL_ALSA=OFF \
+        -DSDL_JACK=OFF \
+        -DSDL_ESD=OFF \
+        -DSDL_PULSEAUDIO=OFF \
+        -DSDL_ARTS=OFF \
+        -DSDL_NAS=OFF \
+        -DSDL_SNDIO=OFF \
+        -DSDL_FUSIONSOUND=OFF \
+        -DSDL_LIBSAMPLERATE=OFF \
+        -DSDL_RPATH=OFF \
+        -DSDL_DIRECTX=OFF \
+        -DSDL_WASAPI=OFF \
+        -DSDL_RENDER_D3D=OFF \
+        -DSDL_VIDEO_VULKAN=OFF \
+        -DSDL_HIDAPI=OFF \
+        -DSDL_SHARED=ON \
+        -DSDL_STATIC=OFF
+}
+
+build() {
+    ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    rm "${dest_dir}${prefix}"/lib/{libSDL2_test.a,libSDL2main.a}
+
+    post_package_strip
+}
