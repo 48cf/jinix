@@ -1,0 +1,26 @@
+#! /bin/sh
+
+name=at-spi2-core
+version=2.56.1
+revision=1
+tarball_url="https://download.gnome.org/sources/at-spi2-core/2.56/at-spi2-core-${version}.tar.xz"
+tarball_blake2b="bee557e2ad4c4d66234f294d13ed3ad7f3c4d3c1d31c10e269d4e805556555ecc0837ab8bbb811a7f90df5379f5c0913bd7b665784cf6d1fcda1cb069f2464eb"
+imagedeps="build-essential meson ninja-build python3 patchelf"
+hostdeps="gcc pkg-config gobject-introspection glib vala"
+deps="core-libs dbus glib libxml libxtst gobject-introspection glib-gi"
+
+configure() {
+    meson_configure \
+        -Dintrospection=enabled \
+        -Dgtk2_atk_adaptor=false
+}
+
+build() {
+    gi_env ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
