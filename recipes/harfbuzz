@@ -1,0 +1,45 @@
+#! /bin/sh
+
+name=harfbuzz
+version=11.1.0
+revision=1
+tarball_url="https://github.com/harfbuzz/harfbuzz/releases/download/${version}/harfbuzz-${version}.tar.xz"
+tarball_blake2b="e59bacf346740d464eef0d6b8172f88e020512519163799a9da8d0b4f30e14a5b065870725ab6f0ea7bf83a06d7cc3065267763dc66a3a5387eea81836fa5d6c"
+imagedeps="build-essential meson ninja-build python3 patchelf"
+hostdeps="gcc pkg-config gobject-introspection glib"
+deps="core-libs graphite2 glib glib-gi gobject-introspection zlib freetype2 cairo icu"
+
+configure() {
+    cp -rp "${source_dir}"/. ./
+
+    mkdir build && cd build
+
+        meson_source_dir=.. \
+    meson_configure \
+        -Dcpp_std=c++17 \
+        -Dgraphite2=enabled \
+        -Dglib=enabled \
+        -Dgobject=enabled \
+        -Dicu=enabled \
+        -Dfreetype=enabled \
+        -Dcairo=enabled \
+        -Dtests=disabled \
+        -Dintrospection=enabled
+
+    cd ..
+}
+
+build() {
+    cd build
+
+    gi_env ninja -j${parallelism}
+}
+
+package() {
+    cd build
+    
+    DESTDIR="${dest_dir}" ninja install
+
+    post_package_strip
+}
+
