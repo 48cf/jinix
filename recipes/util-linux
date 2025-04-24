@@ -21,8 +21,7 @@ build() {
         --disable-lscpu \
         --disable-pylibmount \
         --without-python \
-        --disable-liblastlog2 \
-        ADJTIME_PATH=/var/lib/hwclock/adjtime
+        --disable-liblastlog2
 
     make -j${parallelism}
 }
