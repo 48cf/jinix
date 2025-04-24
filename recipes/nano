@@ -15,8 +15,7 @@ prepare() {
 
 configure() {
         gl_cv_func_strcasecmp_works=yes \
-    autotools_configure \
-        --docdir=${dest_dir}/usr/share/doc/nano
+    autotools_configure
 }
 
 build() {
