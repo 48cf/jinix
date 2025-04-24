@@ -1,0 +1,26 @@
+#! /bin/sh
+
+name=libsass
+version=3.6.6
+revision=1
+tarball_url="https://github.com/sass/libsass/archive/${version}/libsass-${version}.tar.gz"
+tarball_blake2b="c26dc47d129c8cc3a40e0b537504f9d046fff5ce9dab57f20f25484610bb614d51b78e7ffcce96b2a61b14c33807700cf8fb9d7cbe39340fd9c898f9f34171c9"
+source_hostdeps="automake autoconf libtool pkg-config"
+hostdeps="gcc autoconf automake libtool pkg-config"
+deps="core-libs"
+
+prepare() {
+    autoreconf -fvi
+}
+
+build() {
+    autotools_configure
+
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
