@@ -5,7 +5,7 @@ version=3.49.1
 revision=1
 tarball_url="https://sqlite.org/2025/sqlite-autoconf-3490100.tar.gz"
 tarball_blake2b="08f9379977b9a7962de5283cb532ecdd500e6e9b00d5e64e14e323777b47ea90e15745528d441328b7907060b7f594dc5054b327b471189477e595c0575c43a0"
-imagedeps="build-essential patchelf"
+imagedeps="build-essential"
 hostdeps="gcc pkg-config"
 deps="core-libs readline zlib"
 
@@ -24,6 +24,7 @@ configure() {
         --bindir=${prefix}/bin \
         --sbindir=${prefix}/bin \
         --libdir=${prefix}/lib \
+        --soname=legacy \
         --disable-static \
         --enable-shared \
         --enable-fts4 \
@@ -37,10 +38,6 @@ build() {
 
 package() {
     DESTDIR="${dest_dir}" make install
-
-    # Add an soname to the shared library
-    soname="libsqlite3.so.${version}"
-    patchelf --set-soname ${soname} "${dest_dir}${prefix}/lib/${soname}"
 
     post_package_strip
 }
