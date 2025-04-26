@@ -19,6 +19,7 @@ return; \
     autotools_recursive_regen
 }
 
+# TODO: Disable introspection
 configure() {
     autotools_configure \
         --disable-mono \
@@ -33,7 +34,8 @@ configure() {
         --with-dbus-system-address='unix:path=/run/dbus/system_bus_socket' \
         --enable-compat-howl \
         --enable-compat-libdns_sd \
-        --with-systemdsystemunitdir=${prefix}/lib/systemd/system
+        --with-systemdsystemunitdir=${prefix}/lib/systemd/system \
+        --disable-introspection
 }
 
 build() {
