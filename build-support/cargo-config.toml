@@ -1,0 +1,9 @@
+[build]
+rustc = "/base_dir/host-pkgs/rust/usr/local/bin/rustc"
+target = "x86_64-unknown-linux-mlibc"
+
+[target.x86_64-unknown-linux-mlibc]
+linker = "x86_64-linux-mlibc-gcc"
+
+[patch.crates-io]
+libc = { path = "/base_dir/sources/rust-libc" }

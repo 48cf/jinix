@@ -25,6 +25,57 @@ case "$ARCHITECTURE" in
         ;;
 esac
 
+CARGO_HOME="${JINX_CACHE_DIR}/cargo-home"
+
+if [ "${build_dir}/build-support/cargo-config.toml" -nt "${CARGO_HOME}/config.toml" ]; then
+    mkdir -p "${CARGO_HOME}"
+    cp -rpv "${build_dir}/build-support/cargo-config.toml" "${CARGO_HOME}/config.toml"
+fi
+
+cargo_inject_patches() {
+    if [ -z "$cargo_manifest_path" ]; then
+        cargo_manifest_path="${source_dir}/Cargo.toml"
+    fi
+
+    crates_to_patch="
+        libc=0.2.172
+    "
+
+    for crate in ${crates_to_patch}; do
+        crate_name="$(echo "${crate}" | cut -d'=' -f1)"
+        crate_version="$(echo "${crate}" | cut -d'=' -f2)"
+
+        # Check if the crate has multiple versions
+        if [[ "$crate_version" == *","* ]]; then
+            # Update each version separately
+            IFS=',' read -r -a versions <<< "${crate_version}"
+
+            for version in "${versions[@]}"; do
+                echo "* injecting ${crate_name} ${version}..."
+                    CARGO_HOME="${CARGO_HOME}" \
+                cargo update \
+                    --manifest-path "${cargo_manifest_path}" \
+                    "${crate_name}@${version}" > /dev/null 2>&1 || true
+            done
+        else
+            echo "* injecting ${crate_name} ${crate_version}..."
+                CARGO_HOME="${CARGO_HOME}" \
+            cargo update \
+                --manifest-path "${cargo_manifest_path}" \
+                --package "${crate_name}" \
+                --precise "${crate_version}" > /dev/null 2>&1 || true
+        fi
+    done
+}
+
+package_rust_crate() {
+    package() {
+        mkdir -p "${dest_dir}${prefix}"/src/rust/${name}
+        cp -r "${source_dir}"/* "${dest_dir}${prefix}"/src/rust/${name}/
+        post_package_strip
+    }
+}
+
 post_package_strip() {
     if [ -z "$strip_command" ]; then
         strip_command="${OS_TRIPLET}-strip"
