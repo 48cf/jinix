@@ -5,14 +5,13 @@ version=2.42.12
 revision=1
 tarball_url="https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-${version}.tar.xz"
 tarball_blake2b="718a96c9efb836a275692ccbc403df0eb285918c5867d344406f660898c7ce8aad8cce7187faf7f6e9cdcfd1b051d5384f57644d946b888baddbaafb8f99309c"
-imagedeps="meson ninja-build python3 patchelf binutils"
+imagedeps="build-essential meson ninja-build python3 patchelf"
 hostdeps="gcc pkg-config glib gobject-introspection"
 deps="core-libs glib libjpeg-turbo libpng libx11 libtiff shared-mime-info glib-gi"
 
 configure() {
     meson_configure \
         -Dothers=enabled \
-      	--wrap-mode=nofallback \
         -Dman=false \
         -Dintrospection=enabled
 }
