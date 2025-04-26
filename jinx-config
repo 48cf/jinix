@@ -198,6 +198,11 @@ gi_env() {
         CXX="${OS_TRIPLET}-g++" \
         AR="${OS_TRIPLET}-ar" \
         OBJDUMP="${OS_TRIPLET}-objdump" \
+        INTROSPECTION_COMPILER_ENV="/usr/local/bin/g-ir-compiler" \
+        INTROSPECTION_SCANNER_ENV="/usr/local/bin/g-ir-scanner" \
+        INTROSPECTION_GENERATE_ENV="/usr/local/bin/g-ir-generate" \
+        INTROSPECTION_TYPELIBDIR_ENV="${sysroot_dir}${prefix}/lib/girepository-1.0" \
+        INTROSPECTION_GIRDIR_ENV="${sysroot_dir}${prefix}/share/gir-1.0" \
         GI_LDD_WRAPPER="${build_dir}/build-support/mlibc-ldd-wrapper" \
         GI_CROSS_LAUNCHER="${build_dir}/build-support/mlibc-run-wrapper" \
         RUN_WRAPPER_LD_LIBRARY_PATH="${sysroot_dir}${prefix}/lib" \
