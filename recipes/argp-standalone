@@ -1,0 +1,30 @@
+#! /bin/sh
+
+name=argp-standalone
+version=1.5.0
+revision=1
+tarball_url="https://github.com/argp-standalone/argp-standalone/archive/refs/tags/${version}.tar.gz"
+tarball_blake2b="01f4ceb3ad18be534605db09db708f17ab5df6bfd8fc0259451a70163c8e9bda92c4f9445e98d6b6cc0bc19bc61b8b122eddacf96bd026fc2ed0db00dda318f3"
+source_hostdeps="automake autoconf libtool pkg-config"
+hostdeps="gcc autoconf automake libtool pkg-config"
+deps="core-libs"
+
+prepare() {
+    autotools_recursive_regen
+}
+
+configure() {
+    autotools_configure
+}
+
+build() {
+    make AR=${OS_TRIPLET}-ar LDFLAGS="-lintl" -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+	mkdir -pv ${dest_dir}/${prefix}/include
+	cp -v ${source_dir}/argp.h ${dest_dir}/${prefix}/include/
+
+    post_package_strip
+}
