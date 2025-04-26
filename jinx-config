@@ -49,25 +49,29 @@ cargo_inject_patches() {
         crate_version="$(echo "${crate}" | cut -d'=' -f2)"
 
         # Check if the crate has multiple versions
-        if [[ "$crate_version" == *","* ]]; then
-            # Update each version separately
-            IFS=',' read -r -a versions <<< "${crate_version}"
-
-            for version in "${versions[@]}"; do
-                echo "* injecting ${crate_name} ${version}..."
+        case "$crate_version" in
+            *","*)
+                # Update each version separately
+                old_ifs="$IFS"
+                IFS=','
+                for version in ${crate_version}; do
+                    echo "* injecting ${crate_name} ${version}..."
+                        CARGO_HOME="${CARGO_HOME}" \
+                    cargo update \
+                        --manifest-path "${cargo_manifest_path}" \
+                        "${crate_name}@${version}" > /dev/null 2>&1 || true
+                done
+                IFS="$old_ifs"
+                ;;
+            *)
+                echo "* injecting ${crate_name} ${crate_version}..."
                     CARGO_HOME="${CARGO_HOME}" \
                 cargo update \
                     --manifest-path "${cargo_manifest_path}" \
-                    "${crate_name}@${version}" > /dev/null 2>&1 || true
-            done
-        else
-            echo "* injecting ${crate_name} ${crate_version}..."
-                CARGO_HOME="${CARGO_HOME}" \
-            cargo update \
-                --manifest-path "${cargo_manifest_path}" \
-                --package "${crate_name}" \
-                --precise "${crate_version}" > /dev/null 2>&1 || true
-        fi
+                    --package "${crate_name}" \
+                    --precise "${crate_version}" > /dev/null 2>&1 || true
+                ;;
+        esac
     done
 }
 
