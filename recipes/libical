@@ -25,12 +25,13 @@ prepare() {
     cd ..
 }
 
+# TODO: Introspection support
 configure() {
     ICAL_NATIVE_TOOL=${source_dir}/cross-build/bin/ical-glib-src-generator gi_env vala_env cmake_configure \
         -DSHARED_ONLY=yes \
         -DICAL_BUILD_DOCS=false \
-        -DGOBJECT_INTROSPECTION=true \
-        -DICAL_GLIB_VAPI=true \
+        -DGOBJECT_INTROSPECTION=false \
+        -DICAL_GLIB_VAPI=false \
         -DIMPORT_ICAL_GLIB_SRC_GENERATOR="${base_dir}"/build-support/libical/ical.cmake
 }
 
