@@ -1,0 +1,71 @@
+#! /bin/sh
+
+name=librsvg
+version=2.60.0
+version_short=2.60
+revision=1
+tarball_url="https://download.gnome.org/sources/librsvg/${version_short}/librsvg-${version}.tar.xz"
+tarball_blake2b="8831ff0aa9f2dc564ab6fd9d48d44e770831fd76107bf4ba883b1e549fdc4bcd63425336b817d6da373123e1d861faa32e205c0377b260c662c1d919a1ff42ec"
+source_hostdeps="rust"
+imagedeps="build-essential meson ninja-build python3 patchelf"
+hostdeps="gcc pkg-config rust cargo-cbuild gobject-introspection glib vala"
+deps="core-libs cairo harfbuzz pango gdk-pixbuf libidn2 libunistring libxml glib glib-gi gobject-introspection vala"
+# Needed for cargo to download crates during the build process.
+source_allow_network=yes
+allow_network=yes
+
+prepare() {
+    cargo_inject_patches
+}
+
+configure() {
+    vala_env meson_configure \
+        -Dtriplet=x86_64-unknown-linux-mlibc
+}
+
+build() {
+        CARGO_HOME="${CARGO_HOME}" \
+    gi_env vala_env ninja -j${parallelism}
+}
+
+package() {
+        DESTDIR="${dest_dir}" \
+        CARGO_HOME="${CARGO_HOME}" \
+    ninja install
+
+    # Move installed pixbuf loaders to the correct location.
+    mv "${dest_dir}${sysroot_dir}${prefix}"/lib/gdk-pixbuf-2.0/ "${dest_dir}${prefix}"/lib/
+
+    post_package_strip
+}
+
+# name=librsvg
+# version=2.58.5
+# revision=1
+# tarball_url="https://gitlab.gnome.org/GNOME/librsvg/-/archive/${version}/librsvg-${version}.tar.gz"
+# tarball_blake2b="f3e520a96f4cfe6d741fa8a0e61656807164e28d572a1cd728a667818a8067112f12fe3f31c946051ba95a5de364775315884cfddd0b7ca589524095004f088c"
+# source_hostdeps="autoconf automake libtool pkg-config rust"
+# source_deps="gobject-introspection glib glib-gi"
+# imagedeps="build-essential meson ninja-build python3 patchelf"
+# hostdeps="gcc pkg-config rust cargo-cbuild gobject-introspection glib vala"
+# deps="core-libs cairo harfbuzz pango gdk-pixbuf libidn2 libunistring libxml glib glib-gi vala"
+# # Needed for cargo to download crates during the build process.
+# source_allow_network=yes
+# allow_network=yes
+
+# prepare() {
+#     autotools_recursive_regen
+#     cargo_inject_patches
+# }
+
+# configure() {
+#     gi_env vala_env autotools_configure \
+#         RUST_TARGET=x86_64-unknown-linux-mlibc \
+#         ac_cv_path_GDK_PIXBUF_QUERYLOADERS=yes \
+#         cross_compiling=yes
+# }
+
+# build() {
+#         CARGO_HOME="${CARGO_HOME}" \
+#     gi_env vala_env make -j${parallelism}
+# }
