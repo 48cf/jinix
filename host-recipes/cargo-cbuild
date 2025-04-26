@@ -20,7 +20,7 @@ build() {
         CARGO_HOME="${CARGO_HOME}" \
     cargo build \
         --release \
-        --frozen \
+        --offline \
         --target x86_64-unknown-linux-gnu
 }
 
