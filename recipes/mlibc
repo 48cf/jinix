@@ -9,7 +9,7 @@ commit=e541835297be1192c9a5ca539e69adfcf083eaca
 imagedeps="build-essential meson ninja-build"
 hostdeps="gcc pkg-config libgcc-binaries"
 builddeps="freestnd-c-hdrs freestnd-cxx-hdrs frigg"
-deps="mlibc-headers"
+deps="linux-headers mlibc-headers"
 
 configure() {
         CFLAGS="$TARGET_CFLAGS" \
