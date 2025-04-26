@@ -187,6 +187,64 @@ index 0eff228..39b7e2e 100644
  #endif /* !__MLIBC_ABI_ONLY */
  
  #ifdef __cplusplus
+diff --git mlibc-clean/options/linux/include/scsi/scsi.h mlibc-workdir/options/linux/include/scsi/scsi.h
+index fd9cf82..76097d9 100644
+--- mlibc-clean/options/linux/include/scsi/scsi.h
++++ mlibc-workdir/options/linux/include/scsi/scsi.h
+@@ -9,10 +9,22 @@
+ #define START_STOP 0x1b
+ #define ALLOW_MEDIUM_REMOVAL 0x1e
+ 
++#define TYPE_DISK 0x00
++#define TYPE_TAPE 0x01
++#define TYPE_PROCESSOR 0x03
++#define TYPE_WORM 0x04
++#define TYPE_ROM  0x05
++#define TYPE_SCANNER 0x06
++#define TYPE_MOD 0x07
++#define TYPE_MEDIUM_CHANGER 0x08
++#define TYPE_ENCLOSURE 0x0d
++#define TYPE_NO_LUN 0x7f
++
+ #define SCSI_IOCTL_GET_IDLUN 0x5382
+ #define SCSI_IOCTL_TAGGED_ENABLE 0x5383
+ #define SCSI_IOCTL_TAGGED_DISABLE 0x5384
+ #define SCSI_IOCTL_PROBE_HOST 0x5385
++#define SCSI_IOCTL_GET_BUS_NUMBER 0x5386
+ 
+ #endif /* _LINUX_SCSI_SCSI_H */
+ 
+diff --git mlibc-clean/options/linux/include/scsi/sg.h mlibc-workdir/options/linux/include/scsi/sg.h
+index 30288c9..fdc6679 100644
+--- mlibc-clean/options/linux/include/scsi/sg.h
++++ mlibc-workdir/options/linux/include/scsi/sg.h
+@@ -71,6 +71,26 @@ typedef struct sg_req_info {
+     int unused;
+ } sg_req_info_t;
+ 
++#define SG_MAX_SENSE 16
++
++struct sg_header {
++    int pack_len;
++    int reply_len;
++    int pack_id;
++    int result;
++    unsigned int twelve_byte:1;
++    unsigned int target_status:5;
++    unsigned int host_status:8;
++    unsigned int driver_status:8;
++    unsigned int other_flags:10;
++    unsigned char sense_buffer[SG_MAX_SENSE];
++};
++
++#define SG_GET_RESERVED_SIZE 0x2272
++#define SG_SET_RESERVED_SIZE 0x2275
++#define SG_GET_SG_TABLESIZE 0x227F
++#define SG_SCSI_RESET 0x2284
++
+ #ifdef __cplusplus
+ }
+ #endif
 diff --git mlibc-clean/options/posix/generic/mqueue.cpp mlibc-workdir/options/posix/generic/mqueue.cpp
 index d635419..3719028 100644
 --- mlibc-clean/options/posix/generic/mqueue.cpp
@@ -304,6 +362,22 @@ index 631456a..09c26b9 100644
 +	__ensure(!"Not implemented");
 +	__builtin_unreachable();
 +}
+diff --git mlibc-clean/options/posix/generic/unistd.cpp mlibc-workdir/options/posix/generic/unistd.cpp
+index 6e525be..7311182 100644
+--- mlibc-clean/options/posix/generic/unistd.cpp
++++ mlibc-workdir/options/posix/generic/unistd.cpp
+@@ -1449,6 +1449,11 @@ int getresgid(gid_t *rgid, gid_t *egid, gid_t *sgid) {
+ 	return 0;
+ }
+ 
++char *cuserid(char *) {
++	__ensure(!"Not implemented");
++	__builtin_unreachable();
++}
++
+ #if __MLIBC_BSD_OPTION
+ void *sbrk(intptr_t increment) {
+ 	if(increment) {
 diff --git mlibc-clean/options/posix/include/mlibc/posix-sysdeps.hpp mlibc-workdir/options/posix/include/mlibc/posix-sysdeps.hpp
 index 51c4e5c..8cd573c 100644
 --- mlibc-clean/options/posix/include/mlibc/posix-sysdeps.hpp
@@ -427,6 +501,19 @@ index cf2025b..3f2f295 100644
  
  #endif /* !__MLIBC_ABI_ONLY */
  
+diff --git mlibc-clean/options/posix/include/unistd.h mlibc-workdir/options/posix/include/unistd.h
+index 8fcaeab..33f6842 100644
+--- mlibc-clean/options/posix/include/unistd.h
++++ mlibc-workdir/options/posix/include/unistd.h
+@@ -392,6 +392,8 @@ int setdomainname(const char *__name, size_t __len);
+ int getresuid(uid_t *__ruid, uid_t *__euid, uid_t *__suid);
+ int getresgid(gid_t *__rgid, gid_t *__egid, gid_t *__sgid);
+ 
++char *cuserid(char *__string);
++
+ #endif /* !__MLIBC_ABI_ONLY */
+ 
+ #ifdef __cplusplus
 diff --git mlibc-clean/scripts/rust-libc-config.yml mlibc-workdir/scripts/rust-libc-config.yml
 index d8d5ae4..c3f60ed 100644
 --- mlibc-clean/scripts/rust-libc-config.yml
