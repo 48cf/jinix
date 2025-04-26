@@ -39,6 +39,7 @@ cargo_inject_patches() {
 
     crates_to_patch="
         libc=0.2.172
+        parking_lot=0.12.3
         target-lexicon=0.12.16
     "
 
