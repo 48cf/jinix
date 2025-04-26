@@ -31,6 +31,19 @@ index b5f9f11..46abff4 100644
  	long __unused[2];
  };
  
+diff --git mlibc-clean/abis/linux/limits.h mlibc-workdir/abis/linux/limits.h
+index 1363bc0..7ef27c6 100644
+--- mlibc-clean/abis/linux/limits.h
++++ mlibc-workdir/abis/linux/limits.h
+@@ -6,5 +6,8 @@
+ #define HOST_NAME_MAX 64
+ #define NAME_MAX 255
+ #define OPEN_MAX 256
++#define MAX_INPUT 255
++
++#define _POSIX_MAX_INPUT 255
+ 
+ #endif /*_ABIBITS_LIMITS_H */
 diff --git mlibc-clean/options/ansi/generic/stdio.cpp mlibc-workdir/options/ansi/generic/stdio.cpp
 index a5e177a..46719bb 100644
 --- mlibc-clean/options/ansi/generic/stdio.cpp
