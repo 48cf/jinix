@@ -38,34 +38,3 @@ package() {
 
     post_package_strip
 }
-
-# name=librsvg
-# version=2.58.5
-# revision=1
-# tarball_url="https://gitlab.gnome.org/GNOME/librsvg/-/archive/${version}/librsvg-${version}.tar.gz"
-# tarball_blake2b="f3e520a96f4cfe6d741fa8a0e61656807164e28d572a1cd728a667818a8067112f12fe3f31c946051ba95a5de364775315884cfddd0b7ca589524095004f088c"
-# source_hostdeps="autoconf automake libtool pkg-config rust"
-# source_deps="gobject-introspection glib glib-gi"
-# imagedeps="build-essential meson ninja-build python3 patchelf"
-# hostdeps="gcc pkg-config rust cargo-cbuild gobject-introspection glib vala"
-# deps="core-libs cairo harfbuzz pango gdk-pixbuf libidn2 libunistring libxml glib glib-gi vala"
-# # Needed for cargo to download crates during the build process.
-# source_allow_network=yes
-# allow_network=yes
-
-# prepare() {
-#     autotools_recursive_regen
-#     cargo_inject_patches
-# }
-
-# configure() {
-#     gi_env vala_env autotools_configure \
-#         RUST_TARGET=x86_64-unknown-linux-mlibc \
-#         ac_cv_path_GDK_PIXBUF_QUERYLOADERS=yes \
-#         cross_compiling=yes
-# }
-
-# build() {
-#         CARGO_HOME="${CARGO_HOME}" \
-#     gi_env vala_env make -j${parallelism}
-# }
