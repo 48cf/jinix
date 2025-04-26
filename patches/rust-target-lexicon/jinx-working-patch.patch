@@ -1,0 +1,28 @@
+diff --git rust-target-lexicon-clean/src/targets.rs rust-target-lexicon-workdir/src/targets.rs
+index 997c673..7ba5207 100644
+--- rust-target-lexicon-clean/src/targets.rs
++++ rust-target-lexicon-workdir/src/targets.rs
+@@ -748,6 +748,7 @@ pub enum Environment {
+     HurdKernel,
+     LinuxKernel,
+     Macabi,
++    Mlibc,
+     Musl,
+     Musleabi,
+     Musleabihf,
+@@ -791,6 +792,7 @@ impl Environment {
+             HurdKernel => Cow::Borrowed("hurdkernel"),
+             LinuxKernel => Cow::Borrowed("linuxkernel"),
+             Macabi => Cow::Borrowed("macabi"),
++            Mlibc => Cow::Borrowed("mlibc"),
+             Musl => Cow::Borrowed("musl"),
+             Musleabi => Cow::Borrowed("musleabi"),
+             Musleabihf => Cow::Borrowed("musleabihf"),
+@@ -1494,6 +1496,7 @@ impl FromStr for Environment {
+             "hurdkernel" => HurdKernel,
+             "linuxkernel" => LinuxKernel,
+             "macabi" => Macabi,
++            "mlibc" => Mlibc,
+             "musl" => Musl,
+             "musleabi" => Musleabi,
+             "musleabihf" => Musleabihf,

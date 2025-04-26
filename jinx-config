@@ -39,6 +39,7 @@ cargo_inject_patches() {
 
     crates_to_patch="
         libc=0.2.172
+        target-lexicon=0.12.16
     "
 
     for crate in ${crates_to_patch}; do

@@ -7,3 +7,4 @@ linker = "x86_64-linux-mlibc-gcc"
 
 [patch.crates-io]
 libc = { path = "/base_dir/sources/rust-libc" }
+target-lexicon = { path = "/base_dir/sources/rust-target-lexicon" }
