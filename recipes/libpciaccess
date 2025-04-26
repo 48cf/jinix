@@ -7,7 +7,7 @@ tarball_url="https://www.x.org/releases/individual/lib/libpciaccess-${version}.t
 tarball_blake2b="19ebe4e8cb3f409f51be01d0c771aea79d9251d7b464f49d8adf40af55180b0f87c6092271023289f802cc2b684eecace963b5fdcb026ff7879481d22a34a675"
 imagedeps="meson ninja-build"
 hostdeps="gcc pkg-config"
-sourcedeps="xorg-util-macros"
+source_deps="xorg-util-macros"
 deps="core-libs zlib"
 
 configure() {
