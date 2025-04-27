@@ -1,3 +1,23 @@
+diff --git gobject-introspection-clean/giscanner/ccompiler.py gobject-introspection-workdir/giscanner/ccompiler.py
+index c16fc88..7816bbc 100644
+--- gobject-introspection-clean/giscanner/ccompiler.py
++++ gobject-introspection-workdir/giscanner/ccompiler.py
+@@ -240,6 +240,7 @@ class CCompiler(object):
+             if not libtool:
+                 # https://bugzilla.gnome.org/show_bug.cgi?id=625195
+                 args.append('-Wl,-rpath,.')
++                args.append('-Wl,-rpath-link,.')
+ 
+             # Ensure libraries are always linked as we are going to use ldd to work
+             # out their names later
+@@ -260,6 +261,7 @@ class CCompiler(object):
+                         args.append(library_path)
+                     else:
+                         args.append('-Wl,-rpath,' + library_path)
++                        args.append('-Wl,-rpath-link,' + library_path)
+ 
+             runtime_paths.append(library_path)
+ 
 diff --git gobject-introspection-clean/giscanner/shlibs.py gobject-introspection-workdir/giscanner/shlibs.py
 index 9f8ab5d..7b457a8 100644
 --- gobject-introspection-clean/giscanner/shlibs.py
