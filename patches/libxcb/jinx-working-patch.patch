@@ -1,8 +1,7 @@
-diff --git libxcb-clean/doc/Makefile.am libxcb-workdir/doc/Makefile.am
-index f3c934a..08880d7 100644
---- libxcb-clean/doc/Makefile.am
-+++ libxcb-workdir/doc/Makefile.am
-@@ -35,8 +35,8 @@ install-data-local:
+diff -urN --no-dereference libxcb-clean/doc/Makefile.in libxcb-workdir/doc/Makefile.in
+--- libxcb-clean/doc/Makefile.in	2024-04-15 17:09:35.000000000 +0200
++++ libxcb-workdir/doc/Makefile.in	2024-04-15 17:09:35.000000000 +0200
+@@ -518,8 +518,8 @@
  	  $(mkinstalldirs) '$(DESTDIR)$(htmldir)'; \
  	fi
  	@for d in $(docdirs); do \

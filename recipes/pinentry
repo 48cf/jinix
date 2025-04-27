@@ -5,13 +5,12 @@ version=1.3.1
 revision=1
 tarball_url="https://www.gnupg.org/ftp/gcrypt/pinentry/pinentry-${version}.tar.bz2"
 tarball_blake2b="47a510b3746fc8cdd83b56302132f4f4d9c61324fc857ce0867387f70f79490dad375bca4dc72e5d1cdca707bf89a16e1c9a20bf1aa0e857d69e59dc59403afd"
-source_hostdeps="automake autoconf libtool pkg-config"
 imagedeps="build-essential"
-hostdeps="gcc autoconf automake libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs libassuan libgpg-error libsecret"
 
 prepare() {
-    cp -v /usr/local/share/autoconf/build-aux/config.sub ./build-aux/
+    autotools_recursive_regen
 }
 
 configure() {

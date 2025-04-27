@@ -5,8 +5,7 @@ version=2.3.2
 revision=1
 tarball_url="https://download.savannah.gnu.org/releases/acl/acl-${version}.tar.xz"
 tarball_blake2b="9f2abfddcd403df2c716c05f02a1b52453613d10948dc58a65b9ef41b44e37db6de99fb22dcfc4f6f0fb5d0319c939da61bd4e0fba2cdb5643e8087ecd34eeac"
-source_hostdeps="automake autoconf libtool pkg-config"
-hostdeps="gcc automake autoconf libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs attr"
 
 prepare() {

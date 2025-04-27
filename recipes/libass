@@ -5,8 +5,7 @@ version=0.17.3
 revision=1
 tarball_url="https://github.com/libass/libass/releases/download/${version}/libass-${version}.tar.xz"
 tarball_blake2b="23b2b544ac837468ee374f141a67393b527b7b15beadfaea74f69228e508db0079474cf348b4a05c8c39c06891e725f7678d3380fd06f1b3bb89c91f3827b8e6"
-source_hostdeps="automake autoconf libtool pkg-config"
-hostdeps="gcc autoconf automake libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs freetype2 fribidi fontconfig harfbuzz"
 
 prepare() {

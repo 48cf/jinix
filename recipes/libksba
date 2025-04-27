@@ -5,9 +5,8 @@ version=1.6.7
 revision=1
 tarball_url="https://www.gnupg.org/ftp/gcrypt/libksba/libksba-${version}.tar.bz2"
 tarball_blake2b="95f51bc9a0a7ee14b91089aded3a420cf2f986a1599e39e36dc46fd0b71bef465af9c6576c19516d0aadae67399eca69ae0448239216ba486812884ebefa1ae7"
-source_hostdeps="automake autoconf libtool pkg-config"
 imagedeps="build-essential"
-hostdeps="gcc autoconf automake libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs libgpg-error"
 
 prepare() {

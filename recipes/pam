@@ -7,7 +7,7 @@ tarball_url="https://github.com/linux-pam/linux-pam/releases/download/v${version
 tarball_blake2b="39c8c2ccc6f7d125d12d49439ae44cb8fe115f0529549269246e54f4b4de0b3b24c1099e4d3fa39d4e477af8a92b66dd6dc2cb93f0643ab7b56bcaabdd3b8539"
 # builddeps="base"
 imagedeps="build-essential meson ninja-build"
-hostdeps="gcc autoconf automake libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs libintl"
 
 configure() {

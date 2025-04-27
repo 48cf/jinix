@@ -5,12 +5,14 @@ version=0.8
 revision=1
 tarball_url="https://github.com/lathiat/avahi/releases/download/v${version}/avahi-${version}.tar.gz"
 tarball_blake2b="9b57a3e5781abc7acf25c6cfd2d1871b7c2f330bd5bd08214baa60bfee849841b69cd9d322fafaec1ba72c953c3464f017e1870a7d95fa2f27fcd2401ddd24df"
-source_hostdeps="automake autoconf libtool pkg-config"
 imagedeps="build-essential python3 patchelf pkg-config"
-hostdeps="gcc pkg-config gobject-introspection glib automake autoconf libtool"
+source_hostdeps="autoconf automake libtool pkg-config"
+hostdeps="gcc autoconf automake libtool pkg-config gobject-introspection glib"
 deps="core-libs glib libdaemon libevent libexpat gdbm glib-gi gtk+-3"
 
 prepare() {
+    autoreconf -fvi
+
     sed -i '426a if (events & AVAHI_WATCH_HUP) { \
 client_free(c); \
 return; \

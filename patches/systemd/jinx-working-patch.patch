@@ -7,7 +7,7 @@ index b597265..316aaf8 100644
                          if (d->d_un.d_val != 0)
                                  strtab = (const char *) ((uintptr_t) d->d_un.d_val
 -#if defined(__mips__) || defined(__riscv)
-+#if defined(__mips__) || defined(__riscv) || defined(__mlibc_linux__)
++#if defined(__mips__) || defined(__riscv) || defined(__mlibc__)
                                           + bias
  #endif
                                  );
@@ -19,7 +19,7 @@ index 6de67ab..e7ee14e 100644
                  } else
                          ret = in_child ? 0 : child_pid;
          }
-+#elif defined(__mlibc_linux__)
++#elif defined(__mlibc__)
 +        ret = fork();
  #else
          ret = (pid_t) syscall(__NR_clone, flags, NULL);
@@ -96,7 +96,7 @@ index bd043c8..8fad777 100644
  }
  
  int asynchronous_close(int fd) {
-+#if defined(__mlibc_linux__)
++#if defined(__mlibc__)
 +        safe_close(fd);
 +#else
          unsigned v;

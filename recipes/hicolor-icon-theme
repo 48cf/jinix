@@ -10,11 +10,11 @@ hostdeps="gcc pkg-config"
 deps="core-libs"
 
 configure() {
-	meson_configure
+    meson_configure
 }
 
 build() {
-	ninja -j${parallelism}
+    ninja -j${parallelism}
 }
 
 package() {

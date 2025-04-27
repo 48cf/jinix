@@ -6,7 +6,7 @@ revision=1
 tarball_url="https://github.com/webmproject/libvpx/archive/refs/tags/v${version}.tar.gz"
 tarball_blake2b="69f5774e5e002ce442c1325cbf301942100f12e5d0afbfb08ab22401454d77db436bf98fd8b3d54292f55d0bcf4b35c3783c657941b6a8377b7e36891e8dd16a"
 imagedeps="build-essential nasm which"
-hostdeps="gcc autoconf automake libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs"
 
 configure() {

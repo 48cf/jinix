@@ -4,7 +4,7 @@ name=rust
 from_source=rust
 revision=1
 imagedeps="build-essential cmake ninja-build python3 libssl-dev pkg-config"
-hostdeps="autoconf-2.69 automake binutils libtool gcc llvm pkg-config"
+hostdeps="binutils gcc llvm"
 hostrundeps="binutils gcc llvm"
 deps="core-libs"
 # Needed because x.py downloads a bootstrap binaries and

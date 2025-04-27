@@ -5,8 +5,7 @@ version=2.5.2
 revision=1
 tarball_url="https://download.savannah.gnu.org/releases/attr/attr-${version}.tar.gz"
 tarball_blake2b="6a907a035331615adc283288f3db8b7efa39f831919a7e5fdeb2957c9bda8a89197e2c3f6df99852110dc4632839a83fc1b29ca29f4a24bb1784a3ec96d99f08"
-source_hostdeps="automake autoconf libtool pkg-config"
-hostdeps="gcc automake autoconf libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs"
 
 prepare() {

@@ -1,20 +1,21 @@
 #! /bin/sh
 
-name=sdl2
-version=2.30.11
+name=sdl3
+version=3.2.10
 revision=1
-tarball_url="https://github.com/libsdl-org/SDL/releases/download/release-${version}/SDL2-${version}.tar.gz"
-tarball_blake2b="e6038cbf79bec299fae9cfdc4b84ff3e28343abe782942af17e052d7da93111ea04a2ae15b063bfa0ad0d13a1810890dd29d895189f7f417f1bccce715badde1"
-imagedeps="cmake ninja-build libwayland-bin"
+tarball_url="https://github.com/libsdl-org/SDL/releases/download/release-${version}/SDL3-${version}.tar.gz"
+tarball_blake2b="32e33d4209582fd0889969b30700f793562c7cb0afa3fc05befe421d10e101f558f9c817c7cc7855d793d78339a4c5b01129f24a5981a5651271e14d2e5aeff8"
+imagedeps="cmake ninja-build git"
 hostdeps="gcc pkg-config"
-# TODO: Add more dependencies here and make it a more complete build
-deps="core-libs libx11 libxext libxcursor libxi libxfixes libxrandr libxrender libxxf86vm mesa dbus libxkbcommon"
+deps="core-libs libx11 libxext libxcursor libxi libxfixes libxrandr libxrender libxxf86vm mesa"
 
 configure() {
     cmake_configure \
         -DSDL_ALTIVEC=OFF \
         -DSDL_DISKAUDIO=OFF \
-        -DSDL_VIDEO_OPENGL=ON \
+        -DSDL_DIRECTFB=ON \
+        -DSDL_OPENGL=ON \
+        -DSDL_OPENGLES=ON \
         -DSDL_PTHREADS=ON \
         -DSDL_PTHREADS_SEM=OFF \
         -DSDL_OSS=OFF \
@@ -28,11 +29,18 @@ configure() {
         -DSDL_FUSIONSOUND=OFF \
         -DSDL_LIBSAMPLERATE=OFF \
         -DSDL_RPATH=OFF \
+        -DSDL_X11=ON \
+        -DSDL_WAYLAND=OFF \
+        -DSDL_WAYLAND_QT_TOUCH=OFF \
+        -DSDL_RPI=OFF \
+        -DSDL_COCOA=OFF \
         -DSDL_DIRECTX=OFF \
         -DSDL_WASAPI=OFF \
         -DSDL_RENDER_D3D=OFF \
-        -DSDL_VIDEO_VULKAN=OFF \
-        -DSDL_HIDAPI=OFF \
+        -DSDL_VIVANTE=OFF \
+        -DSDL_VULKAN=OFF \
+        -DSDL_KMSDRM=OFF \
+        -DSDL_HIDAPI=ON \
         -DSDL_SHARED=ON \
         -DSDL_STATIC=OFF
 }
@@ -43,8 +51,6 @@ build() {
 
 package() {
     DESTDIR="${dest_dir}" ninja install
-
-    rm "${dest_dir}${prefix}"/lib/{libSDL2_test.a,libSDL2main.a}
 
     post_package_strip
 }

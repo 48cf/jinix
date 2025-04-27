@@ -7,7 +7,7 @@ tarball_url="https://linuxtv.org/downloads/v4l-utils/v4l-utils-${version}.tar.xz
 tarball_blake2b="a68728ab6802754cd766453375e212624ee731a7fc9b0d0da6a4c62ce19e75968c5bdbefa33d2977d439a23f36f5c8ff83efc44dae65eed206a31ef19ea57363"
 imagedeps="meson ninja-build perl libxml-parser-perl"
 hostdeps="gcc pkg-config"
-deps="core-libs alsa-lib glu libjpeg-turbo llvm sdl2 argp-standalone"
+deps="core-libs alsa-lib glu libjpeg-turbo llvm sdl2-compat argp-standalone"
 
 configure() {
     meson_configure \

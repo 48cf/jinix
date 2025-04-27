@@ -3,12 +3,10 @@
 name=libxtst
 version=1.2.5
 revision=1
-tarball_url="https://www.x.org/archive/individual/lib/libXtst-${version}.tar.xz"
-tarball_blake2b="daf9d3c5412623a06c8579b341c1ab6e720719c4f3151acf5c735ea08c79c33800993d55cd9f9e8660be85e290fac641e5e9266deb4d317d9957ced847b1ebb1"
-source_hostdeps="automake autoconf libtool pkg-config"
-source_deps="xorg-util-macros"
-hostdeps="gcc autoconf automake libtool pkg-config"
-deps="core-libs libxext libxfixes libxi xorg-util-macros xorg-proto"
+tarball_url="https://www.x.org/archive/individual/lib/libXtst-${version}.tar.gz"
+tarball_blake2b="5a8569f8818dce0afccba3efac34a54c967e90350deba61fd52c061309105e17481b574d70b609243956447c1bffdff67892d6782206412310ef134ccb6f6736"
+hostdeps="gcc pkg-config"
+deps="core-libs xorg-proto libxext libxi libx11"
 
 prepare() {
     autotools_recursive_regen

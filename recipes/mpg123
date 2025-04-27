@@ -5,8 +5,7 @@ version=1.32.10
 revision=1
 tarball_url="https://downloads.sourceforge.net/mpg123/mpg123-${version}.tar.bz2"
 tarball_blake2b="14cae4880436870b3adae0e98bcf33c27308e01adffec622ffbed7a6f605cf7afe1ac5a742130c1282208ecae1f7c4a0e16d1664ee8c5dc8e2976999ea37fa39"
-source_hostdeps="automake autoconf libtool pkg-config"
-hostdeps="gcc autoconf automake libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs alsa-lib pulseaudio"
 
 prepare() {

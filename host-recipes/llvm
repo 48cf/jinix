@@ -4,7 +4,6 @@ name=llvm
 from_source=llvm
 revision=1
 imagedeps="build-essential cmake ninja-build"
-hostdeps="autoconf-2.69 automake libtool pkg-config"
 hostrundeps="binutils"
 
 configure() {

@@ -3,20 +3,15 @@
 name=libxkbcommon
 version=1.8.1
 revision=1
-# Rehosted due to the following
-# On GitHub we've forked the upstream repository into our own lfs-book namespace and recreated a tag for the release.
-# This is done to ensure the downloaded tarball file name to be correct and consistent (i.e. it shouldn't change when using the browser instead of a tool like wget).
-# Our tag and the upstream release tag are on the same commit, so we've not introduced any change to the tarball content except the name of its top-level directory (that Git does not track). 
-tarball_url="https://github.com/lfs-book/libxkbcommon/archive/v${version}/libxkbcommon-${version}.tar.gz"
-tarball_blake2b="f8b78d0fa1bbd1c278a1dcd6dea5787e56e07e8b1ab389c47a8cf7fc0f624237955a7004dbdecdeb56ebf03733150e9ad2fcb9c49bb08a46ba124e0125a509d0"
-imagedeps="build-essential meson ninja-build libwayland-bin pkg-config"
+git_url="https://github.com/xkbcommon/libxkbcommon.git"
+commit=b3465081878e80ca6c11fe35c81787ec374ec15a
+imagedeps="build-essential git meson ninja-build libwayland-bin pkg-config"
 hostdeps="gcc pkg-config"
 deps="core-libs libxcb libxml xkeyboard-config wayland wayland-protocols"
 
 configure() {
-	meson_configure \
-        -Denable-docs=false \
-		-Dxkb-config-root=${prefix}/share/X11/xkb
+    meson_configure \
+        -Dxkb-config-root="$prefix"/share/X11/xkb
 }
 
 build() {
@@ -25,6 +20,9 @@ build() {
 
 package() {
     DESTDIR="${dest_dir}" ninja install
+
+    mkdir -p "${dest_dir}${prefix}/share/X11/xkb"
+    touch "${dest_dir}${prefix}/share/X11/xkb/.keep"
 
     post_package_strip
 }

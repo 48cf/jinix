@@ -23,8 +23,8 @@ configure() {
 
 build() {
     make -j${parallelism} \
-        AR="$ARCHITECTURE-linux-mlibc-ar" \
-        RANLIB="$ARCHITECTURE-linux-mlibc-ranlib"
+        AR="${OS_TRIPLET}-ar" \
+        RANLIB="${OS_TRIPLET}-ranlib"
 }
 
 package() {

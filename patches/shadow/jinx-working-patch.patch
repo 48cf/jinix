@@ -1,16 +1,3 @@
-diff --git shadow-clean/lib/Makefile.am shadow-workdir/lib/Makefile.am
-index 307e704..17eb29e 100644
---- shadow-clean/lib/Makefile.am
-+++ shadow-workdir/lib/Makefile.am
-@@ -19,7 +19,7 @@ libshadow_la_CPPFLAGS += -DVENDORDIR=\"$(VENDORDIR)\"
- endif
- 
- libshadow_la_CPPFLAGS += -I$(top_srcdir)
--libshadow_la_CFLAGS = $(LIBBSD_CFLAGS) $(LIBCRYPT_PAM) $(LIBSYSTEMD)
-+libshadow_la_CFLAGS = $(LIBBSD_CFLAGS) $(LIBCRYPT_PAM) $(LIBSYSTEMD) -lintl
- libshadow_la_LIBADD = $(LIBADD_DLOPEN)
- 
- libshadow_la_SOURCES = \
 diff --git shadow-clean/lib/freezero.c shadow-workdir/lib/freezero.c
 index c565f43..532aabc 100644
 --- shadow-clean/lib/freezero.c

@@ -1,8 +1,7 @@
-diff --git binutils-clean/configure.ac binutils-workdir/configure.ac
-index 659388f..4e156b8 100644
---- binutils-clean/configure.ac
-+++ binutils-workdir/configure.ac
-@@ -351,7 +351,7 @@ case "${ENABLE_GOLD}" in
+diff -urN --no-dereference binutils-clean/configure binutils-workdir/configure
+--- binutils-clean/configure	2025-02-02 01:00:00.000000000 +0100
++++ binutils-workdir/configure	2025-04-26 15:17:58.611614238 +0200
+@@ -3083,7 +3083,7 @@
        *-*-elf* | *-*-sysv4* | *-*-unixware* | *-*-eabi* | hppa*64*-*-hpux* \
        | *-*-linux* | *-*-gnu* | frv-*-uclinux* | *-*-irix5* | *-*-irix6* \
        | *-*-netbsd* | *-*-openbsd* | *-*-freebsd* | *-*-dragonfly* \
@@ -23,19 +22,6 @@ index 8d978a6..004609b 100644
  #include <sys/syscall.h>	/* system call fork() */
  
  #include "gp-defs.h"
-diff --git binutils-clean/gprofng/libcollector/configure.ac binutils-workdir/gprofng/libcollector/configure.ac
-index 3205da3..be5d23c 100644
---- binutils-clean/gprofng/libcollector/configure.ac
-+++ binutils-workdir/gprofng/libcollector/configure.ac
-@@ -18,7 +18,7 @@ dnl <http://www.gnu.org/licenses/>.
- 
- m4_include([../../bfd/version.m4])
- AC_INIT([gprofng], [BFD_VERSION])
--AC_CONFIG_MACRO_DIRS([../../config ../..])
-+#AC_CONFIG_MACRO_DIRS([../../config ../..])
- AC_CONFIG_AUX_DIR(../..)
- AC_CANONICAL_TARGET
- AM_INIT_AUTOMAKE
 diff --git binutils-clean/gprofng/libcollector/dispatcher.c binutils-workdir/gprofng/libcollector/dispatcher.c
 index adac1dd..d3b24a2 100644
 --- binutils-clean/gprofng/libcollector/dispatcher.c
@@ -69,20 +55,7 @@ index 486c87e..83ce05c 100644
        return NULL;
      }
 -#if !defined(__MUSL_LIBC)
-+#if !defined(__MUSL_LIBC) && !defined(__mlibc_linux__)
++#if !defined(__MUSL_LIBC) && !defined(__mlibc__)
    Dl_serinfo _info, *info = &_info;
    Dl_serpath *path;
- 
-diff --git binutils-clean/libiberty/configure.ac binutils-workdir/libiberty/configure.ac
-index c27e08e..e48ef89 100644
---- binutils-clean/libiberty/configure.ac
-+++ binutils-workdir/libiberty/configure.ac
-@@ -37,7 +37,7 @@ else
-   libiberty_topdir="${srcdir}/.."
- fi
- AC_SUBST(libiberty_topdir)
--AC_CONFIG_AUX_DIR($libiberty_topdir)
-+AC_CONFIG_AUX_DIR([.])
- 
- dnl Very limited version of automake's enable-maintainer-mode
  

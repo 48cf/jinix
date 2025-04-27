@@ -5,9 +5,8 @@ version=6.14
 revision=1
 tarball_url="https://github.com/strace/strace/releases/download/v${version}/strace-${version}.tar.xz"
 tarball_blake2b="940bb7d54c29e8f22dcf67e617e8a664a7147bb96538b3a8a680698fa33f528d6082fb9c9d7eda9540e7730fa0f7d88aafbead4cccd8844ca687e2e4a1c8a7d2"
-source_hostdeps="automake autoconf libtool pkg-config"
 imagedeps="build-essential"
-hostdeps="gcc autoconf automake libtool pkg-config"
+hostdeps="gcc pkg-config"
 deps="core-libs"
 
 prepare() {

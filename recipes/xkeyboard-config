@@ -3,14 +3,15 @@
 name=xkeyboard-config
 version=2.44
 revision=1
-tarball_url="https://www.x.org/pub/individual/data/xkeyboard-config/xkeyboard-config-${version}.tar.xz"
+tarball_url="https://www.x.org/archive/individual/data/xkeyboard-config/xkeyboard-config-${version}.tar.xz"
 tarball_blake2b="6abb485ef5c9cb1292afaed22ac72026dc22c0a08c3bf04ca29f8dd61d68cbf06e511fe095628a0ab6dec7766374318c4b5bddeb2c4da8a8a692bbbbf4b4e83b"
-imagedeps="build-essential meson ninja-build"
+imagedeps="meson ninja-build"
 hostdeps="gcc pkg-config"
-deps="core-libs xorg-proto libx11"
+deps="core-libs"
 
 configure() {
-	meson_configure
+    meson_configure \
+        -Dxorg-rules-symlinks=true
 }
 
 build() {

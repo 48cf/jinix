@@ -5,7 +5,6 @@ version=4.36
 revision=1
 tarball_url="https://archive.mozilla.org/pub/nspr/releases/v${version}/src/nspr-${version}.tar.gz"
 tarball_blake2b="369d851db0f425f0c6c3cdaeb333320860b77b49b40b77cc983998de3f9128f9d987f143e9f2ce155d609fb23f3f9ed0d0abe7d74e20c59763e2b9bdd1835817"
-source_hostdeps="automake autoconf libtool pkg-config"
 imagedeps="build-essential gcc"
 hostdeps="gcc pkg-config"
 deps="core-libs"
