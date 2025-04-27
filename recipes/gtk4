@@ -1,0 +1,34 @@
+#! /bin/sh
+
+name=gtk4
+version=4.18.4
+revision=1
+tarball_url="https://download.gnome.org/sources/gtk/4.18/gtk-${version}.tar.xz"
+tarball_blake2b="f911615ae563563c82e8b122bb5b0b1002e5b7933e473a9eee090114f91644fc2e738ddc72665d03556c099366715e8f884fdb0be71e89bd525e95f5456d8ab6"
+imagedeps="build-essential meson ninja-build python3 patchelf libwayland-bin libgdk-pixbuf2.0-bin glslc"
+hostdeps="gcc pkg-config gobject-introspection glib vala"
+# Missing: printing and colord
+deps="core-libs fribidi gdk-pixbuf graphene iso-codes libepoxy libxkbcommon pango wayland-protocols gstreamer-plugins-bad gstreamer-plugins-good hicolor-icon-theme librsvg libcloudproviders sassc tinysparql"
+
+# TODO: Vulkan not configuring
+configure() {
+    meson_configure \
+        -Dintrospection=enabled \
+        -Dx11-backend=true \
+        -Dbroadway-backend=true \
+        -Dwayland-backend=true \
+        -Ddocumentation=false \
+        -Dtracker=enabled \
+        -Dcloudproviders=enabled \
+        -Dvulkan=disabled
+}
+
+build() {
+    gi_env ninja -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" gi_env ninja install
+
+    post_package_strip
+}
