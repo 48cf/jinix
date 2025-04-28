@@ -6,7 +6,7 @@ diff -urN --no-dereference xorg-proto-clean/include/X11/Xfuncs.h xorg-proto-work
  #   else
  #    include <string.h>
 -#    if defined(__SCO__) || defined(__sun) || defined(__UNIXWARE__) || defined(__CYGWIN__) || defined(_AIX) || defined(__APPLE__)
-+#    if defined(__SCO__) || defined(__sun) || defined(__UNIXWARE__) || defined(__CYGWIN__) || defined(_AIX) || defined(__APPLE__) || defined(__mlibc_linux__)
++#    if defined(__SCO__) || defined(__sun) || defined(__UNIXWARE__) || defined(__CYGWIN__) || defined(_AIX) || defined(__APPLE__) || defined(__mlibc__)
  #     include <strings.h>
  #    endif
  #    define _XFUNCS_H_INCLUDED_STRING_H
@@ -18,7 +18,7 @@ diff -urN --no-dereference xorg-proto-clean/include/X11/Xos.h xorg-proto-workdir
  
  # include <string.h>
 -# if defined(__SCO__) || defined(__UNIXWARE__) || defined(__sun) || defined(__CYGWIN__) || defined(_AIX) || defined(__APPLE__) || defined(__FreeBSD__)
-+# if defined(__SCO__) || defined(__UNIXWARE__) || defined(__sun) || defined(__CYGWIN__) || defined(_AIX) || defined(__APPLE__) || defined(__FreeBSD__) || defined(__mlibc_linux__)
++# if defined(__SCO__) || defined(__UNIXWARE__) || defined(__sun) || defined(__CYGWIN__) || defined(_AIX) || defined(__APPLE__) || defined(__FreeBSD__) || defined(__mlibc__)
  #  include <strings.h>
  # else
  #  ifndef index
