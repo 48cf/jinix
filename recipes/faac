@@ -11,8 +11,6 @@ deps="core-libs"
 
 prepare() {
     autoreconf -fvi
-
-    autotools_recursive_regen
 }
 
 configure() {

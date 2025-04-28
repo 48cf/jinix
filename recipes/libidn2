@@ -8,12 +8,9 @@ tarball_blake2b="8b34975a5a469353ac960ade97d0b67080e811c0d0eb7b11dcb6a4b352753da
 hostdeps="gcc pkg-config"
 deps="core-libs libunistring"
 
-# Commented out for now because autoreconf causes issues with
-# header generation during configure, but otherwise it builds fine
-
-# prepare() {
-#     autoreconf -fvi
-# }
+prepare() {
+    autotools_recursive_regen
+}
 
 configure() {
     autotools_configure

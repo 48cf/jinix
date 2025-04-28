@@ -17,8 +17,6 @@ prepare() {
 client_free(c); \
 return; \
 }' ${source_dir}/avahi-daemon/simple-protocol.c
-
-    autotools_recursive_regen
 }
 
 # TODO: Disable introspection
