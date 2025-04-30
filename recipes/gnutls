@@ -14,9 +14,6 @@ prepare() {
 }
 
 configure() {
-    cp -rp "${source_dir}"/. ./
-
-        configure_script_path=./configure \
     autotools_configure \
         --with-default-trust-store-pkcs11="pkcs11:" \
         --enable-openssl-compatibility
@@ -27,7 +24,7 @@ build() {
 }
 
 package() {
-    DESTDIR=${dest_dir} make install
+    DESTDIR="${dest_dir}" make install
 
     post_package_strip
 }
