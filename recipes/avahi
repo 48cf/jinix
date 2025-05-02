@@ -5,12 +5,13 @@ version=0.8
 revision=1
 tarball_url="https://github.com/lathiat/avahi/releases/download/v${version}/avahi-${version}.tar.gz"
 tarball_blake2b="9b57a3e5781abc7acf25c6cfd2d1871b7c2f330bd5bd08214baa60bfee849841b69cd9d322fafaec1ba72c953c3464f017e1870a7d95fa2f27fcd2401ddd24df"
-imagedeps="build-essential python3 patchelf pkg-config"
-source_hostdeps="autoconf automake libtool pkg-config"
-hostdeps="gcc autoconf automake libtool pkg-config gobject-introspection glib"
+imagedeps="build-essential python3 python3-distutils-extra patchelf pkg-config"
+source_hostdeps="autoconf automake gobject-introspection libtool pkg-config"
+hostdeps="gcc autoconf automake glib libtool gobject-introspection pkg-config"
 deps="core-libs glib libdaemon libevent libexpat gdbm glib-gi gtk+-3"
 
 prepare() {
+    cp -v /usr/local/share/aclocal/introspection.m4 ./common/introspection.m4
     autoreconf -fvi
 
     sed -i '426a if (events & AVAHI_WATCH_HUP) { \
@@ -19,9 +20,8 @@ return; \
 }' ${source_dir}/avahi-daemon/simple-protocol.c
 }
 
-# TODO: Disable introspection
 configure() {
-    autotools_configure \
+    gi_env autotools_configure \
         --disable-mono \
         --disable-monodoc \
         --disable-qt3 \
@@ -34,8 +34,7 @@ configure() {
         --with-dbus-system-address='unix:path=/run/dbus/system_bus_socket' \
         --enable-compat-howl \
         --enable-compat-libdns_sd \
-        --with-systemdsystemunitdir=${prefix}/lib/systemd/system \
-        --disable-introspection
+        --with-systemdsystemunitdir=${prefix}/lib/systemd/system
 }
 
 build() {
