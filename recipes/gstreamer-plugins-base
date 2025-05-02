@@ -7,7 +7,7 @@ tarball_url="https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-
 tarball_blake2b="7d9bbbaf24d981af2794e013ece6b69b9e973ea34a1517bbb550b7d3d7ae778a676f56a56a07a67a684af458af53350f591fe1a1eff5f570d147f3a0374b35b6"
 imagedeps="build-essential meson ninja-build python3 patchelf libwayland-bin"
 hostdeps="gcc pkg-config gobject-introspection glib"
-deps="core-libs gstreamer alsa-lib graphene iso-codes libgudev libjpeg-turbo libogg libpng libtheora libvorbis libxi libxv mesa pango opus sdl3 gdk-pixbuf"
+deps="core-libs gstreamer alsa-lib graphene iso-codes libgudev libjpeg-turbo libogg libpng libtheora libvorbis libxi libxv mesa pango opus sdl2-compat gdk-pixbuf"
 
 configure() {
     meson_configure \

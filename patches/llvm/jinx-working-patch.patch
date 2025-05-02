@@ -1,7 +1,49 @@
-diff --git llvm-clean/llvm/tools/llvm-exegesis/lib/SubprocessMemory.cpp llvm-workdir/llvm/tools/llvm-exegesis/lib/SubprocessMemory.cpp
-index ce0ce91..6e2b612 100644
---- llvm-clean/llvm/tools/llvm-exegesis/lib/SubprocessMemory.cpp
-+++ llvm-workdir/llvm/tools/llvm-exegesis/lib/SubprocessMemory.cpp
+diff -urN --no-dereference llvm-clean/llvm/include/llvm/ADT/bit.h llvm-workdir/llvm/include/llvm/ADT/bit.h
+--- llvm-clean/llvm/include/llvm/ADT/bit.h	2025-04-16 02:23:49.000000000 +0200
++++ llvm-workdir/llvm/include/llvm/ADT/bit.h	2025-05-02 04:22:57.083185680 +0200
+@@ -29,7 +29,7 @@
+ 
+ #if defined(__linux__) || defined(__GNU__) || defined(__HAIKU__) ||            \
+     defined(__Fuchsia__) || defined(__EMSCRIPTEN__) || defined(__NetBSD__) ||  \
+-    defined(__OpenBSD__) || defined(__DragonFly__)
++    defined(__OpenBSD__) || defined(__DragonFly__) || defined(__mlibc__)
+ #include <endian.h>
+ #elif defined(_AIX)
+ #include <sys/machine.h>
+diff -urN --no-dereference llvm-clean/llvm/include/llvm/TargetParser/Triple.h llvm-workdir/llvm/include/llvm/TargetParser/Triple.h
+--- llvm-clean/llvm/include/llvm/TargetParser/Triple.h	2025-04-16 02:23:49.000000000 +0200
++++ llvm-workdir/llvm/include/llvm/TargetParser/Triple.h	2025-05-02 04:22:57.083268865 +0200
+@@ -299,6 +299,7 @@
+     Amplification,
+     OpenCL,
+     OpenHOS,
++    Mlibc,
+ 
+     PAuthTest,
+ 
+diff -urN --no-dereference llvm-clean/llvm/lib/TargetParser/Triple.cpp llvm-workdir/llvm/lib/TargetParser/Triple.cpp
+--- llvm-clean/llvm/lib/TargetParser/Triple.cpp	2025-04-16 02:23:49.000000000 +0200
++++ llvm-workdir/llvm/lib/TargetParser/Triple.cpp	2025-05-02 04:22:57.083374566 +0200
+@@ -384,6 +384,8 @@
+     return "pauthtest";
+   case LLVM:
+     return "llvm";
++  case Mlibc:
++    return "mlibc";
+   }
+ 
+   llvm_unreachable("Invalid EnvironmentType!");
+@@ -766,6 +768,7 @@
+       .StartsWith("ohos", Triple::OpenHOS)
+       .StartsWith("pauthtest", Triple::PAuthTest)
+       .StartsWith("llvm", Triple::LLVM)
++      .StartsWith("mlibc", Triple::Mlibc)
+       .Default(Triple::UnknownEnvironment);
+ }
+ 
+diff -urN --no-dereference llvm-clean/llvm/tools/llvm-exegesis/lib/SubprocessMemory.cpp llvm-workdir/llvm/tools/llvm-exegesis/lib/SubprocessMemory.cpp
+--- llvm-clean/llvm/tools/llvm-exegesis/lib/SubprocessMemory.cpp	2025-04-16 02:23:49.000000000 +0200
++++ llvm-workdir/llvm/tools/llvm-exegesis/lib/SubprocessMemory.cpp	2025-05-02 11:25:26.981105907 +0200
 @@ -16,6 +16,7 @@
  #ifdef __linux__
  #include <fcntl.h>

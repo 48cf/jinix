@@ -10,7 +10,7 @@ hostdeps="gcc pkg-config gobject-introspection glib vala"
 deps="core-libs glib fontconfig freetype2 fribidi cairo xorg-proto libx11 xtrans libxext harfbuzz libxft glib-gi"
 
 configure() {
-	meson_configure \
+    meson_configure \
         -Dintrospection=enabled
 }
 
