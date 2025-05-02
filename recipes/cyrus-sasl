@@ -19,6 +19,7 @@ prepare() {
 
 configure() {
     autotools_configure \
+        CFLAGS="$TARGET_CFLAGS -std=gnu17" \
         --enable-auth-sasldb \
         --with-dblib=lmdb \
         --with-dbpath=/var/lib/sasl/sasldb2 \

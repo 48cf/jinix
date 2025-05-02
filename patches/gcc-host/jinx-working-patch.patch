@@ -6,10 +6,10 @@ index df90720..c7df202 100755
  # Check for special fix rules for particular targets
  case $machine in
      i?86-*-cygwin* | \
-+    *-*-*-mlibc | \
-     i?86-*-mingw32* | \
-     x86_64-*-mingw32* | \
++    *-mlibc* | \
+     *-mingw32* | \
      powerpc-*-eabisim* | \
+     powerpc-*-eabi*    | \
 diff --git gcc-host-clean/gcc/config/i386/t-linux64 gcc-host-workdir/gcc/config/i386/t-linux64
 index f9edc28..7a7bb2f 100644
 --- gcc-host-clean/gcc/config/i386/t-linux64

@@ -13,8 +13,8 @@ prepare() {
 }
 
 configure() {
-    CFLAGS="$CFLAGS -Wl,--copy-dt-needed-entries" \
     autotools_configure \
+        CFLAGS="$TARGET_CFLAGS -std=gnu17 -Wl,--copy-dt-needed-entries" \
         --disable-manpages \
         --enable-library \
         --with-systemduserunitdir=${prefix}/lib/systemd/user \
