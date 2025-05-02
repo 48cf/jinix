@@ -8,29 +8,17 @@ tarball_blake2b="3492efc8ace54b254a7079aa863394da0555a4c342b7c83a47991ecdf31fe06
 source_hostdeps="glib"
 source_imagedeps="build-essential pkg-config cmake libxml2-dev libpcre2-dev libffi-dev"
 imagedeps="build-essential cmake ninja-build python3 python3-distutils-extra patchelf"
-hostdeps="gcc pkg-config gobject-introspection glib vala"
+hostdeps="gcc libical pkg-config gobject-introspection glib vala"
 deps="core-libs icu glib-gi glib libxml pcre2"
 
-prepare() {
-	mkdir -p cross-build
-    cd cross-build
-
-    cmake \
-        -DENABLE_GTK_DOC=OFF \
-        ${source_dir}
-
-    make -j${parallelism}
-    cd ..
-}
-
 configure() {
-        ICAL_NATIVE_TOOL=${source_dir}/cross-build/bin/ical-glib-src-generator \
+        ICAL_NATIVE_TOOL=/usr/local/libexec/libical/ical-glib-src-generator \
     gi_env vala_env cmake_configure \
         -DSHARED_ONLY=yes \
         -DICAL_BUILD_DOCS=false \
         -DGOBJECT_INTROSPECTION=true \
         -DICAL_GLIB_VAPI=true \
-        -DIMPORT_ICAL_GLIB_SRC_GENERATOR="${base_dir}"/build-support/libical/ical.cmake
+        -DIMPORT_ICAL_GLIB_SRC_GENERATOR=${base_dir}/build-support/libical/ical.cmake
 }
 
 build() {
