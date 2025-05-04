@@ -1,8 +1,7 @@
-diff --git libsamplerate-clean/examples/audio_out.c libsamplerate-workdir/examples/audio_out.c
-index 0bde9fd..7b5050c 100644
+diff -urN --no-dereference libsamplerate-clean/examples/audio_out.c libsamplerate-workdir/examples/audio_out.c
 --- libsamplerate-clean/examples/audio_out.c
 +++ libsamplerate-workdir/examples/audio_out.c
-@@ -314,7 +314,7 @@ alsa_close (AUDIO_OUT *audio_out)
+@@ -314,7 +314,7 @@
  
  #include <fcntl.h>
  #include <sys/ioctl.h>

@@ -1,8 +1,7 @@
-diff --git systemd-clean/src/basic/build-path.c systemd-workdir/src/basic/build-path.c
-index b597265..316aaf8 100644
+diff -urN --no-dereference systemd-clean/src/basic/build-path.c systemd-workdir/src/basic/build-path.c
 --- systemd-clean/src/basic/build-path.c
 +++ systemd-workdir/src/basic/build-path.c
-@@ -37,7 +37,7 @@ static int get_runpath_from_dynamic(const ElfW(Dyn) *d, ElfW(Addr) bias, const c
+@@ -37,7 +37,7 @@
                           * using the bias calculated earlier. */
                          if (d->d_un.d_val != 0)
                                  strtab = (const char *) ((uintptr_t) d->d_un.d_val
@@ -11,11 +10,10 @@ index b597265..316aaf8 100644
                                           + bias
  #endif
                                  );
-diff --git systemd-clean/src/basic/raw-clone.h systemd-workdir/src/basic/raw-clone.h
-index 6de67ab..e7ee14e 100644
+diff -urN --no-dereference systemd-clean/src/basic/raw-clone.h systemd-workdir/src/basic/raw-clone.h
 --- systemd-clean/src/basic/raw-clone.h
 +++ systemd-workdir/src/basic/raw-clone.h
-@@ -74,6 +74,8 @@ static inline pid_t raw_clone(unsigned long flags) {
+@@ -74,6 +74,8 @@
                  } else
                          ret = in_child ? 0 : child_pid;
          }
@@ -24,8 +22,7 @@ index 6de67ab..e7ee14e 100644
  #else
          ret = (pid_t) syscall(__NR_clone, flags, NULL);
  #endif
-diff --git systemd-clean/src/core/exec-invoke.c systemd-workdir/src/core/exec-invoke.c
-index 56df5cf..5dee569 100644
+diff -urN --no-dereference systemd-clean/src/core/exec-invoke.c systemd-workdir/src/core/exec-invoke.c
 --- systemd-clean/src/core/exec-invoke.c
 +++ systemd-workdir/src/core/exec-invoke.c
 @@ -5,6 +5,7 @@
@@ -36,11 +33,10 @@ index 56df5cf..5dee569 100644
  
  #if HAVE_PAM
  #include <security/pam_appl.h>
-diff --git systemd-clean/src/libsystemd/sd-event/sd-event.c systemd-workdir/src/libsystemd/sd-event/sd-event.c
-index 64825ca..42c3efb 100644
+diff -urN --no-dereference systemd-clean/src/libsystemd/sd-event/sd-event.c systemd-workdir/src/libsystemd/sd-event/sd-event.c
 --- systemd-clean/src/libsystemd/sd-event/sd-event.c
 +++ systemd-workdir/src/libsystemd/sd-event/sd-event.c
-@@ -1891,7 +1891,8 @@ _public_ int sd_event_trim_memory(void) {
+@@ -1891,7 +1891,8 @@
  
          usec_t before_timestamp = now(CLOCK_MONOTONIC);
          hashmap_trim_pools();
@@ -50,8 +46,7 @@ index 64825ca..42c3efb 100644
          usec_t after_timestamp = now(CLOCK_MONOTONIC);
  
          if (r > 0)
-diff --git systemd-clean/src/mountfsd/mountwork.c systemd-workdir/src/mountfsd/mountwork.c
-index 1d218a6..dbb884f 100644
+diff -urN --no-dereference systemd-clean/src/mountfsd/mountwork.c systemd-workdir/src/mountfsd/mountwork.c
 --- systemd-clean/src/mountfsd/mountwork.c
 +++ systemd-workdir/src/mountfsd/mountwork.c
 @@ -23,6 +23,8 @@
@@ -63,8 +58,7 @@ index 1d218a6..dbb884f 100644
  #define ITERATIONS_MAX 64U
  #define RUNTIME_MAX_USEC (5 * USEC_PER_MINUTE)
  #define PRESSURE_SLEEP_TIME_USEC (50 * USEC_PER_MSEC)
-diff --git systemd-clean/src/nsresourced/userns-registry.c systemd-workdir/src/nsresourced/userns-registry.c
-index 2cc1b1f..7a9c200 100644
+diff -urN --no-dereference systemd-clean/src/nsresourced/userns-registry.c systemd-workdir/src/nsresourced/userns-registry.c
 --- systemd-clean/src/nsresourced/userns-registry.c
 +++ systemd-workdir/src/nsresourced/userns-registry.c
 @@ -13,6 +13,8 @@
@@ -76,8 +70,7 @@ index 2cc1b1f..7a9c200 100644
  int userns_registry_open_fd(void) {
          int fd;
  
-diff --git systemd-clean/src/portable/portable.c systemd-workdir/src/portable/portable.c
-index 21c12d5..fbcd3f7 100644
+diff -urN --no-dereference systemd-clean/src/portable/portable.c systemd-workdir/src/portable/portable.c
 --- systemd-clean/src/portable/portable.c
 +++ systemd-workdir/src/portable/portable.c
 @@ -1,6 +1,7 @@
@@ -88,11 +81,10 @@ index 21c12d5..fbcd3f7 100644
  
  #include "sd-messages.h"
  
-diff --git systemd-clean/src/shared/async.c systemd-workdir/src/shared/async.c
-index bd043c8..8fad777 100644
+diff -urN --no-dereference systemd-clean/src/shared/async.c systemd-workdir/src/shared/async.c
 --- systemd-clean/src/shared/async.c
 +++ systemd-workdir/src/shared/async.c
-@@ -86,6 +86,9 @@ static int close_func(void *p) {
+@@ -86,6 +86,9 @@
  }
  
  int asynchronous_close(int fd) {
@@ -102,7 +94,7 @@ index bd043c8..8fad777 100644
          unsigned v;
          pid_t pid;
          int r;
-@@ -129,6 +132,7 @@ int asynchronous_close(int fd) {
+@@ -129,6 +132,7 @@
                          if (waitpid(pid, NULL, __WCLONE) >= 0 || errno != EINTR)
                                  break;
          }
@@ -110,11 +102,10 @@ index bd043c8..8fad777 100644
  
          return -EBADF; /* return an invalidated fd */
  }
-diff --git systemd-clean/src/shared/bus-util.c systemd-workdir/src/shared/bus-util.c
-index f347ea6..51394fb 100644
+diff -urN --no-dereference systemd-clean/src/shared/bus-util.c systemd-workdir/src/shared/bus-util.c
 --- systemd-clean/src/shared/bus-util.c
 +++ systemd-workdir/src/shared/bus-util.c
-@@ -764,9 +764,9 @@ static int method_dump_memory_state_by_fd(sd_bus_message *message, void *userdat
+@@ -764,9 +764,9 @@
          if (!f)
                  return -ENOMEM;
  
@@ -127,11 +118,10 @@ index f347ea6..51394fb 100644
  
          r = memstream_finalize(&m, &dump, &dump_size);
          if (r < 0)
-diff --git systemd-clean/src/shared/common-signal.c systemd-workdir/src/shared/common-signal.c
-index 8e70e36..40a4410 100644
+diff -urN --no-dereference systemd-clean/src/shared/common-signal.c systemd-workdir/src/shared/common-signal.c
 --- systemd-clean/src/shared/common-signal.c
 +++ systemd-workdir/src/shared/common-signal.c
-@@ -66,10 +66,10 @@ int sigrtmin18_handler(sd_event_source *s, const struct signalfd_siginfo *si, vo
+@@ -66,10 +66,10 @@
                          break;
                  }
  
@@ -146,8 +136,7 @@ index 8e70e36..40a4410 100644
  
                  (void) memstream_dump(LOG_INFO, &m);
                  break;
-diff --git systemd-clean/src/shared/dev-setup.c systemd-workdir/src/shared/dev-setup.c
-index 4b4b625..07fa519 100644
+diff -urN --no-dereference systemd-clean/src/shared/dev-setup.c systemd-workdir/src/shared/dev-setup.c
 --- systemd-clean/src/shared/dev-setup.c
 +++ systemd-workdir/src/shared/dev-setup.c
 @@ -3,6 +3,7 @@

@@ -1,5 +1,4 @@
-diff --git kbd-clean/src/kbdinfo.c kbd-workdir/src/kbdinfo.c
-index ceeb5e8..1080b78 100644
+diff -urN --no-dereference kbd-clean/src/kbdinfo.c kbd-workdir/src/kbdinfo.c
 --- kbd-clean/src/kbdinfo.c
 +++ kbd-workdir/src/kbdinfo.c
 @@ -3,6 +3,7 @@
@@ -10,8 +9,7 @@ index ceeb5e8..1080b78 100644
  #include <errno.h>
  #include <unistd.h>
  #include <sys/ioctl.h>
-diff --git kbd-clean/src/libkeymap/ksyms.c kbd-workdir/src/libkeymap/ksyms.c
-index bc7d154..80043ba 100644
+diff -urN --no-dereference kbd-clean/src/libkeymap/ksyms.c kbd-workdir/src/libkeymap/ksyms.c
 --- kbd-clean/src/libkeymap/ksyms.c
 +++ kbd-workdir/src/libkeymap/ksyms.c
 @@ -3,6 +3,7 @@
@@ -22,21 +20,19 @@ index bc7d154..80043ba 100644
  #include <stdlib.h>
  
  #include "keymap.h"
-diff --git kbd-clean/src/libkeymap/parser.y kbd-workdir/src/libkeymap/parser.y
-index 518dac7..39b35d3 100644
---- kbd-clean/src/libkeymap/parser.y
-+++ kbd-workdir/src/libkeymap/parser.y
-@@ -10,6 +10,8 @@
-  * which should be included with kbd as the file COPYING.
-  */
- %{
+diff -urN --no-dereference kbd-clean/src/libkeymap/parser.c kbd-workdir/src/libkeymap/parser.c
+--- kbd-clean/src/libkeymap/parser.c
++++ kbd-workdir/src/libkeymap/parser.c
+@@ -69,6 +69,8 @@
+ /* First part of user prologue.  */
+ #line 12 "parser.y"
+ 
 +#include <strings.h>
 +
  #include "config.h"
  #include "libcommon.h"
  
-diff --git kbd-clean/src/showkey.c kbd-workdir/src/showkey.c
-index dfd1dce..5f0f138 100644
+diff -urN --no-dereference kbd-clean/src/showkey.c kbd-workdir/src/showkey.c
 --- kbd-clean/src/showkey.c
 +++ kbd-workdir/src/showkey.c
 @@ -1,3 +1,5 @@

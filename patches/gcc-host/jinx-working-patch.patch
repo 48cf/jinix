@@ -1,8 +1,7 @@
-diff --git gcc-host-clean/fixincludes/mkfixinc.sh gcc-host-workdir/fixincludes/mkfixinc.sh
-index df90720..c7df202 100755
+diff -urN --no-dereference gcc-host-clean/fixincludes/mkfixinc.sh gcc-host-workdir/fixincludes/mkfixinc.sh
 --- gcc-host-clean/fixincludes/mkfixinc.sh
 +++ gcc-host-workdir/fixincludes/mkfixinc.sh
-@@ -12,6 +12,7 @@ target=fixinc.sh
+@@ -12,6 +12,7 @@
  # Check for special fix rules for particular targets
  case $machine in
      i?86-*-cygwin* | \
@@ -10,8 +9,7 @@ index df90720..c7df202 100755
      *-mingw32* | \
      powerpc-*-eabisim* | \
      powerpc-*-eabi*    | \
-diff --git gcc-host-clean/gcc/config/i386/t-linux64 gcc-host-workdir/gcc/config/i386/t-linux64
-index f9edc28..7a7bb2f 100644
+diff -urN --no-dereference gcc-host-clean/gcc/config/i386/t-linux64 gcc-host-workdir/gcc/config/i386/t-linux64
 --- gcc-host-clean/gcc/config/i386/t-linux64
 +++ gcc-host-workdir/gcc/config/i386/t-linux64
 @@ -33,6 +33,6 @@
@@ -23,11 +21,10 @@ index f9edc28..7a7bb2f 100644
 +MULTILIB_OSDIRNAMES = m64=../lib$(call if_multiarch,:x86_64-linux-gnu)
 +MULTILIB_OSDIRNAMES+= m32=$(if $(wildcard $(shell echo $(SYSTEM_HEADER_DIR))/../../usr/lib32),../lib32)$(call if_multiarch,:i386-linux-gnu)
  MULTILIB_OSDIRNAMES+= mx32=../libx32$(call if_multiarch,:x86_64-linux-gnux32)
-diff --git gcc-host-clean/gcc/config/linux-d.cc gcc-host-workdir/gcc/config/linux-d.cc
-index 9604041..c07c214 100644
+diff -urN --no-dereference gcc-host-clean/gcc/config/linux-d.cc gcc-host-workdir/gcc/config/linux-d.cc
 --- gcc-host-clean/gcc/config/linux-d.cc
 +++ gcc-host-workdir/gcc/config/linux-d.cc
-@@ -44,6 +44,8 @@ linux_d_os_builtins (void)
+@@ -44,6 +44,8 @@
      d_add_builtin_version ("CRuntime_Bionic");
    else if (OPTION_MUSL)
      d_add_builtin_version ("CRuntime_Musl");
@@ -36,11 +33,10 @@ index 9604041..c07c214 100644
  }
  
  /* Handle a call to `__traits(getTargetInfo, "objectFormat")'.  */
-diff --git gcc-host-clean/gcc/config/linux-rust.cc gcc-host-workdir/gcc/config/linux-rust.cc
-index 65add8a..642a994 100644
+diff -urN --no-dereference gcc-host-clean/gcc/config/linux-rust.cc gcc-host-workdir/gcc/config/linux-rust.cc
 --- gcc-host-clean/gcc/config/linux-rust.cc
 +++ gcc-host-workdir/gcc/config/linux-rust.cc
-@@ -45,6 +45,8 @@ linux_rust_target_os_info (void)
+@@ -45,6 +45,8 @@
      rust_add_target_info ("target_env", "gnu");
    else if (OPTION_MUSL)
      rust_add_target_info ("target_env", "musl");
@@ -49,11 +45,10 @@ index 65add8a..642a994 100644
    else if (OPTION_UCLIBC)
      rust_add_target_info ("target_env", "uclibc");
    else
-diff --git gcc-host-clean/gcc/config/linux.h gcc-host-workdir/gcc/config/linux.h
-index a7248ac..61aa353 100644
+diff -urN --no-dereference gcc-host-clean/gcc/config/linux.h gcc-host-workdir/gcc/config/linux.h
 --- gcc-host-clean/gcc/config/linux.h
 +++ gcc-host-workdir/gcc/config/linux.h
-@@ -34,23 +34,28 @@ see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+@@ -34,23 +34,28 @@
  #define OPTION_BIONIC_P(opts)	(DEFAULT_LIBC == LIBC_BIONIC)
  #undef OPTION_MUSL_P
  #define OPTION_MUSL_P(opts)	(DEFAULT_LIBC == LIBC_MUSL)
@@ -82,7 +77,7 @@ index a7248ac..61aa353 100644
  	builtin_define_std ("linux");				\
  	builtin_define_std ("unix");				\
  	builtin_assert ("system=linux");			\
-@@ -63,21 +68,24 @@ see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+@@ -63,21 +68,24 @@
     -muclibc or -mglibc or -mbionic or -mmusl has been passed to change
     the default.  */
  
@@ -117,7 +112,7 @@ index a7248ac..61aa353 100644
  #else
  #error "Unsupported DEFAULT_LIBC"
  #endif /* DEFAULT_LIBC */
-@@ -99,19 +107,23 @@ see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+@@ -99,19 +107,23 @@
  #define MUSL_DYNAMIC_LINKER32 "/dev/null"
  #define MUSL_DYNAMIC_LINKER64 "/dev/null"
  #define MUSL_DYNAMIC_LINKERX32 "/dev/null"
@@ -145,8 +140,7 @@ index a7248ac..61aa353 100644
  
  /* Whether we have Bionic libc runtime */
  #undef TARGET_HAS_BIONIC
-diff --git gcc-host-clean/gcc/config.build gcc-host-workdir/gcc/config.build
-index b748b33..afbdde0 100644
+diff -urN --no-dereference gcc-host-clean/gcc/config.build gcc-host-workdir/gcc/config.build
 --- gcc-host-clean/gcc/config.build
 +++ gcc-host-workdir/gcc/config.build
 @@ -45,7 +45,7 @@
@@ -158,11 +152,10 @@ index b748b33..afbdde0 100644
  build_file_translate=
  
  # System-specific settings.
-diff --git gcc-host-clean/gcc/config.gcc gcc-host-workdir/gcc/config.gcc
-index 95c91ee..df68126 100644
+diff -urN --no-dereference gcc-host-clean/gcc/config.gcc gcc-host-workdir/gcc/config.gcc
 --- gcc-host-clean/gcc/config.gcc
 +++ gcc-host-workdir/gcc/config.gcc
-@@ -693,7 +693,7 @@ case ${target} in
+@@ -694,7 +694,7 @@
  esac
  
  # Common C libraries.
@@ -171,7 +164,7 @@ index 95c91ee..df68126 100644
  
  # 32-bit x86 processors supported by --with-arch=.  Each processor
  # MUST be separated by exactly one space.
-@@ -919,6 +919,9 @@ case ${target} in
+@@ -920,6 +920,9 @@
      *-*-*musl*)
        tm_defines="$tm_defines DEFAULT_LIBC=LIBC_MUSL"
        ;;
@@ -181,11 +174,10 @@ index 95c91ee..df68126 100644
      *)
        tm_defines="$tm_defines DEFAULT_LIBC=LIBC_GLIBC"
        ;;
-diff --git gcc-host-clean/libcpp/Makefile.in gcc-host-workdir/libcpp/Makefile.in
-index ebbca37..ea97ba4 100644
+diff -urN --no-dereference gcc-host-clean/libcpp/Makefile.in gcc-host-workdir/libcpp/Makefile.in
 --- gcc-host-clean/libcpp/Makefile.in
 +++ gcc-host-workdir/libcpp/Makefile.in
-@@ -32,10 +32,10 @@ AUTOCONF = @AUTOCONF@
+@@ -32,10 +32,10 @@
  AUTOHEADER = @AUTOHEADER@
  CATALOGS = $(patsubst %,po/%,@CATALOGS@)
  CC = @CC@
@@ -198,7 +190,7 @@ index ebbca37..ea97ba4 100644
  WARN_CXXFLAGS = @warn@ @WARN_PEDANTIC@ @WERROR@
  CPP = @CPP@
  CPPFLAGS = @CPPFLAGS@
-@@ -45,7 +45,7 @@ INCINTL = @INCINTL@
+@@ -45,7 +45,7 @@
  INSTALL_DATA = @INSTALL_DATA@
  INSTALL_PROGRAM = @INSTALL_PROGRAM@
  INSTALL_SCRIPT = @INSTALL_SCRIPT@
@@ -207,11 +199,10 @@ index ebbca37..ea97ba4 100644
  LIBICONV = @LIBICONV@
  LIBINTL = @LIBINTL@
  PACKAGE = @PACKAGE@
-diff --git gcc-host-clean/libgcc/config.host gcc-host-workdir/libgcc/config.host
-index e75a7af..4d61f58 100644
+diff -urN --no-dereference gcc-host-clean/libgcc/config.host gcc-host-workdir/libgcc/config.host
 --- gcc-host-clean/libgcc/config.host
 +++ gcc-host-workdir/libgcc/config.host
-@@ -304,6 +304,11 @@ case ${host} in
+@@ -310,6 +310,11 @@
    tmake_file="$tmake_file t-crtstuff-pic t-libgcc-pic t-eh-dw2-dip t-slibgcc t-slibgcc-fuchsia"
    extra_parts="crtbegin.o crtend.o"
    ;;
@@ -223,7 +214,7 @@ index e75a7af..4d61f58 100644
  *-*-linux* | frv-*-*linux* | *-*-kfreebsd*-gnu | *-*-gnu* | *-*-kopensolaris*-gnu | *-*-uclinuxfdpiceabi)
    tmake_file="$tmake_file t-crtstuff-pic t-libgcc-pic t-eh-dw2-dip t-slibgcc t-slibgcc-gld t-slibgcc-elf-ver t-linux"
    extra_parts="crtbegin.o crtbeginS.o crtbeginT.o crtend.o crtendS.o"
-@@ -752,6 +757,10 @@ x86_64-*-elf* | x86_64-*-rtems*)
+@@ -767,6 +772,10 @@
  x86_64-*-fuchsia*)
  	tmake_file="$tmake_file t-libgcc-pic"
  	;;
@@ -234,23 +225,10 @@ index e75a7af..4d61f58 100644
  i[34567]86-*-dragonfly*)
  	tmake_file="${tmake_file} i386/t-dragonfly i386/t-crtstuff"
  	md_unwind_header=i386/dragonfly-unwind.h
-diff --git gcc-host-clean/libstdc++-v3/configure.host gcc-host-workdir/libstdc++-v3/configure.host
-index 7bc4307..8ebd90e 100644
---- gcc-host-clean/libstdc++-v3/configure.host
-+++ gcc-host-workdir/libstdc++-v3/configure.host
-@@ -255,7 +255,7 @@ case "${host_os}" in
-   freebsd*)
-     os_include_dir="os/bsd/freebsd"
-     ;;
--  linux-musl*)
-+  linux-musl* | linux-mlibc*)
-     os_include_dir="os/generic"
-     ;;
-   gnu* | linux* | kfreebsd*-gnu | uclinux*)
 diff -urN --no-dereference gcc-host-clean/libstdc++-v3/configure gcc-host-workdir/libstdc++-v3/configure
---- gcc-host-clean/libstdc++-v3/configure   2024-08-01 10:17:18.000000000 +0200
-+++ gcc-host-workdir/libstdc++-v3/configure 2025-04-26 14:30:21.816584905 +0200
-@@ -38822,7 +38822,7 @@
+--- gcc-host-clean/libstdc++-v3/configure
++++ gcc-host-workdir/libstdc++-v3/configure
+@@ -38856,7 +38856,7 @@
  
    fi
      ;;
@@ -259,3 +237,15 @@ diff -urN --no-dereference gcc-host-clean/libstdc++-v3/configure gcc-host-workdi
  
    # All these tests are for C++; save the language and the compiler flags.
    # The CXXFLAGS thing is suspicious, but based on similar bits previously
+diff -urN --no-dereference gcc-host-clean/libstdc++-v3/configure.host gcc-host-workdir/libstdc++-v3/configure.host
+--- gcc-host-clean/libstdc++-v3/configure.host
++++ gcc-host-workdir/libstdc++-v3/configure.host
+@@ -265,7 +265,7 @@
+   freebsd*)
+     os_include_dir="os/bsd/freebsd"
+     ;;
+-  linux-musl*)
++  linux-musl* | linux-mlibc*)
+     os_include_dir="os/generic"
+     ;;
+   gnu* | linux* | kfreebsd*-gnu | uclinux*)

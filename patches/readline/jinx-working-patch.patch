@@ -1,8 +1,7 @@
-diff --git readline-clean/support/shobj-conf readline-workdir/support/shobj-conf
-index cd7634d..2beb0e6 100644
+diff -urN --no-dereference readline-clean/support/shobj-conf readline-workdir/support/shobj-conf
 --- readline-clean/support/shobj-conf
 +++ readline-workdir/support/shobj-conf
-@@ -123,12 +123,12 @@ sunos5*|solaris2*)
+@@ -123,12 +123,12 @@
  	;;
  
  # All versions of Linux (including Gentoo/FreeBSD) or the semi-mythical GNU Hurd.

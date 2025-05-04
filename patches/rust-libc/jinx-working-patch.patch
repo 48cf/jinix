@@ -1,8 +1,7 @@
-diff --git rust-libc-clean/src/unix/linux_like/linux/mod.rs rust-libc-workdir/src/unix/linux_like/linux/mod.rs
-index 5be701b..f44733d 100644
+diff -urN --no-dereference rust-libc-clean/src/unix/linux_like/linux/mod.rs rust-libc-workdir/src/unix/linux_like/linux/mod.rs
 --- rust-libc-clean/src/unix/linux_like/linux/mod.rs
 +++ rust-libc-workdir/src/unix/linux_like/linux/mod.rs
-@@ -3018,12 +3018,15 @@ pub const MEMBARRIER_CMD_REGISTER_PRIVATE_EXPEDITED_SYNC_CORE: c_int = 1 << 6;
+@@ -3018,12 +3018,15 @@
  pub const MEMBARRIER_CMD_PRIVATE_EXPEDITED_RSEQ: c_int = 1 << 7;
  pub const MEMBARRIER_CMD_REGISTER_PRIVATE_EXPEDITED_RSEQ: c_int = 1 << 8;
  
@@ -18,7 +17,7 @@ index 5be701b..f44733d 100644
  pub const PTHREAD_RWLOCK_INITIALIZER: pthread_rwlock_t = pthread_rwlock_t {
      size: [0; __SIZEOF_PTHREAD_RWLOCK_T],
  };
-@@ -6243,7 +6246,7 @@ cfg_if! {
+@@ -6243,7 +6246,7 @@
  }
  
  cfg_if! {
@@ -27,7 +26,7 @@ index 5be701b..f44733d 100644
          extern "C" {
              #[cfg_attr(gnu_file_offset_bits64, link_name = "aio_read64")]
              pub fn aio_read(aiocbp: *mut aiocb) -> c_int;
-@@ -6387,9 +6390,10 @@ cfg_if! {
+@@ -6387,9 +6390,10 @@
  
  extern "C" {
      #[cfg_attr(
@@ -39,7 +38,7 @@ index 5be701b..f44733d 100644
      pub fn strerror_r(errnum: c_int, buf: *mut c_char, buflen: size_t) -> c_int;
  
      pub fn abs(i: c_int) -> c_int;
-@@ -7044,6 +7048,9 @@ cfg_if! {
+@@ -7044,6 +7048,9 @@
      } else if #[cfg(target_env = "gnu")] {
          mod gnu;
          pub use self::gnu::*;

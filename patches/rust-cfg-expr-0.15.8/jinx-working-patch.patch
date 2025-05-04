@@ -1,12 +1,10 @@
-diff --git rust-cfg-expr-0.15.8-clean/src/targets/builtins.rs rust-cfg-expr-0.15.8-workdir/src/targets/builtins.rs
-index 082a004..e286687 100644
+diff -urN --no-dereference rust-cfg-expr-0.15.8-clean/src/targets/builtins.rs rust-cfg-expr-0.15.8-workdir/src/targets/builtins.rs
 --- rust-cfg-expr-0.15.8-clean/src/targets/builtins.rs
 +++ rust-cfg-expr-0.15.8-workdir/src/targets/builtins.rs
-@@ -2873,6 +2873,19 @@ pub const ALL_BUILTINS: &[TargetInfo] = &[
-         has_atomics: HasAtomics::atomic_8_16_32_64_ptr,
+@@ -2874,6 +2874,19 @@
          panic: Panic::unwind,
      },
-+    TargetInfo {
+     TargetInfo {
 +        triple: Triple::new_const("x86_64-unknown-linux-mlibc"),
 +        os: Some(Os::linux),
 +        abi: None,
@@ -19,10 +17,11 @@ index 082a004..e286687 100644
 +        has_atomics: HasAtomics::atomic_8_16_32_64_ptr,
 +        panic: Panic::unwind,
 +    },
-     TargetInfo {
++    TargetInfo {
          triple: Triple::new_const("x86_64-unknown-linux-ohos"),
          os: Some(Os::linux),
-@@ -3129,6 +3142,7 @@ impl super::Env {
+         abi: None,
+@@ -3129,6 +3142,7 @@
      pub const gnueabihf: Env = Env::new_const("gnueabihf");
      pub const msvc: Env = Env::new_const("msvc");
      pub const musl: Env = Env::new_const("musl");

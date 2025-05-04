@@ -1,6 +1,6 @@
 diff -urN --no-dereference wpa-supplicant-clean/src/utils/os.h wpa-supplicant-workdir/src/utils/os.h
---- wpa-supplicant-clean/src/utils/os.h	2024-07-20 20:04:37.000000000 +0200
-+++ wpa-supplicant-workdir/src/utils/os.h	2025-04-30 00:58:05.162510579 +0200
+--- wpa-supplicant-clean/src/utils/os.h
++++ wpa-supplicant-workdir/src/utils/os.h
 @@ -9,6 +9,8 @@
  #ifndef OS_H
  #define OS_H

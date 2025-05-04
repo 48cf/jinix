@@ -1,5 +1,4 @@
-diff --git psmisc-clean/src/peekfd.c psmisc-workdir/src/peekfd.c
-index 36dff04..a21ee4a 100644
+diff -urN --no-dereference psmisc-clean/src/peekfd.c psmisc-workdir/src/peekfd.c
 --- psmisc-clean/src/peekfd.c
 +++ psmisc-workdir/src/peekfd.c
 @@ -38,6 +38,7 @@
@@ -10,8 +9,7 @@ index 36dff04..a21ee4a 100644
  
  #include "i18n.h"
  
-diff --git psmisc-clean/src/pstree.c psmisc-workdir/src/pstree.c
-index 39265d1..67e4d5f 100644
+diff -urN --no-dereference psmisc-clean/src/pstree.c psmisc-workdir/src/pstree.c
 --- psmisc-clean/src/pstree.c
 +++ psmisc-workdir/src/pstree.c
 @@ -62,7 +62,12 @@

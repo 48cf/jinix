@@ -1,5 +1,4 @@
-diff --git util-linux-clean/libmount/src/hook_idmap.c util-linux-workdir/libmount/src/hook_idmap.c
-index e8c4cab..8490c98 100644
+diff -urN --no-dereference util-linux-clean/libmount/src/hook_idmap.c util-linux-workdir/libmount/src/hook_idmap.c
 --- util-linux-clean/libmount/src/hook_idmap.c
 +++ util-linux-workdir/libmount/src/hook_idmap.c
 @@ -20,6 +20,7 @@
@@ -10,8 +9,7 @@ index e8c4cab..8490c98 100644
  
  #include "strutils.h"
  #include "all-io.h"
-diff --git util-linux-clean/sys-utils/nsenter.c util-linux-workdir/sys-utils/nsenter.c
-index 136931a..fd07f94 100644
+diff -urN --no-dereference util-linux-clean/sys-utils/nsenter.c util-linux-workdir/sys-utils/nsenter.c
 --- util-linux-clean/sys-utils/nsenter.c
 +++ util-linux-workdir/sys-utils/nsenter.c
 @@ -23,6 +23,7 @@
@@ -22,8 +20,7 @@ index 136931a..fd07f94 100644
  
  #include <sys/ioctl.h>
  #include <linux/sockios.h>
-diff --git util-linux-clean/sys-utils/unshare.c util-linux-workdir/sys-utils/unshare.c
-index 05db627..6f21e7f 100644
+diff -urN --no-dereference util-linux-clean/sys-utils/unshare.c util-linux-workdir/sys-utils/unshare.c
 --- util-linux-clean/sys-utils/unshare.c
 +++ util-linux-workdir/sys-utils/unshare.c
 @@ -32,6 +32,7 @@

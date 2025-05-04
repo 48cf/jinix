@@ -1,6 +1,6 @@
 diff -urN --no-dereference libqmi-clean/src/qmi-firmware-update/qfu-at-device.c libqmi-workdir/src/qmi-firmware-update/qfu-at-device.c
---- libqmi-clean/src/qmi-firmware-update/qfu-at-device.c	2025-04-09 05:57:22.000000000 +0200
-+++ libqmi-workdir/src/qmi-firmware-update/qfu-at-device.c	2025-04-28 12:22:07.617791724 +0200
+--- libqmi-clean/src/qmi-firmware-update/qfu-at-device.c
++++ libqmi-workdir/src/qmi-firmware-update/qfu-at-device.c
 @@ -27,6 +27,14 @@
  #include <termios.h>
  #include <unistd.h>

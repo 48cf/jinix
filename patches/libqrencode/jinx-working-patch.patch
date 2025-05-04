@@ -1,5 +1,4 @@
-diff --git libqrencode-clean/qrenc.c libqrencode-workdir/qrenc.c
-index c09c4ab..be89634 100644
+diff -urN --no-dereference libqrencode-clean/qrenc.c libqrencode-workdir/qrenc.c
 --- libqrencode-clean/qrenc.c
 +++ libqrencode-workdir/qrenc.c
 @@ -25,6 +25,7 @@

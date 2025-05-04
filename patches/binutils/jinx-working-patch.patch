@@ -1,6 +1,6 @@
 diff -urN --no-dereference binutils-clean/configure binutils-workdir/configure
---- binutils-clean/configure	2025-02-02 01:00:00.000000000 +0100
-+++ binutils-workdir/configure	2025-04-26 15:17:58.611614238 +0200
+--- binutils-clean/configure
++++ binutils-workdir/configure
 @@ -3083,7 +3083,7 @@
        *-*-elf* | *-*-sysv4* | *-*-unixware* | *-*-eabi* | hppa*64*-*-hpux* \
        | *-*-linux* | *-*-gnu* | frv-*-uclinux* | *-*-irix5* | *-*-irix6* \
@@ -10,8 +10,7 @@ diff -urN --no-dereference binutils-clean/configure binutils-workdir/configure
          case "${target}" in
            *-*-linux*aout* | *-*-linux*oldld*)
              ;;
-diff --git binutils-clean/gprofng/libcollector/collector.c binutils-workdir/gprofng/libcollector/collector.c
-index 8d978a6..004609b 100644
+diff -urN --no-dereference binutils-clean/gprofng/libcollector/collector.c binutils-workdir/gprofng/libcollector/collector.c
 --- binutils-clean/gprofng/libcollector/collector.c
 +++ binutils-workdir/gprofng/libcollector/collector.c
 @@ -27,6 +27,7 @@
@@ -22,11 +21,10 @@ index 8d978a6..004609b 100644
  #include <sys/syscall.h>	/* system call fork() */
  
  #include "gp-defs.h"
-diff --git binutils-clean/gprofng/libcollector/dispatcher.c binutils-workdir/gprofng/libcollector/dispatcher.c
-index adac1dd..d3b24a2 100644
+diff -urN --no-dereference binutils-clean/gprofng/libcollector/dispatcher.c binutils-workdir/gprofng/libcollector/dispatcher.c
 --- binutils-clean/gprofng/libcollector/dispatcher.c
 +++ binutils-workdir/gprofng/libcollector/dispatcher.c
-@@ -598,7 +598,11 @@ collector_timer_create (timer_t * ptimerid)
+@@ -598,7 +598,11 @@
    sigev.sigev_signo = SIGPROF;
    sigev.sigev_value.sival_ptr = ptimerid;
  #if !defined(__MUSL_LIBC)
@@ -38,8 +36,7 @@ index adac1dd..d3b24a2 100644
  #endif
    if (CALL_REAL (timer_create)(CLOCK_THREAD_CPUTIME_ID, &sigev, ptimerid) == -1)
      {
-diff --git binutils-clean/gprofng/libcollector/mmaptrace.c binutils-workdir/gprofng/libcollector/mmaptrace.c
-index 486c87e..83ce05c 100644
+diff -urN --no-dereference binutils-clean/gprofng/libcollector/mmaptrace.c binutils-workdir/gprofng/libcollector/mmaptrace.c
 --- binutils-clean/gprofng/libcollector/mmaptrace.c
 +++ binutils-workdir/gprofng/libcollector/mmaptrace.c
 @@ -32,6 +32,7 @@
@@ -50,7 +47,7 @@ index 486c87e..83ce05c 100644
  #include <stdint.h>
  
  #include "gp-defs.h"
-@@ -470,7 +471,7 @@ dlopen_searchpath (void*(real_dlopen) (const char *, int),
+@@ -470,7 +471,7 @@
        TprintfT (0, "ERROR: dlopen(%s,NOLOAD): %s\n", dl_info.dli_fname, dlerror ());
        return NULL;
      }

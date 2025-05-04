@@ -1,6 +1,6 @@
 diff -urN --no-dereference python-clean/configure python-workdir/configure
---- python-clean/configure	2025-04-08 15:54:08.000000000 +0200
-+++ python-workdir/configure	2025-04-26 16:20:57.317469181 +0200
+--- python-clean/configure
++++ python-workdir/configure
 @@ -4067,6 +4067,9 @@
  	*-*-wasi*)
  	    ac_sys_system=WASI

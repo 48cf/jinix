@@ -1,6 +1,6 @@
 diff -urN --no-dereference iptables-clean/extensions/dscp_helper.c iptables-workdir/extensions/dscp_helper.c
---- iptables-clean/extensions/dscp_helper.c	2022-11-16 11:17:33.000000000 +0100
-+++ iptables-workdir/extensions/dscp_helper.c	2025-04-30 00:32:36.378794171 +0200
+--- iptables-clean/extensions/dscp_helper.c
++++ iptables-workdir/extensions/dscp_helper.c
 @@ -11,6 +11,7 @@
  
  #include <stdio.h>
@@ -10,8 +10,8 @@ diff -urN --no-dereference iptables-clean/extensions/dscp_helper.c iptables-work
  
  
 diff -urN --no-dereference iptables-clean/extensions/libip6t_REJECT.c iptables-workdir/extensions/libip6t_REJECT.c
---- iptables-clean/extensions/libip6t_REJECT.c	2021-06-24 18:20:51.000000000 +0200
-+++ iptables-workdir/extensions/libip6t_REJECT.c	2025-04-30 00:45:36.799643155 +0200
+--- iptables-clean/extensions/libip6t_REJECT.c
++++ iptables-workdir/extensions/libip6t_REJECT.c
 @@ -7,6 +7,7 @@
   */
  #include <stdio.h>
@@ -21,8 +21,8 @@ diff -urN --no-dereference iptables-clean/extensions/libip6t_REJECT.c iptables-w
  #include <linux/netfilter_ipv6/ip6t_REJECT.h>
  
 diff -urN --no-dereference iptables-clean/extensions/libip6t_mh.c iptables-workdir/extensions/libip6t_mh.c
---- iptables-clean/extensions/libip6t_mh.c	2024-05-14 12:49:36.000000000 +0200
-+++ iptables-workdir/extensions/libip6t_mh.c	2025-04-30 00:46:02.823437217 +0200
+--- iptables-clean/extensions/libip6t_mh.c
++++ iptables-workdir/extensions/libip6t_mh.c
 @@ -14,6 +14,7 @@
  #include <stdint.h>
  #include <stdio.h>
@@ -32,8 +32,8 @@ diff -urN --no-dereference iptables-clean/extensions/libip6t_mh.c iptables-workd
  #include <xtables.h>
  #include <linux/netfilter_ipv6/ip6t_mh.h>
 diff -urN --no-dereference iptables-clean/extensions/libipt_REJECT.c iptables-workdir/extensions/libipt_REJECT.c
---- iptables-clean/extensions/libipt_REJECT.c	2021-06-24 18:20:51.000000000 +0200
-+++ iptables-workdir/extensions/libipt_REJECT.c	2025-04-30 00:44:07.292376209 +0200
+--- iptables-clean/extensions/libipt_REJECT.c
++++ iptables-workdir/extensions/libipt_REJECT.c
 @@ -4,6 +4,7 @@
   */
  #include <stdio.h>
@@ -43,8 +43,8 @@ diff -urN --no-dereference iptables-clean/extensions/libipt_REJECT.c iptables-wo
  #include <linux/netfilter_ipv4/ipt_REJECT.h>
  #include <linux/version.h>
 diff -urN --no-dereference iptables-clean/extensions/libxt_AUDIT.c iptables-workdir/extensions/libxt_AUDIT.c
---- iptables-clean/extensions/libxt_AUDIT.c	2021-06-24 18:20:51.000000000 +0200
-+++ iptables-workdir/extensions/libxt_AUDIT.c	2025-04-30 00:32:19.506872165 +0200
+--- iptables-clean/extensions/libxt_AUDIT.c
++++ iptables-workdir/extensions/libxt_AUDIT.c
 @@ -7,6 +7,7 @@
   */
  #include <stdio.h>
@@ -54,8 +54,8 @@ diff -urN --no-dereference iptables-clean/extensions/libxt_AUDIT.c iptables-work
  #include <linux/netfilter/xt_AUDIT.h>
  
 diff -urN --no-dereference iptables-clean/extensions/libxt_CT.c iptables-workdir/extensions/libxt_CT.c
---- iptables-clean/extensions/libxt_CT.c	2022-11-16 11:17:33.000000000 +0100
-+++ iptables-workdir/extensions/libxt_CT.c	2025-04-30 00:31:47.235021350 +0200
+--- iptables-clean/extensions/libxt_CT.c
++++ iptables-workdir/extensions/libxt_CT.c
 @@ -4,6 +4,7 @@
  
  #include <stdio.h>
@@ -65,8 +65,8 @@ diff -urN --no-dereference iptables-clean/extensions/libxt_CT.c iptables-workdir
  #include <linux/netfilter/nf_conntrack_common.h>
  #include <linux/netfilter/xt_CT.h>
 diff -urN --no-dereference iptables-clean/extensions/libxt_HMARK.c iptables-workdir/extensions/libxt_HMARK.c
---- iptables-clean/extensions/libxt_HMARK.c	2024-02-07 21:26:42.000000000 +0100
-+++ iptables-workdir/extensions/libxt_HMARK.c	2025-04-30 00:32:00.906958149 +0200
+--- iptables-clean/extensions/libxt_HMARK.c
++++ iptables-workdir/extensions/libxt_HMARK.c
 @@ -15,6 +15,7 @@
  #include <stdbool.h>
  #include <stdio.h>
@@ -76,8 +76,8 @@ diff -urN --no-dereference iptables-clean/extensions/libxt_HMARK.c iptables-work
  #include "xtables.h"
  #include <linux/netfilter/xt_HMARK.h>
 diff -urN --no-dereference iptables-clean/extensions/libxt_LED.c iptables-workdir/extensions/libxt_LED.c
---- iptables-clean/extensions/libxt_LED.c	2021-06-24 18:20:51.000000000 +0200
-+++ iptables-workdir/extensions/libxt_LED.c	2025-04-30 00:31:50.875004523 +0200
+--- iptables-clean/extensions/libxt_LED.c
++++ iptables-workdir/extensions/libxt_LED.c
 @@ -11,6 +11,7 @@
   */
  #include <stdio.h>
@@ -87,8 +87,8 @@ diff -urN --no-dereference iptables-clean/extensions/libxt_LED.c iptables-workdi
  #include <xtables.h>
  #include <linux/netfilter/xt_LED.h>
 diff -urN --no-dereference iptables-clean/extensions/libxt_RATEEST.c iptables-workdir/extensions/libxt_RATEEST.c
---- iptables-clean/extensions/libxt_RATEEST.c	2021-06-24 18:20:51.000000000 +0200
-+++ iptables-workdir/extensions/libxt_RATEEST.c	2025-04-30 00:31:29.771102082 +0200
+--- iptables-clean/extensions/libxt_RATEEST.c
++++ iptables-workdir/extensions/libxt_RATEEST.c
 @@ -4,6 +4,7 @@
  
  #include <stdio.h>
@@ -98,8 +98,8 @@ diff -urN --no-dereference iptables-clean/extensions/libxt_RATEEST.c iptables-wo
  #include <math.h>
  
 diff -urN --no-dereference iptables-clean/extensions/libxt_conntrack.c iptables-workdir/extensions/libxt_conntrack.c
---- iptables-clean/extensions/libxt_conntrack.c	2024-10-20 23:27:19.000000000 +0200
-+++ iptables-workdir/extensions/libxt_conntrack.c	2025-04-30 00:34:35.402243956 +0200
+--- iptables-clean/extensions/libxt_conntrack.c
++++ iptables-workdir/extensions/libxt_conntrack.c
 @@ -11,6 +11,7 @@
  #include <stdio.h>
  #include <stdlib.h>
@@ -109,8 +109,8 @@ diff -urN --no-dereference iptables-clean/extensions/libxt_conntrack.c iptables-
  #include <linux/netfilter/xt_conntrack.h>
  #include <linux/netfilter/xt_state.h>
 diff -urN --no-dereference iptables-clean/extensions/libxt_dccp.c iptables-workdir/extensions/libxt_dccp.c
---- iptables-clean/extensions/libxt_dccp.c	2022-12-22 11:33:18.000000000 +0100
-+++ iptables-workdir/extensions/libxt_dccp.c	2025-04-30 00:35:22.897881846 +0200
+--- iptables-clean/extensions/libxt_dccp.c
++++ iptables-workdir/extensions/libxt_dccp.c
 @@ -8,6 +8,7 @@
  #include <stdint.h>
  #include <stdio.h>
@@ -120,8 +120,8 @@ diff -urN --no-dereference iptables-clean/extensions/libxt_dccp.c iptables-workd
  #include <netdb.h>
  #include <arpa/inet.h>
 diff -urN --no-dereference iptables-clean/extensions/libxt_icmp.h iptables-workdir/extensions/libxt_icmp.h
---- iptables-clean/extensions/libxt_icmp.h	2023-08-13 00:33:39.000000000 +0200
-+++ iptables-workdir/extensions/libxt_icmp.h	2025-04-30 00:45:05.567894422 +0200
+--- iptables-clean/extensions/libxt_icmp.h
++++ iptables-workdir/extensions/libxt_icmp.h
 @@ -1,3 +1,5 @@
 +#include <strings.h>
 +
@@ -129,8 +129,8 @@ diff -urN --no-dereference iptables-clean/extensions/libxt_icmp.h iptables-workd
  	const char *name;
  	uint8_t type;
 diff -urN --no-dereference iptables-clean/extensions/libxt_ipvs.c iptables-workdir/extensions/libxt_ipvs.c
---- iptables-clean/extensions/libxt_ipvs.c	2021-06-24 18:20:51.000000000 +0200
-+++ iptables-workdir/extensions/libxt_ipvs.c	2025-04-30 00:35:54.393466690 +0200
+--- iptables-clean/extensions/libxt_ipvs.c
++++ iptables-workdir/extensions/libxt_ipvs.c
 @@ -8,6 +8,7 @@
  #include <stdbool.h>
  #include <stdio.h>
@@ -140,8 +140,8 @@ diff -urN --no-dereference iptables-clean/extensions/libxt_ipvs.c iptables-workd
  #include <linux/ip_vs.h>
  #include <linux/netfilter/xt_ipvs.h>
 diff -urN --no-dereference iptables-clean/extensions/libxt_pkttype.c iptables-workdir/extensions/libxt_pkttype.c
---- iptables-clean/extensions/libxt_pkttype.c	2022-11-14 17:52:02.000000000 +0100
-+++ iptables-workdir/extensions/libxt_pkttype.c	2025-04-30 00:41:52.445566056 +0200
+--- iptables-clean/extensions/libxt_pkttype.c
++++ iptables-workdir/extensions/libxt_pkttype.c
 @@ -6,6 +6,7 @@
   */
  #include <stdio.h>
@@ -151,8 +151,8 @@ diff -urN --no-dereference iptables-clean/extensions/libxt_pkttype.c iptables-wo
  #include <linux/if_packet.h>
  #include <linux/netfilter/xt_pkttype.h>
 diff -urN --no-dereference iptables-clean/extensions/libxt_rateest.c iptables-workdir/extensions/libxt_rateest.c
---- iptables-clean/extensions/libxt_rateest.c	2021-06-24 18:20:51.000000000 +0200
-+++ iptables-workdir/extensions/libxt_rateest.c	2025-04-30 00:42:55.188998262 +0200
+--- iptables-clean/extensions/libxt_rateest.c
++++ iptables-workdir/extensions/libxt_rateest.c
 @@ -5,6 +5,7 @@
  #include <stdbool.h>
  #include <stdio.h>
@@ -162,8 +162,8 @@ diff -urN --no-dereference iptables-clean/extensions/libxt_rateest.c iptables-wo
  #include <stddef.h>
  #include <getopt.h>
 diff -urN --no-dereference iptables-clean/extensions/libxt_sctp.c iptables-workdir/extensions/libxt_sctp.c
---- iptables-clean/extensions/libxt_sctp.c	2024-07-05 17:24:05.000000000 +0200
-+++ iptables-workdir/extensions/libxt_sctp.c	2025-04-30 00:43:03.000929366 +0200
+--- iptables-clean/extensions/libxt_sctp.c
++++ iptables-workdir/extensions/libxt_sctp.c
 @@ -11,6 +11,7 @@
  #include <stdbool.h>
  #include <stdio.h>
@@ -173,8 +173,8 @@ diff -urN --no-dereference iptables-clean/extensions/libxt_sctp.c iptables-workd
  #include <getopt.h>
  #include <netdb.h>
 diff -urN --no-dereference iptables-clean/extensions/libxt_tcp.c iptables-workdir/extensions/libxt_tcp.c
---- iptables-clean/extensions/libxt_tcp.c	2024-02-07 21:27:44.000000000 +0100
-+++ iptables-workdir/extensions/libxt_tcp.c	2025-04-30 00:43:35.700645017 +0200
+--- iptables-clean/extensions/libxt_tcp.c
++++ iptables-workdir/extensions/libxt_tcp.c
 @@ -3,6 +3,7 @@
  #include <stdio.h>
  #include <netdb.h>
@@ -184,8 +184,8 @@ diff -urN --no-dereference iptables-clean/extensions/libxt_tcp.c iptables-workdi
  #include <getopt.h>
  #include <netinet/in.h>
 diff -urN --no-dereference iptables-clean/libxtables/getethertype.c iptables-workdir/libxtables/getethertype.c
---- iptables-clean/libxtables/getethertype.c	2021-06-24 18:20:51.000000000 +0200
-+++ iptables-workdir/libxtables/getethertype.c	2025-04-30 00:30:37.747342573 +0200
+--- iptables-clean/libxtables/getethertype.c
++++ iptables-workdir/libxtables/getethertype.c
 @@ -40,6 +40,7 @@
  #include <stdio.h>
  #include <stdlib.h>
@@ -195,8 +195,8 @@ diff -urN --no-dereference iptables-clean/libxtables/getethertype.c iptables-wor
  #include <net/ethernet.h>
  #include <xtables.h>
 diff -urN --no-dereference iptables-clean/libxtables/xtables.c iptables-workdir/libxtables/xtables.c
---- iptables-clean/libxtables/xtables.c	2024-11-07 20:48:42.000000000 +0100
-+++ iptables-workdir/libxtables/xtables.c	2025-04-30 00:30:32.955364725 +0200
+--- iptables-clean/libxtables/xtables.c
++++ iptables-workdir/libxtables/xtables.c
 @@ -27,6 +27,7 @@
  #include <stdio.h>
  #include <stdlib.h>
@@ -206,8 +206,8 @@ diff -urN --no-dereference iptables-clean/libxtables/xtables.c iptables-workdir/
  #include <netinet/ether.h>
  #include <sys/socket.h>
 diff -urN --no-dereference iptables-clean/libxtables/xtoptions.c iptables-workdir/libxtables/xtoptions.c
---- iptables-clean/libxtables/xtoptions.c	2024-11-07 20:48:42.000000000 +0100
-+++ iptables-workdir/libxtables/xtoptions.c	2025-04-30 00:30:30.099377928 +0200
+--- iptables-clean/libxtables/xtoptions.c
++++ iptables-workdir/libxtables/xtoptions.c
 @@ -17,6 +17,7 @@
  #include <stdio.h>
  #include <stdlib.h>

@@ -1,6 +1,6 @@
 diff -urN --no-dereference modemmanager-clean/libqcdm/src/com.c modemmanager-workdir/libqcdm/src/com.c
---- modemmanager-clean/libqcdm/src/com.c	2025-04-10 03:30:25.000000000 +0200
-+++ modemmanager-workdir/libqcdm/src/com.c	2025-04-29 14:43:24.155769524 +0200
+--- modemmanager-clean/libqcdm/src/com.c
++++ modemmanager-workdir/libqcdm/src/com.c
 @@ -23,6 +23,22 @@
  #include "com.h"
  #include "errors.h"
@@ -25,8 +25,8 @@ diff -urN --no-dereference modemmanager-clean/libqcdm/src/com.c modemmanager-wor
  qcdm_port_setup (int fd)
  {
 diff -urN --no-dereference modemmanager-clean/src/mm-port-serial-qcdm.c modemmanager-workdir/src/mm-port-serial-qcdm.c
---- modemmanager-clean/src/mm-port-serial-qcdm.c	2025-04-10 03:30:25.000000000 +0200
-+++ modemmanager-workdir/src/mm-port-serial-qcdm.c	2025-04-29 14:45:53.205583768 +0200
+--- modemmanager-clean/src/mm-port-serial-qcdm.c
++++ modemmanager-workdir/src/mm-port-serial-qcdm.c
 @@ -19,6 +19,7 @@
  #include <stdlib.h>
  #include <unistd.h>

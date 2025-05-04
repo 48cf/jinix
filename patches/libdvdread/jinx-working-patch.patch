@@ -1,5 +1,4 @@
-diff --git libdvdread-clean/src/dvd_reader.c libdvdread-workdir/src/dvd_reader.c
-index c4d9641..e0fc2c2 100644
+diff -urN --no-dereference libdvdread-clean/src/dvd_reader.c libdvdread-workdir/src/dvd_reader.c
 --- libdvdread-clean/src/dvd_reader.c
 +++ libdvdread-workdir/src/dvd_reader.c
 @@ -29,6 +29,7 @@

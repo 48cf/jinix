@@ -1,6 +1,6 @@
 diff -urN --no-dereference appstream-clean/data/meson.build appstream-workdir/data/meson.build
---- appstream-clean/data/meson.build	2024-12-08 23:35:19.000000000 +0100
-+++ appstream-workdir/data/meson.build	2025-04-27 21:56:47.315848996 +0200
+--- appstream-clean/data/meson.build
++++ appstream-workdir/data/meson.build
 @@ -21,7 +21,7 @@
  metainfo_with_relinfo = custom_target('gen-output',
      input : ['../NEWS', 'org.freedesktop.appstream.cli.metainfo.xml'],

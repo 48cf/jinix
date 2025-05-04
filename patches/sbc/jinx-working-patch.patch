@@ -1,5 +1,4 @@
-diff --git sbc-clean/src/sbcdec.c sbc-workdir/src/sbcdec.c
-index 85ded06..17824b8 100644
+diff -urN --no-dereference sbc-clean/src/sbcdec.c sbc-workdir/src/sbcdec.c
 --- sbc-clean/src/sbcdec.c
 +++ sbc-workdir/src/sbcdec.c
 @@ -21,7 +21,7 @@

@@ -1,6 +1,6 @@
 diff -urN --no-dereference libpcap-clean/bpf_filter.c libpcap-workdir/bpf_filter.c
---- libpcap-clean/bpf_filter.c	2024-08-30 21:34:14.000000000 +0200
-+++ libpcap-workdir/bpf_filter.c	2025-04-30 00:24:51.276944214 +0200
+--- libpcap-clean/bpf_filter.c
++++ libpcap-workdir/bpf_filter.c
 @@ -40,6 +40,7 @@
  
  #include <config.h>

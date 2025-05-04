@@ -1,8 +1,7 @@
-diff --git alsa-lib-clean/src/conf.c alsa-lib-workdir/src/conf.c
-index 468d41f..97cf7cf 100644
+diff -urN --no-dereference alsa-lib-clean/src/conf.c alsa-lib-workdir/src/conf.c
 --- alsa-lib-clean/src/conf.c
 +++ alsa-lib-workdir/src/conf.c
-@@ -435,6 +435,10 @@ beginning:</P>
+@@ -435,6 +435,10 @@
  #include <pthread.h>
  #endif
  
@@ -13,8 +12,7 @@ index 468d41f..97cf7cf 100644
  #ifndef DOC_HIDDEN
  
  #ifdef HAVE_LIBPTHREAD
-diff --git alsa-lib-clean/src/ucm/parser.c alsa-lib-workdir/src/ucm/parser.c
-index 488a5c6..68aed82 100644
+diff -urN --no-dereference alsa-lib-clean/src/ucm/parser.c alsa-lib-workdir/src/ucm/parser.c
 --- alsa-lib-clean/src/ucm/parser.c
 +++ alsa-lib-workdir/src/ucm/parser.c
 @@ -36,6 +36,10 @@

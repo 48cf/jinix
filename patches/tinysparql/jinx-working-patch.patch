@@ -1,8 +1,7 @@
-diff --git tinysparql-clean/meson.build tinysparql-workdir/meson.build
-index 1a9c1d0..f9ad65b 100644
+diff -urN --no-dereference tinysparql-clean/meson.build tinysparql-workdir/meson.build
 --- tinysparql-clean/meson.build
 +++ tinysparql-workdir/meson.build
-@@ -150,80 +150,84 @@ add_project_arguments(debug_cflags, language: 'c')
+@@ -150,80 +150,84 @@
  libstemmer = cc.find_library('stemmer', required: get_option('stemmer'))
  have_libstemmer = libstemmer.found()
  
@@ -72,10 +71,7 @@ index 1a9c1d0..f9ad65b 100644
 +#    error('SQLite has no builtin FTS5.')
 +#  endif
 +#endif
- 
--  result = cc.run(sqlite3_builtin_fts5_test,
--    name: 'sqlite3 has builtin FTS5 module',
--    dependencies: sqlite)
++
 +###################################################################
 +## Get an appropriate 4-digit year modifier for strftime
 +###################################################################
@@ -111,6 +107,10 @@ index 1a9c1d0..f9ad65b 100644
 +#  year_modifier = result.stdout()
 +#endif
  
+-  result = cc.run(sqlite3_builtin_fts5_test,
+-    name: 'sqlite3 has builtin FTS5 module',
+-    dependencies: sqlite)
+-
 -  if not result.compiled()
 -    error('Failed to compile SQLite FTS test.')
 -  endif
@@ -158,11 +158,10 @@ index 1a9c1d0..f9ad65b 100644
  
  ##################################################################
  # Check for libtracker-data and libtracker-fts: Unicode support
-diff --git tinysparql-clean/src/libtinysparql/meson.build tinysparql-workdir/src/libtinysparql/meson.build
-index e229b51..32be28f 100644
+diff -urN --no-dereference tinysparql-clean/src/libtinysparql/meson.build tinysparql-workdir/src/libtinysparql/meson.build
 --- tinysparql-clean/src/libtinysparql/meson.build
 +++ tinysparql-workdir/src/libtinysparql/meson.build
-@@ -246,6 +246,6 @@ endif
+@@ -246,6 +246,6 @@
  
  tracker_sparql_uninstalled_dir = meson.current_build_dir()
  

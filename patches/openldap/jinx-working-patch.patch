@@ -1,5 +1,4 @@
-diff --git openldap-clean/clients/tools/ldapurl.c openldap-workdir/clients/tools/ldapurl.c
-index 26f08b3..09d4f87 100644
+diff -urN --no-dereference openldap-clean/clients/tools/ldapurl.c openldap-workdir/clients/tools/ldapurl.c
 --- openldap-clean/clients/tools/ldapurl.c
 +++ openldap-workdir/clients/tools/ldapurl.c
 @@ -33,6 +33,7 @@

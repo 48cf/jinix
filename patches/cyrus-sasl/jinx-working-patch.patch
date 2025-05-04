@@ -1,5 +1,4 @@
-diff --git cyrus-sasl-clean/saslauthd/saslauthd-main.c cyrus-sasl-workdir/saslauthd/saslauthd-main.c
-index ca5b725..9aff7e0 100644
+diff -urN --no-dereference cyrus-sasl-clean/saslauthd/saslauthd-main.c cyrus-sasl-workdir/saslauthd/saslauthd-main.c
 --- cyrus-sasl-clean/saslauthd/saslauthd-main.c
 +++ cyrus-sasl-workdir/saslauthd/saslauthd-main.c
 @@ -99,6 +99,8 @@

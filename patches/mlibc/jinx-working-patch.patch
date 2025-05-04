@@ -1,6 +1,6 @@
 diff -urN --no-dereference mlibc-clean/abis/linux/fcntl.h mlibc-workdir/abis/linux/fcntl.h
---- mlibc-clean/abis/linux/fcntl.h	2025-04-30 08:52:34.598180967 +0200
-+++ mlibc-workdir/abis/linux/fcntl.h	2025-04-30 08:52:34.944546413 +0200
+--- mlibc-clean/abis/linux/fcntl.h
++++ mlibc-workdir/abis/linux/fcntl.h
 @@ -103,6 +103,8 @@
  #endif /* _GNU_SOURCE */
  
@@ -11,8 +11,8 @@ diff -urN --no-dereference mlibc-clean/abis/linux/fcntl.h mlibc-workdir/abis/lin
  #define POSIX_FADV_NORMAL 0
  #define POSIX_FADV_RANDOM 1
 diff -urN --no-dereference mlibc-clean/abis/linux/ioctls.h mlibc-workdir/abis/linux/ioctls.h
---- mlibc-clean/abis/linux/ioctls.h	2025-04-30 08:52:34.598180967 +0200
-+++ mlibc-workdir/abis/linux/ioctls.h	2025-04-30 08:52:34.944678081 +0200
+--- mlibc-clean/abis/linux/ioctls.h
++++ mlibc-workdir/abis/linux/ioctls.h
 @@ -17,4 +17,8 @@
  #define SIOCGIFBRDADDR 0x8919
  #define SIOCGIFNETMASK 0x891B
@@ -23,8 +23,8 @@ diff -urN --no-dereference mlibc-clean/abis/linux/ioctls.h mlibc-workdir/abis/li
 +
  #endif /* _ABIBITS_IOCTLS_H */
 diff -urN --no-dereference mlibc-clean/abis/linux/ipc.h mlibc-workdir/abis/linux/ipc.h
---- mlibc-clean/abis/linux/ipc.h	2025-04-30 08:52:34.598180967 +0200
-+++ mlibc-workdir/abis/linux/ipc.h	2025-04-30 08:52:34.944764905 +0200
+--- mlibc-clean/abis/linux/ipc.h
++++ mlibc-workdir/abis/linux/ipc.h
 @@ -31,13 +31,13 @@
  typedef int key_t;
  
@@ -42,8 +42,8 @@ diff -urN --no-dereference mlibc-clean/abis/linux/ipc.h mlibc-workdir/abis/linux
  };
  
 diff -urN --no-dereference mlibc-clean/abis/linux/limits.h mlibc-workdir/abis/linux/limits.h
---- mlibc-clean/abis/linux/limits.h	2025-04-30 08:52:34.598180967 +0200
-+++ mlibc-workdir/abis/linux/limits.h	2025-04-30 08:52:34.944847681 +0200
+--- mlibc-clean/abis/linux/limits.h
++++ mlibc-workdir/abis/linux/limits.h
 @@ -6,5 +6,8 @@
  #define HOST_NAME_MAX 64
  #define NAME_MAX 255
@@ -54,8 +54,8 @@ diff -urN --no-dereference mlibc-clean/abis/linux/limits.h mlibc-workdir/abis/li
  
  #endif /*_ABIBITS_LIMITS_H */
 diff -urN --no-dereference mlibc-clean/options/ansi/generic/stdio.cpp mlibc-workdir/options/ansi/generic/stdio.cpp
---- mlibc-clean/options/ansi/generic/stdio.cpp	2025-04-30 08:52:34.601553960 +0200
-+++ mlibc-workdir/options/ansi/generic/stdio.cpp	2025-04-30 08:52:34.944963018 +0200
+--- mlibc-clean/options/ansi/generic/stdio.cpp
++++ mlibc-workdir/options/ansi/generic/stdio.cpp
 @@ -393,7 +393,8 @@
  			} else {
  				char *typed_dest = (char *)dest;
@@ -75,8 +75,8 @@ diff -urN --no-dereference mlibc-clean/options/ansi/generic/stdio.cpp mlibc-work
  				break;
  			}
 diff -urN --no-dereference mlibc-clean/options/ansi/include/stdio.h mlibc-workdir/options/ansi/include/stdio.h
---- mlibc-clean/options/ansi/include/stdio.h	2025-04-30 08:52:34.603090727 +0200
-+++ mlibc-workdir/options/ansi/include/stdio.h	2025-04-30 08:52:34.945140372 +0200
+--- mlibc-clean/options/ansi/include/stdio.h
++++ mlibc-workdir/options/ansi/include/stdio.h
 @@ -58,6 +58,7 @@
  };
  
@@ -86,8 +86,8 @@ diff -urN --no-dereference mlibc-clean/options/ansi/include/stdio.h mlibc-workdi
  /* [C11-7.21.1] I/O related macros */
  
 diff -urN --no-dereference mlibc-clean/options/glibc/generic/gshadow.cpp mlibc-workdir/options/glibc/generic/gshadow.cpp
---- mlibc-clean/options/glibc/generic/gshadow.cpp	2025-04-30 08:52:34.610132805 +0200
-+++ mlibc-workdir/options/glibc/generic/gshadow.cpp	2025-04-30 08:52:34.945267111 +0200
+--- mlibc-clean/options/glibc/generic/gshadow.cpp
++++ mlibc-workdir/options/glibc/generic/gshadow.cpp
 @@ -5,3 +5,18 @@
  	__ensure(!"Not implemented");
  	__builtin_unreachable();
@@ -108,8 +108,8 @@ diff -urN --no-dereference mlibc-clean/options/glibc/generic/gshadow.cpp mlibc-w
 +	__builtin_unreachable();
 +}
 diff -urN --no-dereference mlibc-clean/options/glibc/generic/shadow.cpp mlibc-workdir/options/glibc/generic/shadow.cpp
---- mlibc-clean/options/glibc/generic/shadow.cpp	2025-04-30 08:52:34.610132805 +0200
-+++ mlibc-workdir/options/glibc/generic/shadow.cpp	2025-04-30 08:52:34.945352141 +0200
+--- mlibc-clean/options/glibc/generic/shadow.cpp
++++ mlibc-workdir/options/glibc/generic/shadow.cpp
 @@ -207,9 +207,18 @@
  	return res;
  }
@@ -133,8 +133,8 @@ diff -urN --no-dereference mlibc-clean/options/glibc/generic/shadow.cpp mlibc-wo
  
  void endspent(void) {
 diff -urN --no-dereference mlibc-clean/options/glibc/include/gshadow.h mlibc-workdir/options/glibc/include/gshadow.h
---- mlibc-clean/options/glibc/include/gshadow.h	2025-04-30 08:52:34.610638267 +0200
-+++ mlibc-workdir/options/glibc/include/gshadow.h	2025-04-30 08:52:34.945480763 +0200
+--- mlibc-clean/options/glibc/include/gshadow.h
++++ mlibc-workdir/options/glibc/include/gshadow.h
 @@ -1,6 +1,7 @@
  #ifndef _GSHADOW_H
  #define _GSHADOW_H
@@ -154,8 +154,8 @@ diff -urN --no-dereference mlibc-clean/options/glibc/include/gshadow.h mlibc-wor
  #ifdef __cplusplus
  }
 diff -urN --no-dereference mlibc-clean/options/linux/generic/sched.cpp mlibc-workdir/options/linux/generic/sched.cpp
---- mlibc-clean/options/linux/generic/sched.cpp	2025-04-30 08:52:34.614700661 +0200
-+++ mlibc-workdir/options/linux/generic/sched.cpp	2025-04-30 08:52:34.945564722 +0200
+--- mlibc-clean/options/linux/generic/sched.cpp
++++ mlibc-workdir/options/linux/generic/sched.cpp
 @@ -24,9 +24,14 @@
  	return 0;
  }
@@ -175,8 +175,8 @@ diff -urN --no-dereference mlibc-clean/options/linux/generic/sched.cpp mlibc-wor
  
  int sched_getaffinity(pid_t pid, size_t cpusetsize, cpu_set_t *mask) {
 diff -urN --no-dereference mlibc-clean/options/linux/include/bits/linux/cpu_set.h mlibc-workdir/options/linux/include/bits/linux/cpu_set.h
---- mlibc-clean/options/linux/include/bits/linux/cpu_set.h	2025-04-30 08:52:34.615379029 +0200
-+++ mlibc-workdir/options/linux/include/bits/linux/cpu_set.h	2025-04-30 08:52:34.945660813 +0200
+--- mlibc-clean/options/linux/include/bits/linux/cpu_set.h
++++ mlibc-workdir/options/linux/include/bits/linux/cpu_set.h
 @@ -40,6 +40,24 @@
  #define CPU_COUNT_S(setsize, set) __mlibc_cpu_count((setsize), (set))
  #define CPU_COUNT(set) CPU_COUNT_S(sizeof(cpu_set_t), set)
@@ -203,8 +203,8 @@ diff -urN --no-dereference mlibc-clean/options/linux/include/bits/linux/cpu_set.
  
  #ifdef __cplusplus
 diff -urN --no-dereference mlibc-clean/options/linux/include/scsi/scsi.h mlibc-workdir/options/linux/include/scsi/scsi.h
---- mlibc-clean/options/linux/include/scsi/scsi.h	2025-04-30 08:52:34.615433001 +0200
-+++ mlibc-workdir/options/linux/include/scsi/scsi.h	2025-04-30 08:52:34.945792371 +0200
+--- mlibc-clean/options/linux/include/scsi/scsi.h
++++ mlibc-workdir/options/linux/include/scsi/scsi.h
 @@ -9,10 +9,22 @@
  #define START_STOP 0x1b
  #define ALLOW_MEDIUM_REMOVAL 0x1e
@@ -229,8 +229,8 @@ diff -urN --no-dereference mlibc-clean/options/linux/include/scsi/scsi.h mlibc-w
  #endif /* _LINUX_SCSI_SCSI_H */
  
 diff -urN --no-dereference mlibc-clean/options/linux/include/scsi/sg.h mlibc-workdir/options/linux/include/scsi/sg.h
---- mlibc-clean/options/linux/include/scsi/sg.h	2025-04-30 08:52:34.615554085 +0200
-+++ mlibc-workdir/options/linux/include/scsi/sg.h	2025-04-30 08:52:34.945867602 +0200
+--- mlibc-clean/options/linux/include/scsi/sg.h
++++ mlibc-workdir/options/linux/include/scsi/sg.h
 @@ -71,6 +71,26 @@
      int unused;
  } sg_req_info_t;
@@ -259,8 +259,8 @@ diff -urN --no-dereference mlibc-clean/options/linux/include/scsi/sg.h mlibc-wor
  }
  #endif
 diff -urN --no-dereference mlibc-clean/options/posix/generic/mqueue.cpp mlibc-workdir/options/posix/generic/mqueue.cpp
---- mlibc-clean/options/posix/generic/mqueue.cpp	2025-04-30 08:52:34.616832277 +0200
-+++ mlibc-workdir/options/posix/generic/mqueue.cpp	2025-04-30 08:52:34.945944808 +0200
+--- mlibc-clean/options/posix/generic/mqueue.cpp
++++ mlibc-workdir/options/posix/generic/mqueue.cpp
 @@ -20,3 +20,8 @@
  	__ensure(!"Not implemented");
  	__builtin_unreachable();
@@ -271,8 +271,8 @@ diff -urN --no-dereference mlibc-clean/options/posix/generic/mqueue.cpp mlibc-wo
 +	__builtin_unreachable();
 +}
 diff -urN --no-dereference mlibc-clean/options/posix/generic/posix_locale.cpp mlibc-workdir/options/posix/generic/posix_locale.cpp
---- mlibc-clean/options/posix/generic/posix_locale.cpp	2025-04-30 08:52:34.616832277 +0200
-+++ mlibc-workdir/options/posix/generic/posix_locale.cpp	2025-04-30 08:52:34.946027634 +0200
+--- mlibc-clean/options/posix/generic/posix_locale.cpp
++++ mlibc-workdir/options/posix/generic/posix_locale.cpp
 @@ -1,34 +1,55 @@
 +#include <errno.h>
 +#include <locale.h>
@@ -344,8 +344,8 @@ diff -urN --no-dereference mlibc-clean/options/posix/generic/posix_locale.cpp ml
  
  locale_t duplocale(locale_t) {
 diff -urN --no-dereference mlibc-clean/options/posix/generic/sys-uio.cpp mlibc-workdir/options/posix/generic/sys-uio.cpp
---- mlibc-clean/options/posix/generic/sys-uio.cpp	2025-04-30 08:52:34.617554103 +0200
-+++ mlibc-workdir/options/posix/generic/sys-uio.cpp	2025-04-30 08:52:34.946104489 +0200
+--- mlibc-clean/options/posix/generic/sys-uio.cpp
++++ mlibc-workdir/options/posix/generic/sys-uio.cpp
 @@ -65,3 +65,13 @@
  	__ensure(!"Not implemented");
  	__builtin_unreachable();
@@ -361,8 +361,8 @@ diff -urN --no-dereference mlibc-clean/options/posix/generic/sys-uio.cpp mlibc-w
 +	__builtin_unreachable();
 +}
 diff -urN --no-dereference mlibc-clean/options/posix/generic/termios.cpp mlibc-workdir/options/posix/generic/termios.cpp
---- mlibc-clean/options/posix/generic/termios.cpp	2025-04-30 08:52:34.617554103 +0200
-+++ mlibc-workdir/options/posix/generic/termios.cpp	2025-04-30 08:52:34.946185802 +0200
+--- mlibc-clean/options/posix/generic/termios.cpp
++++ mlibc-workdir/options/posix/generic/termios.cpp
 @@ -101,3 +101,7 @@
  	return 0;
  }
@@ -372,8 +372,8 @@ diff -urN --no-dereference mlibc-clean/options/posix/generic/termios.cpp mlibc-w
 +	__builtin_unreachable();
 +}
 diff -urN --no-dereference mlibc-clean/options/posix/generic/unistd.cpp mlibc-workdir/options/posix/generic/unistd.cpp
---- mlibc-clean/options/posix/generic/unistd.cpp	2025-04-30 08:52:34.617554103 +0200
-+++ mlibc-workdir/options/posix/generic/unistd.cpp	2025-04-30 08:52:34.946324894 +0200
+--- mlibc-clean/options/posix/generic/unistd.cpp
++++ mlibc-workdir/options/posix/generic/unistd.cpp
 @@ -1449,6 +1449,11 @@
  	return 0;
  }
@@ -387,8 +387,8 @@ diff -urN --no-dereference mlibc-clean/options/posix/generic/unistd.cpp mlibc-wo
  void *sbrk(intptr_t increment) {
  	if(increment) {
 diff -urN --no-dereference mlibc-clean/options/posix/include/mlibc/posix-sysdeps.hpp mlibc-workdir/options/posix/include/mlibc/posix-sysdeps.hpp
---- mlibc-clean/options/posix/include/mlibc/posix-sysdeps.hpp	2025-04-30 08:52:34.619427937 +0200
-+++ mlibc-workdir/options/posix/include/mlibc/posix-sysdeps.hpp	2025-04-30 08:52:34.947247171 +0200
+--- mlibc-clean/options/posix/include/mlibc/posix-sysdeps.hpp
++++ mlibc-workdir/options/posix/include/mlibc/posix-sysdeps.hpp
 @@ -233,6 +233,7 @@
  [[gnu::weak]] int sys_semget(key_t key, int n, int fl, int *id);
  [[gnu::weak]] int sys_semctl(int semid, int semnum, int cmd, void *semun, int *ret);
@@ -398,8 +398,8 @@ diff -urN --no-dereference mlibc-clean/options/posix/include/mlibc/posix-sysdeps
  [[gnu::weak]] int sys_getthreadaffinity(pid_t tid, size_t cpusetsize, cpu_set_t *mask);
  
 diff -urN --no-dereference mlibc-clean/options/posix/include/mqueue.h mlibc-workdir/options/posix/include/mqueue.h
---- mlibc-clean/options/posix/include/mqueue.h	2025-04-30 08:52:34.619427937 +0200
-+++ mlibc-workdir/options/posix/include/mqueue.h	2025-04-30 08:52:34.948214875 +0200
+--- mlibc-clean/options/posix/include/mqueue.h
++++ mlibc-workdir/options/posix/include/mqueue.h
 @@ -15,6 +15,7 @@
  int mq_setattr(mqd_t __mqdes, const struct mq_attr *__restrict__ __newattr, struct mq_attr *__restrict__ __oldattr);
  int mq_unlink(const char *__name);
@@ -409,8 +409,8 @@ diff -urN --no-dereference mlibc-clean/options/posix/include/mqueue.h mlibc-work
  #endif /* !__MLIBC_ABI_ONLY */
  
 diff -urN --no-dereference mlibc-clean/options/posix/include/netinet/tcp.h mlibc-workdir/options/posix/include/netinet/tcp.h
---- mlibc-clean/options/posix/include/netinet/tcp.h	2025-04-30 08:52:34.619734966 +0200
-+++ mlibc-workdir/options/posix/include/netinet/tcp.h	2025-04-30 10:04:48.325738813 +0200
+--- mlibc-clean/options/posix/include/netinet/tcp.h
++++ mlibc-workdir/options/posix/include/netinet/tcp.h
 @@ -47,6 +47,68 @@
  	TCP_CA_Loss = 4
  };
@@ -481,8 +481,8 @@ diff -urN --no-dereference mlibc-clean/options/posix/include/netinet/tcp.h mlibc
  	uint8_t tcpi_state;
  	uint8_t tcpi_ca_state;
 diff -urN --no-dereference mlibc-clean/options/posix/include/sys/msg.h mlibc-workdir/options/posix/include/sys/msg.h
---- mlibc-clean/options/posix/include/sys/msg.h	2025-04-30 08:52:34.620261287 +0200
-+++ mlibc-workdir/options/posix/include/sys/msg.h	2025-04-30 08:52:34.948407888 +0200
+--- mlibc-clean/options/posix/include/sys/msg.h
++++ mlibc-workdir/options/posix/include/sys/msg.h
 @@ -9,6 +9,17 @@
  extern "C" {
  #endif
@@ -502,8 +502,8 @@ diff -urN --no-dereference mlibc-clean/options/posix/include/sys/msg.h mlibc-wor
  
  int msgget(key_t __key, int __msgflg);
 diff -urN --no-dereference mlibc-clean/options/posix/include/sys/sem.h mlibc-workdir/options/posix/include/sys/sem.h
---- mlibc-clean/options/posix/include/sys/sem.h	2025-04-30 08:52:34.620261287 +0200
-+++ mlibc-workdir/options/posix/include/sys/sem.h	2025-04-30 08:52:34.948486106 +0200
+--- mlibc-clean/options/posix/include/sys/sem.h
++++ mlibc-workdir/options/posix/include/sys/sem.h
 @@ -12,9 +12,15 @@
  #define GETPID 11
  #define GETVAL 12
@@ -541,8 +541,8 @@ diff -urN --no-dereference mlibc-clean/options/posix/include/sys/sem.h mlibc-wor
  
  int semget(key_t __key, int __nsems, int __semflg);
 diff -urN --no-dereference mlibc-clean/options/posix/include/sys/uio.h mlibc-workdir/options/posix/include/sys/uio.h
---- mlibc-clean/options/posix/include/sys/uio.h	2025-04-30 08:52:34.620261287 +0200
-+++ mlibc-workdir/options/posix/include/sys/uio.h	2025-04-30 08:52:34.948565836 +0200
+--- mlibc-clean/options/posix/include/sys/uio.h
++++ mlibc-workdir/options/posix/include/sys/uio.h
 @@ -1,6 +1,7 @@
  #ifndef _SYS_UIO_H
  #define _SYS_UIO_H
@@ -565,8 +565,8 @@ diff -urN --no-dereference mlibc-clean/options/posix/include/sys/uio.h mlibc-wor
  
  #ifdef __cplusplus
 diff -urN --no-dereference mlibc-clean/options/posix/include/termios.h mlibc-workdir/options/posix/include/termios.h
---- mlibc-clean/options/posix/include/termios.h	2025-04-30 08:52:34.620554130 +0200
-+++ mlibc-workdir/options/posix/include/termios.h	2025-04-30 08:52:34.948640727 +0200
+--- mlibc-clean/options/posix/include/termios.h
++++ mlibc-workdir/options/posix/include/termios.h
 @@ -87,6 +87,7 @@
  pid_t tcgetsid(int __fd);
  int tcsendbreak(int __fd, int __duration);
@@ -576,8 +576,8 @@ diff -urN --no-dereference mlibc-clean/options/posix/include/termios.h mlibc-wor
  #endif /* !__MLIBC_ABI_ONLY */
  
 diff -urN --no-dereference mlibc-clean/options/posix/include/unistd.h mlibc-workdir/options/posix/include/unistd.h
---- mlibc-clean/options/posix/include/unistd.h	2025-04-30 08:52:34.620554130 +0200
-+++ mlibc-workdir/options/posix/include/unistd.h	2025-04-30 08:52:34.948771473 +0200
+--- mlibc-clean/options/posix/include/unistd.h
++++ mlibc-workdir/options/posix/include/unistd.h
 @@ -392,6 +392,8 @@
  int getresuid(uid_t *__ruid, uid_t *__euid, uid_t *__suid);
  int getresgid(gid_t *__rgid, gid_t *__egid, gid_t *__sgid);
@@ -588,8 +588,8 @@ diff -urN --no-dereference mlibc-clean/options/posix/include/unistd.h mlibc-work
  
  #ifdef __cplusplus
 diff -urN --no-dereference mlibc-clean/scripts/rust-libc-config.yml mlibc-workdir/scripts/rust-libc-config.yml
---- mlibc-clean/scripts/rust-libc-config.yml	2025-04-30 08:52:34.623681852 +0200
-+++ mlibc-workdir/scripts/rust-libc-config.yml	2025-04-30 08:52:34.949030131 +0200
+--- mlibc-clean/scripts/rust-libc-config.yml
++++ mlibc-workdir/scripts/rust-libc-config.yml
 @@ -181,6 +181,7 @@
    - "CHAR_MIN"
    - "CLOCKS_PER_SEC"
@@ -1111,8 +1111,8 @@ diff -urN --no-dereference mlibc-clean/scripts/rust-libc-config.yml mlibc-workdi
      - "VMIN"
      - "VTIME"
 diff -urN --no-dereference mlibc-clean/scripts/rust-libc-header.rs mlibc-workdir/scripts/rust-libc-header.rs
---- mlibc-clean/scripts/rust-libc-header.rs	2025-04-30 08:52:34.623681852 +0200
-+++ mlibc-workdir/scripts/rust-libc-header.rs	2025-04-30 08:52:34.949349663 +0200
+--- mlibc-clean/scripts/rust-libc-header.rs
++++ mlibc-workdir/scripts/rust-libc-header.rs
 @@ -3,95 +3,81 @@
  
  use crate::prelude::*;
@@ -1881,8 +1881,8 @@ diff -urN --no-dereference mlibc-clean/scripts/rust-libc-header.rs mlibc-workdir
 +pub const SYS_fchmodat2: c_long = 452;
 +pub const SYS_mseal: c_long = 462;
 diff -urN --no-dereference mlibc-clean/sysdeps/linux/generic/sysdeps.cpp mlibc-workdir/sysdeps/linux/generic/sysdeps.cpp
---- mlibc-clean/sysdeps/linux/generic/sysdeps.cpp	2025-04-30 08:52:34.632888007 +0200
-+++ mlibc-workdir/sysdeps/linux/generic/sysdeps.cpp	2025-04-30 08:52:34.949619411 +0200
+--- mlibc-clean/sysdeps/linux/generic/sysdeps.cpp
++++ mlibc-workdir/sysdeps/linux/generic/sysdeps.cpp
 @@ -1036,6 +1036,14 @@
  	return 0;
  }

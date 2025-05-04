@@ -1,8 +1,7 @@
-diff --git libical-clean/cmake/modules/FindGObjectIntrospection.cmake libical-workdir/cmake/modules/FindGObjectIntrospection.cmake
-index 02841f4..f690f90 100644
+diff -urN --no-dereference libical-clean/cmake/modules/FindGObjectIntrospection.cmake libical-workdir/cmake/modules/FindGObjectIntrospection.cmake
 --- libical-clean/cmake/modules/FindGObjectIntrospection.cmake
 +++ libical-workdir/cmake/modules/FindGObjectIntrospection.cmake
-@@ -42,11 +42,31 @@ if(PKG_CONFIG_FOUND)
+@@ -42,11 +42,31 @@
    pkg_check_modules(_pc_gir gobject-introspection-1.0${_gir_version_cmp})
    if(_pc_gir_FOUND)
      set(GObjectIntrospection_FOUND TRUE)

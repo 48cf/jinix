@@ -1,5 +1,4 @@
-diff --git gtk4-clean/gdk/loaders/gdkpng.c gtk4-workdir/gdk/loaders/gdkpng.c
-index b82fd05..f509bff 100644
+diff -urN --no-dereference gtk4-clean/gdk/loaders/gdkpng.c gtk4-workdir/gdk/loaders/gdkpng.c
 --- gtk4-clean/gdk/loaders/gdkpng.c
 +++ gtk4-workdir/gdk/loaders/gdkpng.c
 @@ -37,13 +37,6 @@
@@ -16,7 +15,7 @@ index b82fd05..f509bff 100644
  typedef struct
  {
    guchar *data;
-@@ -344,7 +337,7 @@ gdk_load_png (GBytes      *bytes,
+@@ -344,7 +337,7 @@
    png_set_read_user_chunk_fn (png, &cicp, png_read_chunk_func);
  #endif
  
@@ -25,7 +24,7 @@ index b82fd05..f509bff 100644
      {
        g_free (buffer);
        g_free (row_pointers);
-@@ -639,7 +632,7 @@ gdk_save_png (GdkTexture *texture)
+@@ -639,7 +632,7 @@
    gdk_color_state_ref (color_state);
    bytes = NULL;
  

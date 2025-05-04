@@ -1,6 +1,6 @@
 diff -urN --no-dereference libtool-clean/m4/libtool.m4 libtool-workdir/m4/libtool.m4
---- libtool-clean/m4/libtool.m4	2024-11-20 20:01:08.000000000 +0100
-+++ libtool-workdir/m4/libtool.m4	2024-11-20 20:01:08.000000000 +0100
+--- libtool-clean/m4/libtool.m4
++++ libtool-workdir/m4/libtool.m4
 @@ -2889,6 +2889,18 @@
    hardcode_into_libs=yes
    ;;

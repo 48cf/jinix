@@ -1,5 +1,4 @@
-diff --git procps-ng-clean/src/w.c procps-ng-workdir/src/w.c
-index 049c00a..d270fdd 100644
+diff -urN --no-dereference procps-ng-clean/src/w.c procps-ng-workdir/src/w.c
 --- procps-ng-clean/src/w.c
 +++ procps-ng-workdir/src/w.c
 @@ -61,6 +61,7 @@
@@ -10,8 +9,7 @@ index 049c00a..d270fdd 100644
  
  #include "c.h"
  #include "fileutils.h"
-diff --git procps-ng-clean/src/watch.c procps-ng-workdir/src/watch.c
-index 7ec634b..78b4c8c 100644
+diff -urN --no-dereference procps-ng-clean/src/watch.c procps-ng-workdir/src/watch.c
 --- procps-ng-clean/src/watch.c
 +++ procps-ng-workdir/src/watch.c
 @@ -49,6 +49,7 @@

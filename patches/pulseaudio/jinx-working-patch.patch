@@ -1,8 +1,7 @@
-diff --git pulseaudio-clean/meson.build pulseaudio-workdir/meson.build
-index ba3d01d..c5a4389 100644
+diff -urN --no-dereference pulseaudio-clean/meson.build pulseaudio-workdir/meson.build
 --- pulseaudio-clean/meson.build
 +++ pulseaudio-workdir/meson.build
-@@ -384,6 +384,8 @@ else
+@@ -384,6 +384,8 @@
    libintl_dep = cc.find_library('intl')
  endif
  

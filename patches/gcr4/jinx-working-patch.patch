@@ -1,8 +1,7 @@
-diff --git gcr4-clean/meson.build gcr4-workdir/meson.build
-index 35d97c7..92ab35c 100644
+diff -urN --no-dereference gcr4-clean/meson.build gcr4-workdir/meson.build
 --- gcr4-clean/meson.build
 +++ gcr4-workdir/meson.build
-@@ -94,9 +94,15 @@ if p11_system_config_modules == ''
+@@ -94,9 +94,15 @@
    error('Couldn\'t find location for pkcs11 module config')
  endif
  libsecret_dep = dependency('libsecret-1', version: '>= 0.20', required: get_option('ssh_agent'))
@@ -20,11 +19,10 @@ index 35d97c7..92ab35c 100644
  endif
  
  with_systemd = false
-diff --git gcr4-clean/meson_options.txt gcr4-workdir/meson_options.txt
-index 4ccd6b5..095aabc 100644
+diff -urN --no-dereference gcr4-clean/meson_options.txt gcr4-workdir/meson_options.txt
 --- gcr4-clean/meson_options.txt
 +++ gcr4-workdir/meson_options.txt
-@@ -23,6 +23,16 @@ option('gpg_path',
+@@ -23,6 +23,16 @@
    value: '',
    description: 'Path to gpg, autodetected if not set',
  )

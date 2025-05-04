@@ -1,5 +1,4 @@
-diff --git libdaemon-clean/examples/testd.c libdaemon-workdir/examples/testd.c
-index 6557dff..7c5ea2b 100644
+diff -urN --no-dereference libdaemon-clean/examples/testd.c libdaemon-workdir/examples/testd.c
 --- libdaemon-clean/examples/testd.c
 +++ libdaemon-workdir/examples/testd.c
 @@ -23,7 +23,7 @@

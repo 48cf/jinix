@@ -1,8 +1,7 @@
-diff --git rust-parking-lot-clean/core/src/thread_parker/linux.rs rust-parking-lot-workdir/core/src/thread_parker/linux.rs
-index 92601f6..69a1f4f 100644
+diff -urN --no-dereference rust-parking-lot-clean/core/src/thread_parker/linux.rs rust-parking-lot-workdir/core/src/thread_parker/linux.rs
 --- rust-parking-lot-clean/core/src/thread_parker/linux.rs
 +++ rust-parking-lot-workdir/core/src/thread_parker/linux.rs
-@@ -13,6 +13,58 @@ use libc;
+@@ -13,6 +13,58 @@
  use std::thread;
  use std::time::Instant;
  
@@ -61,7 +60,7 @@ index 92601f6..69a1f4f 100644
  // x32 Linux uses a non-standard type for tv_nsec in timespec.
  // See https://sourceware.org/bugzilla/show_bug.cgi?id=16437
  #[cfg(all(target_arch = "x86_64", target_pointer_width = "32"))]
-@@ -109,12 +161,13 @@ impl ThreadParker {
+@@ -109,12 +161,13 @@
              .map(|ts_ref| ts_ref as *const _)
              .unwrap_or(ptr::null());
          let r = unsafe {
@@ -77,7 +76,7 @@ index 92601f6..69a1f4f 100644
              )
          };
          debug_assert!(r == 0 || r == -1);
-@@ -137,8 +190,7 @@ impl super::UnparkHandleT for UnparkHandle {
+@@ -137,8 +190,7 @@
      unsafe fn unpark(self) {
          // The thread data may have been freed at this point, but it doesn't
          // matter since the syscall will just return EFAULT in that case.

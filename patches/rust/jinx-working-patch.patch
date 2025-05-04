@@ -1,8 +1,7 @@
-diff --git rust-clean/Cargo.lock rust-workdir/Cargo.lock
-index 38a8617..dd37ca9 100644
+diff -urN --no-dereference rust-clean/Cargo.lock rust-workdir/Cargo.lock
 --- rust-clean/Cargo.lock
 +++ rust-workdir/Cargo.lock
-@@ -2040,9 +2040,7 @@ checksum = "baff4b617f7df3d896f97fe922b64817f6cd9a756bb81d40f8883f2f66dcb401"
+@@ -2040,9 +2040,7 @@
  
  [[package]]
  name = "libc"
@@ -13,21 +12,18 @@ index 38a8617..dd37ca9 100644
  
  [[package]]
  name = "libdbus-sys"
-diff --git rust-clean/Cargo.toml rust-workdir/Cargo.toml
-index 97e782d..0399225 100644
+diff -urN --no-dereference rust-clean/Cargo.toml rust-workdir/Cargo.toml
 --- rust-clean/Cargo.toml
 +++ rust-workdir/Cargo.toml
-@@ -93,3 +93,6 @@ codegen-units = 1
+@@ -93,3 +93,6 @@
  # FIXME: LTO cannot be enabled for binaries in a workspace
  # <https://github.com/rust-lang/cargo/issues/9330>
  # lto = true
 +
 +[patch.crates-io]
 +libc = { path = "/base_dir/sources/rust-libc" }
-diff --git rust-workdir/compiler/rustc_target/src/spec/base/linux_mlibc.rs rust-workdir/compiler/rustc_target/src/spec/base/linux_mlibc.rs
-new file mode 100644
-index 0000000..2c79ea2
---- /dev/null
+diff -urN --no-dereference rust-clean/compiler/rustc_target/src/spec/base/linux_mlibc.rs rust-workdir/compiler/rustc_target/src/spec/base/linux_mlibc.rs
+--- rust-clean/compiler/rustc_target/src/spec/base/linux_mlibc.rs	1970-01-01 01:00:00.000000000 +0100
 +++ rust-workdir/compiler/rustc_target/src/spec/base/linux_mlibc.rs
 @@ -0,0 +1,27 @@
 +use crate::spec::{base, Cc, LinkArgs, LinkerFlavor, Lld, TargetOptions};
@@ -57,11 +53,10 @@ index 0000000..2c79ea2
 +
 +    base
 +}
-diff --git rust-clean/compiler/rustc_target/src/spec/base/mod.rs rust-workdir/compiler/rustc_target/src/spec/base/mod.rs
-index b9139c8..4e19f15 100644
+diff -urN --no-dereference rust-clean/compiler/rustc_target/src/spec/base/mod.rs rust-workdir/compiler/rustc_target/src/spec/base/mod.rs
 --- rust-clean/compiler/rustc_target/src/spec/base/mod.rs
 +++ rust-workdir/compiler/rustc_target/src/spec/base/mod.rs
-@@ -15,6 +15,7 @@ pub(crate) mod illumos;
+@@ -15,6 +15,7 @@
  pub(crate) mod l4re;
  pub(crate) mod linux;
  pub(crate) mod linux_gnu;
@@ -69,11 +64,10 @@ index b9139c8..4e19f15 100644
  pub(crate) mod linux_musl;
  pub(crate) mod linux_ohos;
  pub(crate) mod linux_uclibc;
-diff --git rust-clean/compiler/rustc_target/src/spec/mod.rs rust-workdir/compiler/rustc_target/src/spec/mod.rs
-index 794d645..bbcf28e 100644
+diff -urN --no-dereference rust-clean/compiler/rustc_target/src/spec/mod.rs rust-workdir/compiler/rustc_target/src/spec/mod.rs
 --- rust-clean/compiler/rustc_target/src/spec/mod.rs
 +++ rust-workdir/compiler/rustc_target/src/spec/mod.rs
-@@ -1673,6 +1673,7 @@ macro_rules! supported_targets {
+@@ -1673,6 +1673,7 @@
  
  supported_targets! {
      ("x86_64-unknown-linux-gnu", x86_64_unknown_linux_gnu),
@@ -81,10 +75,8 @@ index 794d645..bbcf28e 100644
      ("x86_64-unknown-linux-gnux32", x86_64_unknown_linux_gnux32),
      ("i686-unknown-linux-gnu", i686_unknown_linux_gnu),
      ("i586-unknown-linux-gnu", i586_unknown_linux_gnu),
-diff --git rust-workdir/compiler/rustc_target/src/spec/targets/x86_64_unknown_linux_mlibc.rs rust-workdir/compiler/rustc_target/src/spec/targets/x86_64_unknown_linux_mlibc.rs
-new file mode 100644
-index 0000000..62f38e9
---- /dev/null
+diff -urN --no-dereference rust-clean/compiler/rustc_target/src/spec/targets/x86_64_unknown_linux_mlibc.rs rust-workdir/compiler/rustc_target/src/spec/targets/x86_64_unknown_linux_mlibc.rs
+--- rust-clean/compiler/rustc_target/src/spec/targets/x86_64_unknown_linux_mlibc.rs	1970-01-01 01:00:00.000000000 +0100
 +++ rust-workdir/compiler/rustc_target/src/spec/targets/x86_64_unknown_linux_mlibc.rs
 @@ -0,0 +1,27 @@
 +use crate::spec::{base, Cc, LinkerFlavor, Lld, StackProbeType, Target};
@@ -114,11 +106,10 @@ index 0000000..62f38e9
 +        options: base,
 +    }
 +}
-diff --git rust-clean/library/Cargo.lock rust-workdir/library/Cargo.lock
-index 0be2f9a..ee2aaa5 100644
+diff -urN --no-dereference rust-clean/library/Cargo.lock rust-workdir/library/Cargo.lock
 --- rust-clean/library/Cargo.lock
 +++ rust-workdir/library/Cargo.lock
-@@ -151,9 +151,7 @@ dependencies = [
+@@ -151,9 +151,7 @@
  
  [[package]]
  name = "libc"
@@ -129,11 +120,10 @@ index 0be2f9a..ee2aaa5 100644
  dependencies = [
   "rustc-std-workspace-core",
  ]
-diff --git rust-clean/library/Cargo.toml rust-workdir/library/Cargo.toml
-index 1205f7c..213b831 100644
+diff -urN --no-dereference rust-clean/library/Cargo.toml rust-workdir/library/Cargo.toml
 --- rust-clean/library/Cargo.toml
 +++ rust-workdir/library/Cargo.toml
-@@ -41,6 +41,7 @@ object.debug = 0
+@@ -41,6 +41,7 @@
  rustc-demangle.debug = 0
  
  [patch.crates-io]
@@ -141,11 +131,10 @@ index 1205f7c..213b831 100644
  # See comments in `library/rustc-std-workspace-core/README.md` for what's going on
  # here
  rustc-std-workspace-core = { path = 'rustc-std-workspace-core' }
-diff --git rust-clean/library/std/src/sys/pal/unix/fs.rs rust-workdir/library/std/src/sys/pal/unix/fs.rs
-index 00cfa7a..fc6277e 100644
+diff -urN --no-dereference rust-clean/library/std/src/sys/pal/unix/fs.rs rust-workdir/library/std/src/sys/pal/unix/fs.rs
 --- rust-clean/library/std/src/sys/pal/unix/fs.rs
 +++ rust-workdir/library/std/src/sys/pal/unix/fs.rs
-@@ -15,7 +15,7 @@ use libc::c_char;
+@@ -15,7 +15,7 @@
  use libc::dirfd;
  #[cfg(target_os = "fuchsia")]
  use libc::fstatat as fstatat64;
@@ -154,7 +143,7 @@ index 00cfa7a..fc6277e 100644
  use libc::fstatat64;
  #[cfg(any(
      target_os = "android",
-@@ -26,7 +26,7 @@ use libc::fstatat64;
+@@ -26,7 +26,7 @@
      target_os = "aix",
      target_os = "nto",
      target_os = "vita",
@@ -163,7 +152,7 @@ index 00cfa7a..fc6277e 100644
  ))]
  use libc::readdir as readdir64;
  #[cfg(not(any(
-@@ -43,7 +43,7 @@ use libc::readdir as readdir64;
+@@ -43,7 +43,7 @@
      target_os = "hurd",
  )))]
  use libc::readdir_r as readdir64_r;
@@ -172,7 +161,7 @@ index 00cfa7a..fc6277e 100644
  use libc::readdir64;
  #[cfg(target_os = "l4re")]
  use libc::readdir64_r;
-@@ -54,7 +54,7 @@ use libc::{
+@@ -54,7 +54,7 @@
      lstat as lstat64, off64_t, open as open64, stat as stat64,
  };
  #[cfg(not(any(
@@ -181,7 +170,7 @@ index 00cfa7a..fc6277e 100644
      target_os = "l4re",
      target_os = "android",
      target_os = "hurd",
-@@ -64,7 +64,7 @@ use libc::{
+@@ -64,7 +64,7 @@
      lstat as lstat64, off_t as off64_t, open as open64, stat as stat64,
  };
  #[cfg(any(
@@ -190,7 +179,7 @@ index 00cfa7a..fc6277e 100644
      target_os = "l4re",
      target_os = "hurd"
  ))]
-@@ -880,7 +880,7 @@ impl DirEntry {
+@@ -880,7 +880,7 @@
  
      #[cfg(all(
          any(
@@ -199,7 +188,7 @@ index 00cfa7a..fc6277e 100644
              target_os = "android",
              target_os = "fuchsia",
              target_os = "hurd"
-@@ -909,7 +909,7 @@ impl DirEntry {
+@@ -909,7 +909,7 @@
  
      #[cfg(any(
          not(any(
@@ -208,11 +197,10 @@ index 00cfa7a..fc6277e 100644
              target_os = "android",
              target_os = "fuchsia",
              target_os = "hurd",
-diff --git rust-clean/library/std/src/sys/pal/unix/futex.rs rust-workdir/library/std/src/sys/pal/unix/futex.rs
-index d4551dd..f448cc9 100644
+diff -urN --no-dereference rust-clean/library/std/src/sys/pal/unix/futex.rs rust-workdir/library/std/src/sys/pal/unix/futex.rs
 --- rust-clean/library/std/src/sys/pal/unix/futex.rs
 +++ rust-workdir/library/std/src/sys/pal/unix/futex.rs
-@@ -21,6 +21,58 @@ pub type SmallFutex = AtomicU32;
+@@ -21,6 +21,58 @@
  /// Must be the underlying type of SmallFutex
  pub type SmallPrimitive = u32;
  
@@ -271,7 +259,7 @@ index d4551dd..f448cc9 100644
  /// Waits for a `futex_wake` operation to wake us.
  ///
  /// Returns directly if the futex doesn't hold the expected value.
-@@ -69,8 +121,7 @@ pub fn futex_wait(futex: &AtomicU32, expected: u32, timeout: Option<Duration>) -
+@@ -69,8 +121,7 @@
                  } else if #[cfg(any(target_os = "linux", target_os = "android"))] {
                      // Use FUTEX_WAIT_BITSET rather than FUTEX_WAIT to be able to give an
                      // absolute time rather than a relative time.
@@ -281,7 +269,7 @@ index d4551dd..f448cc9 100644
                          futex as *const AtomicU32,
                          libc::FUTEX_WAIT_BITSET | libc::FUTEX_PRIVATE_FLAG,
                          expected,
-@@ -100,18 +151,24 @@ pub fn futex_wait(futex: &AtomicU32, expected: u32, timeout: Option<Duration>) -
+@@ -100,18 +151,24 @@
  /// On some platforms, this always returns false.
  #[cfg(any(target_os = "linux", target_os = "android"))]
  pub fn futex_wake(futex: &AtomicU32) -> bool {
@@ -312,11 +300,10 @@ index d4551dd..f448cc9 100644
      }
  }
  
-diff --git rust-clean/library/std/src/sys/pal/unix/os.rs rust-workdir/library/std/src/sys/pal/unix/os.rs
-index 04199c5..2c0a81d 100644
+diff -urN --no-dereference rust-clean/library/std/src/sys/pal/unix/os.rs rust-workdir/library/std/src/sys/pal/unix/os.rs
 --- rust-clean/library/std/src/sys/pal/unix/os.rs
 +++ rust-workdir/library/std/src/sys/pal/unix/os.rs
-@@ -119,10 +119,12 @@ pub fn error_string(errno: i32) -> String {
+@@ -119,10 +119,12 @@
          #[cfg_attr(
              all(
                  any(target_os = "linux", target_os = "hurd", target_env = "newlib"),
@@ -330,11 +317,10 @@ index 04199c5..2c0a81d 100644
          fn strerror_r(errnum: c_int, buf: *mut c_char, buflen: libc::size_t) -> c_int;
      }
  
-diff --git rust-clean/library/std/src/sys/pal/unix/process/process_unix.rs rust-workdir/library/std/src/sys/pal/unix/process/process_unix.rs
-index 2bff192..1d3d481 100644
+diff -urN --no-dereference rust-clean/library/std/src/sys/pal/unix/process/process_unix.rs rust-workdir/library/std/src/sys/pal/unix/process/process_unix.rs
 --- rust-clean/library/std/src/sys/pal/unix/process/process_unix.rs
 +++ rust-workdir/library/std/src/sys/pal/unix/process/process_unix.rs
-@@ -787,7 +787,7 @@ impl Command {
+@@ -787,7 +787,7 @@
      #[cfg(target_os = "linux")]
      fn send_pidfd(&self, sock: &crate::sys::net::Socket) {
          use libc::{CMSG_DATA, CMSG_FIRSTHDR, CMSG_LEN, CMSG_SPACE, SCM_RIGHTS, SOL_SOCKET};
@@ -343,7 +329,7 @@ index 2bff192..1d3d481 100644
          use crate::io::IoSlice;
          use crate::os::fd::RawFd;
          use crate::sys::cvt_r;
-@@ -795,7 +795,12 @@ impl Command {
+@@ -795,7 +795,12 @@
          unsafe {
              let child_pid = libc::getpid();
              // pidfd_open sets CLOEXEC by default
@@ -356,11 +342,10 @@ index 2bff192..1d3d481 100644
  
              let fds: [c_int; 1] = [pidfd as RawFd];
  
-diff --git rust-clean/library/std/src/sys/pal/unix/weak.rs rust-workdir/library/std/src/sys/pal/unix/weak.rs
-index 5a37598..968a85c 100644
+diff -urN --no-dereference rust-clean/library/std/src/sys/pal/unix/weak.rs rust-workdir/library/std/src/sys/pal/unix/weak.rs
 --- rust-clean/library/std/src/sys/pal/unix/weak.rs
 +++ rust-workdir/library/std/src/sys/pal/unix/weak.rs
-@@ -141,7 +141,7 @@ unsafe fn fetch(name: &str) -> *mut libc::c_void {
+@@ -141,7 +141,7 @@
      libc::dlsym(libc::RTLD_DEFAULT, name.as_ptr())
  }
  
@@ -369,7 +354,7 @@ index 5a37598..968a85c 100644
  pub(crate) macro syscall {
      (fn $name:ident($($arg_name:ident: $t:ty),*) -> $ret:ty) => (
          unsafe fn $name($($arg_name: $t),*) -> $ret {
-@@ -157,7 +157,7 @@ pub(crate) macro syscall {
+@@ -157,7 +157,7 @@
      )
  }
  
@@ -378,11 +363,10 @@ index 5a37598..968a85c 100644
  pub(crate) macro syscall {
      (fn $name:ident($($arg_name:ident: $t:ty),*) -> $ret:ty) => (
          unsafe fn $name($($arg_name:$t),*) -> $ret {
-diff --git rust-clean/library/unwind/src/lib.rs rust-workdir/library/unwind/src/lib.rs
-index 2650b27..13ff5f1 100644
+diff -urN --no-dereference rust-clean/library/unwind/src/lib.rs rust-workdir/library/unwind/src/lib.rs
 --- rust-clean/library/unwind/src/lib.rs
 +++ rust-workdir/library/unwind/src/lib.rs
-@@ -68,6 +68,10 @@ cfg_if::cfg_if! {
+@@ -68,6 +68,10 @@
      }
  }
  
@@ -393,11 +377,10 @@ index 2650b27..13ff5f1 100644
  // This is the same as musl except that we default to using the system libunwind
  // instead of libgcc.
  #[cfg(target_env = "ohos")]
-diff --git rust-clean/src/tools/build-manifest/src/main.rs rust-workdir/src/tools/build-manifest/src/main.rs
-index cd5ca74..6d260e2 100644
+diff -urN --no-dereference rust-clean/src/tools/build-manifest/src/main.rs rust-workdir/src/tools/build-manifest/src/main.rs
 --- rust-clean/src/tools/build-manifest/src/main.rs
 +++ rust-workdir/src/tools/build-manifest/src/main.rs
-@@ -182,6 +182,7 @@ static TARGETS: &[&str] = &[
+@@ -182,6 +182,7 @@
      "x86_64-unknown-illumos",
      "x86_64-unknown-linux-gnu",
      "x86_64-unknown-linux-gnux32",
@@ -405,11 +388,10 @@ index cd5ca74..6d260e2 100644
      "x86_64-unknown-linux-musl",
      "x86_64-unknown-linux-ohos",
      "x86_64-unknown-netbsd",
-diff --git rust-clean/src/tools/generate-copyright/src/cargo_metadata.rs rust-workdir/src/tools/generate-copyright/src/cargo_metadata.rs
-index b717bd5..e9656fc 100644
+diff -urN --no-dereference rust-clean/src/tools/generate-copyright/src/cargo_metadata.rs rust-workdir/src/tools/generate-copyright/src/cargo_metadata.rs
 --- rust-clean/src/tools/generate-copyright/src/cargo_metadata.rs
 +++ rust-workdir/src/tools/generate-copyright/src/cargo_metadata.rs
-@@ -114,7 +114,11 @@ fn load_important_files(
+@@ -114,7 +114,11 @@
  ) -> Result<(), Error> {
      let name_version = format!("{}-{}", package.name, package.version);
      println!("Scraping notices for {}...", name_version);

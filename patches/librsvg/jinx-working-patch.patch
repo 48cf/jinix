@@ -1,8 +1,7 @@
-diff --git librsvg-clean/meson.build librsvg-workdir/meson.build
-index 3759fc7..edd86c9 100644
+diff -urN --no-dereference librsvg-clean/meson.build librsvg-workdir/meson.build
 --- librsvg-clean/meson.build
 +++ librsvg-workdir/meson.build
-@@ -134,6 +134,9 @@ vapigen_dep    = dependency('vapigen',
+@@ -134,6 +134,9 @@
  
  # Extra env to pass to cargo
  extra_env = environment()

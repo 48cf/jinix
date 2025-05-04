@@ -1,5 +1,4 @@
-diff --git libsndfile-clean/programs/sndfile-play.c libsndfile-workdir/programs/sndfile-play.c
-index 48b95c1..27a1056 100644
+diff -urN --no-dereference libsndfile-clean/programs/sndfile-play.c libsndfile-workdir/programs/sndfile-play.c
 --- libsndfile-clean/programs/sndfile-play.c
 +++ libsndfile-workdir/programs/sndfile-play.c
 @@ -59,7 +59,7 @@

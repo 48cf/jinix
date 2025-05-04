@@ -1,8 +1,7 @@
-diff --git pam-clean/libpam_misc/meson.build pam-workdir/libpam_misc/meson.build
-index e0bb30f..95216a5 100644
+diff -urN --no-dereference pam-clean/libpam_misc/meson.build pam-workdir/libpam_misc/meson.build
 --- pam-clean/libpam_misc/meson.build
 +++ pam-workdir/libpam_misc/meson.build
-@@ -18,7 +18,7 @@ libpam_misc = shared_library(
+@@ -18,7 +18,7 @@
    'pam_misc',
    sources: libpam_misc_src,
    include_directories: [libpam_misc_inc, libpamc_inc],
@@ -11,11 +10,10 @@ index e0bb30f..95216a5 100644
    link_depends: libpam_misc_link_deps,
    link_args: libpam_misc_link_args,
    version: libpam_misc_version,
-diff --git pam-clean/modules/module-meson.build pam-workdir/modules/module-meson.build
-index acb7087..2f64fee 100644
+diff -urN --no-dereference pam-clean/modules/module-meson.build pam-workdir/modules/module-meson.build
 --- pam-clean/modules/module-meson.build
 +++ pam-workdir/modules/module-meson.build
-@@ -12,8 +12,9 @@ if module == 'pam_env'
+@@ -12,8 +12,9 @@
    pam_module_deps += [libeconf]
  endif
  if module == 'pam_faillock'
@@ -26,8 +24,7 @@ index acb7087..2f64fee 100644
  endif
  if module == 'pam_issue'
    pam_module_deps += [libsystemd]
-diff --git pam-clean/modules/pam_namespace/pam_namespace.h pam-workdir/modules/pam_namespace/pam_namespace.h
-index 1799938..45fb6ce 100644
+diff -urN --no-dereference pam-clean/modules/pam_namespace/pam_namespace.h pam-workdir/modules/pam_namespace/pam_namespace.h
 --- pam-clean/modules/pam_namespace/pam_namespace.h
 +++ pam-workdir/modules/pam_namespace/pam_namespace.h
 @@ -59,6 +59,7 @@
@@ -38,8 +35,7 @@ index 1799938..45fb6ce 100644
  #include "security/pam_modules.h"
  #include "security/pam_modutil.h"
  #include "security/pam_ext.h"
-diff --git pam-clean/modules/pam_unix/pam_unix_acct.c pam-workdir/modules/pam_unix/pam_unix_acct.c
-index befd3c9..2bbef6f 100644
+diff -urN --no-dereference pam-clean/modules/pam_unix/pam_unix_acct.c pam-workdir/modules/pam_unix/pam_unix_acct.c
 --- pam-clean/modules/pam_unix/pam_unix_acct.c
 +++ pam-workdir/modules/pam_unix/pam_unix_acct.c
 @@ -50,6 +50,7 @@

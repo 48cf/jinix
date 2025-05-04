@@ -1,8 +1,7 @@
-diff --git polkit-clean/meson.build polkit-workdir/meson.build
-index cf494c2..938ca7c 100644
+diff -urN --no-dereference polkit-clean/meson.build polkit-workdir/meson.build
 --- polkit-clean/meson.build
 +++ polkit-workdir/meson.build
-@@ -211,14 +211,20 @@ config_data.set('HAVE_PIDFD_OPEN', cc.get_define('SYS_pidfd_open', prefix: '#inc
+@@ -211,14 +211,20 @@
  
  # systemd unit / sysuser / tmpfiles.d file installation directories
  systemdsystemunitdir = get_option('systemdsystemunitdir')
@@ -25,8 +24,7 @@ index cf494c2..938ca7c 100644
  else
    if systemdsystemunitdir == ''
      systemdsystemunitdir = '/usr/lib/systemd/system'
-diff --git polkit-clean/meson_options.txt polkit-workdir/meson_options.txt
-index 31b7a2b..2b832b2 100644
+diff -urN --no-dereference polkit-clean/meson_options.txt polkit-workdir/meson_options.txt
 --- polkit-clean/meson_options.txt
 +++ polkit-workdir/meson_options.txt
 @@ -1,5 +1,7 @@
@@ -37,11 +35,10 @@ index 31b7a2b..2b832b2 100644
  
  option('libs-only', type: 'boolean', value: false, description: 'Only build libraries (skips building polkitd)')
  option('polkitd_user', type: 'string', value: 'polkitd', description: 'User for running polkitd (polkitd)')
-diff --git polkit-clean/meson_post_install.py polkit-workdir/meson_post_install.py
-index efb75a1..0b5e1e0 100644
+diff -urN --no-dereference polkit-clean/meson_post_install.py polkit-workdir/meson_post_install.py
 --- polkit-clean/meson_post_install.py
 +++ polkit-workdir/meson_post_install.py
-@@ -28,16 +28,16 @@ except KeyError:
+@@ -28,16 +28,16 @@
  
  dst = os.path.join(bindir, 'pkexec')
  
@@ -67,7 +64,7 @@ index efb75a1..0b5e1e0 100644
  
  dst = os.path.join(pkgsysconfdir, 'rules.d')
  
-@@ -57,13 +57,13 @@ if not os.path.exists(dst):
+@@ -57,13 +57,13 @@
  # and/or other users.
  dst = os.path.join(pkglibdir, 'polkit-agent-helper-1')
  

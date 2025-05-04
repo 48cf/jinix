@@ -1,12 +1,10 @@
-diff --git rust-cfg-expr-0.17.2-clean/src/targets/builtins.rs rust-cfg-expr-0.17.2-workdir/src/targets/builtins.rs
-index 79e3570..f04c997 100644
+diff -urN --no-dereference rust-cfg-expr-0.17.2-clean/src/targets/builtins.rs rust-cfg-expr-0.17.2-workdir/src/targets/builtins.rs
 --- rust-cfg-expr-0.17.2-clean/src/targets/builtins.rs
 +++ rust-cfg-expr-0.17.2-workdir/src/targets/builtins.rs
-@@ -3302,6 +3302,19 @@ pub const ALL_BUILTINS: &[TargetInfo] = &[
-         has_atomics: HasAtomics::atomic_8_16_32_64_ptr,
+@@ -3303,6 +3303,19 @@
          panic: Panic::unwind,
      },
-+    TargetInfo {
+     TargetInfo {
 +        triple: Triple::new_const("x86_64-unknown-linux-mlibc"),
 +        os: Some(Os::linux),
 +        abi: None,
@@ -19,10 +17,11 @@ index 79e3570..f04c997 100644
 +        has_atomics: HasAtomics::atomic_8_16_32_64_ptr,
 +        panic: Panic::unwind,
 +    },
-     TargetInfo {
++    TargetInfo {
          triple: Triple::new_const("x86_64-unknown-linux-ohos"),
          os: Some(Os::linux),
-@@ -3669,6 +3682,7 @@ impl super::Env {
+         abi: None,
+@@ -3669,6 +3682,7 @@
      pub const gnu: Env = Env::new_const("gnu");
      pub const msvc: Env = Env::new_const("msvc");
      pub const musl: Env = Env::new_const("musl");
