@@ -366,6 +366,7 @@ prepare_container() {
                 continue
             fi
 
+            rm -rf "$JINX_CACHE_DIR/sets/${pkgset}"
             make_dir "$JINX_CACHE_DIR/sets/${pkgset}"
 
             cp -Pplrf "$JINX_CACHE_DIR/sets/${pkgset}../.image" "$JINX_CACHE_DIR/sets/${pkgset}.image"
@@ -1978,6 +1979,15 @@ Acquire::Check-Valid-Until "0";' >> "$JINX_CACHE_DIR/sets/.image/etc/apt/apt.con
     echo "${sources_list_tmp}" >>"$JINX_CACHE_DIR/sets/.image/etc/apt/sources.list"
 
     run_in_container1 "$JINX_CACHE_DIR/sets/.image" apt-get update
+
+    mv "$JINX_CACHE_DIR/sets/.image"/usr/bin/dpkg-statoverride "$JINX_CACHE_DIR/sets/.image"/usr/bin/dpkg-statoverride-wrapped
+    cat >"$JINX_CACHE_DIR/sets/.image"/usr/bin/dpkg-statoverride <<'EOF'
+#! /bin/sh
+dpkg-statoverride-wrapped "$@"
+exit 0
+EOF
+    chmod +x "$JINX_CACHE_DIR/sets/.image"/usr/bin/dpkg-statoverride
+
     run_in_container1 "$JINX_CACHE_DIR/sets/.image" apt-get install -y locales
     run_in_container1 "$JINX_CACHE_DIR/sets/.image" locale-gen
 
