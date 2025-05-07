@@ -1,0 +1,30 @@
+#! /bin/sh
+
+name=xfconf
+version=4.20.0
+revision=1
+tarball_url="https://archive.xfce.org/src/xfce/xfconf/4.20/xfconf-${version}.tar.bz2"
+tarball_blake2b="56b895e8da736b5c0f63e733e625fe09c07a95ccb1d72271387ace1214410aab04be1ff508c6c43b1ab890cc1a4fd2bb0904b5f6ad4e7f615be2dcea60f01ec4"
+imagedeps="build-essential"
+hostdeps="gcc pkg-config glib gobject-introspection vala"
+deps="core-libs glib libxfce4util"
+
+prepare() {
+	autotools_recursive_regen
+}
+
+configure() {
+    autotools_configure \
+        --disable-gtk-doc
+
+}
+
+build() {
+    make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
