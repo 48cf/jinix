@@ -10,18 +10,6 @@ diff -urN --no-dereference systemd-clean/src/basic/build-path.c systemd-workdir/
                                           + bias
  #endif
                                  );
-diff -urN --no-dereference systemd-clean/src/basic/raw-clone.h systemd-workdir/src/basic/raw-clone.h
---- systemd-clean/src/basic/raw-clone.h
-+++ systemd-workdir/src/basic/raw-clone.h
-@@ -74,6 +74,8 @@
-                 } else
-                         ret = in_child ? 0 : child_pid;
-         }
-+#elif defined(__mlibc__)
-+        ret = fork();
- #else
-         ret = (pid_t) syscall(__NR_clone, flags, NULL);
- #endif
 diff -urN --no-dereference systemd-clean/src/core/exec-invoke.c systemd-workdir/src/core/exec-invoke.c
 --- systemd-clean/src/core/exec-invoke.c
 +++ systemd-workdir/src/core/exec-invoke.c
