@@ -379,7 +379,7 @@ prepare_container() {
                 pkg="$(echo "${pkg}" | sed 's/^experimental://g')"
             fi
 
-            if ! run_in_container1 "$JINX_CACHE_DIR/sets/${pkgset}.image" apt-get install -y ${want_experimental} "${pkg}"; then
+            if ! run_in_container1 "$JINX_CACHE_DIR/sets/${pkgset}.image" env TERM='' LD_PRELOAD='/root/nochown.so' apt-get install -y ${want_experimental} "${pkg}"; then
                 die 'Jinx error: Installing an imagedep failed.'
             fi
 
@@ -1979,15 +1979,6 @@ Acquire::Check-Valid-Until "0";' >> "$JINX_CACHE_DIR/sets/.image/etc/apt/apt.con
     echo "${sources_list_tmp}" >>"$JINX_CACHE_DIR/sets/.image/etc/apt/sources.list"
 
     run_in_container1 "$JINX_CACHE_DIR/sets/.image" apt-get update
-
-    mv "$JINX_CACHE_DIR/sets/.image"/usr/bin/dpkg-statoverride "$JINX_CACHE_DIR/sets/.image"/usr/bin/dpkg-statoverride-wrapped
-    cat >"$JINX_CACHE_DIR/sets/.image"/usr/bin/dpkg-statoverride <<'EOF'
-#! /bin/sh
-dpkg-statoverride-wrapped "$@"
-exit 0
-EOF
-    chmod +x "$JINX_CACHE_DIR/sets/.image"/usr/bin/dpkg-statoverride
-
     run_in_container1 "$JINX_CACHE_DIR/sets/.image" apt-get install -y locales
     run_in_container1 "$JINX_CACHE_DIR/sets/.image" locale-gen
 
@@ -2017,6 +2008,36 @@ EOF
         mv "$f" "${f%.static*}"
     done
     mv "${XBPS_BUILDENV}/xbps-bin/bin" "$JINX_CACHE_DIR/xbps-bin"
+
+    cat >"${XBPS_BUILDENV}/nochown.c" <<'EOF'
+#include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+int chown(const char *pathname, uid_t owner, gid_t group) {
+    printf("chown(%s, %d, %d); suppressed\n", pathname, owner, group);
+    return 0;
+}
+
+int fchown(int fd, uid_t owner, gid_t group) {
+    printf("fchown(%d, %d, %d); suppressed\n", fd, owner, group);
+    return 0;
+}
+
+int lchown(const char *pathname, uid_t owner, gid_t group) {
+    printf("lchown(%s, %d, %d); suppressed\n", pathname, owner, group);
+    return 0;
+}
+
+int fchownat(int dirfd, const char *pathname,
+             uid_t owner, gid_t group, int flags) {
+    printf("fchownat(%d, %s, %d, %d, %d); suppressed\n", dirfd, pathname, owner, group, flags);
+    return 0;
+}
+EOF
+    run_in_container1 "${XBPS_BUILDENV}" gcc -O2 -fPIC -shared /nochown.c -o /nochown.so
+    mv "${XBPS_BUILDENV}/nochown.so" "$JINX_CACHE_DIR/sets/.image/root/"
+
     chmod -R 777 "${XBPS_BUILDENV}"
     rm -rf "${XBPS_BUILDENV}"
 }
