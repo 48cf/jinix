@@ -2015,23 +2015,35 @@ Acquire::Check-Valid-Until "0";' >> "$JINX_CACHE_DIR/sets/.image/etc/apt/apt.con
 #include <fcntl.h>
 
 int chown(const char *pathname, uid_t owner, gid_t group) {
-    printf("chown(%s, %d, %d); suppressed\n", pathname, owner, group);
+    if (owner == 0 && group == 0) {
+        return 0;
+    }
+    printf("\e[93mchown(%s, %d, %d); suppressed\e[0m\n", pathname, owner, group);
     return 0;
 }
 
 int fchown(int fd, uid_t owner, gid_t group) {
-    printf("fchown(%d, %d, %d); suppressed\n", fd, owner, group);
+    if (owner == 0 && group == 0) {
+        return 0;
+    }
+    printf("\e[93mfchown(%d, %d, %d); suppressed\e[0m\n", fd, owner, group);
     return 0;
 }
 
 int lchown(const char *pathname, uid_t owner, gid_t group) {
-    printf("lchown(%s, %d, %d); suppressed\n", pathname, owner, group);
+    if (owner == 0 && group == 0) {
+        return 0;
+    }
+    printf("\e[93mlchown(%s, %d, %d); suppressed\e[0m\n", pathname, owner, group);
     return 0;
 }
 
 int fchownat(int dirfd, const char *pathname,
              uid_t owner, gid_t group, int flags) {
-    printf("fchownat(%d, %s, %d, %d, %d); suppressed\n", dirfd, pathname, owner, group, flags);
+    if (owner == 0 && group == 0) {
+        return 0;
+    }
+    printf("\e[93mfchownat(%d, %s, %d, %d, %d); suppressed\e[0m\n", dirfd, pathname, owner, group, flags);
     return 0;
 }
 EOF
