@@ -1,0 +1,30 @@
+#! /bin/sh
+
+name=libxfce4ui
+version=4.20.0
+revision=1
+tarball_url="https://archive.xfce.org/src/xfce/libxfce4ui/4.20/libxfce4ui-${version}.tar.bz2"
+tarball_blake2b="83ce64e1a7131142e53d9eb3cc4a301267f57512bcf86ebfbc14d804f79e249e80ebb96f0c6dd70ea2481b20b8810a3c21caa352b37f6950f70868b54d44e999"
+imagedeps="build-essential patchelf meson ninja-build"
+hostdeps="gcc pkg-config glib gobject-introspection vala"
+deps="core-libs libxfce4util gtk+-3 xfconf libsm startup-notification libgtop libepoxy hicolor-icon-theme libgudev"
+
+prepare() {
+    autotools_recursive_regen
+}
+
+configure() {
+    gi_env vala_env autotools_configure \
+        --enable-epoxy \
+        --with-vendor-info="Jinix"
+}
+
+build() {
+    gi_env vala_env make -j${parallelism}
+}
+
+package() {
+    DESTDIR="${dest_dir}" make install
+
+    post_package_strip
+}
