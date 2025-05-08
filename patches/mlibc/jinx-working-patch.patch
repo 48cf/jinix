@@ -2200,7 +2200,18 @@ diff -urN --no-dereference mlibc-clean/sysdeps/linux/generic/sysdeps.cpp mlibc-w
  int sys_getaffinity(pid_t pid, size_t cpusetsize, cpu_set_t *mask) {
  	auto ret = do_syscall(SYS_sched_getaffinity, pid, cpusetsize, mask);
  	if (int e = sc_error(ret); e)
-@@ -1620,6 +1628,30 @@
+@@ -1477,6 +1485,10 @@
+ 	return sys_setresuid(-1, euid, -1);
+ }
+ 
++int sys_setegid(gid_t egid) {
++	return sys_setresgid(-1, egid, -1);
++}
++
+ int sys_vm_remap(void *pointer, size_t size, size_t new_size, void **window) {
+ 	auto ret = do_syscall(SYS_mremap, pointer, size, new_size, MREMAP_MAYMOVE);
+ 	// TODO: musl fixes up EPERM errors from the kernel.
+@@ -1620,6 +1632,30 @@
  	return 0;
  }
  
@@ -2231,7 +2242,7 @@ diff -urN --no-dereference mlibc-clean/sysdeps/linux/generic/sysdeps.cpp mlibc-w
  #endif // __MLIBC_POSIX_OPTION
  
  #if __MLIBC_LINUX_OPTION
-@@ -1695,6 +1727,20 @@
+@@ -1695,6 +1731,20 @@
  	return 0;
  }
  
@@ -2252,7 +2263,7 @@ diff -urN --no-dereference mlibc-clean/sysdeps/linux/generic/sysdeps.cpp mlibc-w
  #endif // __MLIBC_LINUX_OPTION
  
  int sys_times(struct tms *tms, clock_t *out) {
-@@ -1896,6 +1942,14 @@
+@@ -1896,6 +1946,14 @@
  	return 0;
  }
  
