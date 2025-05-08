@@ -23,7 +23,7 @@ fi
 rm -rf mount_dir
 
 if [ -z "$IMAGE_SIZE" ]; then
-    IMAGE_SIZE=4G
+    IMAGE_SIZE=8G
 fi
 rm -f jinix.img
 fallocate -l "${IMAGE_SIZE}" jinix.img
