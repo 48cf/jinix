@@ -7,7 +7,7 @@ git_url="https://gitlab.freedesktop.org/dbus/dbus.git"
 commit=958bf9db2100553bcd2fe2a854e1ebb42e886054
 imagedeps="git meson ninja-build"
 hostdeps="gcc pkg-config"
-deps="core-libs libexpat systemd"
+deps="core-libs libexpat libx11 systemd"
 
 configure() {
     meson_configure \
