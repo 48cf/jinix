@@ -565,19 +565,37 @@ diff -urN --no-dereference mlibc-clean/options/posix/generic/posix_stdlib.cpp ml
 diff -urN --no-dereference mlibc-clean/options/posix/generic/sys-uio.cpp mlibc-workdir/options/posix/generic/sys-uio.cpp
 --- mlibc-clean/options/posix/generic/sys-uio.cpp
 +++ mlibc-workdir/options/posix/generic/sys-uio.cpp
-@@ -65,3 +65,13 @@
+@@ -65,3 +65,31 @@
  	__ensure(!"Not implemented");
  	__builtin_unreachable();
  }
 +
-+ssize_t process_vm_readv(pid_t, const struct iovec *, unsigned long, const struct iovec *, unsigned long, unsigned long) {
-+	__ensure(!"Not implemented");
-+	__builtin_unreachable();
++ssize_t process_vm_readv(pid_t pid,
++		const struct iovec *local_iov, unsigned long local_iov_count,
++		const struct iovec *remote_iov, unsigned long remote_iov_count,
++		unsigned long flags) {
++	MLIBC_CHECK_OR_ENOSYS(mlibc::sys_process_vm_readv, -1);
++	ssize_t bytes_read;
++	if(int e = mlibc::sys_process_vm_readv(pid, local_iov, local_iov_count,
++			remote_iov, remote_iov_count, flags, &bytes_read); e) {
++		errno = e;
++		return -1;
++	}
++	return bytes_read;
 +}
 +
-+ssize_t process_vm_writev(pid_t, const struct iovec *, unsigned long, const struct iovec *, unsigned long, unsigned long) {
-+	__ensure(!"Not implemented");
-+	__builtin_unreachable();
++ssize_t process_vm_writev(pid_t pid,
++		const struct iovec *local_iov, unsigned long local_iov_count,
++		const struct iovec *remote_iov, unsigned long remote_iov_count,
++		unsigned long flags) {
++	MLIBC_CHECK_OR_ENOSYS(mlibc::sys_process_vm_writev, -1);
++	ssize_t bytes_written;
++	if(int e = mlibc::sys_process_vm_writev(pid, local_iov, local_iov_count,
++			remote_iov, remote_iov_count, flags, &bytes_written); e) {
++		errno = e;
++		return -1;
++	}
++	return bytes_written;
 +}
 diff -urN --no-dereference mlibc-clean/options/posix/generic/termios.cpp mlibc-workdir/options/posix/generic/termios.cpp
 --- mlibc-clean/options/posix/generic/termios.cpp
@@ -616,6 +634,22 @@ diff -urN --no-dereference mlibc-clean/options/posix/include/mlibc/posix-sysdeps
  [[gnu::weak]] int sys_getaffinity(pid_t pid, size_t cpusetsize, cpu_set_t *mask);
  [[gnu::weak]] int sys_getthreadaffinity(pid_t tid, size_t cpusetsize, cpu_set_t *mask);
  
+@@ -249,6 +250,15 @@
+ [[gnu::weak]] int sys_shmdt(const void *shmaddr);
+ [[gnu::weak]] int sys_shmget(int *shm_id, key_t key, size_t size, int shmflg);
+ 
++[[gnu::weak]] int sys_process_vm_readv(pid_t pid,
++		const struct iovec *local_iov, unsigned long local_iov_count,
++		const struct iovec *remote_iov, unsigned long remote_iov_count,
++		unsigned long flags, ssize_t *out);
++[[gnu::weak]] int sys_process_vm_writev(pid_t pid,
++		const struct iovec *local_iov, unsigned long local_iov_count,
++		const struct iovec *remote_iov, unsigned long remote_iov_count,
++		unsigned long flags, ssize_t *out);
++
+ } //namespace mlibc
+ 
+ #endif // MLIBC_POSIX_SYSDEPS
 diff -urN --no-dereference mlibc-clean/options/posix/include/monetary.h mlibc-workdir/options/posix/include/monetary.h
 --- mlibc-clean/options/posix/include/monetary.h	1970-01-01 01:00:00.000000000 +0100
 +++ mlibc-workdir/options/posix/include/monetary.h
@@ -2166,7 +2200,38 @@ diff -urN --no-dereference mlibc-clean/sysdeps/linux/generic/sysdeps.cpp mlibc-w
  int sys_getaffinity(pid_t pid, size_t cpusetsize, cpu_set_t *mask) {
  	auto ret = do_syscall(SYS_sched_getaffinity, pid, cpusetsize, mask);
  	if (int e = sc_error(ret); e)
-@@ -1695,6 +1703,20 @@
+@@ -1620,6 +1628,30 @@
+ 	return 0;
+ }
+ 
++int sys_process_vm_readv(pid_t pid,
++		const struct iovec *local_iov, unsigned long local_iov_count,
++		const struct iovec *remote_iov, unsigned long remote_iov_count,
++		unsigned long flags, ssize_t *out) {
++	auto ret = do_syscall(SYS_process_vm_readv, pid, local_iov, local_iov_count,
++			remote_iov, remote_iov_count, flags);
++	if(int e = sc_error(ret); e)
++		return e;
++	*out = sc_int_result<ssize_t>(ret);
++	return 0;
++}
++
++int sys_process_vm_writev(pid_t pid,
++		const struct iovec *local_iov, unsigned long local_iov_count,
++		const struct iovec *remote_iov, unsigned long remote_iov_count,
++		unsigned long flags, ssize_t *out) {
++	auto ret = do_syscall(SYS_process_vm_writev, pid, local_iov, local_iov_count,
++			remote_iov, remote_iov_count, flags);
++	if(int e = sc_error(ret); e)
++		return e;
++	*out = sc_int_result<ssize_t>(ret);
++	return 0;
++}
++
+ #endif // __MLIBC_POSIX_OPTION
+ 
+ #if __MLIBC_LINUX_OPTION
+@@ -1695,6 +1727,20 @@
  	return 0;
  }
  
@@ -2187,7 +2252,7 @@ diff -urN --no-dereference mlibc-clean/sysdeps/linux/generic/sysdeps.cpp mlibc-w
  #endif // __MLIBC_LINUX_OPTION
  
  int sys_times(struct tms *tms, clock_t *out) {
-@@ -1896,6 +1918,14 @@
+@@ -1896,6 +1942,14 @@
  	return 0;
  }
  
