@@ -1200,6 +1200,7 @@ cmd_check_updates() {
         for pkg in $(eval '(' cd "'${base_dir}'"/recipes '&&' echo "${ppkg}" ')' ); do
             unset repology_id
             unset repology_srcname
+            unset repology_status
             unset skip_pkg_check
 
             . "${base_dir}/recipes/${pkg}"
@@ -1223,17 +1224,22 @@ cmd_check_updates() {
                 srcname_to_check=".srcname==\"$repology_srcname\" and"
             fi
 
+            if [ -z "$repology_status" ]; then
+                status_to_check=""
+            else
+                status_to_check=".status == \"$repology_status\" and"
+            fi
             sleep 1
             repology_response="$(curl -s -A '' https://repology.org/api/v1/project/$name_to_check)"
-            checked_vers=$(echo "$repology_response" | jq '.[] | select('"$srcname_to_check"' (.repo=="arch" or .repo=="nix_unstable" or .repo=="chimera")).version' | sort -Vr | head -n 1)
+            checked_vers=$(echo "$repology_response" | jq '.[] | select('"$status_to_check"' '"$srcname_to_check"' (.repo=="arch" or .repo=="nix_unstable" or .repo=="chimera")).version' | sort -Vr | head -n 1)
             if [ -z "$checked_vers" ]; then
-                checked_vers=$(echo "$repology_response" | jq '.[] | select('"$srcname_to_check"' .repo=="alpine_edge").version' | sort -Vr | head -n 1)
+                checked_vers=$(echo "$repology_response" | jq '.[] | select('"$status_to_check"' '"$srcname_to_check"' .repo=="alpine_edge").version' | sort -Vr | head -n 1)
             fi
             if [ -z "$checked_vers" ]; then
-                checked_vers=$(echo "$repology_response" | jq '.[] | select('"$srcname_to_check"' .repo=="debian_unstable").version' | sort -Vr | head -n 1)
+                checked_vers=$(echo "$repology_response" | jq '.[] | select('"$status_to_check"' '"$srcname_to_check"' .repo=="debian_unstable").version' | sort -Vr | head -n 1)
             fi
             if [ -z "$checked_vers" ]; then
-                checked_vers=$(echo "$repology_response" | jq '.[] | select('"$srcname_to_check"' .repo=="aur").version' | sort -Vr | head -n 1)
+                checked_vers=$(echo "$repology_response" | jq '.[] | select('"$status_to_check"' '"$srcname_to_check"' .repo=="aur").version' | sort -Vr | head -n 1)
             fi
             if [ -z "$checked_vers" ]; then
                 printf " \033[0;97;101mis not checkable\033[0m\n"
