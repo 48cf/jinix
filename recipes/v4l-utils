@@ -1,6 +1,8 @@
 #! /bin/sh
 
 name=v4l-utils
+repology_id=video4linux
+repology_srcname=v4l-utils
 version=1.28.1
 revision=1
 tarball_url="https://linuxtv.org/downloads/v4l-utils/v4l-utils-${version}.tar.xz"

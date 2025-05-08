@@ -1,6 +1,7 @@
 #! /bin/sh
 
 name=gtk4
+repology_id=gtk
 version=4.18.4
 revision=1
 tarball_url="https://download.gnome.org/sources/gtk/4.18/gtk-${version}.tar.xz"

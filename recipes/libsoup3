@@ -1,6 +1,7 @@
 #! /bin/sh
 
 name=libsoup3
+repology_id=libsoup
 version=3.6.5
 revision=1
 tarball_url="https://download.gnome.org/sources/libsoup/3.6/libsoup-${version}.tar.xz"

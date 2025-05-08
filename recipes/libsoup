@@ -1,6 +1,7 @@
 #! /bin/sh
 
 name=libsoup
+repology_status=legacy
 version=2.74.3
 revision=1
 tarball_url="https://download.gnome.org/sources/libsoup/2.74/libsoup-${version}.tar.xz"

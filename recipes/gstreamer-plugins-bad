@@ -1,6 +1,7 @@
 #! /bin/sh
 
 name=gstreamer-plugins-bad
+repology_id=gstreamer:bad
 version=1.26.0
 revision=1
 tarball_url="https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-${version}.tar.xz"

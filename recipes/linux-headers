@@ -1,6 +1,7 @@
 #! /bin/sh
 
 name=linux-headers
+skip_pkg_check=yes
 from_source=linux
 revision=1
 imagedeps="build-essential rsync"

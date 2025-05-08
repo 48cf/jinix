@@ -1,6 +1,7 @@
 #! /bin/sh
 
 name=gtksourceview5
+repology_id=gtksourceview
 version=5.16.0
 revision=1
 tarball_url="https://download.gnome.org/sources/gtksourceview/5.16/gtksourceview-${version}.tar.xz"

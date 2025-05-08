@@ -1,6 +1,7 @@
 #! /bin/sh
 
 name=fast_float
+repology_id=fast-float
 version=8.0.2
 revision=1
 tarball_url="https://github.com/fastfloat/fast_float/archive/v${version}/fast_float-${version}.tar.gz"

@@ -1,6 +1,7 @@
 #! /bin/sh
 
 name=rust-libc
+skip_pkg_check=yes
 version=0.2.172
 revision=1
 tarball_url="https://github.com/rust-lang/libc/archive/refs/tags/${version}.tar.gz"

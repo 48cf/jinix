@@ -1,6 +1,7 @@
 #! /bin/sh
 
 name=gstreamer-plugins-base
+repology_id=gstreamer:base
 version=1.26.0
 revision=1
 tarball_url="https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-${version}.tar.xz"

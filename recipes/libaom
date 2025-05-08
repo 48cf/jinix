@@ -1,6 +1,7 @@
 #! /bin/sh
 
 name=libaom
+repology_id=aom
 version=3.12.1
 revision=1
 tarball_url="https://storage.googleapis.com/aom-releases/libaom-${version}.tar.gz"
