@@ -10,7 +10,7 @@ hostdeps="gcc pkg-config"
 deps="core-libs glib libxml"
 
 configure() {
-	meson_configure \
+    meson_configure \
         -Dupdate-mimedb=false
 }
 

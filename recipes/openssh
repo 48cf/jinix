@@ -31,9 +31,9 @@ build() {
 package() {
     make DESTDIR="${dest_dir}" install
 
-	mkdir -pv ${dest_dir}/etc/pam.d/
+    mkdir -pv ${dest_dir}/etc/pam.d/
     cp -v "${base_dir}"/build-support/openssh/* "${dest_dir}"/etc/pam.d/
-	echo "UsePAM yes" >> ${dest_dir}/etc/ssh/sshd_config
+    echo "UsePAM yes" >> ${dest_dir}/etc/ssh/sshd_config
 
     post_package_strip
 }

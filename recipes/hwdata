@@ -9,10 +9,10 @@ hostdeps="gcc pkg-config"
 deps="core-libs"
 
 configure() {
-	cp -rp "${source_dir}"/. ./
+    cp -rp "${source_dir}"/. ./
 
-    "./configure" \
-		--prefix=/usr \
+    ./configure \
+        --prefix=${prefix} \
         --disable-blacklist
 }
 

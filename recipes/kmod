@@ -1,3 +1,5 @@
+#! /bin/sh
+
 name=kmod
 version=34
 revision=2

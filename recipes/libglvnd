@@ -1,4 +1,4 @@
-# !/bin/sh
+#! /bin/sh
 
 name=libglvnd
 version=1.7.0

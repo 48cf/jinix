@@ -10,7 +10,7 @@ hostdeps="gcc pkg-config"
 deps="core-libs libxml libffi libexpat"
 
 configure() {
-	meson_configure \
+    meson_configure \
         -Ddocumentation=false
 }
 

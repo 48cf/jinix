@@ -28,8 +28,8 @@ package() {
     DESTDIR="${dest_dir}" ninja install
 
     rm -rv ${dest_dir}${prefix}/lib/xorg
-	# This will be installed by xorg-server
-	rm -v ${dest_dir}${prefix}/share/man/man1/Xserver.1
+    # This will be installed by xorg-server
+    rm -v ${dest_dir}${prefix}/share/man/man1/Xserver.1
 
     post_package_strip
 }

@@ -31,7 +31,7 @@ package() {
     # Remove pulseaudio server autostart, wireplumber has it's own server
     rm -vf ${dest_dir}/etc/xdg/autostart/pulseaudio.desktop
     rm -vf ${dest_dir}/etc/xdg/Xwayland-session.d/00-pulseaudio-x11
-    sed -e '$a autospawn = no' -i ${dest_dir}/etc/pulse/client.conf	
+    sed -e '$a autospawn = no' -i ${dest_dir}/etc/pulse/client.conf
 
     post_package_strip
 }

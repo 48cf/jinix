@@ -10,7 +10,6 @@ hostdeps="gcc pkg-config gobject-introspection glib vala"
 deps="core-libs curl libxml libxmlb libyaml zstd libxslt systemd"
 
 configure() {
-	stat /usr/bin/appstreamcli
     vala_env meson_configure \
         -Dapidocs=false \
         -Dstemming=false \

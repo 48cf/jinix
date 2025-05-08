@@ -10,7 +10,7 @@ hostdeps="gcc pkg-config"
 deps="core-libs gnutls colord dbus libusb pam avahi libpaper"
 
 prepare() {
-	sed -i 's#@CUPS_HTMLVIEW@#firefox#' ${source_dir}/desktop/cups.desktop.in
+    sed -i 's#@CUPS_HTMLVIEW@#firefox#' ${source_dir}/desktop/cups.desktop.in
 }
 
 configure() {
@@ -34,7 +34,7 @@ package() {
     echo "ServerName /run/cups/cups.sock" > ${dest_dir}/etc/cups/client.conf
 
     mkdir -pv ${dest_dir}/etc/pam.d
-	cat > ${dest_dir}/etc/pam.d/cups << "EOF"
+    cat > ${dest_dir}/etc/pam.d/cups << "EOF"
 # Begin /etc/pam.d/cups
 
 auth    include system-auth

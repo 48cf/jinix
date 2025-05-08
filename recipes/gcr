@@ -11,7 +11,7 @@ hostdeps="gcc pkg-config gobject-introspection glib vala"
 deps="core-libs glib libgcrypt p11-kit gtk+-3 libxslt libsecret openssh"
 
 prepare() {
-	sed -i 's:"/desktop:"/org:' ${source_dir}/schema/*.xml
+    sed -i 's:"/desktop:"/org:' ${source_dir}/schema/*.xml
 }
 
 configure() {
@@ -19,8 +19,8 @@ configure() {
         -Dgtk_doc=false \
         -Dssh_agent=false \
         -Dgpg_path=${prefix}/bin/gpg \
-		-Dssh_add_path=${prefix}/bin/ssh-add \
-		-Dssh_agent_path=${prefix}/bin/ssh-agent
+        -Dssh_add_path=${prefix}/bin/ssh-add \
+        -Dssh_agent_path=${prefix}/bin/ssh-agent
 }
 
 build() {

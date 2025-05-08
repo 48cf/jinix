@@ -10,19 +10,19 @@ hostdeps="gcc pkg-config"
 deps="core-libs libwebp gdk-pixbuf"
 
 configure() {
-	meson_configure
+    meson_configure
 }
 
 build() {
-	ninja -j${parallelism}
+    ninja -j${parallelism}
 }
 
 package() {
     DESTDIR="${dest_dir}" ninja install
 
-	# The pixbuf loader is installed in the wrong directory, move it
+    # The pixbuf loader is installed in the wrong directory, move it
     mkdir -pv ${dest_dir}/${prefix}/lib/gdk-pixbuf-2.0/2.10.0/loaders/
     mv -v ${dest_dir}/sysroot/${prefix}/lib/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-webp.so ${dest_dir}/${prefix}/lib/gdk-pixbuf-2.0/2.10.0/loaders/
 
-	post_package_strip
+    post_package_strip
 }

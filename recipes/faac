@@ -14,7 +14,7 @@ prepare() {
 }
 
 configure() {
-	autotools_configure
+    autotools_configure
 }
 
 build() {

@@ -12,8 +12,8 @@ deps="core-libs libgudev libmbim libqmi polkit dbus"
 configure() {
     vala_env meson_configure \
         -Dbash_completion=false \
-		-Dman=false \
-		-Dqrtr=false \
+        -Dman=false \
+        -Dqrtr=false \
         -Dudevdir=${prefix}/lib/udev
 }
 
@@ -24,11 +24,11 @@ build() {
 package() {
     DESTDIR="${dest_dir}" gi_env ninja install
 
-	mkdir -pv ${dest_dir}${prefix}/share/polkit-1/actions
-	mkdir -pv ${dest_dir}${prefix}/lib/systemd/system
-	mv -v ${dest_dir}/sysroot/${prefix}/share/polkit-1/actions/* ${dest_dir}/${prefix}/share/polkit-1/actions/
-	mv -v ${dest_dir}/sysroot/${prefix}/lib/systemd/system/* ${dest_dir}/${prefix}/lib/systemd/system/
-	rm -rv ${dest_dir}/sysroot/
+    mkdir -pv ${dest_dir}${prefix}/share/polkit-1/actions
+    mkdir -pv ${dest_dir}${prefix}/lib/systemd/system
+    mv -v ${dest_dir}/sysroot/${prefix}/share/polkit-1/actions/* ${dest_dir}/${prefix}/share/polkit-1/actions/
+    mv -v ${dest_dir}/sysroot/${prefix}/lib/systemd/system/* ${dest_dir}/${prefix}/lib/systemd/system/
+    rm -rv ${dest_dir}/sysroot/
 
     post_package_strip
 }

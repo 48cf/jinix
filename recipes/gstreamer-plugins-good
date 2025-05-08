@@ -1,3 +1,5 @@
+#! /bin/sh
+
 name=gstreamer-plugins-good
 version=1.26.0
 revision=1
@@ -12,7 +14,7 @@ configure() {
     meson_configure \
         --wrap-mode=nodownload \
         -Dpackage-name="GStreamer ${version}" \
-		-Dv4l2=disabled
+        -Dv4l2=disabled
 }
 
 build() {

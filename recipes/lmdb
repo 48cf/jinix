@@ -14,15 +14,19 @@ configure() {
 
 build() {
     cd libraries/liblmdb
-    make -j${parallelism} CC=${OS_TRIPLET}-gcc \
+
+    make -j${parallelism} \
         CFLAGS="$TARGET_CFLAGS" \
         LDFLAGS="$TARGET_LDFLAGS" \
-		AR=${OS_TRIPLET}-ar
+        CC=${OS_TRIPLET}-gcc \
+        AR=${OS_TRIPLET}-ar
+
     sed -i 's| liblmdb.a||' Makefile
 }
 
 package() {
     cd libraries/liblmdb
+
     DESTDIR="${dest_dir}" make prefix=${prefix} install
 
     post_package_strip

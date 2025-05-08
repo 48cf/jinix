@@ -10,7 +10,7 @@ hostdeps="gcc pkg-config gobject-introspection glib vala"
 deps="core-libs glib glib-gi systemd gobject-introspection"
 
 configure() {
-	vala_env meson_configure
+    vala_env meson_configure
 }
 
 build() {

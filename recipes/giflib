@@ -1,3 +1,5 @@
+#! /bin/sh
+
 name=giflib
 version=5.2.2
 revision=1
@@ -8,11 +10,11 @@ hostdeps="gcc pkg-config"
 deps="core-libs"
 
 prepare() {
-	cp ${source_dir}/pic/gifgrid.gif ${source_dir}/doc/giflib-logo.gif
+    cp ${source_dir}/pic/gifgrid.gif ${source_dir}/doc/giflib-logo.gif
 }
 
 configure() {
-	cp -rp ${source_dir}/. ./
+    cp -rp ${source_dir}/. ./
 }
 
 build() {

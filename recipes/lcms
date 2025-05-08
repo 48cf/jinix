@@ -9,11 +9,11 @@ hostdeps="gcc pkg-config"
 deps="core-libs libjpeg-turbo libtiff"
 
 prepare() {
-	autotools_recursive_regen
+    autotools_recursive_regen
 }
 
 configure() {
-	autotools_configure
+    autotools_configure
 }
 
 build() {

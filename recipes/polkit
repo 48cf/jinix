@@ -10,13 +10,13 @@ hostdeps="gcc pkg-config gobject-introspection glib vala"
 deps="core-libs duktape glib libxslt pam systemd glib-gi"
 
 configure() {
-	vala_env meson_configure \
+    vala_env meson_configure \
         -Dman=false \
         -Dtests=false \
         -Dintrospection=true \
         -Dsession_tracking=logind \
-		-Dos_type=lfs \
-		-Dsystemdsystemunitdir=${prefix}/lib/systemd/system \
+        -Dos_type=lfs \
+        -Dsystemdsystemunitdir=${prefix}/lib/systemd/system \
         -Dsysusers_dir=${prefix}/lib/sysusers.d \
         -Dtmpfiles_dir=${prefix}/lib/tmpfiles.d
 }

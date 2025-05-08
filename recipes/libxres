@@ -9,7 +9,7 @@ hostdeps="gcc pkg-config"
 deps="core-libs xorg-util-macros xorg-proto libxext"
 
 prepare() {
-	autotools_recursive_regen
+    autotools_recursive_regen
 }
 
 build() {

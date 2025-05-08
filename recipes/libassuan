@@ -14,8 +14,8 @@ prepare() {
 }
 
 configure() {
-	autotools_configure \
-        --with-libgpg-error-prefix=${sysroot_dir}/${prefix}
+    autotools_configure \
+        --with-libgpg-error-prefix=${sysroot_dir}${prefix}
 }
 
 build() {

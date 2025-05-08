@@ -1,3 +1,5 @@
+#! /bin/sh
+
 name=x265
 version=4.1
 revision=1
@@ -8,7 +10,7 @@ hostdeps="gcc pkg-config"
 deps="core-libs"
 
 configure() {
-    cmake_source_dir="${source_dir}/source" \
+        cmake_source_dir="${source_dir}/source" \
     cmake_configure \
         -DGIT_ARCHETYPE=1
 }
