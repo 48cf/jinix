@@ -484,13 +484,11 @@ destroy_container() {
 }
 
 do_hg_fetch() {
-    [ -d "${source_dir}" ] && return
     hg clone "${hg_url}" "${base_dir}"/sources/${name}
     ( cd "${base_dir}"/sources/${name} && hg up "${tag}" )
 }
 
 do_git_fetch() {
-    [ -d "${source_dir}" ] && return
     if ! [ -z "${commit}" ]; then
         if [ "${shallow}" = "no" ]; then
             git clone "${git_url}" --revision="${commit}" "${base_dir}"/sources/${name}
@@ -509,8 +507,6 @@ do_git_fetch() {
 }
 
 do_tarball_fetch() {
-    [ -d "${source_dir}" ] && return
-
     tarball_path="${base_dir}"/sources/"$(basename "${tarball_url}")"
 
     if ! [ -f "$tarball_path" ]; then
@@ -577,8 +573,12 @@ get_real_source_dir() {
     fi
 }
 
-do_fetch() {
+cont_fetch() {
     make_dir "${base_dir}"/sources
+
+    source_source_recipe $1
+
+    get_real_source_dir
 
     if ! [ -z "${git_url}" ]; then
         do_git_fetch
@@ -910,6 +910,21 @@ do_package() {
     cd "${base_dir}"
 }
 
+precont_fetch() {
+    source_source_recipe $1
+
+    get_real_source_dir
+
+    [ -d "${source_dir}" ] && return
+
+    cross_compile=yes
+    imagedeps="git mercurial"
+    allow_network="yes"
+    prepare_container
+    run_in_container internal-cont-fetch $1
+    destroy_container
+}
+
 precont_patch() {
     [ -f "${base_dir}"/sources/$1.patched ] && return
 
@@ -924,7 +939,7 @@ do_source() {
 
     get_real_source_dir
 
-    do_fetch
+    "${script}" internal-precont-fetch $1
 
     "${script}" internal-precont-patch $1
 
@@ -2111,6 +2126,12 @@ fi
 case "$1" in
     internal-prepare)
         do_prepare "$2"
+        ;;
+    internal-precont-fetch)
+        precont_fetch "$2"
+        ;;
+    internal-cont-fetch)
+        cont_fetch "$2"
         ;;
     internal-precont-patch)
         precont_patch "$2"
