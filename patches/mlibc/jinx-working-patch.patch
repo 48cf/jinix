@@ -74,6 +74,72 @@ diff -urN --no-dereference mlibc-clean/options/ansi/generic/stdio.cpp mlibc-work
  				}
  				break;
  			}
+diff -urN --no-dereference mlibc-clean/options/ansi/generic/string.cpp mlibc-workdir/options/ansi/generic/string.cpp
+--- mlibc-clean/options/ansi/generic/string.cpp
++++ mlibc-workdir/options/ansi/generic/string.cpp
+@@ -103,7 +103,9 @@
+ 	}
+ }
+ 
+-size_t strxfrm(char *__restrict dest, const char *__restrict src, size_t n) {
++size_t strxfrm_l(char *__restrict dest, const char *__restrict src, size_t n, locale_t loc) {
++	(void)loc;
++
+ 	// NOTE: This might not work for non ANSI charsets.
+ 	size_t l = strlen(src);
+ 
+@@ -114,6 +116,11 @@
+ 	return l;
+ }
+ 
++size_t strxfrm(char *__restrict dest, const char *__restrict src, size_t n) {
++	// TODO: Replace NULL with the current locale.
++	return strxfrm_l(dest, src, n, NULL);
++}
++
+ void *memchr(const void *s, int c, size_t size) {
+ 	auto s_bytes = static_cast<const unsigned char *>(s);
+ 	for(size_t i = 0; i < size; i++)
+@@ -287,8 +294,10 @@
+ }
+ 
+ int wcscoll(const wchar_t *, const wchar_t *) { MLIBC_STUB_BODY; }
++int wcscoll_l(const wchar_t *, const wchar_t *, locale_t) { MLIBC_STUB_BODY; }
+ int wcsncmp(const wchar_t *, const wchar_t *, size_t) { MLIBC_STUB_BODY; }
+ int wcsxfrm(wchar_t *__restrict, const wchar_t *__restrict, size_t) { MLIBC_STUB_BODY; }
++int wcsxfrm_l(wchar_t *__restrict, const wchar_t *__restrict, size_t, locale_t) { MLIBC_STUB_BODY; }
+ 
+ int wmemcmp(const wchar_t *a, const wchar_t *b, size_t size) {
+ 	for(size_t i = 0; i < size; i++) {
+diff -urN --no-dereference mlibc-clean/options/ansi/generic/time.cpp mlibc-workdir/options/ansi/generic/time.cpp
+--- mlibc-clean/options/ansi/generic/time.cpp
++++ mlibc-workdir/options/ansi/generic/time.cpp
+@@ -89,8 +89,10 @@
+ 	return localtime_r(unix_gmt, &per_thread_tm);
+ }
+ 
+-size_t strftime(char *__restrict dest, size_t max_size,
+-		const char *__restrict format, const struct tm *__restrict tm) {
++size_t strftime_l(char *__restrict dest, size_t max_size,
++		const char *__restrict format, const struct tm *__restrict tm,
++		locale_t locale) {
++	(void)locale;
+ 	auto c = format;
+ 	auto p = dest;
+ 	[[maybe_unused]] bool use_alternative_symbols = false;
+@@ -447,6 +449,12 @@
+ 	return (p - dest);
+ }
+ 
++size_t strftime(char *__restrict dest, size_t max_size,
++	const char *__restrict format, const struct tm *__restrict tm) {
++	// TODO: Replace NULL with the current locale.
++	return strftime_l(dest, max_size, format, tm, NULL);
++}
++
+ size_t wcsftime(wchar_t *__restrict, size_t, const wchar_t *__restrict,
+ 		const struct tm *__restrict) {
+ 	mlibc::infoLogger() << "mlibc: wcsftime is a stub" << frg::endlog;
 diff -urN --no-dereference mlibc-clean/options/ansi/include/stdio.h mlibc-workdir/options/ansi/include/stdio.h
 --- mlibc-clean/options/ansi/include/stdio.h
 +++ mlibc-workdir/options/ansi/include/stdio.h
@@ -85,6 +151,68 @@ diff -urN --no-dereference mlibc-clean/options/ansi/include/stdio.h mlibc-workdi
  
  /* [C11-7.21.1] I/O related macros */
  
+diff -urN --no-dereference mlibc-clean/options/ansi/include/string.h mlibc-workdir/options/ansi/include/string.h
+--- mlibc-clean/options/ansi/include/string.h
++++ mlibc-workdir/options/ansi/include/string.h
+@@ -2,6 +2,7 @@
+ #define _STRING_H
+ 
+ #include <mlibc-config.h>
++#include <bits/posix/locale_t.h>
+ #include <bits/null.h>
+ #include <bits/size_t.h>
+ 
+@@ -30,6 +31,7 @@
+ int strcoll(const char *__a, const char *__b);
+ int strncmp(const char *__a, const char *__b, size_t __max_size);
+ size_t strxfrm(char *__restrict __dest, const char *__restrict __src, size_t __max_size);
++size_t strxfrm_l(char *__restrict __dest, const char *__restrict __src, size_t __max_size, locale_t __locale);
+ 
+ /* [7.24.5] Search functions */
+ 
+diff -urN --no-dereference mlibc-clean/options/ansi/include/time.h mlibc-workdir/options/ansi/include/time.h
+--- mlibc-clean/options/ansi/include/time.h
++++ mlibc-workdir/options/ansi/include/time.h
+@@ -80,6 +80,7 @@
+ /* POSIX extensions. */
+ 
+ #if __MLIBC_POSIX_OPTION
++#	include <bits/posix/locale_t.h>
+ #	include <bits/posix/posix_time.h>
+ #	include <bits/posix/timer_t.h>
+ #endif /* __MLIBC_POSIX_OPTION */
+@@ -111,6 +112,9 @@
+ 
+ #if __MLIBC_POSIX_OPTION
+ #include <abi-bits/pid_t.h>
++size_t strftime_l(char * __restrict __dest, size_t __max_size,
++		const char *__restrict __format, const struct tm *__restrict _ptr,
++		locale_t __locale);
+ char *strptime(const char *__restrict __buf, const char *__restrict __format,
+ 		struct tm *__restrict __tm);
+ int clock_getcpuclockid(pid_t __pid, clockid_t *__clockid);
+diff -urN --no-dereference mlibc-clean/options/ansi/include/wchar.h mlibc-workdir/options/ansi/include/wchar.h
+--- mlibc-clean/options/ansi/include/wchar.h
++++ mlibc-workdir/options/ansi/include/wchar.h
+@@ -1,6 +1,7 @@
+ #ifndef _WCHAR_H
+ #define _WCHAR_H
+ 
++#include <bits/posix/locale_t.h>
+ #include <bits/null.h>
+ #include <bits/size_t.h>
+ #include <bits/wchar_t.h>
+@@ -70,8 +71,10 @@
+ 
+ int wcscmp(const wchar_t *__a, const wchar_t *__b);
+ int wcscoll(const wchar_t *__a, const wchar_t *__b);
++int wcscoll_l(const wchar_t *__a, const wchar_t *__b, locale_t __locale);
+ int wcsncmp(const wchar_t *__a, const wchar_t *__b, size_t __size);
+ int wcsxfrm(wchar_t *__restrict __dest, const wchar_t *__restrict __src, size_t __size);
++int wcsxfrm_l(wchar_t *__restrict __dest, const wchar_t *__restrict __src, size_t __size, locale_t __locale);
+ int wmemcmp(const wchar_t *__a, const wchar_t *__b, size_t __size);
+ 
+ wchar_t *wcschr(const wchar_t *__s, wchar_t __wc);
 diff -urN --no-dereference mlibc-clean/options/glibc/generic/gshadow.cpp mlibc-workdir/options/glibc/generic/gshadow.cpp
 --- mlibc-clean/options/glibc/generic/gshadow.cpp
 +++ mlibc-workdir/options/glibc/generic/gshadow.cpp
@@ -307,6 +435,15 @@ diff -urN --no-dereference mlibc-clean/options/linux/include/scsi/sg.h mlibc-wor
  #ifdef __cplusplus
  }
  #endif
+diff -urN --no-dereference mlibc-clean/options/posix/generic/monetary.cpp mlibc-workdir/options/posix/generic/monetary.cpp
+--- mlibc-clean/options/posix/generic/monetary.cpp	1970-01-01 01:00:00.000000000 +0100
++++ mlibc-workdir/options/posix/generic/monetary.cpp
+@@ -0,0 +1,5 @@
++#include <bits/ensure.h>
++#include <monetary.h>
++
++ssize_t strfmon(char *__restrict, size_t, const char *__restrict, ...) { MLIBC_STUB_BODY; }
++ssize_t strfmon_l(char *__restrict, size_t, locale_t, const char *__restrict, ...) { MLIBC_STUB_BODY; }
 diff -urN --no-dereference mlibc-clean/options/posix/generic/mqueue.cpp mlibc-workdir/options/posix/generic/mqueue.cpp
 --- mlibc-clean/options/posix/generic/mqueue.cpp
 +++ mlibc-workdir/options/posix/generic/mqueue.cpp
@@ -479,6 +616,36 @@ diff -urN --no-dereference mlibc-clean/options/posix/include/mlibc/posix-sysdeps
  [[gnu::weak]] int sys_getaffinity(pid_t pid, size_t cpusetsize, cpu_set_t *mask);
  [[gnu::weak]] int sys_getthreadaffinity(pid_t tid, size_t cpusetsize, cpu_set_t *mask);
  
+diff -urN --no-dereference mlibc-clean/options/posix/include/monetary.h mlibc-workdir/options/posix/include/monetary.h
+--- mlibc-clean/options/posix/include/monetary.h	1970-01-01 01:00:00.000000000 +0100
++++ mlibc-workdir/options/posix/include/monetary.h
+@@ -0,0 +1,26 @@
++
++#ifndef _MONETARY_H
++#define _MONETARY_H
++
++#include <mlibc-config.h>
++#include <bits/posix/locale_t.h>
++#include <bits/null.h>
++#include <bits/size_t.h>
++#include <bits/ssize_t.h>
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++#ifndef __MLIBC_ABI_ONLY
++
++ssize_t strfmon(char *__restrict, size_t, const char *__restrict, ...);
++ssize_t strfmon_l(char *__restrict, size_t, locale_t, const char *__restrict, ...);
++
++#endif /* !__MLIBC_ABI_ONLY */
++
++#ifdef __cplusplus
++}
++#endif
++
++#endif /* _MONETARY_H */
 diff -urN --no-dereference mlibc-clean/options/posix/include/mqueue.h mlibc-workdir/options/posix/include/mqueue.h
 --- mlibc-clean/options/posix/include/mqueue.h
 +++ mlibc-workdir/options/posix/include/mqueue.h
@@ -669,6 +836,25 @@ diff -urN --no-dereference mlibc-clean/options/posix/include/unistd.h mlibc-work
  #endif /* !__MLIBC_ABI_ONLY */
  
  #ifdef __cplusplus
+diff -urN --no-dereference mlibc-clean/options/posix/meson.build mlibc-workdir/options/posix/meson.build
+--- mlibc-clean/options/posix/meson.build
++++ mlibc-workdir/options/posix/meson.build
+@@ -12,6 +12,7 @@
+ 	'generic/langinfo.cpp',
+ 	'generic/libgen.cpp',
+ 	'generic/lookup.cpp',
++	'generic/monetary.cpp',
+ 	'generic/netdb.cpp',
+ 	'generic/net-if.cpp',
+ 	'generic/poll.cpp',
+@@ -103,6 +104,7 @@
+ 		'include/wordexp.h',
+ 		'include/semaphore.h',
+ 		'include/mqueue.h',
++		'include/monetary.h',
+ 	)
+ 	install_headers(
+ 		'include/arpa/inet.h',
 diff -urN --no-dereference mlibc-clean/scripts/rust-libc-config.yml mlibc-workdir/scripts/rust-libc-config.yml
 --- mlibc-clean/scripts/rust-libc-config.yml
 +++ mlibc-workdir/scripts/rust-libc-config.yml
