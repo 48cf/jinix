@@ -13,8 +13,8 @@ prepare() {
 }
 
 build() {
-        CFLAGS="$CFLAGS -Wl,--copy-dt-needed-entries"
     autotools_configure \
+        CFLAGS="$CFLAGS -Wl,--copy-dt-needed-entries" \
         --enable-epoxy \
         --enable-compositor \
         --enable-xpresent \
