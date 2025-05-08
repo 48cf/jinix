@@ -24,7 +24,7 @@ build() {
 package() {
     DESTDIR="${dest_dir}" make PREFIX=${prefix} install
 
-    rm -fv ${dest_dir}/usr/lib/libgif.a
+    rm -fv ${dest_dir}${prefix}/lib/libgif.a
 
     post_package_strip
 }

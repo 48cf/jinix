@@ -20,8 +20,8 @@ build() {
 package() {
     DESTDIR="${dest_dir}" ninja install
 
-    mkdir -pv ${dest_dir}/${prefix}/include
-    cp -v ${source_dir}/argp.h ${dest_dir}/${prefix}/include/
+    mkdir -pv ${dest_dir}${prefix}/include
+    cp -v ${source_dir}/argp.h ${dest_dir}${prefix}/include/
 
     post_package_strip
 }

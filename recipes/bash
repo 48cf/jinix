@@ -35,7 +35,7 @@ configure() {
         --with-curses \
         --enable-readline \
         --without-bash-malloc \
-        --with-installed-readline="${sysroot}/usr/lib"
+        --with-installed-readline="${sysroot}${prefix}/lib"
 }
 
 build() {

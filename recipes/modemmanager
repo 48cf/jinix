@@ -26,9 +26,9 @@ package() {
 
     mkdir -pv ${dest_dir}${prefix}/share/polkit-1/actions
     mkdir -pv ${dest_dir}${prefix}/lib/systemd/system
-    mv -v ${dest_dir}/sysroot/${prefix}/share/polkit-1/actions/* ${dest_dir}/${prefix}/share/polkit-1/actions/
-    mv -v ${dest_dir}/sysroot/${prefix}/lib/systemd/system/* ${dest_dir}/${prefix}/lib/systemd/system/
-    rm -rv ${dest_dir}/sysroot/
+    mv -v ${dest_dir}${sysroot_dir}${prefix}/share/polkit-1/actions/* ${dest_dir}${prefix}/share/polkit-1/actions/
+    mv -v ${dest_dir}${sysroot_dir}${prefix}/lib/systemd/system/* ${dest_dir}${prefix}/lib/systemd/system/
+    rm -rv ${dest_dir}${sysroot_dir}/
 
     post_package_strip
 }

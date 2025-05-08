@@ -17,8 +17,8 @@ configure() {
     autotools_configure \
         --sysconfdir=/etc/ssh \
         --with-privsep-path=/var/lib/sshd \
-        --with-default-path=/usr/bin \
-        --with-superuser-path=/usr/sbin:/usr/bin \
+        --with-default-path=${prefix}/bin \
+        --with-superuser-path=${prefix}/sbin:${prefix}/bin \
         --with-pid-dir=/run \
         --with-pam \
         --with-xauth=${prefix}/bin/xauth

@@ -32,7 +32,7 @@ build() {
 package() {
     DESTDIR="${dest_dir}" make install
 
-    ln -svf ../libexec/bluetooth/bluetoothd ${dest_dir}/${prefix}/bin
+    ln -svf ../libexec/bluetooth/bluetoothd ${dest_dir}${prefix}/bin
 
     install -v -dm755 ${dest_dir}/etc/bluetooth
     install -v -m644 ${source_dir}/src/main.conf ${dest_dir}/etc/bluetooth/main.conf

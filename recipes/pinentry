@@ -16,8 +16,8 @@ prepare() {
 configure() {
     autotools_configure \
         --enable-pinentry-tty \
-        --with-libgpg-error-prefix=${sysroot_dir}/${prefix} \
-        --with-libassuan-prefix=${sysroot_dir}/${prefix} \
+        --with-libgpg-error-prefix=${sysroot_dir}${prefix} \
+        --with-libassuan-prefix=${sysroot_dir}${prefix} \
         --disable-pinentry-efl \
         --disable-pinentry-gtk2 \
         --disable-pinentry-gnome3 \

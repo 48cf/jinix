@@ -12,12 +12,12 @@ deps="core-libs libtasn1"
 prepare() {
     sed '20,$ d' -i ${source_dir}/trust/trust-extract-compat
 
-    cat >> ${source_dir}/trust/trust-extract-compat << "EOF"
-    # Copy existing anchor modifications to /etc/ssl/local
-    /usr/libexec/make-ca/copy-trust-modifications
+    cat >> ${source_dir}/trust/trust-extract-compat << EOF
+# Copy existing anchor modifications to /etc/ssl/local
+${prefix}/libexec/make-ca/copy-trust-modifications
 
-    # Update trust stores
-    /usr/bin/make-ca -r
+# Update trust stores
+${prefix}/bin/make-ca -r
 EOF
 }
 
