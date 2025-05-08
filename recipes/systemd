@@ -30,7 +30,6 @@ configure() {
         -Dsysupdate=disabled \
         -Dukify=disabled \
         -Dcoredump=false \
-        -Dfirstboot=false \
         -Dtimesyncd=false \
         -Dnss-myhostname=false \
         -Dnss-mymachines=false \

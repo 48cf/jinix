@@ -21,6 +21,16 @@ diff -urN --no-dereference systemd-clean/src/core/exec-invoke.c systemd-workdir/
  
  #if HAVE_PAM
  #include <security/pam_appl.h>
+diff -urN --no-dereference systemd-clean/src/firstboot/firstboot.c systemd-workdir/src/firstboot/firstboot.c
+--- systemd-clean/src/firstboot/firstboot.c
++++ systemd-workdir/src/firstboot/firstboot.c
+@@ -1,5 +1,6 @@
+ /* SPDX-License-Identifier: LGPL-2.1-or-later */
+ 
++#include <sys/file.h>
+ #include <fcntl.h>
+ #include <getopt.h>
+ #include <linux/loop.h>
 diff -urN --no-dereference systemd-clean/src/libsystemd/sd-event/sd-event.c systemd-workdir/src/libsystemd/sd-event/sd-event.c
 --- systemd-clean/src/libsystemd/sd-event/sd-event.c
 +++ systemd-workdir/src/libsystemd/sd-event/sd-event.c
