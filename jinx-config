@@ -271,6 +271,18 @@ vala_env() {
     "$@"
 }
 
+python_include_dir() {
+    if ! [ -f ${base_dir}/recipes/python ]; then
+        echo "Python recipe not found" >&2
+        return 1
+    fi
+
+    python_version="$(. ${base_dir}/recipes/python && echo $version)"
+    python_include_dir="${prefix}/include/python${python_version%*.*}"
+
+    echo "$python_include_dir"
+}
+
 python_site_dir() {
     if ! [ -f ${base_dir}/recipes/python ]; then
         echo "Python recipe not found" >&2
