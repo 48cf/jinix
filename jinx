@@ -489,20 +489,19 @@ do_hg_fetch() {
 }
 
 do_git_fetch() {
-    if ! [ -z "${commit}" ]; then
-        if [ "${shallow}" = "no" ]; then
-            git clone "${git_url}" --revision="${commit}" "${base_dir}"/sources/${name}
-        else
-            git clone "${git_url}" --revision="${commit}" --depth=1 "${base_dir}"/sources/${name}
-            git -C "${base_dir}"/sources/${name} fetch --tags
-        fi
+    if [ -z "${commit}" ]; then
+        die "* error: Git commit not specified"
+    fi
+
+    if ! ( echo "${commit}" | grep -qE '^[0-9a-f]{40}$' ); then
+        die "* error: Invalid commit hash"
+    fi
+
+    if [ "${shallow}" = "no" ]; then
+        git clone "${git_url}" --revision="${commit}" "${base_dir}"/sources/${name}
     else
-        if [ "${shallow}" = "no" ]; then
-            git clone "${git_url}" --branch="${branch}" "${base_dir}"/sources/${name}
-        else
-            git clone "${git_url}" --branch="${branch}" --depth=1 "${base_dir}"/sources/${name}
-            git -C "${base_dir}"/sources/${name} fetch --tags
-        fi
+        git clone "${git_url}" --revision="${commit}" --depth=1 "${base_dir}"/sources/${name}
+        git -C "${base_dir}"/sources/${name} fetch --tags
     fi
 }
 
