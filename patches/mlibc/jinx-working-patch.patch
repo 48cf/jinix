@@ -153,6 +153,42 @@ diff -urN --no-dereference mlibc-clean/options/glibc/include/gshadow.h mlibc-wor
  
  #ifdef __cplusplus
  }
+diff -urN --no-dereference mlibc-clean/options/linux/generic/capabilities.cpp mlibc-workdir/options/linux/generic/capabilities.cpp
+--- mlibc-clean/options/linux/generic/capabilities.cpp
++++ mlibc-workdir/options/linux/generic/capabilities.cpp
+@@ -1,16 +1,28 @@
++#include <errno.h>
++#include <bits/ensure.h>
++
+ #include <mlibc/debug.hpp>
++#include <mlibc/linux-sysdeps.hpp>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
+ 
+-int capset(void *, void *) {
+-	mlibc::infoLogger() << "mlibc: capset is a no-op!" << frg::endlog;
++int capset(void *hdr, const void *data) {
++	MLIBC_CHECK_OR_ENOSYS(mlibc::sys_capset, -1);
++	if(int e = mlibc::sys_capset(hdr, data); e) {
++		errno = e;
++		return -1;
++	}
+ 	return 0;
+ }
+ 
+-int capget(void *, void *) {
+-	mlibc::infoLogger() << "mlibc: capget is a no-op!" << frg::endlog;
++int capget(void *hdr, void *data) {
++	MLIBC_CHECK_OR_ENOSYS(mlibc::sys_capget, -1);
++	if(int e = mlibc::sys_capget(hdr, data); e) {
++		errno = e;
++		return -1;
++	}
+ 	return 0;
+ }
+ 
 diff -urN --no-dereference mlibc-clean/options/linux/generic/sched.cpp mlibc-workdir/options/linux/generic/sched.cpp
 --- mlibc-clean/options/linux/generic/sched.cpp
 +++ mlibc-workdir/options/linux/generic/sched.cpp
@@ -202,6 +238,19 @@ diff -urN --no-dereference mlibc-clean/options/linux/include/bits/linux/cpu_set.
  #endif /* !__MLIBC_ABI_ONLY */
  
  #ifdef __cplusplus
+diff -urN --no-dereference mlibc-clean/options/linux/include/mlibc/linux-sysdeps.hpp mlibc-workdir/options/linux/include/mlibc/linux-sysdeps.hpp
+--- mlibc-clean/options/linux/include/mlibc/linux-sysdeps.hpp
++++ mlibc-workdir/options/linux/include/mlibc/linux-sysdeps.hpp
+@@ -94,6 +94,9 @@
+ [[gnu::weak]] int sys_pidfd_getpid(int fd, pid_t *outpid);
+ [[gnu::weak]] int sys_pidfd_send_signal(int pidfd, int sig, siginfo_t *info, unsigned int flags);
+ 
++[[gnu::weak]] int sys_capset(void *hdr, const void *data);
++[[gnu::weak]] int sys_capget(void *hdr, void *data);
++
+ } // namespace mlibc
+ 
+ #endif // MLIBX_LINUX_SYSDEPS
 diff -urN --no-dereference mlibc-clean/options/linux/include/scsi/scsi.h mlibc-workdir/options/linux/include/scsi/scsi.h
 --- mlibc-clean/options/linux/include/scsi/scsi.h
 +++ mlibc-workdir/options/linux/include/scsi/scsi.h
@@ -1931,7 +1980,28 @@ diff -urN --no-dereference mlibc-clean/sysdeps/linux/generic/sysdeps.cpp mlibc-w
  int sys_getaffinity(pid_t pid, size_t cpusetsize, cpu_set_t *mask) {
  	auto ret = do_syscall(SYS_sched_getaffinity, pid, cpusetsize, mask);
  	if (int e = sc_error(ret); e)
-@@ -1896,6 +1904,14 @@
+@@ -1695,6 +1703,20 @@
+ 	return 0;
+ }
+ 
++int sys_capset(void *hdr, const void *data) {
++	auto ret = do_syscall(SYS_capset, hdr, data);
++	if (int e = sc_error(ret); e)
++		return e;
++	return 0;
++}
++
++int sys_capget(void *hdr, void *data) {
++	auto ret = do_syscall(SYS_capget, hdr, data);
++	if (int e = sc_error(ret); e)
++		return e;
++	return 0;
++}
++
+ #endif // __MLIBC_LINUX_OPTION
+ 
+ int sys_times(struct tms *tms, clock_t *out) {
+@@ -1896,6 +1918,14 @@
  	return 0;
  }
  
