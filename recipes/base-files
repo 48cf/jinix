@@ -8,13 +8,28 @@ source_dir="meta-sources/base-files"
 
 package() {
     cp -r ${source_dir}/. "${dest_dir}"/
-    install -dv -m 1777 "${dest_dir}"/tmp "${dest_dir}"/var/tmp
 
-    # This is broken?
-    # chown -R 1000:1000 "${dest_dir}"/home/user
+    cat <<'EOF' >"${dest_dir}"/INSTALL
+#! /bin/sh
 
-    chmod 750 "${dest_dir}"/root
-    chmod 777 "${dest_dir}"/tmp
-    chmod 777 "${dest_dir}"/run
-    chmod 710 "${dest_dir}"/home/user
+export PATH="/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin"
+
+ACTION="$1"
+
+case "${ACTION}" in
+pre)
+    ;;
+post)
+    chown -R 1000:1000 home/user
+
+    chmod 750 root
+    chmod 777 tmp
+    chmod 777 run
+    chmod 710 home/user
+    ;;
+esac
+
+exit 0
+EOF
+    chmod +x "${dest_dir}"/INSTALL
 }
