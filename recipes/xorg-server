@@ -17,7 +17,7 @@ configure() {
         -Dxkb_output_dir=/var/lib/xkb \
         -Dxkb_bin_dir=${prefix}/bin \
         -Ddefault_font_path=${prefix}/share/fonts/X11/misc
-    
+
     sed -i 's|/sysroot||' include/dix-config.h
 }
 
