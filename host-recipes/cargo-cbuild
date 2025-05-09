@@ -30,7 +30,7 @@ package() {
         -type f \
         -executable \
         -exec install -D -m755 -t "${dest_dir}${prefix}/bin" {} +
-    
+
         strip_command=strip \
     post_package_strip
 }
