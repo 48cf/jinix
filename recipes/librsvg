@@ -25,13 +25,13 @@ configure() {
 
 build() {
         CARGO_HOME="${CARGO_HOME}" \
-    gi_env vala_env ninja -j${parallelism}
+    gi_env vala_env meson compile -j${parallelism}
 }
 
 package() {
         DESTDIR="${dest_dir}" \
         CARGO_HOME="${CARGO_HOME}" \
-    ninja install
+    meson install
 
     # Move installed pixbuf loaders to the correct location.
     mv "${dest_dir}${sysroot_dir}${prefix}"/lib/gdk-pixbuf-2.0/ "${dest_dir}${prefix}"/lib/
