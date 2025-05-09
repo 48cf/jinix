@@ -9,22 +9,16 @@ imagedeps="build-essential patchelf meson ninja-build"
 hostdeps="gcc pkg-config glib gobject-introspection vala"
 deps="core-libs glib glib-gi gobject-introspection vala"
 
-prepare() {
-    autotools_recursive_regen
-}
-
 configure() {
-    gi_env vala_env autotools_configure \
-        --enable-vala \
-        --disable-gtk-doc
+    vala_env meson_configure
 }
 
 build() {
-    gi_env vala_env make -j${parallelism}
+    gi_env vala_env ninja -j${parallelism}
 }
 
 package() {
-    DESTDIR="${dest_dir}" make install
+    DESTDIR="${dest_dir}" ninja install
 
     post_package_strip
 }
