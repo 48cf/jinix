@@ -140,6 +140,17 @@ diff -urN --no-dereference mlibc-clean/options/ansi/generic/time.cpp mlibc-workd
  size_t wcsftime(wchar_t *__restrict, size_t, const wchar_t *__restrict,
  		const struct tm *__restrict) {
  	mlibc::infoLogger() << "mlibc: wcsftime is a stub" << frg::endlog;
+diff -urN --no-dereference mlibc-clean/options/ansi/include/inttypes.h mlibc-workdir/options/ansi/include/inttypes.h
+--- mlibc-clean/options/ansi/include/inttypes.h
++++ mlibc-workdir/options/ansi/include/inttypes.h
+@@ -110,6 +110,7 @@
+ #define SCNx64 __PRI64 "x"
+ #define SCNxMAX __PRI64 "x"
+ #define SCNi8 "hhi"
++#define SCNx8 "hhx"
+ #define SCNxPTR __PRIPTR "x"
+ 
+ #define SCNi8 "hhi"
 diff -urN --no-dereference mlibc-clean/options/ansi/include/stdio.h mlibc-workdir/options/ansi/include/stdio.h
 --- mlibc-clean/options/ansi/include/stdio.h
 +++ mlibc-workdir/options/ansi/include/stdio.h
