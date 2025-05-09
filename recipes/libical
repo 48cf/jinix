@@ -24,7 +24,7 @@ configure() {
 build() {
         GI_SCANNER_DISABLE_CACHE=1 \
         PKG_CONFIG="${OS_TRIPLET}-pkg-config" \
-    gi_env vala_env ninja -j${parallelism}
+    gi_env vala_env cmake --build . -j${parallelism}
 }
 
 package() {

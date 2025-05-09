@@ -40,7 +40,7 @@ configure() {
 }
 
 build() {
-    ninja -j${parallelism}
+    cmake --build . -j${parallelism}
 }
 
 package() {

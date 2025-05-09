@@ -18,11 +18,11 @@ configure() {
 }
 
 build() {
-    ninja -j${parallelism}
+    cmake --build . -j${parallelism}
 }
 
 package() {
-    DESTDIR="${dest_dir}" ninja install
+    DESTDIR="${dest_dir}" cmake --install .
 
     post_package_strip
 }
