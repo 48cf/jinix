@@ -1289,6 +1289,11 @@ cmd_install() {
     pkgs_to_install=""
     for ppkg in "$@"; do
         for pkg in $(eval '(' cd "'${base_dir}'"/recipes '&&' echo "${ppkg}" ')' ); do
+            bootstrap_pkg=$(unset bootstrap_pkg && . "${base_dir}"/recipes/${pkg} && echo "${bootstrap_pkg}")
+            if [ "${bootstrap_pkg}" = "yes" ]; then
+                continue
+            fi
+
             pkgs_to_install="${pkgs_to_install} ${pkg}"
         done
     done
