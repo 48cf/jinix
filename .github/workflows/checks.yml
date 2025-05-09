@@ -1,0 +1,15 @@
+name: Checks
+on: [push, pull_request]
+jobs:
+  lint-recipes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y devscripts # for checkbashisms
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Lint recipes
+        run: |
+          build-support/lint.sh $(find host-recipes recipes source-recipes -type f)
