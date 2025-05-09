@@ -23,7 +23,7 @@ build() {
 package() {
     temp_dest_dir=$(mktemp -d)
 
-    DESTDIR="${temp_dest_dir}" ninja install
+    DESTDIR="${temp_dest_dir}" meson install --no-rebuild
 
     mkdir -p "${dest_dir}${prefix}/share/gir-1.0"
     mkdir -p "${dest_dir}${prefix}/lib/girepository-1.0"

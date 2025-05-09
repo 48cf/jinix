@@ -44,7 +44,7 @@ build() {
 }
 
 package() {
-    DESTDIR="${dest_dir}" ninja install
+    DESTDIR="${dest_dir}" meson install --no-rebuild
 
     mkdir -pv ${dest_dir}/etc/pam.d/
     cp -v "${base_dir}"/build-support/systemd/* "${dest_dir}"/etc/pam.d/

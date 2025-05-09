@@ -23,7 +23,7 @@ build() {
 }
 
 package() {
-    DESTDIR="${dest_dir}" ninja install
+    DESTDIR="${dest_dir}" meson install --no-rebuild
 
     # Remove unneeded config file
     rm -fv ${dest_dir}/etc/dbus-1/system.d/pulseaudio-system.conf

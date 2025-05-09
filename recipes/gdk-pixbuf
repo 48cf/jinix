@@ -21,7 +21,7 @@ build() {
 }
 
 package() {
-    DESTDIR="${dest_dir}" ninja install
+    DESTDIR="${dest_dir}" meson install --no-rebuild
 
     # XXX install step warns that gdk-pixbuf-query-loaders wasn't run because
     # DESTDIR was set, figure out how we can run this manually instead

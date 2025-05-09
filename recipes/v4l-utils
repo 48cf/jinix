@@ -23,7 +23,7 @@ build() {
 }
 
 package() {
-    DESTDIR="${dest_dir}" ninja install
+    DESTDIR="${dest_dir}" meson install --no-rebuild
 
     # Move v4l2-dbg from ${prefix}/sbin to ${prefix}/bin
     mv -v "${dest_dir}${prefix}/sbin/v4l2-dbg" "${dest_dir}${prefix}/bin/"

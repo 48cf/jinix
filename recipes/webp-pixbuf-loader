@@ -18,7 +18,7 @@ build() {
 }
 
 package() {
-    DESTDIR="${dest_dir}" ninja install
+    DESTDIR="${dest_dir}" meson install --no-rebuild
 
     # The pixbuf loader is installed in the wrong directory, move it
     mkdir -pv ${dest_dir}${prefix}/lib/gdk-pixbuf-2.0/2.10.0/loaders/

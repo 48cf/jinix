@@ -18,7 +18,7 @@ build() {
 }
 
 package() {
-    DESTDIR="${dest_dir}" ninja install
+    DESTDIR="${dest_dir}" meson install --no-rebuild
 
     mkdir -pv ${dest_dir}${prefix}/include
     cp -v ${source_dir}/argp.h ${dest_dir}${prefix}/include/

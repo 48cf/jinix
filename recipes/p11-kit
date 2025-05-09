@@ -31,7 +31,7 @@ build() {
 }
 
 package() {
-    DESTDIR="${dest_dir}" ninja install
+    DESTDIR="${dest_dir}" meson install --no-rebuild
 
     ln -svf "../libexec/p11-kit/trust-extract-compat" "${dest_dir}${prefix}/bin/update-ca-certificates"
 

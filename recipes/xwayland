@@ -25,7 +25,7 @@ build() {
 }
 
 package() {
-    DESTDIR="${dest_dir}" ninja install
+    DESTDIR="${dest_dir}" meson install --no-rebuild
 
     rm -rv ${dest_dir}${prefix}/lib/xorg
     # This will be installed by xorg-server
