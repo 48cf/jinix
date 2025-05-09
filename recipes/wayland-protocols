@@ -9,10 +9,12 @@ imagedeps="meson ninja-build libwayland-bin pkg-config"
 hostdeps="gcc pkg-config"
 deps="core-libs wayland"
 
-build() {
+configure() {
     meson_configure
+}
 
-    ninja -j${parallelism}
+build() {
+    meson compile -j${parallelism}
 }
 
 package() {

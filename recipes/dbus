@@ -28,7 +28,7 @@ configure() {
 }
 
 build() {
-    ninja -j${parallelism}
+    meson compile -j${parallelism}
 }
 
 package() {

@@ -24,7 +24,7 @@ configure() {
 }
 
 build() {
-    gi_env ninja -j${parallelism}
+    gi_env meson compile -j${parallelism}
 }
 
 package() {

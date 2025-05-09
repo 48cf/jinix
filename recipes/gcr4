@@ -20,7 +20,7 @@ configure() {
 }
 
 build() {
-    gi_env vala_env ninja -j${parallelism}
+    gi_env vala_env meson compile -j${parallelism}
 }
 
 package() {
