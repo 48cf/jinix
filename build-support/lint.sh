@@ -21,29 +21,6 @@ verify_build_system() {
         return 0
     fi
 
-    case "$build_system" in
-        autotools)
-            # Check for meson.build or CMakeLists.txt
-            if [ -f sources/$name/meson.build ]; then
-                print_error "* $1 has meson.build, but uses autotools" >> "$errors"
-                return 1
-            elif [ -f sources/$name/CMakeLists.txt ]; then
-                print_error "* $1 has CMakeLists.txt, but uses autotools" >> "$errors"
-                return 1
-            fi
-            ;;
-        cmake)
-            # Check for meson.build
-            if [ -f sources/$name/meson.build ]; then
-                print_error "* $1 has meson.build, but uses cmake" >> "$errors"
-                return 1
-            fi
-            ;;
-        meson)
-            # We're good :)
-            ;;
-    esac
-
     # If we're using autotools, the next checks are not needed
     if [ "$build_system" = "autotools" ]; then
         return 0
@@ -87,10 +64,8 @@ lint_recipe() {
     fi
 
     # Check if recipe has a configure step
-    if grep -q 'configure() {' "$1"; then
-        if ! verify_build_system "$1"; then
-            recipe_has_errors="yes"
-        fi
+    if grep -q 'configure() {' "$1" && ! verify_build_system "$1"; then
+        recipe_has_errors="yes"
     fi
 
     if [ "$recipe_has_errors" = "yes" ]; then
