@@ -68,14 +68,16 @@ package() {
     cd nss
 
     install -v -m755 -d "${dest_dir}${prefix}/bin"
-    # install -v -m755 dist/Linux*/bin/{certutil,nss-config,pk12util} "${dest_dir}${prefix}"/bin
-    install -v -m755 dist/Linux*/bin/{certutil,pk12util} "${dest_dir}${prefix}"/bin
+    install -v -m755 dist/Linux*/bin/certutil "${dest_dir}${prefix}"/bin
+    # install -v -m755 dist/Linux*/bin/nss-config "${dest_dir}${prefix}"/bin
+    install -v -m755 dist/Linux*/bin/pk12util "${dest_dir}${prefix}"/bin
 
     install -v -m755 -d "${dest_dir}${prefix}/lib"
     install -v -m755 dist/Linux*/lib/*.so "${dest_dir}${prefix}"/lib
 
     install -v -m755 -d "${dest_dir}${prefix}/include/nss"
-    install -v -m644 dist/{public,private}/nss/* "${dest_dir}${prefix}/include/nss"
+    install -v -m644 dist/public/nss/* "${dest_dir}${prefix}/include/nss"
+    install -v -m644 dist/private/nss/* "${dest_dir}${prefix}/include/nss"
 
     install -v -m755 -d "${dest_dir}${prefix}/lib/pkgconfig"
     # install -v -m644 dist/Linux*/lib/pkgconfig/nss.pc "${dest_dir}${prefix}/lib/pkgconfig"
