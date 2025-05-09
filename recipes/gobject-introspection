@@ -20,14 +20,7 @@ configure() {
 }
 
 build() {
-        CC="${OS_TRIPLET}-gcc" \
-        CXX="${OS_TRIPLET}-g++" \
-        AR="${OS_TRIPLET}-ar" \
-        OBJDUMP="${OS_TRIPLET}-objdump" \
-        GI_LDD_WRAPPER="${build_dir}/build-support/mlibc-ldd-wrapper" \
-        RUN_WRAPPER_LD_LIBRARY_PATH="${sysroot_dir}${prefix}/lib" \
-        RUN_WRAPPER_INTERP="${build_dir}/builds/mlibc/ld.so" \
-    ninja -j${parallelism}
+    gi_env ninja -j${parallelism}
 }
 
 package() {
