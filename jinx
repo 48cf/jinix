@@ -891,6 +891,11 @@ do_package() {
 
     xbps_deps=""
     for dep in ${deps}; do
+        bootstrap_pkg=$(unset bootstrap_pkg && . "${base_dir}"/recipes/${dep} && echo "${bootstrap_pkg}")
+        if [ "${bootstrap_pkg}" = "yes" ]; then
+            continue
+        fi
+
         xbps_deps="${xbps_deps} ${dep}>=0.0"
     done
 
