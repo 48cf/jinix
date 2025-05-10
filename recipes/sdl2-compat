@@ -22,7 +22,5 @@ build() {
 package() {
     DESTDIR="${dest_dir}" cmake --install .
 
-    rm -v "${dest_dir}${prefix}"/lib/*.a
-
     post_package_strip
 }
