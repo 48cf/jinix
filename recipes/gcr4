@@ -9,7 +9,7 @@ tarball_blake2b="8a7e18fd0cac203c0f04e694f38ec872ac81a064290147d02c3a52c0091aab1
 imagedeps="build-essential meson ninja-build python3 patchelf"
 hostdeps="gcc pkg-config gobject-introspection glib vala"
 # Missing: GnuPG
-deps="core-libs glib libgcrypt p11-kit gtk4 libxslt libsecret openssh glib-gi"
+deps="core-libs glib2 libgcrypt p11-kit gtk4 libxslt libsecret openssh"
 
 configure() {
     vala_env meson_configure \

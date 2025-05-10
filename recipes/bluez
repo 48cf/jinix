@@ -6,7 +6,7 @@ revision=1
 tarball_url="https://www.kernel.org/pub/linux/bluetooth/bluez-${version}.tar.xz"
 tarball_blake2b="e908bc000b45832845a09ea7e906d39e107e4934fef4efc9a78b278b7f8ae914ed3a573ef53512de7076a3b1ca8115634fb502cb8d1d0c8516febe05f9e059f8"
 hostdeps="gcc pkg-config"
-deps="core-libs dbus glib libical systemd"
+deps="core-libs dbus glib2 libical systemd"
 
 prepare() {
     autotools_recursive_regen

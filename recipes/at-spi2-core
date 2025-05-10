@@ -7,7 +7,7 @@ tarball_url="https://download.gnome.org/sources/at-spi2-core/2.56/at-spi2-core-$
 tarball_blake2b="12dff02209243cde88108eced8b2757bdce3dff20eff95a362d00de610374aabeedbc8878a60c11ac28f0e71918f74caf0083c07d652bd06b656c27d4238579f"
 imagedeps="build-essential meson ninja-build python3 patchelf"
 hostdeps="gcc pkg-config gobject-introspection glib vala"
-deps="core-libs dbus glib libxml2 libxtst gobject-introspection glib-gi"
+deps="core-libs dbus glib2 libxml2 libxtst gobject-introspection"
 
 configure() {
     meson_configure \

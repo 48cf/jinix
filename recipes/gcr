@@ -9,7 +9,7 @@ tarball_blake2b="ac2c1cd7c1ff458b554a4c0b667fa9a6a9629f14ad173ec84e3bb76b17fefe0
 imagedeps="build-essential meson ninja-build python3 patchelf"
 hostdeps="gcc pkg-config gobject-introspection glib vala"
 # Missing: GnuPG
-deps="core-libs glib libgcrypt p11-kit gtk+-3 libxslt libsecret openssh"
+deps="core-libs glib2 libgcrypt p11-kit gtk+-3 libxslt libsecret openssh"
 
 prepare() {
     sed -i 's:"/desktop:"/org:' ${source_dir}/schema/*.xml

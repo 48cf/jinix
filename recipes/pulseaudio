@@ -7,7 +7,7 @@ tarball_url="https://www.freedesktop.org/software/pulseaudio/releases/pulseaudio
 tarball_blake2b="781ece3d507916aa681d3b0132689730a621b4d92e45f86570e4d2fdebc4c0025ebe7f7a05046545f9b26caca513e8975f12498fa314524bc67eacaea72842fa"
 imagedeps="meson ninja-build perl libxml-parser-perl"
 hostdeps="gcc pkg-config"
-deps="core-libs alsa-lib dbus glib gtk+-3 libsamplerate libsndfile libxtst speex bluez sbc avahi systemd fftw gstreamer-plugins-base libtool libice libsm"
+deps="core-libs alsa-lib dbus glib2 gtk+-3 libsamplerate libsndfile libxtst speex bluez sbc avahi systemd fftw gstreamer-plugins-base libtool libice libsm"
 
 configure() {
     meson_configure \

@@ -10,7 +10,7 @@ tarball_blake2b="c45299fdf6c004c56d6480cbde9ff4dee64e460be6742331b93097e5782591c
 imagedeps="build-essential meson ninja-build python3 patchelf libwayland-bin libgdk-pixbuf2.0-bin"
 hostdeps="gcc pkg-config gobject-introspection glib vala"
 # Missing: printing and colord
-deps="core-libs at-spi2-core cairo glib gdk-pixbuf iso-codes libx11 libxext libxcb libxcomposite libxrender libxrandr libxfixes libxdamage libxinerama libxslt pango fribidi libepoxy libxkbcommon fontconfig freetype2 libxi harfbuzz libxcursor gsettings-desktop-schemas dbus wayland-protocols sassc tinysparql libcloudproviders libavif libjxl webp-pixbuf-loader glib-gi librsvg"
+deps="core-libs at-spi2-core cairo glib2 gdk-pixbuf iso-codes libx11 libxext libxcb libxcomposite libxrender libxrandr libxfixes libxdamage libxinerama libxslt pango fribidi libepoxy libxkbcommon fontconfig freetype2 libxi harfbuzz libxcursor gsettings-desktop-schemas dbus wayland-protocols sassc tinysparql libcloudproviders libavif libjxl webp-pixbuf-loader librsvg"
 
 configure() {
     meson_configure \

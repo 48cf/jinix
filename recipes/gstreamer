@@ -7,7 +7,7 @@ tarball_url="https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-${version
 tarball_blake2b="48ac9eb40c3ae9644028d2f1135658cb6eb661870556edfb956023bc126a3d8077e5e030c0f3718a0f572a0ac8bcc2339cad8e74563cd0c10de7f9956bcba939"
 imagedeps="build-essential meson ninja-build python3 patchelf"
 hostdeps="gcc pkg-config gobject-introspection glib"
-deps="core-libs glib libcap gtk+-3 gsl"
+deps="core-libs glib2 libcap gtk+-3 gsl"
 
 configure() {
     meson_configure \

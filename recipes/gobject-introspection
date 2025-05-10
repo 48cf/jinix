@@ -8,7 +8,7 @@ tarball_url="https://download.gnome.org/sources/gobject-introspection/${version_
 tarball_blake2b="c888cc36f980db61bf7da46199fecfbe944034b9ffdf3e6e21cc56b2177c3ece1a0571166ab37c63c6f0d5c80be91963c9e342f5162e2b908838d8eef9e193e3"
 imagedeps="build-essential bison flex git meson ninja-build patchelf python3 libpython3-dev gobject-introspection"
 hostdeps="gcc pkg-config"
-deps="core-libs glib python"
+deps="core-libs bootstrap-glib2 python"
 
 configure() {
     meson_configure \

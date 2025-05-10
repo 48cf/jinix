@@ -8,7 +8,7 @@ tarball_url="https://download.gnome.org/sources/libsoup/2.74/libsoup-${version}.
 tarball_blake2b="91f441197414314bb78cf15e7c13b54714e669145784812fb7a68cc41c8965ea29c53dc686d690e00f28f711be9f767038e5cc43b11aa0136f190dd2d41ec2a0"
 imagedeps="build-essential meson ninja-build python3 patchelf"
 hostdeps="gcc pkg-config gobject-introspection glib vala"
-deps="core-libs brotli glib-networking libpsl libxml2 sqlite glib-gi"
+deps="core-libs brotli glib-networking libpsl libxml2 sqlite glib2"
 
 configure() {
     vala_env meson_configure \

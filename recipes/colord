@@ -7,7 +7,7 @@ tarball_url="https://www.freedesktop.org/software/colord/releases/colord-${versi
 tarball_blake2b="f4434ec817fc2afc1ade144f533d2c3b98117356677b5962ff95b566a8c66b6b8ce95ec8f76b3ae849a6468000dc08b8f8fc207c2cc9c85a966157fb1612078e"
 imagedeps="build-essential meson ninja-build python3 patchelf colord itstool"
 hostdeps="gcc pkg-config gobject-introspection glib vala"
-deps="core-libs dbus glib lcms libgudev libgusb polkit sqlite"
+deps="core-libs dbus glib2 lcms libgudev libgusb polkit sqlite"
 
 configure() {
     vala_env meson_configure \

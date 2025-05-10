@@ -7,7 +7,7 @@ git_url="https://gitlab.xfce.org/xfce/xfconf.git"
 commit=aa1a5b5f327c616eb8d5abe4d458d971461f0576
 imagedeps="build-essential git meson ninja-build python3-distutils-extra patchelf"
 hostdeps="gcc pkg-config glib gobject-introspection vala"
-deps="core-libs bash-completion glib libxfce4util"
+deps="core-libs bash-completion glib2 libxfce4util"
 
 configure() {
     vala_env meson_configure

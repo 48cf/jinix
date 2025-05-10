@@ -7,7 +7,7 @@ tarball_url="https://github.com/polkit-org/polkit/archive/${version}/polkit-${ve
 tarball_blake2b="2e86c8853edf29879d8367b77d210d3a891178297cb5f9eb204a953bfaa66f6ff2307da265f4c3f89265ba8ce32e94641272d654a78d116dfb32a65d402f877a"
 imagedeps="build-essential meson ninja-build python3 patchelf pkg-config"
 hostdeps="gcc pkg-config gobject-introspection glib vala"
-deps="core-libs duktape glib libxslt pam systemd glib-gi"
+deps="core-libs duktape glib2 libxslt pam systemd"
 
 configure() {
     vala_env meson_configure \
