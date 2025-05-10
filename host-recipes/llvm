@@ -19,7 +19,7 @@ configure() {
 }
 
 build() {
-    cmake --build -j${parallelism}
+    cmake --build . -j${parallelism}
 }
 
 package() {
