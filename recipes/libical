@@ -9,7 +9,7 @@ source_hostdeps="glib"
 source_imagedeps="build-essential pkg-config cmake libxml2-dev libpcre2-dev libffi-dev"
 imagedeps="build-essential cmake ninja-build python3 python3-distutils-extra patchelf"
 hostdeps="gcc libical pkg-config gobject-introspection glib vala"
-deps="core-libs icu glib-gi glib libxml pcre2"
+deps="core-libs icu glib-gi glib libxml2 pcre2"
 
 configure() {
         ICAL_NATIVE_TOOL=/usr/local/libexec/libical/ical-glib-src-generator \

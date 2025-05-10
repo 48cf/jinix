@@ -7,7 +7,7 @@ tarball_url="https://github.com/linuxwacom/libwacom/releases/download/libwacom-$
 tarball_blake2b="c52c9eab66fb9cfc58ed78d09c0890a72a472e92ce96ba9095e10694e18e96afe0106c4877106e2dcb54f77076edb600deaef664082252488898b74826e150e2"
 imagedeps="meson ninja-build"
 hostdeps="gcc pkg-config"
-deps="core-libs librsvg libgudev libxml libevdev"
+deps="core-libs librsvg libgudev libxml2 libevdev"
 
 configure() {
     meson_configure \

@@ -6,7 +6,7 @@ revision=1
 tarball_url="https://w1.fi/releases/wpa_supplicant-${version}.tar.gz"
 tarball_blake2b="71bd0d11cd31eb5bc6beb51caf0f1399856ea188f316d2330053a2d8c81869057811e9f500828e8981eabd0af38f30a18a3ae584d744005c78681c82fa910abf"
 hostdeps="gcc pkg-config"
-deps="core-libs libnl libxml dbus"
+deps="core-libs libnl libxml2 dbus"
 
 prepare() {
     cat > wpa_supplicant/.config <<EOF

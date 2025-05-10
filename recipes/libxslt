@@ -7,7 +7,7 @@ tarball_url="https://download.gnome.org/sources/libxslt/1.1/libxslt-${version}.t
 tarball_blake2b="84d1cff32c78c4eeff4db614214ee1808bcf958d55711b08e7e2191a4343fb61d38d6b3d9b43f6f12be2dc909fced0a5b5905fa2c5ec7761c83125007e1ce265"
 # imagedeps="libpython3.13-dev python3 pkg-config"
 hostdeps="gcc pkg-config"
-deps="core-libs libxml"
+deps="core-libs libxml2"
 
 prepare() {
     autotools_recursive_regen

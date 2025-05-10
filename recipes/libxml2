@@ -1,7 +1,6 @@
 #! /bin/sh
 
-name=libxml
-repology_id=libxml2
+name=libxml2
 version=2.14.2
 revision=1
 tarball_url="https://download.gnome.org/sources/libxml2/2.14/libxml2-${version}.tar.xz"
