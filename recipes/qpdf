@@ -10,8 +10,7 @@ hostdeps="gcc pkg-config"
 deps="core-libs libjpeg-turbo gnutls libtiff"
 
 configure() {
-    cmake_configure \
-        -DBUILD_STATIC_LIBS=OFF
+    cmake_configure
 }
 
 build() {
