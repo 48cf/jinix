@@ -11,6 +11,7 @@ deps="core-libs"
 
 configure() {
     cmake_configure \
+        -DJANSSON_BUILD_SHARED_LIBS=ON \
         -DJANSSON_BUILD_DOCS=OFF
 }
 
