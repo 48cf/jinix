@@ -1320,6 +1320,14 @@ cmd_install() {
             die "* package '${name}' not built"
         fi
 
+        # xbps seems to only install the package every second time when reinstalling.
+        # Remove the package to be sure it gets reinstalled.
+        if ! [ -z "${force_install}" ]; then
+            XBPS_ARCH=invalid \
+            XBPS_TARGET_ARCH="${JINX_ARCH}" \
+                "$JINX_CACHE_DIR"/xbps-bin/xbps-remove -Fy -r "${sysroot}" -R "${build_dir}"/pkgs ${pkg}
+        fi
+
         XBPS_ARCH=invalid \
         XBPS_TARGET_ARCH="${JINX_ARCH}" \
             "$JINX_CACHE_DIR"/xbps-bin/xbps-install -y $force_install -r "${sysroot}" -R "${build_dir}"/pkgs ${pkg} >/dev/null
