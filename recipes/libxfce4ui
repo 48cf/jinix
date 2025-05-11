@@ -7,7 +7,7 @@ tarball_url="https://archive.xfce.org/src/xfce/libxfce4ui/4.21/libxfce4ui-${vers
 tarball_blake2b="24b935f53cbcd80c7774319823b0fc916a6844953fe3d40d8f979157374494f84d38ec0e3e53863ebb5af208fa73ae33d465a9005e4e97cf43aa8436611892e0"
 imagedeps="build-essential meson ninja-build patchelf pkg-config python3 python3-distutils-extra xfce4-dev-tools"
 hostdeps="gcc pkg-config glib gobject-introspection vala"
-deps="core-libs libxfce4util gtk+-3 xfconf libsm startup-notification libgtop libepoxy hicolor-icon-theme libgudev"
+deps="core-libs libxfce4util gtk3 xfconf libsm startup-notification libgtop libepoxy hicolor-icon-theme libgudev"
 
 configure() {
     vala_env meson_configure \

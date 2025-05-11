@@ -8,7 +8,7 @@ tarball_blake2b="c90c6863738b103c256eeb0907060a0f74b73ef50ac0728d2114aa558a7a1ad
 source_imagedeps="gtk-doc-tools"
 source_hostdeps="autoconf automake libtool pkg-config"
 hostdeps="gcc pkg-config"
-deps="core-libs libvorbis alsa-lib gstreamer gtk+-3 pulseaudio libtool"
+deps="core-libs libvorbis alsa-lib gstreamer gtk3 pulseaudio libtool"
 
 prepare() {
     autoreconf -fvi

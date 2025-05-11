@@ -1,6 +1,6 @@
 #! /bin/sh
 
-name=gtk+-3
+name=gtk3
 repology_id=gtk
 repology_status=legacy
 version=3.24.49
