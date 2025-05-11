@@ -7,7 +7,7 @@ revision=1
 tarball_url="https://download.gnome.org/sources/libsoup/3.6/libsoup-${version}.tar.xz"
 tarball_blake2b="525bb92614b4ce39405ca29fd960c181f86ff555361cfd231fa36c7eef3342b0b79742d382906605a44e021a943da2d6d41de9f51c3ec247ec19618a59c8cbb7"
 imagedeps="build-essential meson ninja-build python3 patchelf"
-hostdeps="gcc pkg-config gobject-introspection glib vala"
+hostdeps="gcc pkg-config gobject-introspection glib2 vala"
 deps="core-libs brotli glib-networking libpsl libxml2 nghttp2 sqlite glib2 gobject-introspection vala"
 
 configure() {

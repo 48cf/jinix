@@ -3,7 +3,7 @@
 name=libical
 from_source=libical
 revision=1
-hostdeps="glib"
+hostdeps="glib2"
 imagedeps="build-essential pkg-config cmake libxml2-dev libpcre2-dev libffi-dev"
 
 configure() {

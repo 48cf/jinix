@@ -6,7 +6,7 @@ revision=1
 tarball_url="https://download.gnome.org/sources/graphene/1.10/graphene-${version}.tar.xz"
 tarball_blake2b="61eb18994ce833838c746dad6650df61acf6de3d4742f136d8f877aa9db5c49d310c01d1a80a558250e2dafacab23181ac29506ea18db6308c53b9305411919a"
 imagedeps="build-essential meson ninja-build python3 patchelf"
-hostdeps="gcc pkg-config gobject-introspection glib"
+hostdeps="gcc pkg-config gobject-introspection glib2"
 deps="core-libs gobject-introspection glib2"
 
 configure() {

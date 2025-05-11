@@ -6,7 +6,7 @@ revision=1
 tarball_url="https://download.gnome.org/sources/geocode-glib/3.26/geocode-glib-${version}.tar.xz"
 tarball_blake2b="be783328b2372e1647c3fd6debadaf8313688fe1c993cbc1e084cd9ad8ba8fec0b142a0f579f63085684ef8fafc6e7ec6f54441a085d25d9d5f2eed31a893d1b"
 imagedeps="build-essential meson ninja-build python3 patchelf"
-hostdeps="gcc pkg-config glib gobject-introspection"
+hostdeps="gcc pkg-config glib2 gobject-introspection"
 deps="core-libs json-glib libsoup3"
 
 configure() {

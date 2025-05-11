@@ -7,7 +7,7 @@ tarball_url="https://github.com/lathiat/avahi/releases/download/v${version}/avah
 tarball_blake2b="9b57a3e5781abc7acf25c6cfd2d1871b7c2f330bd5bd08214baa60bfee849841b69cd9d322fafaec1ba72c953c3464f017e1870a7d95fa2f27fcd2401ddd24df"
 imagedeps="build-essential python3 python3-distutils-extra patchelf pkg-config"
 source_hostdeps="autoconf automake gobject-introspection libtool pkg-config"
-hostdeps="gcc autoconf automake glib libtool gobject-introspection pkg-config"
+hostdeps="gcc autoconf automake glib2 libtool gobject-introspection pkg-config"
 deps="core-libs glib2 libdaemon libevent libexpat gdbm gtk3"
 
 prepare() {

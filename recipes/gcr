@@ -7,7 +7,7 @@ revision=1
 tarball_url="https://download.gnome.org/sources/gcr/3.41/gcr-${version}.tar.xz"
 tarball_blake2b="ac2c1cd7c1ff458b554a4c0b667fa9a6a9629f14ad173ec84e3bb76b17fefe007a47ed861fc820cb1a4f48b81b3dfe9860d521fe677c7dbcce004766b43afe9a"
 imagedeps="build-essential meson ninja-build python3 patchelf"
-hostdeps="gcc pkg-config gobject-introspection glib vala"
+hostdeps="gcc pkg-config gobject-introspection glib2 vala"
 # Missing: GnuPG
 deps="core-libs glib2 libgcrypt p11-kit gtk3 libxslt libsecret openssh"
 

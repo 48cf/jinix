@@ -5,7 +5,7 @@ revision=1
 from_source=vala
 # imagedeps="meson ninja-build python3-docutils build-essential libpcre2-dev pkg-config libffi-dev zlib1g-dev"
 imagedeps="build-essential pkg-config libpcre2-dev pkg-config libffi-dev zlib1g-dev"
-hostdeps="glib gobject-introspection"
+hostdeps="glib2 gobject-introspection"
 
 prepare() {
     autotools_recursive_regen

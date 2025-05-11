@@ -6,7 +6,7 @@ revision=1
 tarball_url="https://www.freedesktop.org/software/appstream/releases/AppStream-${version}.tar.xz"
 tarball_blake2b="e8b3ca6092d4cddf73e5f902ac9d5e071d9eb31d8b206fd814e2078f5bcfcba1683e97beccaea9e7024da0285d77c63fb426e3b3d17f15c3add332e964e313d3"
 imagedeps="build-essential meson ninja-build python3 patchelf gperf pkg-config appstream libappstream-dev itstool"
-hostdeps="gcc pkg-config gobject-introspection glib vala"
+hostdeps="gcc pkg-config gobject-introspection glib2 vala"
 deps="core-libs curl libxml2 libxmlb libyaml zstd libxslt systemd"
 
 configure() {
