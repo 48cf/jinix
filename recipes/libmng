@@ -10,7 +10,8 @@ hostdeps="gcc pkg-config"
 deps="core-libs libjpeg-turbo lcms"
 
 configure() {
-    cmake_configure
+    cmake_configure \
+        -DMNG_INSTALL_LIB_DIR=lib
 }
 
 build() {
