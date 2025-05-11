@@ -10,7 +10,8 @@ hostdeps="gcc pkg-config"
 deps="core-libs zlib"
 
 configure() {
-    cmake_configure
+    cmake_configure \
+        -DPNG_STATIC=OFF
 }
 
 build() {
