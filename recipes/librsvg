@@ -35,6 +35,7 @@ package() {
 
     # Move installed pixbuf loaders to the correct location.
     mv "${dest_dir}${sysroot_dir}${prefix}"/lib/gdk-pixbuf-2.0/ "${dest_dir}${prefix}"/lib/
+    rm -rfv ${dest_dir}${sysroot_dir}
 
     post_package_strip
 }

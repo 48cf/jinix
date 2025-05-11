@@ -24,9 +24,9 @@ build() {
 package() {
     DESTDIR="${dest_dir}" cmake --install .
 
-    # The pixbuf loader is installed in the wrong directory, move it
-    mkdir -pv ${dest_dir}${prefix}/lib/gdk-pixbuf-2.0/2.10.0/loaders/
-    mv -v ${dest_dir}${sysroot_dir}${prefix}/lib/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-jxl.so ${dest_dir}${prefix}/lib/gdk-pixbuf-2.0/2.10.0/loaders/
+    # Move installed pixbuf loaders to the correct location.
+    mv "${dest_dir}${sysroot_dir}${prefix}"/lib/gdk-pixbuf-2.0/ "${dest_dir}${prefix}"/lib/
+    rm -rfv ${dest_dir}${sysroot_dir}
 
     post_package_strip
 }
