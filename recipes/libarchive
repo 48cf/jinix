@@ -20,5 +20,8 @@ build() {
 package() {
     DESTDIR="${dest_dir}" cmake --install .
 
+    # Remove static libraries
+    rm -v "${dest_dir}${prefix}/lib/libarchive.a"
+
     post_package_strip
 }
