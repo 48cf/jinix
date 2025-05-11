@@ -11,6 +11,7 @@ deps="core-libs openssl"
 
 configure() {
     cmake_configure \
+        -DEVENT__LIBRARY_TYPE=SHARED \
         -DEVENT__DISABLE_BENCHMARK=ON \
         -DEVENT__DISABLE_TESTS=ON \
         -DEVENT__DISABLE_REGRESS=ON
