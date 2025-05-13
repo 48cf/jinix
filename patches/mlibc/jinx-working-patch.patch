@@ -376,6 +376,35 @@ diff -urN --no-dereference mlibc-clean/options/linux/generic/sched.cpp mlibc-wor
  }
  
  int sched_getaffinity(pid_t pid, size_t cpusetsize, cpu_set_t *mask) {
+diff -urN --no-dereference mlibc-clean/options/linux/generic/sys-sysinfo.cpp mlibc-workdir/options/linux/generic/sys-sysinfo.cpp
+--- mlibc-clean/options/linux/generic/sys-sysinfo.cpp
++++ mlibc-workdir/options/linux/generic/sys-sysinfo.cpp
+@@ -1,5 +1,6 @@
+ #include <errno.h>
+ #include <sys/sysinfo.h>
++#include <unistd.h>
+ 
+ #include <bits/ensure.h>
+ #include <mlibc/debug.hpp>
+@@ -14,12 +15,12 @@
+ 	return 0;
+ }
+ 
+-int get_nprocs(void) {
+-	__ensure(!"Not implemented");
+-	__builtin_unreachable();
++int get_nprocs_conf() {
++	// Taken from musl
++	return sysconf(_SC_NPROCESSORS_CONF);
+ }
+ 
+-int get_nprocs_conf(void) {
+-	__ensure(!"Not implemented");
+-	__builtin_unreachable();
++int get_nprocs() {
++	// Taken from musl
++	return sysconf(_SC_NPROCESSORS_ONLN);
+ }
 diff -urN --no-dereference mlibc-clean/options/linux/include/bits/linux/cpu_set.h mlibc-workdir/options/linux/include/bits/linux/cpu_set.h
 --- mlibc-clean/options/linux/include/bits/linux/cpu_set.h
 +++ mlibc-workdir/options/linux/include/bits/linux/cpu_set.h
