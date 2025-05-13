@@ -1,10 +1,10 @@
 #! /bin/sh
 
 name=linux
-version=6.14.4
+version=6.14.6
 revision=1
 tarball_url="https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${version}.tar.xz"
-tarball_blake2b="8f5f44fa6f7b2a964a3fb14afd10dc0c6cc5ec73eb3b6dba24d35664f7083546b70eff7a3d5a9b3ba3c8b84785518c6df91aff0ed948cd538ff0b3b0484fd613"
+tarball_blake2b="dedcadc0b7506f620da3ac849446539e83d694f0955d5417e063b6680d53ef8993eeef40562ae8dae9249a21bea9746093f8873a360dd74f6b139fbafdd7b9ac"
 revision=1
 imagedeps="bc bison build-essential cpio dwarves flex kmod libelf-dev libncurses5-dev libssl-dev dracut busybox"
 hostdeps="gcc"
