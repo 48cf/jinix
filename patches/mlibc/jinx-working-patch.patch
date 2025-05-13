@@ -100,14 +100,41 @@ diff -urN --no-dereference mlibc-clean/options/ansi/generic/string.cpp mlibc-wor
  void *memchr(const void *s, int c, size_t size) {
  	auto s_bytes = static_cast<const unsigned char *>(s);
  	for(size_t i = 0; i < size; i++)
-@@ -287,8 +294,10 @@
+@@ -286,9 +293,35 @@
+ 	return *l - *r;
  }
  
- int wcscoll(const wchar_t *, const wchar_t *) { MLIBC_STUB_BODY; }
-+int wcscoll_l(const wchar_t *, const wchar_t *, locale_t) { MLIBC_STUB_BODY; }
+-int wcscoll(const wchar_t *, const wchar_t *) { MLIBC_STUB_BODY; }
++int wcscoll_l(const wchar_t *l, const wchar_t *r, locale_t loc) {
++	(void)loc;
++	return wcscmp(l, r);
++}
++
++int wcscoll(const wchar_t *l, const wchar_t *r) {
++	// TODO: Replace NULL with the current locale.
++	return wcscoll_l(l, r, NULL);
++}
++
  int wcsncmp(const wchar_t *, const wchar_t *, size_t) { MLIBC_STUB_BODY; }
- int wcsxfrm(wchar_t *__restrict, const wchar_t *__restrict, size_t) { MLIBC_STUB_BODY; }
-+int wcsxfrm_l(wchar_t *__restrict, const wchar_t *__restrict, size_t, locale_t) { MLIBC_STUB_BODY; }
+-int wcsxfrm(wchar_t *__restrict, const wchar_t *__restrict, size_t) { MLIBC_STUB_BODY; }
++
++int wcsxfrm_l(wchar_t *__restrict dest, const wchar_t *__restrict src, size_t n, locale_t loc) {
++	(void)loc;
++	// NOTE: This might not work for non ANSI charsets.
++	size_t l = wcslen(src);
++	if(l < n) {
++		wmemcpy(dest, src, l + 1);
++	}else if(n) {
++		wmemcpy(dest, src, n - 1);
++		dest[n - 1] = 0;
++	}
++	return l;
++}
++
++int wcsxfrm(wchar_t *__restrict dest, const wchar_t *__restrict src, size_t n) {
++	// TODO: Replace NULL with the current locale.
++	return wcsxfrm_l(dest, src, n, NULL);
++}
  
  int wmemcmp(const wchar_t *a, const wchar_t *b, size_t size) {
  	for(size_t i = 0; i < size; i++) {
