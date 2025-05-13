@@ -68,13 +68,7 @@ case "$1" in
         ;;
     *)
         if [ "$(id -u)" = "0" ]; then
-            case "$LD_LIBRARY_PATH" in
-                *libfakeroot*)
-                    ;;
-                *)
-                    die "$0: Jinx does not support running as root."
-                    ;;
-            esac
+            die "$0: Jinx does not support running as root."
         fi
         ;;
 esac
@@ -474,7 +468,7 @@ run_in_container() {
         ${unshare_net_flag} \
         --workdir / \
         -- \
-        /bin/bash -c "cd /build_dir && ${use_fakeroot} /bin/bash /jinx $run_in_cont_argvar"
+        /bin/bash -c "cd /build_dir && /bin/bash /jinx $run_in_cont_argvar"
 
     rm -rf "${imgroot}/sysroot" "${imgroot}/jinx" "${imgroot}/jinx-config" "${imgroot}/base_dir" "${imgroot}/sources" "${imgroot}/build_dir"
 }
@@ -1114,7 +1108,7 @@ do_pkg() {
     fi
     run_in_container internal-build $1
     rm -rf "${base_dir}"/pkgs/$1
-    use_fakeroot=fakeroot run_in_container internal-package $1
+    run_in_container internal-package $1
     if [ -f "${build_dir}"/.jinx-errcode ] && ! [ "$(cat "${build_dir}"/.jinx-errcode)" = "0" ]; then
         rm -rf "${base_dir}"/pkgs/$1
         return 1
@@ -2025,7 +2019,7 @@ Acquire::Check-Valid-Until "0";' >> "$JINX_CACHE_DIR/sets/.image/etc/apt/apt.con
         chmod 755 "$f"
     done
 
-    run_in_container1 "$JINX_CACHE_DIR/sets/.image" apt-get install -y autopoint bash bison bzip2 curl diffutils docbook-xsl doxygen fakeroot file findutils flex gawk gettext grep gzip xsltproc m4 make patch perl python3 sed tar texinfo w3m which xmlto xz-utils zstd
+    run_in_container1 "$JINX_CACHE_DIR/sets/.image" apt-get install -y autopoint bash bison bzip2 curl diffutils docbook-xsl doxygen file findutils flex gawk gettext grep gzip xsltproc m4 make patch perl python3 sed tar texinfo w3m which xmlto xz-utils zstd
 
     # Build xbps
     XBPS_BUILDENV="$JINX_CACHE_DIR/xbps_buildenv"
