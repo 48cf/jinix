@@ -33,7 +33,7 @@ package() {
 
     echo "ServerName /run/cups/cups.sock" > ${dest_dir}/etc/cups/client.conf
 
-    mkdir -pv ${dest_dir}/etc/pam.d
+    chmod 644 ${dest_dir}/etc/pam.d/cups
     cat > ${dest_dir}/etc/pam.d/cups << "EOF"
 # Begin /etc/pam.d/cups
 
@@ -43,6 +43,7 @@ session include system-session
 
 # End /etc/pam.d/cups
 EOF
+    chmod 444 ${dest_dir}/etc/pam.d/cups
 
     post_package_strip
 }
