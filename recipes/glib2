@@ -1,6 +1,7 @@
 #! /bin/sh
 
 name=glib2
+repology_id=glib
 version=2.84.1
 revision=1
 tarball_url="https://download.gnome.org/sources/glib/2.84/glib-${version}.tar.xz"
