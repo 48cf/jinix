@@ -5,7 +5,6 @@ version=1.25.6
 revision=1
 tarball_url="https://www.mupdf.com/downloads/archive/mupdf-${version}-source.tar.gz"
 tarball_blake2b="f9fb771e96938c2862e10aa7482f52218cf5d159e77300016b64f2f10424d72e6ea13566abf8180eb2a31644d711755f93edc69189230d50a543408105881b55"
-# imagedeps="cmake ninja-build"
 hostdeps="gcc pkg-config"
 deps="core-libs zlib harfbuzz libjpeg-turbo openjpeg curl libglvnd libx11 libxext libxrandr"
 

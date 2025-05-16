@@ -6,7 +6,7 @@ version=3.12.1
 revision=1
 tarball_url="https://storage.googleapis.com/aom-releases/libaom-${version}.tar.gz"
 tarball_blake2b="4fa4ea0620b27013d2c39589ea5bc4333ea26ffe51dad64e95b240cdf5c82fcd0810fecf45410f34b89057d9000c93efae106c49e4017796d7c8b2752357709d"
-imagedeps="cmake ninja-build nasm"
+imagedeps="nasm"
 hostdeps="gcc pkg-config"
 deps="core-libs"
 

@@ -6,7 +6,7 @@ version=4.4.0.1
 revision=1
 tarball_url="https://download.gnome.org/sources/gcr/4.4/gcr-${version}.tar.xz"
 tarball_blake2b="8a7e18fd0cac203c0f04e694f38ec872ac81a064290147d02c3a52c0091aab1bee0af85b38d38286d283a277ac7309a59c020545e4839e32b05708d220cb4425"
-imagedeps="build-essential meson ninja-build python3 patchelf"
+imagedeps="build-essential patchelf"
 hostdeps="gcc pkg-config gobject-introspection glib2 vala"
 # Missing: GnuPG
 deps="core-libs glib2 libgcrypt p11-kit gtk4 libxslt libsecret openssh"

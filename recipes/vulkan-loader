@@ -5,7 +5,6 @@ version=1.4.309
 revision=1
 tarball_url="https://github.com/KhronosGroup/Vulkan-Loader/archive/refs/tags/v${version}/Vulkan-Loader-${version}.tar.gz"
 tarball_blake2b="59f7cfc0e33342c8584567d1863a967d411d722518edbfc179d636f6689b8bfc52bfd08db780e3f4976b24642554248e0a12e2eb94f8ccfe887f18290fb9760d"
-imagedeps="cmake ninja-build"
 hostdeps="gcc pkg-config"
 deps="core-libs vulkan-headers wayland libxcb libx11 libxrandr"
 

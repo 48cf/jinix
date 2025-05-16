@@ -5,7 +5,6 @@ version=0.2.7
 revision=1
 tarball_url="https://github.com/aruiz/webp-pixbuf-loader/archive/${version}/webp-pixbuf-loader-${version}.tar.gz"
 tarball_blake2b="7f81addbe268aab79c83f587bb26ac4d2ba8311da49d6e0b690003256e8e5206523aabc2dcb0bf6da38267872f24a6daeff0f5062a77e8e60c08610f3ee0ede7"
-imagedeps="meson ninja-build"
 hostdeps="gcc pkg-config"
 deps="core-libs libwebp gdk-pixbuf"
 

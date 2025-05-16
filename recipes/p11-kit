@@ -5,7 +5,7 @@ version=0.25.5
 revision=1
 tarball_url="https://github.com/p11-glue/p11-kit/releases/download/${version}/p11-kit-${version}.tar.xz"
 tarball_blake2b="96d6a9c2807586abafae4da4df89f566672733963997d6a83e00aaf83a7a0c0e2995638f505e98fb87a90c60bde28814f1e8b7d5071bf0af96bb0467105a1ddc"
-imagedeps="build-essential meson ninja-build"
+imagedeps="build-essential"
 hostdeps="gcc pkg-config"
 deps="core-libs libtasn1"
 

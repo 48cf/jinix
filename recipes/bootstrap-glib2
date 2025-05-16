@@ -5,7 +5,7 @@ skip_pkg_check=yes
 bootstrap_pkg=yes
 from_source=glib2
 revision=1
-imagedeps="meson ninja-build python3-docutils"
+imagedeps=" python3-docutils"
 hostdeps="gcc pkg-config"
 deps="core-libs pcre2 libffi zlib util-linux"
 

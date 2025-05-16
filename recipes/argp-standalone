@@ -5,7 +5,6 @@ version=0.0git
 revision=1
 git_url="https://github.com/argp-standalone/argp-standalone.git"
 commit=8ded2bc942740b5d291e450af661c5090dc3ca38
-imagedeps="meson ninja-build"
 hostdeps="gcc pkg-config"
 deps="core-libs"
 

@@ -5,7 +5,7 @@ version=3.9.2
 revision=1
 tarball_url="https://download.gnome.org/sources/tinysparql/3.9/tinysparql-${version}.tar.xz"
 tarball_blake2b="de128835e736b940f09793dcc7bd4a71680410fea8c00ab6a36d85b2d62639b3f08ddded74f4d1851c6060e5f5f82841a5ef714191a29869546549dd21d1722b"
-imagedeps="build-essential meson ninja-build patchelf python3 python3-gi"
+imagedeps="build-essential patchelf python3 python3-gi"
 hostdeps="gcc pkg-config glib2 gobject-introspection vala"
 deps="core-libs glib2 gobject-introspection vala json-glib icu sqlite dbus libsoup3"
 

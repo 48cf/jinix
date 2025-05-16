@@ -5,7 +5,6 @@ version=1.1.5
 revision=1
 tarball_url="https://archive.xfce.org/src/apps/xfce4-terminal/1.1/xfce4-terminal-${version}.tar.xz"
 tarball_blake2b="d17a90a89e883d274e63ccba8332fc5b4caf4a9fab50eed26afc1401795df305ba4190cfb8e653b7a2730226dd3f6a870e32581a0c5ba2d660cbe79000ba9a54"
-imagedeps="meson ninja-build"
 hostdeps="gcc glib2 pkg-config"
 deps="core-libs libxfce4ui vte"
 

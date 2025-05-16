@@ -5,7 +5,7 @@ version=1.88.0
 revision=1
 tarball_url="https://github.com/boostorg/boost/releases/download/boost-${version}/boost-${version}-b2-nodocs.tar.xz"
 tarball_blake2b="8b826177bd2a82024835bb4b5ebaa891a17ad406b6d96539904d81d84485448a0af4bdb76c64f1c2f49604e0da6e100a840b8929afe6a146fedd6f55fbb75b8a"
-imagedeps="build-essential python3"
+imagedeps="build-essential"
 hostdeps="gcc pkg-config"
 deps="core-libs bzip2 icu python xz zlib zstd"
 
