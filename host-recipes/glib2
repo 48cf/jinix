@@ -3,7 +3,7 @@
 name=glib2
 revision=1
 from_source=glib2
-imagedeps="meson ninja-build python3-docutils build-essential libpcre2-dev pkg-config libffi-dev zlib1g-dev"
+imagedeps="python3-docutils build-essential libpcre2-dev pkg-config libffi-dev zlib1g-dev"
 
 configure() {
     meson setup "${source_dir}" \

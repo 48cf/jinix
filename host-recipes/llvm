@@ -3,7 +3,7 @@
 name=llvm
 from_source=llvm
 revision=1
-imagedeps="build-essential cmake ninja-build"
+imagedeps="build-essential"
 hostrundeps="binutils"
 
 configure() {

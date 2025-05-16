@@ -3,7 +3,7 @@
 name=vala
 revision=1
 from_source=vala
-# imagedeps="meson ninja-build python3-docutils build-essential libpcre2-dev pkg-config libffi-dev zlib1g-dev"
+# imagedeps="python3-docutils build-essential libpcre2-dev pkg-config libffi-dev zlib1g-dev"
 imagedeps="build-essential pkg-config libpcre2-dev pkg-config libffi-dev zlib1g-dev"
 hostdeps="glib2 gobject-introspection"
 
@@ -12,12 +12,12 @@ prepare() {
 }
 
 configure() {
-    CFLAGS="$HOST_CFLAGS" \
-    CXXFLAGS="$HOST_CXXFLAGS" \
-    LDFLAGS="$HOST_LDFLAGS" \
+        CFLAGS="$HOST_CFLAGS" \
+        CXXFLAGS="$HOST_CXXFLAGS" \
+        LDFLAGS="$HOST_LDFLAGS" \
     "${source_dir}"/configure \
-    --prefix="${prefix}" \
-    --disable-valadoc
+        --prefix="${prefix}" \
+        --disable-valadoc
 }
 
 build() {

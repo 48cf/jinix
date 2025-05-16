@@ -3,7 +3,7 @@
 name=gobject-introspection
 revision=1
 from_source="gobject-introspection"
-imagedeps="build-essential bison flex git meson ninja-build python3 libpython3-dev pkg-config libpcre2-dev libffi-dev"
+imagedeps="build-essential libpython3-dev pkg-config libpcre2-dev libffi-dev"
 hostdeps="gcc glib2"
 
 configure() {

@@ -3,7 +3,7 @@
 name=rust
 from_source=rust
 revision=1
-imagedeps="build-essential cmake ninja-build python3 libssl-dev pkg-config"
+imagedeps="build-essential libssl-dev pkg-config"
 hostdeps="binutils gcc llvm"
 hostrundeps="binutils gcc llvm"
 deps="core-libs"
