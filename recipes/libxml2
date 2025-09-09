@@ -1,10 +1,10 @@
 #! /bin/sh
 
 name=libxml2
-version=2.14.2
+version=2.14.5
 revision=1
-tarball_url="https://download.gnome.org/sources/libxml2/2.14/libxml2-${version}.tar.xz"
-tarball_blake2b="2331234ed60358168298d04c83162bfe7d08e6fc77091fe1ecf8384e68902ab745f039dc807d12dda3124313724806bd7fb651de975dbc60fdaf963bac043ff8"
+git_url="https://gitlab.gnome.org/GNOME/libxml2.git"
+commit=74f3154320df8950eceae4951975cc9dfc3a254d
 hostdeps="gcc pkg-config"
 deps="core-libs icu readline zlib"
 

@@ -9,7 +9,7 @@ imagedeps="build-essential rsync"
 build() {
     cp -rp "${source_dir}"/. ./
 
-    make ARCH=$ARCHITECTURE headers_install
+    make ARCH=${JINX_ARCH} headers_install
     find usr/include -type f ! -name *.h -delete
 }
 

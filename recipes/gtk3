@@ -2,11 +2,11 @@
 
 name=gtk3
 repology_id=gtk
-repology_status=legacy
-version=3.24.49
+repology_srcname=gtk3
+version=3.24.50
 revision=1
-tarball_url="https://download.gnome.org/sources/gtk/3.24/gtk-${version}.tar.xz"
-tarball_blake2b="c45299fdf6c004c56d6480cbde9ff4dee64e460be6742331b93097e5782591c81decdd4dfbba59bd3f0a72ad26c7919c7363877b4d4b3227ecc246025c29f1b2"
+git_url="https://gitlab.gnome.org/GNOME/gtk.git"
+commit=93f05958bd683cb573236bd2a4cede68160595ca
 imagedeps="build-essential patchelf libwayland-bin libgdk-pixbuf2.0-bin"
 hostdeps="gcc pkg-config gobject-introspection glib2 vala"
 # Missing: printing and colord

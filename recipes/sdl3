@@ -1,10 +1,10 @@
 #! /bin/sh
 
 name=sdl3
-version=3.2.12
+version=3.2.22
 revision=1
-tarball_url="https://github.com/libsdl-org/SDL/releases/download/release-${version}/SDL3-${version}.tar.gz"
-tarball_blake2b="319e6e8f7348047d2aaa80ccd8b6a321e601a9bce58c338915b7c5a0e62b96d50ebd4de4ef47f9e5613f10c2c5f26220e769e19d8629cb590da92b42dd0731ab"
+git_url="https://github.com/libsdl-org/SDL.git"
+commit=a96677bdf6b4acb84af4ec294e5f60a4e8cbbe03
 imagedeps="libwayland-bin"
 hostdeps="gcc pkg-config"
 deps="core-libs libx11 libxext libxcursor libxi libxfixes libxkbcommon libxrandr libxrender libxxf86vm mesa"

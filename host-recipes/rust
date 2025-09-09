@@ -20,7 +20,7 @@ targets = "X86"
 download-ci-llvm = false
 
 [build]
-target = ["${ARCHITECTURE}-unknown-linux-mlibc", "x86_64-unknown-linux-gnu"]
+target = ["${JINX_ARCH}-unknown-linux-mlibc", "x86_64-unknown-linux-gnu"]
 build-dir = "${build_dir}/host-builds/rust"
 docs = false
 tools = [
@@ -41,7 +41,7 @@ deny-warnings = false
 [target.x86_64-unknown-linux-gnu]
 llvm-config = "${build_dir}/host-pkgs/llvm/usr/local/bin/llvm-config"
 
-[target.${ARCHITECTURE}-unknown-linux-mlibc]
+[target.${JINX_ARCH}-unknown-linux-mlibc]
 llvm-config = "${build_dir}/host-pkgs/llvm/usr/local/bin/llvm-config"
 cc = "${OS_TRIPLET}-gcc"
 cxx = "${OS_TRIPLET}-g++"

@@ -3,10 +3,10 @@
 name=libxcomposite
 version=0.4.6
 revision=1
-tarball_url="https://www.x.org/archive/individual/lib/libXcomposite-${version}.tar.xz"
-tarball_blake2b="1e017ac65c7fb9973f8a1ad06116c67b9ebecf880bee8fb9b2afd83e85ec53853eb082c7edfb6a53f1a8451ac8c61c63c540facbf97953997695b18d65d00c45"
+tarball_url="https://www.x.org/archive/individual/lib/libXcomposite-${version}.tar.gz"
+tarball_blake2b="1ee04b1279b5274083dd2f46a763abccf6c2aaecc5cf13b1c4ca712b3ea562e9c2fce7c5b5685a93187ab5747ca549305b0cae1581a29815a1db516f292bf501"
 hostdeps="gcc pkg-config"
-deps="core-libs libxfixes xorg-util-macros xorg-proto"
+deps="core-libs libxfixes xorg-proto"
 
 prepare() {
     autotools_recursive_regen

@@ -3,18 +3,20 @@
 name=libxres
 version=1.2.2
 revision=1
-tarball_url="https://www.x.org/archive/individual/lib/libXres-${version}.tar.xz"
-tarball_blake2b="569d4e4b8bf43254139a7c1428ba9dbce592930b05588ca90266e42721fe7cdfb997d05f983dce97afda460c39b9b232128f760f2c69aa87d800f948562a03fc"
+tarball_url="https://www.x.org/archive/individual/lib/libXres-${version}.tar.gz"
+tarball_blake2b="fd609d4aaa6bb4e26cf5df6261023789c170bd905d0f834a75dfdcbf3a7d545bfd7615d7122ba4344548e7feb190272d12bd237f6043e88907dcc38812ec0605"
 hostdeps="gcc pkg-config"
-deps="core-libs xorg-util-macros xorg-proto libxext"
+deps="core-libs xorg-proto libx11 libxext"
 
 prepare() {
     autotools_recursive_regen
 }
 
-build() {
+configure() {
     autotools_configure
+}
 
+build() {
     make -j${parallelism}
 }
 

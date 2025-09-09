@@ -1,13 +1,13 @@
 #! /bin/sh
 
 name=vte
-version=0.80.1
-revision=1
-tarball_url="https://gitlab.gnome.org/GNOME/vte/-/archive/${version}/vte-${version}.tar.gz"
-tarball_blake2b="e165602646eb31b54ee51829e6f2e4d0977441998cd8503d735f0e81606ddb7cb83d387c264013495103f502d2f00da804956af04f40e080100c0474c9d34a81"
+version=0.80.3
+revision=3
+git_url="https://gitlab.gnome.org/GNOME/vte.git"
+commit=02eaf1997d904dbfb792e2ae9ae0ba8b82f117f1
 imagedeps="build-essential patchelf"
 hostdeps="gcc pkg-config gobject-introspection glib2 vala"
-deps="core-libs cairo fribidi glib2 gnutls gtk3 gtk4 icu pango pcre2 zlib fast_float"
+deps="core-libs fast_float cairo fribidi glib2 gnutls gtk3 gtk4 icu pango pcre2 zlib fast_float"
 
 configure() {
     vala_env meson_configure \

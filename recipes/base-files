@@ -3,8 +3,8 @@
 name=base-files
 skip_pkg_check=yes
 version=0.0
-revision=1
-source_dir="meta-sources/base-files"
+revision=10
+source_dir="base-files"
 
 package() {
     cp -r ${source_dir}/. "${dest_dir}"/

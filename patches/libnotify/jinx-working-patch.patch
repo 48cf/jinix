@@ -1,4 +1,5 @@
-diff -urN --no-dereference libnotify-clean/tools/notify-send.c libnotify-workdir/tools/notify-send.c
+diff --git libnotify-clean/tools/notify-send.c libnotify-workdir/tools/notify-send.c
+index de92cbb..2825b56 100644
 --- libnotify-clean/tools/notify-send.c
 +++ libnotify-workdir/tools/notify-send.c
 @@ -25,6 +25,7 @@

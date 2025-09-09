@@ -1,10 +1,10 @@
 #! /bin/sh
 
 name=xbps
-version=0.59.2
-revision=1
+version=0.60.5
+revision=3
 tarball_url="https://github.com/void-linux/xbps/archive/refs/tags/${version}.tar.gz"
-tarball_blake2b="cabe5676eb1611271f255c75f4439f3ef4ea6096d6fc26f0982da471556e1fd1733cb76a6d5857d3546513b157e8a3493624d09d989134f3f6d7763c55e98a83"
+tarball_blake2b="91aad926f25e78c17b2646f2e478e9a4141d9d80ebb93bc821c91333c8f5b5cf72a08edb7f25aef486e0761f15da8322207474c3b6f546d6403dd424cc442525"
 hostdeps="gcc pkg-config"
 deps="core-libs libarchive openssl zlib"
 
@@ -12,7 +12,6 @@ configure() {
     cp -rp "${source_dir}"/. ./
 
         CFLAGS="$TARGET_CFLAGS -Wno-error" \
-        CPPFLAGS="$TARGET_CPPFLAGS" \
         LDFLAGS="$TARGET_LDFLAGS" \
     ./configure \
         --verbose \

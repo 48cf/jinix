@@ -2,29 +2,29 @@
 
 name=giflib
 version=5.2.2
-revision=1
+revision=2
 tarball_url="https://sourceforge.net/projects/giflib/files/giflib-${version}.tar.gz"
 tarball_blake2b="5729628044f1bd9227856c76f67b673760c7c93860d9131ab0f67d900b8090fa24693ce16555ff65cfd839c6c960630d49a19ee26e03bdc9d2b4626f9efac393"
-imagedeps="xmlto"
+imagedeps="imagemagick"
 hostdeps="gcc pkg-config"
 deps="core-libs"
 
-prepare() {
-    cp ${source_dir}/pic/gifgrid.gif ${source_dir}/doc/giflib-logo.gif
-}
-
-configure() {
-    cp -rp ${source_dir}/. ./
-}
-
 build() {
-    CC=${OS_TRIPLET}-gcc AR=${OS_TRIPLET}-ar make -j${parallelism}
+    cp -rp "${source_dir}"/. ./
+
+    make \
+        CC="${OS_TRIPLET}-gcc" \
+        AR="${OS_TRIPLET}-ar" \
+        OFLAGS="$TARGET_CFLAGS" \
+        LDFLAGS="$TARGET_LDFLAGS"
 }
 
 package() {
-    DESTDIR="${dest_dir}" make PREFIX=${prefix} install
+    make install \
+        DESTDIR="${dest_dir}" \
+        PREFIX="${prefix}" \
 
-    rm -fv ${dest_dir}${prefix}/lib/libgif.a
+    rm -v "${dest_dir}${prefix}"/lib/*.a
 
     post_package_strip
 }

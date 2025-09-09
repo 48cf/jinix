@@ -14,8 +14,8 @@ configure() {
     meson_configure \
         -Dgtk_doc=false \
         -Dgi_cross_use_prebuilt_gi=true \
-        -Dgi_cross_binary_wrapper="${build_dir}"/build-support/mlibc-run-wrapper \
-        -Dgi_cross_ldd_wrapper="${build_dir}"/build-support/mlibc-ldd-wrapper \
+        -Dgi_cross_binary_wrapper="${base_dir}"/build-support/mlibc-run-wrapper \
+        -Dgi_cross_ldd_wrapper="${base_dir}"/build-support/mlibc-ldd-wrapper \
         -Dtests=false
 }
 

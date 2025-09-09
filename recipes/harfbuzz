@@ -1,17 +1,16 @@
 #! /bin/sh
 
 name=harfbuzz
-version=11.2.0
+version=11.4.5
 revision=1
-tarball_url="https://github.com/harfbuzz/harfbuzz/releases/download/${version}/harfbuzz-${version}.tar.xz"
-tarball_blake2b="112693a42120407c25b8bf84ed14f7a481810f34557132e5902e5eeaa967071d0aa785961541b7779b7d36f353c54b6f3167c3ab6bdb81238a69d385dab3ebfe"
+git_url="https://github.com/harfbuzz/harfbuzz.git"
+commit=22f77d48abc35c1e053d02f1ada0d8f1ce1b8423
 imagedeps="build-essential patchelf"
 hostdeps="gcc pkg-config gobject-introspection glib2"
 deps="core-libs graphite2 glib2 gobject-introspection zlib freetype2 cairo icu"
 
 configure() {
     meson_configure \
-        -Dcpp_std=c++17 \
         -Dgraphite2=enabled \
         -Dglib=enabled \
         -Dgobject=enabled \

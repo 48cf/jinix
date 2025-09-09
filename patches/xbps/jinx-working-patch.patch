@@ -1,25 +1,38 @@
-diff -urN --no-dereference xbps-clean/configure xbps-workdir/configure
+diff --git xbps-clean/bin/xbps-install/util.c xbps-workdir/bin/xbps-install/util.c
+index d0eadf2..8651ea5 100644
+--- xbps-clean/bin/xbps-install/util.c
++++ xbps-workdir/bin/xbps-install/util.c
+@@ -34,6 +34,7 @@
+ #include <string.h>
+ #include <strings.h>
+ #include <unistd.h>
++#include <termios.h>
+
+ #include <xbps.h>
+ #include "defs.h"
+diff --git xbps-clean/configure xbps-workdir/configure
+index 2b54b90..e7f4e40 100755
 --- xbps-clean/configure
 +++ xbps-workdir/configure
 @@ -1,7 +1,7 @@
  #!/bin/sh
  # Try and be like autotools configure, but without autotools
- 
--VERSION=0.59.1
-+VERSION=0.59.2
- 
+
+-VERSION=0.60
++VERSION=0.60.5
+
  # Ensure that we do not inherit these from env
  OS=
-@@ -189,7 +189,7 @@
+@@ -189,7 +189,7 @@ else
  	echo "Using compiler $CC"
  fi
- 
+
 -[ -z "$DEBUG" ] && DEBUG=yes
 +[ -z "$DEBUG" ] && DEBUG=no
- 
+
  echo "CC =	$CC" >>$CONFIG_MK
  echo "CFLAGS =	-O2" >>$CONFIG_MK
-@@ -677,7 +677,7 @@
+@@ -678,7 +678,7 @@ fi
  # pkg-config is required to know dependencies for static linking.
  #
  printf "Checking for pkg-config ... "
@@ -28,9 +41,9 @@ diff -urN --no-dereference xbps-clean/configure xbps-workdir/configure
  if [ -z "$PKGCONFIG_BIN" ]; then
  	echo "not found, exiting."
  	exit 1
-@@ -691,14 +691,14 @@
+@@ -692,14 +692,14 @@ fi
  LIBARCHIVE_REQVER=3.3.3
- 
+
  printf "Checking for libarchive >= ${LIBARCHIVE_REQVER}  via pkg-config ... "
 -if ! pkg-config --atleast-version=${LIBARCHIVE_REQVER} libarchive; then
 +if ! $PKGCONFIG_BIN --atleast-version=${LIBARCHIVE_REQVER} libarchive; then
@@ -47,8 +60,8 @@ diff -urN --no-dereference xbps-clean/configure xbps-workdir/configure
 +	echo "STATIC_LIBS +=    $($PKGCONFIG_BIN --libs --static libarchive)" \
  		>>$CONFIG_MK
  fi
- 
-@@ -706,17 +706,17 @@
+
+@@ -707,17 +707,17 @@ fi
  # libssl with pkg-config support is required.
  #
  printf "Checking for libssl via pkg-config ... "
@@ -71,9 +84,9 @@ diff -urN --no-dereference xbps-clean/configure xbps-workdir/configure
 +echo "LDFLAGS +=        $($PKGCONFIG_BIN --libs libssl)" >>$CONFIG_MK
 +echo "STATIC_LIBS +=    $($PKGCONFIG_BIN --libs --static libssl)" \
  	>>$CONFIG_MK
- 
+
  #
-@@ -734,13 +734,13 @@
+@@ -735,13 +735,13 @@ fi
  #
  if [ "$BUILD_TESTS" = "yes" ]; then
  	printf "Checking for ATF via pkg-config ... "
@@ -91,26 +104,11 @@ diff -urN --no-dereference xbps-clean/configure xbps-workdir/configure
  	echo "BUILD_TESTS = yes" >>$CONFIG_MK
  	BUILD_TESTS_VALUE=yes
  else
-diff -urN --no-dereference xbps-clean/data/60:ae:0c:d6:f0:95:17:80:bc:93:46:7a:89:af:a3:2d.plist xbps-workdir/data/60:ae:0c:d6:f0:95:17:80:bc:93:46:7a:89:af:a3:2d.plist
---- xbps-clean/data/60:ae:0c:d6:f0:95:17:80:bc:93:46:7a:89:af:a3:2d.plist
-+++ xbps-workdir/data/60:ae:0c:d6:f0:95:17:80:bc:93:46:7a:89:af:a3:2d.plist	1970-01-01 01:00:00.000000000 +0100
-@@ -1,12 +0,0 @@
--<?xml version="1.0" encoding="UTF-8"?>
--<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
--<plist version="1.0">
--<dict>
--	<key>public-key</key>
--	<data>LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUlJQ0lqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FnOEFNSUlDQ2dLQ0FnRUF2clN6QlpNdmd2T0NJM0FYYk9qYQoycktSa0pTVE0zYy9FalRJZ0NnRFhndW05M0JQQ3RZOE1jRlZvQ1U0T2lYSEdmVG1xMzlCVk5wTHZMSEw5S2sxCnAyNzhTQmhYVk90YkIyRVZtREtudmZJREVUbGRMR3plN3JaTlJKZHR1TjJtWi9UVnJVQjlTMHlRYytJdWY0aHYKMytEOTdWSWRUSkhBN0FTcjA0MjhwcEVHSkd3U1NoWTJYSm05RDVJMEV1R1JXYzE0TUVHN2RJS0ppWWlNMG5FNAp0WW8yL3ZINElGVEhkblZBM2dZaVp5RG5idUNBUi84RVNmVVRVMTNTTkNPZGJ1ZGYzRDVCY3krVWlNREpJM1llCjRNRktCclQ5WmhaK0dzWEJaWTQ4MmxxaVppNkNMNXB0YzlJUUZmOC9lS1phOGphdGtpVkZWZ3JLZU5Sak9UeE4KZldTdTJua3hHTlgrYmhYWXRoaUdXbUpFWThjQ0FQeUZOK0x2NVJldEsyNTZnZGNiMnNrbUVxZWZ2MnpQQyt3VgpXQmJkSDViRDRiWmpuME42Wmw4MXJ2NVJ6RHZudmYrdkQxNGFGVWJaOFFGcXU3NVBiTDR3Nm1ZTTRsZE0vZzBSCjZOWEU4QXo5Qnd4MnREZlllS3V1dHcxRXBQbTJZdkZ5VFViMWNveUF1VEdSeUFhcDFVVEh2ZzlsaFBJSm1oRlEKSjVrQ2cxcUQ3QTMxV2wwUmxuZTZoZ0dvMFpaTko1Y0pNL3YvelNUS0pjdUZnd283SDBoT0dpbDZEZm84OUI0agpHOTZBQ3lQUytEVktQRlhSWXdqL0FrYkhwYVEyZjFGTUFvU3BCcXVEcUhoM3VrazcxS1g2ajE5dDBpRjhEUUxyCnZ0RlNTZElqREEwMmx3ZVY5TmFRcFdzQ0F3RUFBUT09Ci0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQo=</data>
--	<key>public-key-size</key>
--	<integer>4096</integer>
--	<key>signature-by</key>
--	<string>Void Linux</string>
--</dict>
--</plist>
-diff -urN --no-dereference xbps-clean/data/Makefile xbps-workdir/data/Makefile
+diff --git xbps-clean/data/Makefile xbps-workdir/data/Makefile
+index 25a439e..57ca738 100644
 --- xbps-clean/data/Makefile
 +++ xbps-workdir/data/Makefile
-@@ -16,7 +16,7 @@
+@@ -18,7 +18,7 @@ install:
  	install -d $(DESTDIR)$(PKGCONFIGDIR)
  	install -m644 $(PCFILE) $(DESTDIR)$(PKGCONFIGDIR)
  	install -d $(DESTDIR)/$(DBDIR)/keys
@@ -119,16 +117,11 @@ diff -urN --no-dereference xbps-clean/data/Makefile xbps-workdir/data/Makefile
  	install -d $(DESTDIR)/$(SHAREDIR)/xbps.d
  	install -m644 repod-main.conf $(DESTDIR)/$(SHAREDIR)/xbps.d/00-repository-main.conf
  	install -m644 xbps.conf $(DESTDIR)/$(SHAREDIR)/xbps.d/xbps.conf
-diff -urN --no-dereference xbps-clean/data/repod-main.conf xbps-workdir/data/repod-main.conf
---- xbps-clean/data/repod-main.conf
-+++ xbps-workdir/data/repod-main.conf
-@@ -1 +1 @@
--repository=https://a-hel-fi.m.voidlinux.org/current
-+repository=https://localhost/repo/current
-diff -urN --no-dereference xbps-clean/lib/Makefile xbps-workdir/lib/Makefile
+diff --git xbps-clean/lib/Makefile xbps-workdir/lib/Makefile
+index 2b4efe4..a299e45 100644
 --- xbps-clean/lib/Makefile
 +++ xbps-workdir/lib/Makefile
-@@ -93,8 +93,8 @@
+@@ -97,8 +97,8 @@ install: all
  	install -d $(DESTDIR)$(LIBDIR)
  	install -m 644 libxbps.a $(DESTDIR)$(LIBDIR)
  	install -m 755 $(LIBXBPS_SHLIB) $(DESTDIR)$(LIBDIR)
@@ -136,6 +129,32 @@ diff -urN --no-dereference xbps-clean/lib/Makefile xbps-workdir/lib/Makefile
 -	cp -a libxbps.so.$(LIBXBPS_MAJOR) $(DESTDIR)$(LIBDIR)
 +	cp -dR libxbps.so $(DESTDIR)$(LIBDIR)
 +	cp -dR libxbps.so.$(LIBXBPS_MAJOR) $(DESTDIR)$(LIBDIR)
- 
+
  .PHONY: uninstall
  uninstall:
+diff --git xbps-clean/lib/fetch/ftp.c xbps-workdir/lib/fetch/ftp.c
+index 9986a57..4da7fe0 100644
+--- xbps-clean/lib/fetch/ftp.c
++++ xbps-workdir/lib/fetch/ftp.c
+@@ -74,7 +74,7 @@
+ #include <string.h>
+ #include <time.h>
+ #include <unistd.h>
+-
++#include <strings.h>
+ #include "fetch.h"
+ #include "common.h"
+ #include "ftperr.h"
+diff --git xbps-clean/lib/fetch/http.c xbps-workdir/lib/fetch/http.c
+index b23e919..9a04fcc 100644
+--- xbps-clean/lib/fetch/http.c
++++ xbps-workdir/lib/fetch/http.c
+@@ -74,7 +74,7 @@
+ #include <string.h>
+ #include <time.h>
+ #include <unistd.h>
+-
++#include <strings.h>
+ #include <netinet/in.h>
+ #include <netinet/tcp.h>
+

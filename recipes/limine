@@ -1,10 +1,10 @@
 #! /bin/sh
 
 name=limine
-version=9.3.2
+version=9.6.6
 revision=1
-tarball_url="https://github.com/limine-bootloader/limine/releases/download/v${version}/limine-${version}.tar.gz"
-tarball_blake2b="1017eb95c1827d36e8208cb7e745ef0784cbd19fcc1e0d2b841e72bfd88a766d19a7f4d23c7c202663759d381c9f2dbfcfddc5a66d8cfeadb4bd5416d7e7955a"
+tarball_url="https://codeberg.org/Limine/Limine/releases/download/v${version}/limine-${version}.tar.gz"
+tarball_blake2b="67ebe44c68629d794310f2f21dcc2c2c14845e34accff473dfa931a452ce3d299dd5d1d81481bf744dbd5394453a86f60b065cb89f7b8d9ec5fca67a7f72b934"
 imagedeps="mtools nasm"
 hostdeps="gcc pkg-config"
 deps="core-libs"
@@ -14,7 +14,7 @@ prepare() {
 }
 
 configure() {
-    if [ "$ARCHITECTURE" = "x86_64" ]; then
+    if [ "${JINX_ARCH}" = "x86_64" ]; then
         X86_FLAGS="--enable-bios \
                    --enable-bios-cd \
                    --enable-bios-pxe \
@@ -24,9 +24,9 @@ configure() {
 
     autotools_configure \
         $X86_FLAGS \
-        --enable-uefi-$ARCHITECTURE \
+        --enable-uefi-${JINX_ARCH} \
         --enable-uefi-cd \
-        TOOLCHAIN_FOR_TARGET=${OS_TRIPLET}
+        TOOLCHAIN_FOR_TARGET=${OS_TRIPLET}-
 }
 
 build() {
