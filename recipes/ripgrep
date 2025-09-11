@@ -9,19 +9,27 @@ source_hostdeps="rust"
 imagedeps="build-essential"
 hostdeps="gcc pkg-config rust"
 deps="core-libs"
-# Needed for `cargo fetch` during configure
-allow_network=yes
+# Needed for `cargo fetch` during prepare
+source_hostdeps="rust"
+source_allow_network=yes
 
 prepare() {
     cargo_inject_patches
-}
-
-configure() {
-    cp -rp "${source_dir}"/. ./
 
         CARGO_HOME="${CARGO_HOME}" \
     cargo fetch \
-        --target x86_64-unknown-linux-mlibc
+        --target "${JINX_ARCH}-unknown-linux-mlibc"
+}
+
+build() {
+    cp -rp "${source_dir}"/. ./
+
+        CARGO_HOME="${CARGO_HOME}" \
+    cargo build \
+        --release \
+        --offline \
+        --target "${JINX_ARCH}-unknown-linux-mlibc" \
+        --jobs "${parallelism}"
 }
 
 package() {
@@ -31,8 +39,7 @@ package() {
         --no-track \
         --path . \
         --root "${dest_dir}${prefix}" \
-        --target x86_64-unknown-linux-mlibc \
-        --jobs "${parallelism}"
+        --target "${JINX_ARCH}-unknown-linux-mlibc"
 
     post_package_strip
 }
