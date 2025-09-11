@@ -13,7 +13,6 @@ configure() {
     meson_configure \
         -Db_ndebug=true \
         -Dbuild-tests=false \
-        -Dshared-glapi=enabled \
         -Dexpat=enabled \
         -Dgbm=enabled \
         -Dgles1=enabled \
@@ -22,7 +21,6 @@ configure() {
         -Degl=enabled \
         -Dllvm=enabled \
         -Dzstd=enabled \
-        -Dosmesa=true \
         -Dvideo-codecs=all_free \
         -Dvulkan-drivers=amd,swrast,virtio \
         -Dvulkan-layers=device-select,intel-nullhw,overlay \
