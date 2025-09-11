@@ -1,0 +1,7 @@
+#! /bin/sh
+
+name=rust-crates
+skip_pkg_check=yes
+version=0.0
+revision=1
+deps="rust-cfg-expr-0.15.8 rust-cfg-expr-0.17.2 rust-libc rust-parking-lot rust-target-lexicon"

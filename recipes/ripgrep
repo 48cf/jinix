@@ -10,6 +10,7 @@ imagedeps="build-essential"
 hostdeps="gcc pkg-config rust"
 deps="core-libs"
 # Needed for `cargo fetch` during prepare
+source_deps="rust-crates"
 source_hostdeps="rust"
 source_allow_network=yes
 
