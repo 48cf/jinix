@@ -34,7 +34,7 @@ export LC_COLLATE
 umask 0022
 
 jinx_major_ver="0.6"
-jinx_minor_ver="17"
+jinx_minor_ver="23"
 
 jinx_version="${jinx_major_ver}.${jinx_minor_ver}"
 
@@ -42,6 +42,9 @@ debian_snapshot="20250627T143139Z"
 
 XBPS_VERSION=0.60.5
 XBPS_SHA256SUM=fba39edfdcfeb6f7e3f348a091453fefb087089999cf5bea20ea65ac6cf009dc
+
+debootstrap_version=1.0.141
+debootstrap_sha256sum=1066dd75b337156cdc4ebace2ad38f68fdff56fb8b7d20a1a4eb9739afe55c12
 
 die() {
     echo "$1"
@@ -191,8 +194,11 @@ if [ "$in_container" = "false" ]; then
     mkdir -p "$JINX_CACHE_DIR"
     JINX_CACHE_DIR="$(cd "$JINX_CACHE_DIR" && pwd -P)"
 
-    export PATH="${JINX_CACHE_DIR}/xbps/bin:${PATH}:/usr/sbin:/sbin"
-    export LD_LIBRARY_PATH="${JINX_CACHE_DIR}/xbps/lib:${PATH}"
+    export PATH="${JINX_CACHE_DIR}/xbps/bin:${JINX_CACHE_DIR}/debootstrap/usr/sbin:${PATH}:/usr/sbin:/sbin"
+    if ! [ -z "${LD_LIBRARY_PATH}" ]; then
+        LD_LIBRARY_PATH=":${LD_LIBRARY_PATH}"
+    fi
+    export LD_LIBRARY_PATH="${JINX_CACHE_DIR}/xbps/lib${LD_LIBRARY_PATH}"
 
     mkdir -p "${base_dir}/sources" "${build_dir}/host-builds" "${build_dir}/host-pkgs" "${build_dir}/builds" "${build_dir}/pkgs"
 fi
@@ -215,12 +221,72 @@ trap 'cleanup' EXIT
 
 make_temp() {
     mkdir -p "$JINX_CACHE_DIR/tmp"
-    tmp="$(mktemp "$JINX_CACHE_DIR/tmp/tmp.XXXXXXXX")"
+    tmp="$(mktemp $1 "$JINX_CACHE_DIR/tmp/tmp.XXXXXXXX")"
     temp_collect="${temp_collect} \"${tmp}\""
-    if [ "$1" = "-d" ]; then
-        rm -f "${tmp}"
-        mkdir -p "${tmp}"
-    fi
+}
+
+tracked_subshell() {
+    (
+        temp_collect=""
+        cleanup_done=no
+        trap 'cleanup; exit 1' INT TERM HUP QUIT
+        trap 'cleanup' EXIT
+        set -e
+        eval "$1"
+    )
+}
+
+include_recipe() {
+    unset cross_compile
+    unset name
+    unset version
+    unset revision
+    unset from_source
+    unset deps
+    unset builddeps
+    unset hostdeps
+    unset hostrundeps
+    unset imagedeps
+    unset allow_network
+    unset source_deps
+    unset source_hostdeps
+    unset source_imagedeps
+    unset source_allow_network
+    unset clean_workdirs
+    unset bootstrap_pkg
+    unset from_source
+    unset source_dir
+    unset hg_url
+    unset tag
+    unset git_url
+    unset commit
+    unset shallow
+    unset tarball_url
+    unset tarball_sha256
+    unset tarball_sha512
+    unset tarball_blake2b
+
+    early_prepare() {
+        :
+    }
+
+    prepare() {
+        :
+    }
+
+    configure() {
+        :
+    }
+
+    build() {
+        :
+    }
+
+    package() {
+        :
+    }
+
+    . "$1"
 }
 
 build_hostdeps() {
@@ -237,16 +303,14 @@ build_deps() {
     for dep in ${deps} ${builddeps}; do
         [ -f "${base_dir}"/recipes/${dep} ] || die "missing dependency '${dep}' for recipe '${name}'"
 
-        (
-            unset version
-            unset from_source
-            . "${base_dir}"/recipes/${dep}
+        tracked_subshell '
+            include_recipe "${base_dir}"/recipes/${dep}
             if ! [ -z "${from_source}" ]; then
                 version=$(unset version && source_source_recipe ${from_source} && echo "$version")
             fi
 
             [ -f "${build_dir}"/pkgs/${name}-${version}_${revision}.${JINX_ARCH}.xbps ]
-        ) && continue
+        ' && continue
 
         "${script}" build ${dep}
     done
@@ -619,37 +683,12 @@ get_real_source_dir() {
     fi
 }
 
-default_recipe_steps() {
-    early_prepare() {
-        :
-    }
-
-    prepare() {
-        :
-    }
-
-    configure() {
-        :
-    }
-
-    build() {
-        :
-    }
-
-    package() {
-        :
-    }
-}
-
 source_source_recipe() {
     if [ -f "${base_dir}"/source-recipes/$1 ]; then
-        . "${base_dir}"/source-recipes/$1
+        include_recipe "${base_dir}"/source-recipes/$1
     elif [ -f "${base_dir}"/recipes/$1 ]; then
-        . "${base_dir}"/recipes/$1
+        include_recipe "${base_dir}"/recipes/$1
 
-        unset deps
-        unset builddeps
-        unset hostrundeps
         imagedeps="${source_imagedeps}"
         hostdeps="${source_hostdeps}"
         deps="${source_deps}"
@@ -660,8 +699,6 @@ source_source_recipe() {
 }
 
 do_fetch() {
-    default_recipe_steps
-
     source_source_recipe $1
 
     get_real_source_dir
@@ -679,10 +716,10 @@ do_fetch() {
     fi
 
     if ! [ "${is_sourceless_package}" = true ]; then
-        (
+        tracked_subshell '
             cd "${source_dir}"
             early_prepare
-        )
+        '
     fi
 }
 
@@ -737,8 +774,6 @@ do_patch() {
 }
 
 do_prepare() {
-    default_recipe_steps
-
     source_source_recipe $1
 
     get_real_source_dir
@@ -751,10 +786,7 @@ do_prepare() {
 }
 
 do_configure_host() {
-    default_recipe_steps
-
-    unset from_source
-    . "${base_dir}"/host-recipes/$1
+    include_recipe "${base_dir}"/host-recipes/$1
 
     mkdir -p "${build_dir}"/host-builds/${name}
 
@@ -778,10 +810,7 @@ do_configure_host() {
 }
 
 do_build_host() {
-    default_recipe_steps
-
-    unset from_source
-    . "${base_dir}"/host-recipes/$1
+    include_recipe "${base_dir}"/host-recipes/$1
 
     mkdir -p "${build_dir}"/host-builds/${name}
 
@@ -805,10 +834,7 @@ do_build_host() {
 }
 
 do_package_host() {
-    default_recipe_steps
-
-    unset from_source
-    . "${base_dir}"/host-recipes/$1
+    include_recipe "${base_dir}"/host-recipes/$1
 
     dest_dir="${build_dir}"/host-pkgs/${name}
 
@@ -843,10 +869,7 @@ do_package_host() {
 }
 
 do_configure() {
-    default_recipe_steps
-
-    unset from_source
-    . "${base_dir}"/recipes/$1
+    include_recipe "${base_dir}"/recipes/$1
 
     mkdir -p "${build_dir}"/builds/${name}
 
@@ -874,10 +897,7 @@ do_configure() {
 }
 
 do_build() {
-    default_recipe_steps
-
-    unset from_source
-    . "${base_dir}"/recipes/$1
+    include_recipe "${base_dir}"/recipes/$1
 
     mkdir -p "${build_dir}"/builds/${name}
 
@@ -905,10 +925,7 @@ do_build() {
 }
 
 do_package() {
-    default_recipe_steps
-
-    unset from_source
-    . "${base_dir}"/recipes/$1
+    include_recipe "${base_dir}"/recipes/$1
 
     dest_dir="${build_dir}"/pkgs/${name}
 
@@ -976,33 +993,33 @@ do_source() {
     prepare_container
 
     if ! [ -f "${base_dir}"/sources/$1.version ] || ! [ "$(cat "${base_dir}"/sources/$1.version)" = "${version}" ]; then
-        (
+        tracked_subshell '
             allow_network="yes"
-            clean_sources $1
+            clean_sources '$1'
             [ "${is_local_package}" = true ] || container_base_dir_ro="-o ro"
-            run_in_container internal-fetch $1
-            echo "${version}" >"${base_dir}"/sources/$1.version
-        )
+            run_in_container internal-fetch '$1'
+            echo "${version}" >"${base_dir}"/sources/'$1'.version
+        '
     fi
 
     if ! [ -f "${base_dir}"/sources/$1.patched ]; then
-        (
+        tracked_subshell '
             if ! [ "${is_local_package}" = true ] && ! [ "${is_sourceless_package}" = true ]; then
                 allow_network="yes"
-                run_in_container internal-patch $1
+                run_in_container internal-patch '$1'
             fi
-            touch "${base_dir}"/sources/$1.patched
-        )
+            touch "${base_dir}"/sources/'$1'.patched
+        '
     fi
 
     if ! [ -f "${base_dir}"/sources/$1.prepared ]; then
-        (
+        tracked_subshell '
             if ! [ "${is_sourceless_package}" = true ]; then
                 [ "${is_local_package}" = true ] || container_base_dir_ro="-o ro"
-                run_in_container internal-prepare $1
+                run_in_container internal-prepare '$1'
             fi
-            touch "${base_dir}"/sources/$1.prepared
-        )
+            touch "${base_dir}"/sources/'$1'.prepared
+        '
     fi
 
     destroy_container
@@ -1079,15 +1096,14 @@ do_regen() {
 }
 
 do_host_pkg() {
-    unset from_source
-    . "${base_dir}"/host-recipes/$1
+    include_recipe "${base_dir}"/host-recipes/$1
 
     echo "* building host package: $name"
 
     if ! [ -z "${from_source}" ]; then
-        ( do_source "${from_source}" )
+        tracked_subshell 'do_source "${from_source}"'
     else
-        ( do_source "${name}" )
+        tracked_subshell 'do_source "${name}"'
     fi
 
     cross_compile=yes
@@ -1124,8 +1140,7 @@ do_host_pkg() {
 }
 
 do_pkg() {
-    unset from_source
-    . "${base_dir}"/recipes/$1
+    include_recipe "${base_dir}"/recipes/$1
 
     echo "* building package: $name"
 
@@ -1137,30 +1152,30 @@ do_pkg() {
         *git)
             if ! [ -f "${build_dir}"/pkgs/${name}-${version}_${revision}.${JINX_ARCH}.xbps ]; then
                 rm -rf "${build_dir}"/builds/"$1"
-                (
+                tracked_subshell '
                 if ! [ -z "${from_source}" ]; then
                     name=$(unset name && source_source_recipe ${from_source} && echo "${name}")
                 fi
                 clean_sources "${name}"
-                )
+                '
             fi
             ;;
     esac
 
     if ! [ -f "${build_dir}"/pkgs/${name}-${version}_${revision}.${JINX_ARCH}.xbps ]; then
         rm -rf "${build_dir}"/builds/"$1"
-        (
+        tracked_subshell '
         if ! [ -z "${from_source}" ]; then
             name=$(unset name && source_source_recipe ${from_source} && echo "${name}")
         fi
         need_repatch "${name}"
-        )
+        '
     fi
 
     if ! [ -z "${from_source}" ]; then
-        ( do_source "${from_source}" )
+        tracked_subshell 'do_source "${from_source}"'
     else
-        ( do_source "${name}" )
+        tracked_subshell 'do_source "${name}"'
     fi
 
     prepare_container
@@ -1228,7 +1243,7 @@ do_pkg() {
 cmd_host_build() {
     for ppkg in "$@"; do
         for pkg in $(eval '(' cd "'${base_dir}'"/host-recipes '&&' echo "${ppkg}" ')' ); do
-            ( do_host_pkg "${pkg}" )
+            tracked_subshell 'do_host_pkg "${pkg}"'
         done
     done
 }
@@ -1236,21 +1251,19 @@ cmd_host_build() {
 cmd_build() {
     for ppkg in "$@"; do
         for pkg in $(eval '(' cd "'${base_dir}'"/recipes '&&' echo "${ppkg}" ')' ); do
-            ( do_pkg "${pkg}" )
+            tracked_subshell 'do_pkg "${pkg}"'
         done
     done
 }
 
 do_build_if_needed() {
-    unset version
-    unset from_source
-    . "${base_dir}"/recipes/$1
+    include_recipe "${base_dir}"/recipes/$1
     if ! [ -z "${from_source}" ]; then
         version=$(unset version && source_source_recipe ${from_source} && echo "$version")
     fi
 
     if ! [ -f "${build_dir}"/pkgs/${name}-${version}_${revision}.${JINX_ARCH}.xbps ]; then
-        ( do_pkg "$1" )
+        tracked_subshell 'do_pkg "'$1'"'
     fi
 }
 
@@ -1274,34 +1287,34 @@ cmd_build_if_needed() {
     deps="$(export LC_ALL=C; echo "${deps}" | tr ' ' '\n' | sort | uniq | xargs)"
     hostdeps="$(export LC_ALL=C; echo "${hostdeps}" | tr ' ' '\n' | sort | uniq | xargs)"
 
-    (
-        make_temp
-        hostdeps_file="${tmp}"
-        make_temp
-        deps_file="${tmp}"
+    make_temp
+    hostdeps_file="${tmp}"
+    make_temp
+    deps_file="${tmp}"
 
-        get_hostdeps_file
-        get_builddeps_file
+    get_hostdeps_file
+    get_builddeps_file
 
-        for hostdep in $(cat "${hostdeps_file}"); do
-            ( do_host_build_if_needed "${hostdep}" )
-        done
-        for dep in $(cat "${deps_file}"); do
-            ( do_build_if_needed "${dep}" )
-        done
-    )
+    unset deps builddeps hostdeps hostrundeps
+
+    for hostdep in $(cat "${hostdeps_file}"); do
+        tracked_subshell 'do_host_build_if_needed "${hostdep}"'
+    done
+    for dep in $(cat "${deps_file}"); do
+        tracked_subshell 'do_build_if_needed "${dep}"'
+    done
 }
 
 cmd_regen() {
     for i in "$@"; do
-        ( do_regen "$i" )
+        tracked_subshell 'do_regen "$i"'
     done
 }
 
 cmd_host_rebuild() {
     for ppkg in "$@"; do
         for pkg in $(eval '(' cd "'${base_dir}'"/host-recipes '&&' echo "${ppkg}" ')' ); do
-            ( do_host_rebuild "${pkg}" )
+            tracked_subshell 'do_host_rebuild "${pkg}"'
         done
     done
 }
@@ -1309,7 +1322,7 @@ cmd_host_rebuild() {
 cmd_rebuild() {
     for ppkg in "$@"; do
         for pkg in $(eval '(' cd "'${base_dir}'"/recipes '&&' echo "${ppkg}" ')' ); do
-            ( do_rebuild "${pkg}" )
+            tracked_subshell 'do_rebuild "${pkg}"'
         done
     done
 }
@@ -1347,8 +1360,8 @@ cmd_install() {
     for pkg in ${pkgs_to_install}; do
         echo "* installing ${pkg}..."
 
-        (
-        . "${base_dir}"/recipes/${pkg}
+        tracked_subshell '
+        include_recipe "${base_dir}"/recipes/${pkg}
 
         if ! [ -z "${from_source}" ]; then
             version=$(unset version && source_source_recipe ${from_source} && echo "$version")
@@ -1358,7 +1371,7 @@ cmd_install() {
             if [ "$(id -u)" = "0" ]; then
                 die "$0: a package needs to be built, but Jinx was invoked as root"
             fi
-            ( do_pkg "${pkg}" )
+            tracked_subshell '\''do_pkg "${pkg}"'\''
         fi
 
         # xbps seems to only install the package every second time when reinstalling.
@@ -1373,8 +1386,8 @@ cmd_install() {
         XBPS_TARGET_ARCH="${JINX_ARCH}" \
             xbps-install -y $force_install -r "${sysroot}" -R "${build_dir}"/pkgs ${pkg} >/dev/null 2>&1
 
-        tar -tf "${build_dir}"/pkgs/${name}-${version}_${revision}.${JINX_ARCH}.xbps | ( grep -v "${files_to_ignore}" || true ) >>"${all_files}"
-        )
+        zstdcat "${build_dir}"/pkgs/${name}-${version}_${revision}.${JINX_ARCH}.xbps | tar -tf - | ( grep -v "${files_to_ignore}" || true ) >>"${all_files}"
+        '
     done
 
     echo "* checking for conflicts..."
@@ -1396,17 +1409,17 @@ cmd_install() {
             echo "  file path: ${elem}"
             printf "  in packages:"
             for pkg in ${pkgs_to_install}; do
-                (
-                . "${base_dir}"/recipes/${pkg}
+                tracked_subshell '
+                include_recipe "${base_dir}"/recipes/${pkg}
 
                 if ! [ -z "${from_source}" ]; then
                     version=$(unset version && source_source_recipe ${from_source} && echo "$version")
                 fi
 
-                if tar -tf "${build_dir}"/pkgs/${name}-${version}_${revision}.${JINX_ARCH}.xbps | ( grep -v "${files_to_ignore}" || true ) | grep -q "${elem}"; then
+                if zstdcat "${build_dir}"/pkgs/${name}-${version}_${revision}.${JINX_ARCH}.xbps | tar -tf - | ( grep -v "${files_to_ignore}" || true ) | grep -q "${elem}"; then
                     printf " ${pkg}"
                 fi
-                )
+                '
             done
             printf "\n"
         done
@@ -1422,6 +1435,14 @@ reinit_container() {
     mkdir -p "${apt_cache}"
 
     mkdir -p "$JINX_CACHE_DIR/sets/.image"
+
+    SHA256_COMMAND="sha256sum"
+    if ! command -v "${SHA256_COMMAND%% *}" >/dev/null 2>&1; then
+        SHA256_COMMAND="sha256"
+        if ! command -v "${SHA256_COMMAND%% *}" >/dev/null 2>&1; then
+            die "error: Cannot find sha256(sum) command"
+        fi
+    fi
 
     cat >"$JINX_CACHE_DIR/nochown.c" <<EOF
 #include <stdio.h>
@@ -1462,29 +1483,20 @@ EOF
         ppc64le) DEBOOTSTRAP_ARCH=ppc64el ;;
     esac
 
-    if ! command -v debootstrap >/dev/null 2>&1; then
-        die "error: missing debootstrap command"
-    fi
-
-    DEBOOTSTRAP_PATH="$(command -v debootstrap)"
-    make_temp -d
-    TMP_PATH="${tmp}"
-    cp "${DEBOOTSTRAP_PATH}" "${TMP_PATH}"/
-    sed "s/HOST_ARCH=[^;#]*/HOST_ARCH=${DEBOOTSTRAP_ARCH}/g" "${DEBOOTSTRAP_PATH}" >"${TMP_PATH}/debootstrap"
-    chmod +x "${TMP_PATH}/debootstrap"
-
-    cat >"$JINX_CACHE_DIR/debootstrap_wrap.c" <<EOF
-#include <unistd.h>
-
-int main(int argc, char *argv[]) {
-    (void)argc;
-    argv[0] = "${DEBOOTSTRAP_PATH}";
-    execv("${TMP_PATH}/debootstrap", argv);
-    return 1;
-}
-EOF
-    cc -O2 -pipe -std=gnu99 -Wall -Wextra "$JINX_CACHE_DIR/debootstrap_wrap.c" -o "$JINX_CACHE_DIR/debootstrap_wrap"
-    rm "$JINX_CACHE_DIR/debootstrap_wrap.c"
+    # Install debootstrap
+    tracked_subshell '
+        cd "${JINX_CACHE_DIR}"
+        wget -O debootstrap.tar.gz https://salsa.debian.org/installer-team/debootstrap/-/archive/${debootstrap_version}/debootstrap-${debootstrap_version}.tar.gz
+        if ! "${SHA256_COMMAND}" debootstrap.tar.gz | grep "${debootstrap_sha256sum}" >/dev/null 2>&1; then
+            die "Jinx: Failed to verify debootstrap tarball"
+        fi
+        tar -zxf debootstrap.tar.gz
+        make -C debootstrap-${debootstrap_version} DESTDIR="$(pwd -P)/debootstrap" install
+        rm -rf debootstrap.tar.gz debootstrap-${debootstrap_version}
+        sed "s/HOST_ARCH=[^;#]*/HOST_ARCH=${DEBOOTSTRAP_ARCH}/g;s|DEBOOTSTRAP_DIR=/usr/share/debootstrap|DEBOOTSTRAP_DIR=\"$(pwd -P)/debootstrap/usr/share/debootstrap\"|g" debootstrap/usr/sbin/debootstrap >debootstrap.sed
+        mv debootstrap.sed debootstrap/usr/sbin/debootstrap
+        chmod +x debootstrap/usr/sbin/debootstrap
+    '
 
     mkdir -p "$JINX_CACHE_DIR/sets/.image/var/cache/apt/archives"
 
@@ -1493,10 +1505,9 @@ EOF
 
         mount --bind '${apt_cache}' '$JINX_CACHE_DIR/sets/.image/var/cache/apt/archives'
 
-        LD_PRELOAD='$JINX_CACHE_DIR/sets/.image/nochown.so' '$JINX_CACHE_DIR/debootstrap_wrap' \
+        LD_PRELOAD='$JINX_CACHE_DIR/sets/.image/nochown.so' debootstrap \
             --foreign sid '$JINX_CACHE_DIR/sets/.image' https://snapshot.debian.org/archive/debian/${debian_snapshot}/
     "
-    rm "$JINX_CACHE_DIR/debootstrap_wrap"
 
     for dir in dev proc sys run tmp var/tmp; do
         rm -rf "${JINX_CACHE_DIR}/sets/.image/${dir}"
@@ -1529,37 +1540,30 @@ Acquire::Check-Valid-Until "0";' >> "$JINX_CACHE_DIR/sets/.image/etc/apt/apt.con
     run_in_container1 "$JINX_CACHE_DIR/sets/.image" apt-get install -y autopoint bash bison bzip2 cmake curl diffutils docbook-xsl doxygen file findutils flex gawk gettext git grep gzip lzip m4 make mercurial meson ninja-build patch perl python3 sed tar texinfo w3m which xmlto xsltproc xz-utils zstd
 
     # Build xbps
-    SHA256_COMMAND="sha256sum"
-    if ! command -v "${SHA256_COMMAND%% *}" >/dev/null 2>&1; then
-        SHA256_COMMAND="sha256"
-        if ! command -v "${SHA256_COMMAND%% *}" >/dev/null 2>&1; then
-            die "error: Cannot find sha256(sum) command"
-        fi
-    fi
-
-    curl -Lo "${JINX_CACHE_DIR}/xbps-${XBPS_VERSION}.tar.gz" https://github.com/void-linux/xbps/archive/refs/tags/${XBPS_VERSION}.tar.gz
+    wget -O "${JINX_CACHE_DIR}/xbps-${XBPS_VERSION}.tar.gz" https://github.com/void-linux/xbps/archive/refs/tags/${XBPS_VERSION}.tar.gz
     if ! "${SHA256_COMMAND}" "${JINX_CACHE_DIR}/xbps-${XBPS_VERSION}.tar.gz" | grep "${XBPS_SHA256SUM}" >/dev/null 2>&1; then
         die "Jinx: Failed to verify XBPS tarball"
     fi
-    (
+
+    tracked_subshell '
 
     cd "$JINX_CACHE_DIR"
     tar -zxf xbps-${XBPS_VERSION}.tar.gz
     cd xbps-${XBPS_VERSION}
 
     # XXX: xbps upstream forgot to bump version string
-    sed 's/0\.60/'"${XBPS_VERSION}"'/g' configure >configure.sed
+    sed "s/0\.60/${XBPS_VERSION}/g" configure >configure.sed
     mv configure.sed configure
-    sed 's/&& DEBUG=yes/&& DEBUG=no/g' configure >configure.sed
+    sed "s/&& DEBUG=yes/&& DEBUG=no/g" configure >configure.sed
     mv configure.sed configure
     chmod +x configure
 
     CFLAGS="-O2 -pipe -Wno-error" ./configure --verbose --prefix="$JINX_CACHE_DIR/xbps" --localstatedir=/var
 
-    sed '/DBDIR/d' data/Makefile >data/Makefile.sed
+    sed "/DBDIR/d" data/Makefile >data/Makefile.sed
     mv data/Makefile.sed data/Makefile
 
-    sed 's/-lxml2/-lxml2 -llzma -lm/g' config.mk >config.mk.sed
+    sed "s/-lxml2/-lxml2 -llzma -lm/g" config.mk >config.mk.sed
     mv config.mk.sed config.mk
 
     if command -v gmake >/dev/null 2>&1; then
@@ -1574,7 +1578,7 @@ Acquire::Check-Valid-Until "0";' >> "$JINX_CACHE_DIR/sets/.image/etc/apt/apt.con
     cd ..
     rm -rf xbps-${XBPS_VERSION}*
 
-    )
+    '
 }
 
 first_use() {
@@ -1651,12 +1655,12 @@ case "$1" in
         do_package "$2"
         ;;
     internal-get-deps-file)
-        . "${base_dir}"/recipes/$2
+        include_recipe "${base_dir}"/recipes/$2
         deps_file="$3"
         get_deps_file
         ;;
     internal-get-hostdeps-file)
-        . "${base_dir}"/host-recipes/$2
+        include_recipe "${base_dir}"/host-recipes/$2
         hostdeps_file="$3"
         get_hostdeps_file_run
         ;;

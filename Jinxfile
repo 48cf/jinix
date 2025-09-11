@@ -22,9 +22,9 @@ esac
 
 CARGO_HOME="${JINX_CACHE_DIR}/cargo-home"
 
-if [ "${build_dir}/build-support/cargo-config.toml" -nt "${CARGO_HOME}/config.toml" ]; then
+if [ "${base_dir}/build-support/cargo-config.toml" -nt "${CARGO_HOME}/config.toml" ]; then
     mkdir -p "${CARGO_HOME}"
-    cp -rpv "${build_dir}/build-support/cargo-config.toml" "${CARGO_HOME}/config.toml"
+    cp -rpv "${base_dir}/build-support/cargo-config.toml" "${CARGO_HOME}/config.toml"
 fi
 
 cargo_inject_patches() {
@@ -251,8 +251,8 @@ gi_env() {
         INTROSPECTION_TYPELIBDIR_ENV="${sysroot_dir}${prefix}/lib/girepository-1.0" \
         INTROSPECTION_GIRDIR_ENV="${sysroot_dir}${prefix}/share/gir-1.0" \
         INTROSPECTION_MAKEFILE_ENV="/usr/local/share/gobject-introspection-1.0/Makefile.introspection" \
-        GI_LDD_WRAPPER="${build_dir}/build-support/mlibc-ldd-wrapper" \
-        GI_CROSS_LAUNCHER="${build_dir}/build-support/mlibc-run-wrapper" \
+        GI_LDD_WRAPPER="${base_dir}/build-support/mlibc-ldd-wrapper" \
+        GI_CROSS_LAUNCHER="${base_dir}/build-support/mlibc-run-wrapper" \
         RUN_WRAPPER_LD_LIBRARY_PATH="${sysroot_dir}${prefix}/lib" \
         RUN_WRAPPER_INTERP="${build_dir}/builds/mlibc/ld.so" \
     "$@"
@@ -261,8 +261,8 @@ gi_env() {
 vala_env() {
         GI_GIR_PATH="${sysroot_dir}${prefix}/share/gir-1.0" \
         VALADIR="${sysroot_dir}${prefix}/share/vala/vapi" \
-        VAPIGEN="${build_dir}/build-support/cross-vapigen" \
-        VALAC="${build_dir}/build-support/cross-valac" \
+        VAPIGEN="${base_dir}/build-support/cross-vapigen" \
+        VALAC="${base_dir}/build-support/cross-valac" \
         VALA_MAKEFILE="/usr/local/share/vala/Makefile.vapigen" \
         VAPIGEN_VAPIDIRS="${sysroot_dir}${prefix}/share/vala/vapi" \
         VAPIGEN_GIRDIRS="${sysroot_dir}${prefix}/share/gir-1.0" \

@@ -1,3 +1,4 @@
 /.jinx-cache
 /build*
+!/build-support
 /sources
