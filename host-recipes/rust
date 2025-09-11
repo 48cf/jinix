@@ -1,5 +1,6 @@
 #! /bin/sh
 
+_cargo_home="${build_dir}/host-builds/rust/cargo-home"
 _tools="rustc std cargo clippy rustfmt"
 
 name=rust
@@ -22,7 +23,7 @@ targets = "X86"
 download-ci-llvm = false
 
 [build]
-target = ["${JINX_ARCH}-unknown-linux-mlibc", "x86_64-unknown-linux-gnu"]
+target = ["${RUST_TARGET}", "${RUST_HOST_TARGET}"]
 build-dir = "${build_dir}/host-builds/rust"
 docs = false
 
@@ -34,10 +35,10 @@ sysconfdir = "etc"
 codegen-tests = false
 deny-warnings = false
 
-[target.x86_64-unknown-linux-gnu]
+[target.${RUST_HOST_TARGET}]
 llvm-config = "${build_dir}/host-pkgs/llvm/usr/local/bin/llvm-config"
 
-[target.${JINX_ARCH}-unknown-linux-mlibc]
+[target.${RUST_TARGET}]
 llvm-config = "${build_dir}/host-pkgs/llvm/usr/local/bin/llvm-config"
 cc = "${OS_TRIPLET}-gcc"
 cxx = "${OS_TRIPLET}-g++"
@@ -48,13 +49,13 @@ EOF
 }
 
 build() {
-        CARGO_HOME="${build_dir}/host-builds/rust/cargo-home" \
+        CARGO_HOME="${_cargo_home}" \
         BOOTSTRAP_SKIP_TARGET_SANITY=1 \
     python3 ${source_dir}/x.py build ${_tools} --stage 2 -j${parallelism}
 }
 
 package() {
-        CARGO_HOME="${build_dir}/host-builds/rust/cargo-home" \
+        CARGO_HOME="${_cargo_home}" \
         BOOTSTRAP_SKIP_TARGET_SANITY=1 \
         DESTDIR="${dest_dir}" \
     python3 ${source_dir}/x.py install ${_tools} -j${parallelism}

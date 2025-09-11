@@ -1,8 +1,8 @@
 [build]
 rustc = "${build_dir}/host-pkgs/rust/usr/local/bin/rustc"
-target = "${JINX_ARCH}-unknown-linux-mlibc"
+target = "${RUST_TARGET}"
 
-[target.${JINX_ARCH}-unknown-linux-mlibc]
+[target.${RUST_TARGET}]
 linker = "${JINX_ARCH}-linux-mlibc-gcc"
 
 [patch.crates-io]

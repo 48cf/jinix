@@ -10,7 +10,7 @@ source_hostdeps="rust"
 imagedeps="build-essential patchelf"
 hostdeps="gcc pkg-config rust cargo-cbuild gobject-introspection glib2 vala"
 deps="core-libs cairo harfbuzz pango gdk-pixbuf libidn2 libunistring libxml2 glib2 gobject-introspection vala"
-# Needed for `cargo fetch` during prepare
+# Needed for `cargo fetch` during prepare.
 source_hostdeps="rust"
 source_allow_network=yes
 

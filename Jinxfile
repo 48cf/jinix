@@ -14,15 +14,29 @@ OS_TRIPLET=${JINX_ARCH}-linux-mlibc
 
 case "${JINX_ARCH}" in
     x86_64)
+        RUST_TARGET="x86_64-unknown-linux-mlibc"
         TARGET_CFLAGS="$TARGET_CFLAGS -march=x86-64 -mtune=generic -fcf-protection -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer"
         TARGET_CXXFLAGS="$TARGET_CXXFLAGS -march=x86-64 -mtune=generic -fcf-protection -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer"
         TARGET_LDFLAGS="$TARGET_LDFLAGS -Wl,-z,pack-relative-relocs"
         ;;
 esac
 
+RUST_HOST_TARGET="$(uname -m)-unknown-linux-gnu"
+
+case "$(uname -m)" in
+    i?86) RUST_HOST_TARGET="i686-unknown-linux-gnu" ;;
+    arm*) RUST_HOST_TARGET="armv7-unknown-linux-gnueabihf" ;;
+    riscv64) RUST_HOST_TARGET="riscv64gc-unknown-linux-gnu" ;;
+    ppc64le) RUST_HOST_TARGET="powerpc64le-unknown-linux-gnu" ;;
+esac
+
 CARGO_HOME="${build_dir}/cargo-home"
 
-if [ "${base_dir}/build-support/cargo-config.toml" -nt "${CARGO_HOME}/config.toml" ]; then
+# If we're in a container and the cargo config file is missing or outdated, install it.
+#
+# We need the in_container check to prevent `envsubst` from expanding the variables too early
+# while we're still running on the host.
+if [ "$in_container" = "true" ] && [ "${base_dir}/build-support/cargo-config.toml" -nt "${CARGO_HOME}/config.toml" ]; then
     mkdir -p "${CARGO_HOME}"
 
     make_temp
@@ -31,10 +45,10 @@ if [ "${base_dir}/build-support/cargo-config.toml" -nt "${CARGO_HOME}/config.tom
         base_dir="${base_dir}" \
         build_dir="${build_dir}" \
         JINX_ARCH="${JINX_ARCH}" \
-    envsubst '${base_dir} ${build_dir} ${JINX_ARCH}' \
+        RUST_TARGET="${RUST_TARGET}" \
+        RUST_HOST_TARGET="${RUST_HOST_TARGET}" \
+    envsubst '${base_dir} ${build_dir} ${JINX_ARCH} ${RUST_TARGET} ${RUST_HOST_TARGET}' \
         <"${base_dir}/build-support/cargo-config.toml" >"$config_tmp"
-
-    cat "$config_tmp"
 
     touch -r "${base_dir}/build-support/cargo-config.toml" "$config_tmp"
     mv -f "$config_tmp" "${CARGO_HOME}/config.toml"

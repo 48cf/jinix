@@ -1,23 +1,36 @@
 #! /bin/sh
 
+_cargo_home="${build_dir}/host-builds/cargo-cbuild/cargo-home"
+
 name=cargo-cbuild
 from_source=cargo-cbuild
 revision=1
 imagedeps="build-essential gcc libssl-dev pkg-config"
 hostdeps="rust"
+# Needed for `cargo fetch` during configure.
+#
+# We can't put this into prepare because we need to use a separate CARGO_HOME
+# for this package to avoid pulling in patched crates.
+allow_network=yes
 
-build() {
+configure() {
     cp -rp "${source_dir}"/. ./
 
-        CARGO_HOME="${CARGO_HOME}" \
+        CARGO_HOME="${_cargo_home}" \
+    cargo fetch \
+        --target ${RUST_HOST_TARGET}
+}
+
+build() {
+        CARGO_HOME="${_cargo_home}" \
     cargo build \
         --release \
         --offline \
-        --target x86_64-unknown-linux-gnu
+        --target ${RUST_HOST_TARGET}
 }
 
 package() {
-    find target/x86_64-unknown-linux-gnu/release \
+    find target/${RUST_HOST_TARGET}/release \
         -maxdepth 1 \
         -type f \
         -executable \

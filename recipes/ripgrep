@@ -23,13 +23,6 @@ prepare() {
 
 build() {
     cp -rp "${source_dir}"/. ./
-
-        CARGO_HOME="${CARGO_HOME}" \
-    cargo build \
-        --release \
-        --offline \
-        --target "${JINX_ARCH}-unknown-linux-mlibc" \
-        --jobs "${parallelism}"
 }
 
 package() {
@@ -39,7 +32,8 @@ package() {
         --no-track \
         --path . \
         --root "${dest_dir}${prefix}" \
-        --target "${JINX_ARCH}-unknown-linux-mlibc"
+        --target "${JINX_ARCH}-unknown-linux-mlibc" \
+        --jobs "${parallelism}"
 
     post_package_strip
 }
