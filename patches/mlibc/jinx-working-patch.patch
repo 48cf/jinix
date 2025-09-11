@@ -1,7 +1,8 @@
-diff -urN --no-dereference mlibc-clean/abis/linux/fcntl.h mlibc-workdir/abis/linux/fcntl.h
+diff --git mlibc-clean/abis/linux/fcntl.h mlibc-workdir/abis/linux/fcntl.h
+index b2215a2..34cbe85 100644
 --- mlibc-clean/abis/linux/fcntl.h
 +++ mlibc-workdir/abis/linux/fcntl.h
-@@ -103,6 +103,8 @@
+@@ -103,6 +103,8 @@ struct f_owner_ex {
  #endif /* _GNU_SOURCE */
  
  #define F_OWNER_TID 0
@@ -10,7 +11,8 @@ diff -urN --no-dereference mlibc-clean/abis/linux/fcntl.h mlibc-workdir/abis/lin
  
  #define POSIX_FADV_NORMAL 0
  #define POSIX_FADV_RANDOM 1
-diff -urN --no-dereference mlibc-clean/abis/linux/ioctls.h mlibc-workdir/abis/linux/ioctls.h
+diff --git mlibc-clean/abis/linux/ioctls.h mlibc-workdir/abis/linux/ioctls.h
+index f3606a3..57167bf 100644
 --- mlibc-clean/abis/linux/ioctls.h
 +++ mlibc-workdir/abis/linux/ioctls.h
 @@ -17,4 +17,8 @@
@@ -22,10 +24,11 @@ diff -urN --no-dereference mlibc-clean/abis/linux/ioctls.h mlibc-workdir/abis/li
 +#define SIOCDELMULTI 0x8932
 +
  #endif /* _ABIBITS_IOCTLS_H */
-diff -urN --no-dereference mlibc-clean/abis/linux/ipc.h mlibc-workdir/abis/linux/ipc.h
+diff --git mlibc-clean/abis/linux/ipc.h mlibc-workdir/abis/linux/ipc.h
+index b5f9f11..9fc10f3 100644
 --- mlibc-clean/abis/linux/ipc.h
 +++ mlibc-workdir/abis/linux/ipc.h
-@@ -31,13 +31,13 @@
+@@ -31,13 +31,13 @@ extern "C" {
  typedef int key_t;
  
  struct ipc64_perm {
@@ -37,11 +40,12 @@ diff -urN --no-dereference mlibc-clean/abis/linux/ipc.h mlibc-workdir/abis/linux
  	gid_t cgid;
  	mode_t mode;
 -	int __ipc_perm_seq;
-+	int __seq;
++	int seq;
  	long __unused[2];
  };
  
-diff -urN --no-dereference mlibc-clean/abis/linux/limits.h mlibc-workdir/abis/linux/limits.h
+diff --git mlibc-clean/abis/linux/limits.h mlibc-workdir/abis/linux/limits.h
+index 1363bc0..7ef27c6 100644
 --- mlibc-clean/abis/linux/limits.h
 +++ mlibc-workdir/abis/linux/limits.h
 @@ -6,5 +6,8 @@
@@ -53,10 +57,11 @@ diff -urN --no-dereference mlibc-clean/abis/linux/limits.h mlibc-workdir/abis/li
 +#define _POSIX_MAX_INPUT 255
  
  #endif /*_ABIBITS_LIMITS_H */
-diff -urN --no-dereference mlibc-clean/options/ansi/generic/stdio.cpp mlibc-workdir/options/ansi/generic/stdio.cpp
+diff --git mlibc-clean/options/ansi/generic/stdio.cpp mlibc-workdir/options/ansi/generic/stdio.cpp
+index a5e177a..46719bb 100644
 --- mlibc-clean/options/ansi/generic/stdio.cpp
 +++ mlibc-workdir/options/ansi/generic/stdio.cpp
-@@ -393,7 +393,8 @@
+@@ -393,7 +393,8 @@ static int do_scanf(H &handler, const char *fmt, __builtin_va_list args) {
  			} else {
  				char *typed_dest = (char *)dest;
  				if(typed_dest)
@@ -66,7 +71,7 @@ diff -urN --no-dereference mlibc-clean/options/ansi/generic/stdio.cpp mlibc-work
  			}
  		};
  
-@@ -648,7 +649,6 @@
+@@ -648,7 +649,6 @@ static int do_scanf(H &handler, const char *fmt, __builtin_va_list args) {
  					handler.consume();
  					append_to_buffer(c);
  					c = handler.look_ahead();
@@ -74,10 +79,11 @@ diff -urN --no-dereference mlibc-clean/options/ansi/generic/stdio.cpp mlibc-work
  				}
  				break;
  			}
-diff -urN --no-dereference mlibc-clean/options/ansi/generic/string.cpp mlibc-workdir/options/ansi/generic/string.cpp
+diff --git mlibc-clean/options/ansi/generic/string.cpp mlibc-workdir/options/ansi/generic/string.cpp
+index bc8c09e..24e3515 100644
 --- mlibc-clean/options/ansi/generic/string.cpp
 +++ mlibc-workdir/options/ansi/generic/string.cpp
-@@ -103,7 +103,9 @@
+@@ -103,7 +103,9 @@ int strncmp(const char *a, const char *b, size_t max_size) {
  	}
  }
  
@@ -88,7 +94,7 @@ diff -urN --no-dereference mlibc-clean/options/ansi/generic/string.cpp mlibc-wor
  	// NOTE: This might not work for non ANSI charsets.
  	size_t l = strlen(src);
  
-@@ -114,6 +116,11 @@
+@@ -114,6 +116,11 @@ size_t strxfrm(char *__restrict dest, const char *__restrict src, size_t n) {
  	return l;
  }
  
@@ -100,7 +106,7 @@ diff -urN --no-dereference mlibc-clean/options/ansi/generic/string.cpp mlibc-wor
  void *memchr(const void *s, int c, size_t size) {
  	auto s_bytes = static_cast<const unsigned char *>(s);
  	for(size_t i = 0; i < size; i++)
-@@ -286,9 +293,35 @@
+@@ -286,9 +293,35 @@ int wcscmp(const wchar_t *l, const wchar_t *r) {
  	return *l - *r;
  }
  
@@ -138,10 +144,11 @@ diff -urN --no-dereference mlibc-clean/options/ansi/generic/string.cpp mlibc-wor
  
  int wmemcmp(const wchar_t *a, const wchar_t *b, size_t size) {
  	for(size_t i = 0; i < size; i++) {
-diff -urN --no-dereference mlibc-clean/options/ansi/generic/time.cpp mlibc-workdir/options/ansi/generic/time.cpp
+diff --git mlibc-clean/options/ansi/generic/time.cpp mlibc-workdir/options/ansi/generic/time.cpp
+index 05c9a9e..99d6a1a 100644
 --- mlibc-clean/options/ansi/generic/time.cpp
 +++ mlibc-workdir/options/ansi/generic/time.cpp
-@@ -89,8 +89,10 @@
+@@ -89,8 +89,11 @@ struct tm *localtime(const time_t *unix_gmt) {
  	return localtime_r(unix_gmt, &per_thread_tm);
  }
  
@@ -151,10 +158,11 @@ diff -urN --no-dereference mlibc-clean/options/ansi/generic/time.cpp mlibc-workd
 +		const char *__restrict format, const struct tm *__restrict tm,
 +		locale_t locale) {
 +	(void)locale;
++
  	auto c = format;
  	auto p = dest;
  	[[maybe_unused]] bool use_alternative_symbols = false;
-@@ -447,6 +449,12 @@
+@@ -447,6 +450,12 @@ size_t strftime(char *__restrict dest, size_t max_size,
  	return (p - dest);
  }
  
@@ -167,21 +175,11 @@ diff -urN --no-dereference mlibc-clean/options/ansi/generic/time.cpp mlibc-workd
  size_t wcsftime(wchar_t *__restrict, size_t, const wchar_t *__restrict,
  		const struct tm *__restrict) {
  	mlibc::infoLogger() << "mlibc: wcsftime is a stub" << frg::endlog;
-diff -urN --no-dereference mlibc-clean/options/ansi/include/inttypes.h mlibc-workdir/options/ansi/include/inttypes.h
---- mlibc-clean/options/ansi/include/inttypes.h
-+++ mlibc-workdir/options/ansi/include/inttypes.h
-@@ -110,6 +110,7 @@
- #define SCNx64 __PRI64 "x"
- #define SCNxMAX __PRI64 "x"
- #define SCNi8 "hhi"
-+#define SCNx8 "hhx"
- #define SCNxPTR __PRIPTR "x"
- 
- #define SCNi8 "hhi"
-diff -urN --no-dereference mlibc-clean/options/ansi/include/stdio.h mlibc-workdir/options/ansi/include/stdio.h
+diff --git mlibc-clean/options/ansi/include/stdio.h mlibc-workdir/options/ansi/include/stdio.h
+index 8b6de9f..3a3a7a1 100644
 --- mlibc-clean/options/ansi/include/stdio.h
 +++ mlibc-workdir/options/ansi/include/stdio.h
-@@ -58,6 +58,7 @@
+@@ -58,6 +58,7 @@ struct __mlibc_file_base {
  };
  
  typedef off_t fpos_t;
@@ -189,7 +187,8 @@ diff -urN --no-dereference mlibc-clean/options/ansi/include/stdio.h mlibc-workdi
  
  /* [C11-7.21.1] I/O related macros */
  
-diff -urN --no-dereference mlibc-clean/options/ansi/include/string.h mlibc-workdir/options/ansi/include/string.h
+diff --git mlibc-clean/options/ansi/include/string.h mlibc-workdir/options/ansi/include/string.h
+index b0e67a6..d155365 100644
 --- mlibc-clean/options/ansi/include/string.h
 +++ mlibc-workdir/options/ansi/include/string.h
 @@ -2,6 +2,7 @@
@@ -200,7 +199,7 @@ diff -urN --no-dereference mlibc-clean/options/ansi/include/string.h mlibc-workd
  #include <bits/null.h>
  #include <bits/size_t.h>
  
-@@ -30,6 +31,7 @@
+@@ -30,6 +31,7 @@ int strcmp(const char *__a, const char *__b);
  int strcoll(const char *__a, const char *__b);
  int strncmp(const char *__a, const char *__b, size_t __max_size);
  size_t strxfrm(char *__restrict __dest, const char *__restrict __src, size_t __max_size);
@@ -208,10 +207,11 @@ diff -urN --no-dereference mlibc-clean/options/ansi/include/string.h mlibc-workd
  
  /* [7.24.5] Search functions */
  
-diff -urN --no-dereference mlibc-clean/options/ansi/include/time.h mlibc-workdir/options/ansi/include/time.h
+diff --git mlibc-clean/options/ansi/include/time.h mlibc-workdir/options/ansi/include/time.h
+index f54fd13..b259a2c 100644
 --- mlibc-clean/options/ansi/include/time.h
 +++ mlibc-workdir/options/ansi/include/time.h
-@@ -80,6 +80,7 @@
+@@ -80,6 +80,7 @@ void tzset(void);
  /* POSIX extensions. */
  
  #if __MLIBC_POSIX_OPTION
@@ -219,7 +219,7 @@ diff -urN --no-dereference mlibc-clean/options/ansi/include/time.h mlibc-workdir
  #	include <bits/posix/posix_time.h>
  #	include <bits/posix/timer_t.h>
  #endif /* __MLIBC_POSIX_OPTION */
-@@ -111,6 +112,9 @@
+@@ -111,6 +112,9 @@ char *ctime_r(const time_t *__timer, char *__buf);
  
  #if __MLIBC_POSIX_OPTION
  #include <abi-bits/pid_t.h>
@@ -229,7 +229,8 @@ diff -urN --no-dereference mlibc-clean/options/ansi/include/time.h mlibc-workdir
  char *strptime(const char *__restrict __buf, const char *__restrict __format,
  		struct tm *__restrict __tm);
  int clock_getcpuclockid(pid_t __pid, clockid_t *__clockid);
-diff -urN --no-dereference mlibc-clean/options/ansi/include/wchar.h mlibc-workdir/options/ansi/include/wchar.h
+diff --git mlibc-clean/options/ansi/include/wchar.h mlibc-workdir/options/ansi/include/wchar.h
+index 6a58f97..1b2a2d0 100644
 --- mlibc-clean/options/ansi/include/wchar.h
 +++ mlibc-workdir/options/ansi/include/wchar.h
 @@ -1,6 +1,7 @@
@@ -240,7 +241,7 @@ diff -urN --no-dereference mlibc-clean/options/ansi/include/wchar.h mlibc-workdi
  #include <bits/null.h>
  #include <bits/size_t.h>
  #include <bits/wchar_t.h>
-@@ -70,8 +71,10 @@
+@@ -70,8 +71,10 @@ wchar_t *wcsncat(wchar_t *__restrict __dest, const wchar_t *__restrict __src, si
  
  int wcscmp(const wchar_t *__a, const wchar_t *__b);
  int wcscoll(const wchar_t *__a, const wchar_t *__b);
@@ -251,10 +252,11 @@ diff -urN --no-dereference mlibc-clean/options/ansi/include/wchar.h mlibc-workdi
  int wmemcmp(const wchar_t *__a, const wchar_t *__b, size_t __size);
  
  wchar_t *wcschr(const wchar_t *__s, wchar_t __wc);
-diff -urN --no-dereference mlibc-clean/options/glibc/generic/gshadow.cpp mlibc-workdir/options/glibc/generic/gshadow.cpp
+diff --git mlibc-clean/options/glibc/generic/gshadow.cpp mlibc-workdir/options/glibc/generic/gshadow.cpp
+index f93a47d..9c724b0 100644
 --- mlibc-clean/options/glibc/generic/gshadow.cpp
 +++ mlibc-workdir/options/glibc/generic/gshadow.cpp
-@@ -5,3 +5,18 @@
+@@ -5,3 +5,18 @@ int getsgnam_r(const char *, struct sgrp *, char *, size_t, struct sgrp **) {
  	__ensure(!"Not implemented");
  	__builtin_unreachable();
  }
@@ -273,43 +275,19 @@ diff -urN --no-dereference mlibc-clean/options/glibc/generic/gshadow.cpp mlibc-w
 +	__ensure(!"Not implemented");
 +	__builtin_unreachable();
 +}
-diff -urN --no-dereference mlibc-clean/options/glibc/generic/shadow.cpp mlibc-workdir/options/glibc/generic/shadow.cpp
---- mlibc-clean/options/glibc/generic/shadow.cpp
-+++ mlibc-workdir/options/glibc/generic/shadow.cpp
-@@ -207,9 +207,18 @@
- 	return res;
- }
- 
--struct spwd *fgetspent(FILE *) {
--	__ensure(!"Not implemented");
--	__builtin_unreachable();
-+struct spwd *fgetspent(FILE *f) {
-+	static struct spwd sp;
-+	static char *line;
-+	struct spwd *res = 0;
-+	size_t size = 0;
-+	int cs;
-+	pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, &cs);
-+	if(getline(&line, &size, f) >= 0 && __parsespent(line, &sp) >= 0) {
-+		res = &sp;
-+	}
-+	pthread_setcancelstate(cs, 0);
-+	return res;
- }
- 
- void endspent(void) {
-diff -urN --no-dereference mlibc-clean/options/glibc/include/gshadow.h mlibc-workdir/options/glibc/include/gshadow.h
+diff --git mlibc-clean/options/glibc/include/gshadow.h mlibc-workdir/options/glibc/include/gshadow.h
+index 4517700..99c5edc 100644
 --- mlibc-clean/options/glibc/include/gshadow.h
 +++ mlibc-workdir/options/glibc/include/gshadow.h
-@@ -1,6 +1,7 @@
- #ifndef _GSHADOW_H
+@@ -2,6 +2,7 @@
  #define _GSHADOW_H
  
-+#include <stdio.h>
  #include <paths.h>
++#include <stdio.h>
  #include <bits/size_t.h>
  
-@@ -20,6 +21,9 @@
+ #define GSHADOW _PATH_GSHADOW
+@@ -20,6 +21,9 @@ extern "C" {
  #endif
  
  int getsgnam_r(const char *__name, struct sgrp *__result_buf, char *__buffer, size_t __len, struct sgrp **__result);
@@ -319,7 +297,8 @@ diff -urN --no-dereference mlibc-clean/options/glibc/include/gshadow.h mlibc-wor
  
  #ifdef __cplusplus
  }
-diff -urN --no-dereference mlibc-clean/options/linux/generic/capabilities.cpp mlibc-workdir/options/linux/generic/capabilities.cpp
+diff --git mlibc-clean/options/linux/generic/capabilities.cpp mlibc-workdir/options/linux/generic/capabilities.cpp
+index 871822a..f0fca27 100644
 --- mlibc-clean/options/linux/generic/capabilities.cpp
 +++ mlibc-workdir/options/linux/generic/capabilities.cpp
 @@ -1,16 +1,28 @@
@@ -355,60 +334,11 @@ diff -urN --no-dereference mlibc-clean/options/linux/generic/capabilities.cpp ml
  	return 0;
  }
  
-diff -urN --no-dereference mlibc-clean/options/linux/generic/sched.cpp mlibc-workdir/options/linux/generic/sched.cpp
---- mlibc-clean/options/linux/generic/sched.cpp
-+++ mlibc-workdir/options/linux/generic/sched.cpp
-@@ -24,9 +24,14 @@
- 	return 0;
- }
- 
--int sched_getscheduler(pid_t) {
--	__ensure(!"Not implemented");
--	__builtin_unreachable();
-+int sched_getscheduler(pid_t pid) {
-+	MLIBC_CHECK_OR_ENOSYS(mlibc::sys_getscheduler, -1);
-+	int policy;
-+	if(int e = mlibc::sys_getscheduler(pid, &policy); e) {
-+		errno = e;
-+		return -1;
-+	}
-+	return policy;
- }
- 
- int sched_getaffinity(pid_t pid, size_t cpusetsize, cpu_set_t *mask) {
-diff -urN --no-dereference mlibc-clean/options/linux/generic/sys-sysinfo.cpp mlibc-workdir/options/linux/generic/sys-sysinfo.cpp
---- mlibc-clean/options/linux/generic/sys-sysinfo.cpp
-+++ mlibc-workdir/options/linux/generic/sys-sysinfo.cpp
-@@ -1,5 +1,6 @@
- #include <errno.h>
- #include <sys/sysinfo.h>
-+#include <unistd.h>
- 
- #include <bits/ensure.h>
- #include <mlibc/debug.hpp>
-@@ -14,12 +15,12 @@
- 	return 0;
- }
- 
--int get_nprocs(void) {
--	__ensure(!"Not implemented");
--	__builtin_unreachable();
-+int get_nprocs_conf() {
-+	// Taken from musl
-+	return sysconf(_SC_NPROCESSORS_CONF);
- }
- 
--int get_nprocs_conf(void) {
--	__ensure(!"Not implemented");
--	__builtin_unreachable();
-+int get_nprocs() {
-+	// Taken from musl
-+	return sysconf(_SC_NPROCESSORS_ONLN);
- }
-diff -urN --no-dereference mlibc-clean/options/linux/include/bits/linux/cpu_set.h mlibc-workdir/options/linux/include/bits/linux/cpu_set.h
+diff --git mlibc-clean/options/linux/include/bits/linux/cpu_set.h mlibc-workdir/options/linux/include/bits/linux/cpu_set.h
+index 0eff228..39b7e2e 100644
 --- mlibc-clean/options/linux/include/bits/linux/cpu_set.h
 +++ mlibc-workdir/options/linux/include/bits/linux/cpu_set.h
-@@ -40,6 +40,24 @@
+@@ -40,6 +40,24 @@ int __mlibc_cpu_count(const size_t __setsize, const cpu_set_t *__set);
  #define CPU_COUNT_S(setsize, set) __mlibc_cpu_count((setsize), (set))
  #define CPU_COUNT(set) CPU_COUNT_S(sizeof(cpu_set_t), set)
  
@@ -433,20 +363,22 @@ diff -urN --no-dereference mlibc-clean/options/linux/include/bits/linux/cpu_set.
  #endif /* !__MLIBC_ABI_ONLY */
  
  #ifdef __cplusplus
-diff -urN --no-dereference mlibc-clean/options/linux/include/mlibc/linux-sysdeps.hpp mlibc-workdir/options/linux/include/mlibc/linux-sysdeps.hpp
+diff --git mlibc-clean/options/linux/include/mlibc/linux-sysdeps.hpp mlibc-workdir/options/linux/include/mlibc/linux-sysdeps.hpp
+index 7aacb24..4d577ad 100644
 --- mlibc-clean/options/linux/include/mlibc/linux-sysdeps.hpp
 +++ mlibc-workdir/options/linux/include/mlibc/linux-sysdeps.hpp
-@@ -94,6 +94,9 @@
+@@ -96,6 +96,9 @@ int sys_ioctl(int fd, unsigned long request, void *arg, int *result);
  [[gnu::weak]] int sys_pidfd_getpid(int fd, pid_t *outpid);
  [[gnu::weak]] int sys_pidfd_send_signal(int pidfd, int sig, siginfo_t *info, unsigned int flags);
  
 +[[gnu::weak]] int sys_capset(void *hdr, const void *data);
 +[[gnu::weak]] int sys_capget(void *hdr, void *data);
 +
- } // namespace mlibc
- 
- #endif // MLIBX_LINUX_SYSDEPS
-diff -urN --no-dereference mlibc-clean/options/linux/include/scsi/scsi.h mlibc-workdir/options/linux/include/scsi/scsi.h
+ [[gnu::weak]] int sys_process_vm_readv(pid_t pid,
+ 		const struct iovec *local_iov, unsigned long liovcnt,
+ 		const struct iovec *remote_iov, unsigned long riovcnt,
+diff --git mlibc-clean/options/linux/include/scsi/scsi.h mlibc-workdir/options/linux/include/scsi/scsi.h
+index fd9cf82..76097d9 100644
 --- mlibc-clean/options/linux/include/scsi/scsi.h
 +++ mlibc-workdir/options/linux/include/scsi/scsi.h
 @@ -9,10 +9,22 @@
@@ -472,10 +404,11 @@ diff -urN --no-dereference mlibc-clean/options/linux/include/scsi/scsi.h mlibc-w
  
  #endif /* _LINUX_SCSI_SCSI_H */
  
-diff -urN --no-dereference mlibc-clean/options/linux/include/scsi/sg.h mlibc-workdir/options/linux/include/scsi/sg.h
+diff --git mlibc-clean/options/linux/include/scsi/sg.h mlibc-workdir/options/linux/include/scsi/sg.h
+index 30288c9..fdc6679 100644
 --- mlibc-clean/options/linux/include/scsi/sg.h
 +++ mlibc-workdir/options/linux/include/scsi/sg.h
-@@ -71,6 +71,26 @@
+@@ -71,6 +71,26 @@ typedef struct sg_req_info {
      int unused;
  } sg_req_info_t;
  
@@ -502,8 +435,10 @@ diff -urN --no-dereference mlibc-clean/options/linux/include/scsi/sg.h mlibc-wor
  #ifdef __cplusplus
  }
  #endif
-diff -urN --no-dereference mlibc-clean/options/posix/generic/monetary.cpp mlibc-workdir/options/posix/generic/monetary.cpp
---- mlibc-clean/options/posix/generic/monetary.cpp	1970-01-01 01:00:00.000000000 +0100
+diff --git mlibc-workdir/options/posix/generic/monetary.cpp mlibc-workdir/options/posix/generic/monetary.cpp
+new file mode 100644
+index 0000000..3ff73a5
+--- /dev/null
 +++ mlibc-workdir/options/posix/generic/monetary.cpp
 @@ -0,0 +1,5 @@
 +#include <bits/ensure.h>
@@ -511,10 +446,11 @@ diff -urN --no-dereference mlibc-clean/options/posix/generic/monetary.cpp mlibc-
 +
 +ssize_t strfmon(char *__restrict, size_t, const char *__restrict, ...) { MLIBC_STUB_BODY; }
 +ssize_t strfmon_l(char *__restrict, size_t, locale_t, const char *__restrict, ...) { MLIBC_STUB_BODY; }
-diff -urN --no-dereference mlibc-clean/options/posix/generic/mqueue.cpp mlibc-workdir/options/posix/generic/mqueue.cpp
+diff --git mlibc-clean/options/posix/generic/mqueue.cpp mlibc-workdir/options/posix/generic/mqueue.cpp
+index d635419..3719028 100644
 --- mlibc-clean/options/posix/generic/mqueue.cpp
 +++ mlibc-workdir/options/posix/generic/mqueue.cpp
-@@ -20,3 +20,8 @@
+@@ -20,3 +20,8 @@ mqd_t mq_open(const char *, int, ...) {
  	__ensure(!"Not implemented");
  	__builtin_unreachable();
  }
@@ -523,10 +459,11 @@ diff -urN --no-dereference mlibc-clean/options/posix/generic/mqueue.cpp mlibc-wo
 +	__ensure(!"Not implemented");
 +	__builtin_unreachable();
 +}
-diff -urN --no-dereference mlibc-clean/options/posix/generic/posix_locale.cpp mlibc-workdir/options/posix/generic/posix_locale.cpp
+diff --git mlibc-clean/options/posix/generic/posix_locale.cpp mlibc-workdir/options/posix/generic/posix_locale.cpp
+index bd8710a..42fa94c 100644
 --- mlibc-clean/options/posix/generic/posix_locale.cpp
 +++ mlibc-workdir/options/posix/generic/posix_locale.cpp
-@@ -1,34 +1,55 @@
+@@ -1,34 +1,51 @@
 +#include <errno.h>
 +#include <locale.h>
 +
@@ -555,15 +492,13 @@ diff -urN --no-dereference mlibc-clean/options/posix/generic/posix_locale.cpp ml
 +	if(!locale) {
 +		errno = EINVAL;
 +		return nullptr;
-+	}
-+
+ 	}
+-	return nullptr;
 +	if(strcmp(locale, "C") != 0 && strcmp(locale, "POSIX") != 0) {
 +		mlibc::infoLogger() << "mlibc: newlocale() only supports \"C\" and \"POSIX\" locales" << frg::endlog;
 +		errno = ENOENT;
 +		return nullptr;
- 	}
--	return nullptr;
-+
++	}
 +	mlibc::infoLogger() << "mlibc: newlocale() is a stub" << frg::endlog;
 +	return (locale_t)&cLocaleObject;
  }
@@ -581,25 +516,24 @@ diff -urN --no-dereference mlibc-clean/options/posix/generic/posix_locale.cpp ml
 +	if(!locale) {
 +		errno = EINVAL;
 +		return nullptr;
-+	}
-+
+ 	}
+-	return nullptr;
 +	if(locale == LC_GLOBAL_LOCALE) {
 +		locale = &cLocaleObject;
 +	} else if(locale != &cLocaleObject) {
 +		errno = EINVAL;
 +		return nullptr;
- 	}
--	return nullptr;
-+
++	}
 +	mlibc::infoLogger() << "mlibc: uselocale() is a stub" << frg::endlog;
 +	return &cLocaleObject;
  }
  
  locale_t duplocale(locale_t) {
-diff -urN --no-dereference mlibc-clean/options/posix/generic/posix_stdlib.cpp mlibc-workdir/options/posix/generic/posix_stdlib.cpp
+diff --git mlibc-clean/options/posix/generic/posix_stdlib.cpp mlibc-workdir/options/posix/generic/posix_stdlib.cpp
+index 8cf23ba..c8b2ba1 100644
 --- mlibc-clean/options/posix/generic/posix_stdlib.cpp
 +++ mlibc-workdir/options/posix/generic/posix_stdlib.cpp
-@@ -80,7 +80,7 @@
+@@ -80,7 +80,7 @@ namespace {
  
  unsigned short seed_48[7] = { 0, 0, 0, 0xe66d, 0xdeec, 0x5, 0xb };
  
@@ -608,7 +542,7 @@ diff -urN --no-dereference mlibc-clean/options/posix/generic/posix_stdlib.cpp ml
  	uint64_t x = xi[0] | (xi[1] + 0U) << 16 | (xi[2] + 0ULL) << 32;
  	uint64_t a = lc[0] | (lc[1] + 0U) << 16 | (lc[2] + 0ULL) << 32;
  	x = a*x + lc[3];
-@@ -96,7 +96,7 @@
+@@ -96,7 +96,7 @@ double erand48(unsigned short s[3]) {
  	union {
  		uint64_t u;
  		double f;
@@ -617,7 +551,7 @@ diff -urN --no-dereference mlibc-clean/options/posix/generic/posix_stdlib.cpp ml
  	return x.f - 1.0;
  }
  
-@@ -116,9 +116,8 @@
+@@ -116,9 +116,8 @@ void srand48(long int seed) {
  	seed48(arr);
  }
  
@@ -629,45 +563,11 @@ diff -urN --no-dereference mlibc-clean/options/posix/generic/posix_stdlib.cpp ml
  }
  
  long int mrand48(void) {
-diff -urN --no-dereference mlibc-clean/options/posix/generic/sys-uio.cpp mlibc-workdir/options/posix/generic/sys-uio.cpp
---- mlibc-clean/options/posix/generic/sys-uio.cpp
-+++ mlibc-workdir/options/posix/generic/sys-uio.cpp
-@@ -65,3 +65,31 @@
- 	__ensure(!"Not implemented");
- 	__builtin_unreachable();
- }
-+
-+ssize_t process_vm_readv(pid_t pid,
-+		const struct iovec *local_iov, unsigned long local_iov_count,
-+		const struct iovec *remote_iov, unsigned long remote_iov_count,
-+		unsigned long flags) {
-+	MLIBC_CHECK_OR_ENOSYS(mlibc::sys_process_vm_readv, -1);
-+	ssize_t bytes_read;
-+	if(int e = mlibc::sys_process_vm_readv(pid, local_iov, local_iov_count,
-+			remote_iov, remote_iov_count, flags, &bytes_read); e) {
-+		errno = e;
-+		return -1;
-+	}
-+	return bytes_read;
-+}
-+
-+ssize_t process_vm_writev(pid_t pid,
-+		const struct iovec *local_iov, unsigned long local_iov_count,
-+		const struct iovec *remote_iov, unsigned long remote_iov_count,
-+		unsigned long flags) {
-+	MLIBC_CHECK_OR_ENOSYS(mlibc::sys_process_vm_writev, -1);
-+	ssize_t bytes_written;
-+	if(int e = mlibc::sys_process_vm_writev(pid, local_iov, local_iov_count,
-+			remote_iov, remote_iov_count, flags, &bytes_written); e) {
-+		errno = e;
-+		return -1;
-+	}
-+	return bytes_written;
-+}
-diff -urN --no-dereference mlibc-clean/options/posix/generic/termios.cpp mlibc-workdir/options/posix/generic/termios.cpp
+diff --git mlibc-clean/options/posix/generic/termios.cpp mlibc-workdir/options/posix/generic/termios.cpp
+index 631456a..09c26b9 100644
 --- mlibc-clean/options/posix/generic/termios.cpp
 +++ mlibc-workdir/options/posix/generic/termios.cpp
-@@ -101,3 +101,7 @@
+@@ -101,3 +101,7 @@ int tcsetattr(int fd, int opts, const struct termios *attr) {
  	return 0;
  }
  
@@ -675,10 +575,11 @@ diff -urN --no-dereference mlibc-clean/options/posix/generic/termios.cpp mlibc-w
 +	__ensure(!"Not implemented");
 +	__builtin_unreachable();
 +}
-diff -urN --no-dereference mlibc-clean/options/posix/generic/unistd.cpp mlibc-workdir/options/posix/generic/unistd.cpp
+diff --git mlibc-clean/options/posix/generic/unistd.cpp mlibc-workdir/options/posix/generic/unistd.cpp
+index 9652a17..baaba22 100644
 --- mlibc-clean/options/posix/generic/unistd.cpp
 +++ mlibc-workdir/options/posix/generic/unistd.cpp
-@@ -1449,6 +1449,11 @@
+@@ -1404,6 +1404,11 @@ int getresgid(gid_t *rgid, gid_t *egid, gid_t *sgid) {
  	return 0;
  }
  
@@ -690,35 +591,10 @@ diff -urN --no-dereference mlibc-clean/options/posix/generic/unistd.cpp mlibc-wo
  #if __MLIBC_BSD_OPTION
  void *sbrk(intptr_t increment) {
  	if(increment) {
-diff -urN --no-dereference mlibc-clean/options/posix/include/mlibc/posix-sysdeps.hpp mlibc-workdir/options/posix/include/mlibc/posix-sysdeps.hpp
---- mlibc-clean/options/posix/include/mlibc/posix-sysdeps.hpp
-+++ mlibc-workdir/options/posix/include/mlibc/posix-sysdeps.hpp
-@@ -233,6 +233,7 @@
- [[gnu::weak]] int sys_semget(key_t key, int n, int fl, int *id);
- [[gnu::weak]] int sys_semctl(int semid, int semnum, int cmd, void *semun, int *ret);
- 
-+[[gnu::weak]] int sys_getscheduler(pid_t pid, int *ret);
- [[gnu::weak]] int sys_getaffinity(pid_t pid, size_t cpusetsize, cpu_set_t *mask);
- [[gnu::weak]] int sys_getthreadaffinity(pid_t tid, size_t cpusetsize, cpu_set_t *mask);
- 
-@@ -249,6 +250,15 @@
- [[gnu::weak]] int sys_shmdt(const void *shmaddr);
- [[gnu::weak]] int sys_shmget(int *shm_id, key_t key, size_t size, int shmflg);
- 
-+[[gnu::weak]] int sys_process_vm_readv(pid_t pid,
-+		const struct iovec *local_iov, unsigned long local_iov_count,
-+		const struct iovec *remote_iov, unsigned long remote_iov_count,
-+		unsigned long flags, ssize_t *out);
-+[[gnu::weak]] int sys_process_vm_writev(pid_t pid,
-+		const struct iovec *local_iov, unsigned long local_iov_count,
-+		const struct iovec *remote_iov, unsigned long remote_iov_count,
-+		unsigned long flags, ssize_t *out);
-+
- } //namespace mlibc
- 
- #endif // MLIBC_POSIX_SYSDEPS
-diff -urN --no-dereference mlibc-clean/options/posix/include/monetary.h mlibc-workdir/options/posix/include/monetary.h
---- mlibc-clean/options/posix/include/monetary.h	1970-01-01 01:00:00.000000000 +0100
+diff --git mlibc-workdir/options/posix/include/monetary.h mlibc-workdir/options/posix/include/monetary.h
+new file mode 100644
+index 0000000..11af859
+--- /dev/null
 +++ mlibc-workdir/options/posix/include/monetary.h
 @@ -0,0 +1,26 @@
 +
@@ -747,10 +623,11 @@ diff -urN --no-dereference mlibc-clean/options/posix/include/monetary.h mlibc-wo
 +#endif
 +
 +#endif /* _MONETARY_H */
-diff -urN --no-dereference mlibc-clean/options/posix/include/mqueue.h mlibc-workdir/options/posix/include/mqueue.h
+diff --git mlibc-clean/options/posix/include/mqueue.h mlibc-workdir/options/posix/include/mqueue.h
+index cbee138..485607f 100644
 --- mlibc-clean/options/posix/include/mqueue.h
 +++ mlibc-workdir/options/posix/include/mqueue.h
-@@ -15,6 +15,7 @@
+@@ -15,6 +15,7 @@ int mq_getattr(mqd_t __mqdes, struct mq_attr *__attr);
  int mq_setattr(mqd_t __mqdes, const struct mq_attr *__restrict__ __newattr, struct mq_attr *__restrict__ __oldattr);
  int mq_unlink(const char *__name);
  mqd_t mq_open(const char *__name, int __flags, ...);
@@ -758,10 +635,11 @@ diff -urN --no-dereference mlibc-clean/options/posix/include/mqueue.h mlibc-work
  
  #endif /* !__MLIBC_ABI_ONLY */
  
-diff -urN --no-dereference mlibc-clean/options/posix/include/netinet/tcp.h mlibc-workdir/options/posix/include/netinet/tcp.h
+diff --git mlibc-clean/options/posix/include/netinet/tcp.h mlibc-workdir/options/posix/include/netinet/tcp.h
+index 2ac4201..424965e 100644
 --- mlibc-clean/options/posix/include/netinet/tcp.h
 +++ mlibc-workdir/options/posix/include/netinet/tcp.h
-@@ -47,6 +47,68 @@
+@@ -48,6 +48,68 @@ enum tcp_ca_state {
  	TCP_CA_Loss = 4
  };
  
@@ -830,7 +708,8 @@ diff -urN --no-dereference mlibc-clean/options/posix/include/netinet/tcp.h mlibc
  struct tcp_info {
  	uint8_t tcpi_state;
  	uint8_t tcpi_ca_state;
-diff -urN --no-dereference mlibc-clean/options/posix/include/sys/msg.h mlibc-workdir/options/posix/include/sys/msg.h
+diff --git mlibc-clean/options/posix/include/sys/msg.h mlibc-workdir/options/posix/include/sys/msg.h
+index f62220a..be4afe2 100644
 --- mlibc-clean/options/posix/include/sys/msg.h
 +++ mlibc-workdir/options/posix/include/sys/msg.h
 @@ -9,6 +9,17 @@
@@ -851,10 +730,11 @@ diff -urN --no-dereference mlibc-clean/options/posix/include/sys/msg.h mlibc-wor
  #ifndef __MLIBC_ABI_ONLY
  
  int msgget(key_t __key, int __msgflg);
-diff -urN --no-dereference mlibc-clean/options/posix/include/sys/sem.h mlibc-workdir/options/posix/include/sys/sem.h
+diff --git mlibc-clean/options/posix/include/sys/sem.h mlibc-workdir/options/posix/include/sys/sem.h
+index d98f91f..07aebd1 100644
 --- mlibc-clean/options/posix/include/sys/sem.h
 +++ mlibc-workdir/options/posix/include/sys/sem.h
-@@ -12,9 +12,15 @@
+@@ -12,9 +12,15 @@ extern "C" {
  #define GETPID 11
  #define GETVAL 12
  #define GETALL 13
@@ -870,7 +750,7 @@ diff -urN --no-dereference mlibc-clean/options/posix/include/sys/sem.h mlibc-wor
  #define SEM_UNDO 0x1000
  
  struct sembuf {
-@@ -31,6 +37,19 @@
+@@ -31,6 +37,19 @@ struct semid_ds {
  	unsigned long   sem_nsems;
  };
  
@@ -890,34 +770,11 @@ diff -urN --no-dereference mlibc-clean/options/posix/include/sys/sem.h mlibc-wor
  #ifndef __MLIBC_ABI_ONLY
  
  int semget(key_t __key, int __nsems, int __semflg);
-diff -urN --no-dereference mlibc-clean/options/posix/include/sys/uio.h mlibc-workdir/options/posix/include/sys/uio.h
---- mlibc-clean/options/posix/include/sys/uio.h
-+++ mlibc-workdir/options/posix/include/sys/uio.h
-@@ -1,6 +1,7 @@
- #ifndef _SYS_UIO_H
- #define _SYS_UIO_H
- 
-+#include <abi-bits/pid_t.h>
- #include <bits/posix/iovec.h>
- #include <bits/ssize_t.h>
- #include <bits/off_t.h>
-@@ -22,6 +23,12 @@
- ssize_t preadv(int __fd, const struct iovec *__iov, int __iovcnt, off_t __offset);
- ssize_t pwritev(int __fd, const struct iovec *__iov, int __iovcnt, off_t __offset);
- 
-+// Linux extensions
-+ssize_t process_vm_readv(pid_t __pid, const struct iovec *__local_iov, unsigned long __liovcnt, const struct iovec *__remote_iov,
-+	unsigned long __riovcnt, unsigned long __flags);
-+ssize_t process_vm_writev(pid_t __pid, const struct iovec *__local_iov, unsigned long __liovcnt, const struct iovec *__remote_iov,
-+	unsigned long __riovcnt, unsigned long __flags);
-+
- #endif /* !__MLIBC_ABI_ONLY */
- 
- #ifdef __cplusplus
-diff -urN --no-dereference mlibc-clean/options/posix/include/termios.h mlibc-workdir/options/posix/include/termios.h
+diff --git mlibc-clean/options/posix/include/termios.h mlibc-workdir/options/posix/include/termios.h
+index cf2025b..3f2f295 100644
 --- mlibc-clean/options/posix/include/termios.h
 +++ mlibc-workdir/options/posix/include/termios.h
-@@ -87,6 +87,7 @@
+@@ -87,6 +87,7 @@ int tcgetattr(int fd, struct termios *__attr);
  pid_t tcgetsid(int __fd);
  int tcsendbreak(int __fd, int __duration);
  int tcsetattr(int __fd, int __optional_actions, const struct termios *__attr);
@@ -925,10 +782,11 @@ diff -urN --no-dereference mlibc-clean/options/posix/include/termios.h mlibc-wor
  
  #endif /* !__MLIBC_ABI_ONLY */
  
-diff -urN --no-dereference mlibc-clean/options/posix/include/unistd.h mlibc-workdir/options/posix/include/unistd.h
+diff --git mlibc-clean/options/posix/include/unistd.h mlibc-workdir/options/posix/include/unistd.h
+index 8fcaeab..33f6842 100644
 --- mlibc-clean/options/posix/include/unistd.h
 +++ mlibc-workdir/options/posix/include/unistd.h
-@@ -392,6 +392,8 @@
+@@ -392,6 +392,8 @@ int setdomainname(const char *__name, size_t __len);
  int getresuid(uid_t *__ruid, uid_t *__euid, uid_t *__suid);
  int getresgid(gid_t *__rgid, gid_t *__egid, gid_t *__sgid);
  
@@ -937,10 +795,11 @@ diff -urN --no-dereference mlibc-clean/options/posix/include/unistd.h mlibc-work
  #endif /* !__MLIBC_ABI_ONLY */
  
  #ifdef __cplusplus
-diff -urN --no-dereference mlibc-clean/options/posix/meson.build mlibc-workdir/options/posix/meson.build
+diff --git mlibc-clean/options/posix/meson.build mlibc-workdir/options/posix/meson.build
+index 681c99b..5abb6a4 100644
 --- mlibc-clean/options/posix/meson.build
 +++ mlibc-workdir/options/posix/meson.build
-@@ -12,6 +12,7 @@
+@@ -12,6 +12,7 @@ libc_sources += files(
  	'generic/langinfo.cpp',
  	'generic/libgen.cpp',
  	'generic/lookup.cpp',
@@ -948,18 +807,19 @@ diff -urN --no-dereference mlibc-clean/options/posix/meson.build mlibc-workdir/o
  	'generic/netdb.cpp',
  	'generic/net-if.cpp',
  	'generic/poll.cpp',
-@@ -103,6 +104,7 @@
- 		'include/wordexp.h',
+@@ -105,6 +106,7 @@ if not no_headers
  		'include/semaphore.h',
  		'include/mqueue.h',
+ 		'include/utmpx.h',
 +		'include/monetary.h',
  	)
  	install_headers(
  		'include/arpa/inet.h',
-diff -urN --no-dereference mlibc-clean/scripts/rust-libc-config.yml mlibc-workdir/scripts/rust-libc-config.yml
+diff --git mlibc-clean/scripts/rust-libc-config.yml mlibc-workdir/scripts/rust-libc-config.yml
+index fec4bc5..753e643 100644
 --- mlibc-clean/scripts/rust-libc-config.yml
 +++ mlibc-workdir/scripts/rust-libc-config.yml
-@@ -181,6 +181,7 @@
+@@ -198,6 +198,7 @@ ignored_macros:
    - "CHAR_MIN"
    - "CLOCKS_PER_SEC"
    - "CMSG_NXTHDR"
@@ -967,7 +827,7 @@ diff -urN --no-dereference mlibc-clean/scripts/rust-libc-config.yml mlibc-workdi
    - "CPU_ALLOC"
    - "CPU_ALLOC_SIZE"
    - "CPU_CLR"
-@@ -190,8 +191,10 @@
+@@ -207,8 +208,10 @@ ignored_macros:
    - "CPU_FREE"
    - "CPU_ISSET"
    - "CPU_ISSET_S"
@@ -978,7 +838,7 @@ diff -urN --no-dereference mlibc-clean/scripts/rust-libc-config.yml mlibc-workdi
    - "CPU_ZERO"
    - "CPU_ZERO_S"
    - "DOUBLEBITS"
-@@ -1447,6 +1450,476 @@
+@@ -1493,6 +1496,476 @@ ignored_macros:
    - "MNTOPT_SUID"
    - "MNTOPT_NOSUID"
    - "MNTOPT_NOAUTO"
@@ -1455,10 +1315,10 @@ diff -urN --no-dereference mlibc-clean/scripts/rust-libc-config.yml mlibc-workdi
  
  forced_macros:
    - "__MLIBC_THREAD_CREATE_JOINABLE"
-@@ -1947,6 +2420,15 @@
-   - "recvmsg"
-   - "uname"
-   - "strchrnul"
+@@ -2037,6 +2510,13 @@ ignored_functions:
+   - "forkpty"
+   - "openpty"
+   - "statx"
 +  # :shrug:
 +  - "clone"
 +  - "getopt_long"
@@ -1466,12 +1326,10 @@ diff -urN --no-dereference mlibc-clean/scripts/rust-libc-config.yml mlibc-workdi
 +  - "pthread_once"
 +  - "posix_spawn"
 +  - "posix_spawnp"
-+  - "ioctl"
-+
  
  forced_functions:
    - "__errno_location"
-@@ -2040,6 +2522,7 @@
+@@ -2130,6 +2610,7 @@ force_macro_type:
    "usize":
      - "NCCS"
      - "PTHREAD_STACK_MIN"
@@ -1479,10 +1337,11 @@ diff -urN --no-dereference mlibc-clean/scripts/rust-libc-config.yml mlibc-workdi
      - "VEOF"
      - "VMIN"
      - "VTIME"
-diff -urN --no-dereference mlibc-clean/scripts/rust-libc-header.rs mlibc-workdir/scripts/rust-libc-header.rs
+diff --git mlibc-clean/scripts/rust-libc-header.rs mlibc-workdir/scripts/rust-libc-header.rs
+index 97c8d6c..cc73167 100644
 --- mlibc-clean/scripts/rust-libc-header.rs
 +++ mlibc-workdir/scripts/rust-libc-header.rs
-@@ -3,95 +3,81 @@
+@@ -3,16 +3,71 @@
  
  use crate::prelude::*;
  
@@ -1556,6 +1415,13 @@ diff -urN --no-dereference mlibc-clean/scripts/rust-libc-header.rs mlibc-workdir
  pub type statfs64 = crate::statfs;
  pub type statvfs64 = crate::statvfs;
 -pub type idtype_t = c_uint;
+ pub type Ioctl = c_ulong;
+ pub type pthread_t = *mut c_void;
+ 
+@@ -24,85 +79,13 @@ pub type __s32 = c_int;
+ pub type __u64 = c_ulonglong;
+ pub type __s64 = c_longlong;
+ 
 -pub const RTLD_DEFAULT: *mut c_void = 0i64 as *mut c_void;
 -pub const RLIM_INFINITY: crate::rlim_t = !0;
 -
@@ -1635,9 +1501,6 @@ diff -urN --no-dereference mlibc-clean/scripts/rust-libc-header.rs mlibc-workdir
 -        }
 -    }
 -}
-+pub type __u64 = c_ulong;
-+pub type __s64 = c_long;
-+
 +pub const __SIZEOF_PTHREAD_MUTEXATTR_T: usize = 20;
 +pub const __SIZEOF_PTHREAD_RWLOCKATTR_T: usize = 4;
 +pub const __SIZEOF_PTHREAD_CONDATTR_T: usize = 8;
@@ -1648,7 +1511,7 @@ diff -urN --no-dereference mlibc-clean/scripts/rust-libc-header.rs mlibc-workdir
  
  pub const PTHREAD_MUTEX_INITIALIZER: pthread_mutex_t = pthread_mutex_t {
      size: [0; 16],
-@@ -103,149 +89,475 @@
+@@ -114,69 +97,83 @@ pub const PTHREAD_RWLOCK_INITIALIZER: pthread_rwlock_t = pthread_rwlock_t {
      size: [0; 12],
  };
  
@@ -1688,22 +1551,6 @@ diff -urN --no-dereference mlibc-clean/scripts/rust-libc-header.rs mlibc-workdir
 +    fields: [c_int; 1],
  }
  
--impl fmt::Debug for ifreq {
--    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
--        f.debug_struct("ifreq").finish()
-+impl siginfo_t {
-+    pub unsafe fn si_addr(&self) -> *mut c_void {
-+        #[repr(C)]
-+        struct siginfo_sigfault {
-+            _si_signo: c_int,
-+            _si_errno: c_int,
-+            _si_code: c_int,
-+            si_addr: *mut c_void,
-+        }
-+        (*(self as *const siginfo_t as *const siginfo_sigfault)).si_addr
-     }
--}
- 
 -safe_f! {
 -    pub {const} fn makedev(major: c_uint, minor: c_uint) -> crate::dev_t {
 -        let major = major as crate::dev_t;
@@ -1714,6 +1561,104 @@ diff -urN --no-dereference mlibc-clean/scripts/rust-libc-header.rs mlibc-workdir
 -        dev |= (minor & 0x000000ff) << 0;
 -        dev |= (minor & 0xffffff00) << 12;
 -        dev
+-    }
++// Internal, for casts to access union fields
++#[repr(C)]
++struct sifields_sigchld {
++    si_pid: crate::pid_t,
++    si_uid: crate::uid_t,
++    si_status: c_int,
++    si_utime: c_long,
++    si_stime: c_long,
++}
+ 
+-    pub {const} fn major(dev: crate::dev_t) -> c_uint {
+-        let mut major = 0;
+-        major |= (dev & 0x00000000000fff00) >> 8;
+-        major |= (dev & 0xfffff00000000000) >> 32;
+-        major as c_uint
++impl Copy for sifields_sigchld {}
++impl Clone for sifields_sigchld {
++    fn clone(&self) -> sifields_sigchld {
++        *self
+     }
++}
+ 
+-    pub {const} fn minor(dev: crate::dev_t) -> c_uint {
+-        let mut minor = 0;
+-        minor |= (dev & 0x00000000000000ff) >> 0;
+-        minor |= (dev & 0x00000ffffff00000) >> 12;
+-        minor as c_uint
+-    }
++// Internal, for casts to access union fields
++#[repr(C)]
++union sifields {
++    _align_pointer: *mut c_void,
++    sigchld: sifields_sigchld,
+ }
+ 
+-extern "C" {
+-    #[link_name = "__gnu_strerror_r"]
+-    pub fn strerror_r(errnum: c_int, buf: *mut c_char, buflen: size_t) -> c_int;
++// Internal, for casts to access union fields. Note that some variants
++// of sifields start with a pointer, which makes the alignment of
++// sifields vary on 32-bit and 64-bit architectures.
++#[repr(C)]
++struct siginfo_f {
++    _siginfo_base: [c_int; 3],
++    sifields: sifields,
+ }
+ 
+ impl siginfo_t {
++    unsafe fn sifields(&self) -> &sifields {
++        &(*(self as *const siginfo_t as *const siginfo_f)).sifields
++    }
++
++    pub unsafe fn si_pid(&self) -> crate::pid_t {
++        self.sifields().sigchld.si_pid
++    }
++
++    pub unsafe fn si_uid(&self) -> crate::uid_t {
++        self.sifields().sigchld.si_uid
++    }
++
+     pub unsafe fn si_status(&self) -> c_int {
+-        #[repr(C)]
+-        struct siginfo_sigchld {
+-            _si_signo: c_int,
+-            _si_errno: c_int,
+-            _si_code: c_int,
+-            si_pid: crate::pid_t,
+-            si_uid: crate::uid_t,
+-            si_status: c_int,
+-            si_utime: crate::clock_t,
+-            si_stime: crate::clock_t,
+-        }
+-        (*(self as *const siginfo_t as *const siginfo_sigchld)).si_status
++        self.sifields().sigchld.si_status
++    }
++
++    pub unsafe fn si_utime(&self) -> c_long {
++        self.sifields().sigchld.si_utime
++    }
++
++    pub unsafe fn si_stime(&self) -> c_long {
++        self.sifields().sigchld.si_stime
+     }
+ 
+     pub unsafe fn si_addr(&self) -> *mut c_void {
+@@ -189,79 +186,384 @@ impl siginfo_t {
+         }
+         (*(self as *const siginfo_t as *const siginfo_sigfault)).si_addr
+     }
+-}
+ 
+-s! {
+-    pub struct sockaddr_nl {
+-        pub nl_family: crate::sa_family_t,
+-        nl_pad: c_ushort,
+-        pub nl_pid: u32,
+-        pub nl_groups: u32,
 +    pub unsafe fn si_value(&self) -> crate::sigval {
 +        #[repr(C)]
 +        struct siginfo_timer {
@@ -1728,91 +1673,6 @@ diff -urN --no-dereference mlibc-clean/scripts/rust-libc-header.rs mlibc-workdir
      }
  }
  
--f! {
--    pub fn major(dev: crate::dev_t) -> c_uint {
--        let mut major = 0;
--        major |= (dev & 0x00000000000fff00) >> 8;
--        major |= (dev & 0xfffff00000000000) >> 32;
--        major as c_uint
--    }
--
--    pub fn minor(dev: crate::dev_t) -> c_uint {
--        let mut minor = 0;
--        minor |= (dev & 0x00000000000000ff) >> 0;
--        minor |= (dev & 0x00000ffffff00000) >> 12;
--        minor as c_uint
-+// Internal, for casts to access union fields
-+#[repr(C)]
-+struct sifields_sigchld {
-+    si_pid: crate::pid_t,
-+    si_uid: crate::uid_t,
-+    si_status: c_int,
-+    si_utime: c_long,
-+    si_stime: c_long,
-+}
-+
-+impl Copy for sifields_sigchld {}
-+impl Clone for sifields_sigchld {
-+    fn clone(&self) -> sifields_sigchld {
-+        *self
-     }
- }
- 
--extern "C" {
--    #[link_name = "__gnu_strerror_r"]
--    pub fn strerror_r(errnum: c_int, buf: *mut c_char, buflen: size_t) -> c_int;
-+// Internal, for casts to access union fields
-+#[repr(C)]
-+union sifields {
-+    _align_pointer: *mut c_void,
-+    sigchld: sifields_sigchld,
- }
- 
-+// Internal, for casts to access union fields. Note that some variants
-+// of sifields start with a pointer, which makes the alignment of
-+// sifields vary on 32-bit and 64-bit architectures.
- #[repr(C)]
--struct __siginfo_fields {
--    fields: [c_int; 1],
-+struct siginfo_f {
-+    _siginfo_base: [c_int; 3],
-+    sifields: sifields,
- }
- 
- impl siginfo_t {
--    unsafe fn sifields(&self) -> &__siginfo_fields {
--        &(*(self.__si_fields.as_ptr() as *const __siginfo_fields))
-+    unsafe fn sifields(&self) -> &sifields {
-+        &(*(self as *const siginfo_t as *const siginfo_f)).sifields
-+    }
-+
-+    pub unsafe fn si_pid(&self) -> crate::pid_t {
-+        self.sifields().sigchld.si_pid
-+    }
-+
-+    pub unsafe fn si_uid(&self) -> crate::uid_t {
-+        self.sifields().sigchld.si_uid
-     }
- 
-     pub unsafe fn si_status(&self) -> c_int {
--        self.sifields().fields[0]
-+        self.sifields().sigchld.si_status
-+    }
-+
-+    pub unsafe fn si_utime(&self) -> c_long {
-+        self.sifields().sigchld.si_utime
-     }
--}
- 
--s! {
--    pub struct sockaddr_nl {
--        pub nl_family: crate::sa_family_t,
--        nl_pad: c_ushort,
--        pub nl_pid: u32,
--        pub nl_groups: u32,
--    }
--}
--
 -// linux/netlink.h
 -pub const NLA_ALIGNTO: c_int = 4;
 -
@@ -1878,11 +1738,6 @@ diff -urN --no-dereference mlibc-clean/scripts/rust-libc-header.rs mlibc-workdir
 -pub const NLA_F_NESTED: c_int = 1 << 15;
 -pub const NLA_F_NET_BYTEORDER: c_int = 1 << 14;
 -pub const NLA_TYPE_MASK: c_int = !(NLA_F_NESTED | NLA_F_NET_BYTEORDER);
-+    pub unsafe fn si_stime(&self) -> c_long {
-+        self.sifields().sigchld.si_stime
-+    }
-+}
-+
 +pub const SYS_read: c_long = 0;
 +pub const SYS_write: c_long = 1;
 +pub const SYS_open: c_long = 2;
@@ -2249,27 +2104,11 @@ diff -urN --no-dereference mlibc-clean/scripts/rust-libc-header.rs mlibc-workdir
 +pub const SYS_set_mempolicy_home_node: c_long = 450;
 +pub const SYS_fchmodat2: c_long = 452;
 +pub const SYS_mseal: c_long = 462;
-diff -urN --no-dereference mlibc-clean/sysdeps/linux/generic/sysdeps.cpp mlibc-workdir/sysdeps/linux/generic/sysdeps.cpp
+diff --git mlibc-clean/sysdeps/linux/generic/sysdeps.cpp mlibc-workdir/sysdeps/linux/generic/sysdeps.cpp
+index 056a45c..2fba3a8 100644
 --- mlibc-clean/sysdeps/linux/generic/sysdeps.cpp
 +++ mlibc-workdir/sysdeps/linux/generic/sysdeps.cpp
-@@ -587,14 +587,14 @@
- }
- 
- int sys_getresuid(uid_t *ruid, uid_t *euid, uid_t *suid) {
--	auto ret = do_syscall(SYS_getresuid, &ruid, &euid, &suid);
-+	auto ret = do_syscall(SYS_getresuid, ruid, euid, suid);
-         if (int e = sc_error(ret); e)
-                 return e;
- 	return 0;
- }
- 
- int sys_getresgid(gid_t *rgid, gid_t *egid, gid_t *sgid) {
--	auto ret = do_syscall(SYS_getresgid, &rgid, &egid, &sgid);
-+	auto ret = do_syscall(SYS_getresgid, rgid, egid, sgid);
-         if (int e = sc_error(ret); e)
-                 return e;
- 	return 0;
-@@ -1036,6 +1036,14 @@
+@@ -1164,6 +1164,14 @@ int sys_swapoff(const char *path) {
  	return 0;
  }
  
@@ -2284,7 +2123,7 @@ diff -urN --no-dereference mlibc-clean/sysdeps/linux/generic/sysdeps.cpp mlibc-w
  int sys_getaffinity(pid_t pid, size_t cpusetsize, cpu_set_t *mask) {
  	auto ret = do_syscall(SYS_sched_getaffinity, pid, cpusetsize, mask);
  	if (int e = sc_error(ret); e)
-@@ -1477,6 +1485,10 @@
+@@ -1605,6 +1613,10 @@ int sys_seteuid(uid_t euid) {
  	return sys_setresuid(-1, euid, -1);
  }
  
@@ -2295,38 +2134,7 @@ diff -urN --no-dereference mlibc-clean/sysdeps/linux/generic/sysdeps.cpp mlibc-w
  int sys_vm_remap(void *pointer, size_t size, size_t new_size, void **window) {
  	auto ret = do_syscall(SYS_mremap, pointer, size, new_size, MREMAP_MAYMOVE);
  	// TODO: musl fixes up EPERM errors from the kernel.
-@@ -1620,6 +1632,30 @@
- 	return 0;
- }
- 
-+int sys_process_vm_readv(pid_t pid,
-+		const struct iovec *local_iov, unsigned long local_iov_count,
-+		const struct iovec *remote_iov, unsigned long remote_iov_count,
-+		unsigned long flags, ssize_t *out) {
-+	auto ret = do_syscall(SYS_process_vm_readv, pid, local_iov, local_iov_count,
-+			remote_iov, remote_iov_count, flags);
-+	if(int e = sc_error(ret); e)
-+		return e;
-+	*out = sc_int_result<ssize_t>(ret);
-+	return 0;
-+}
-+
-+int sys_process_vm_writev(pid_t pid,
-+		const struct iovec *local_iov, unsigned long local_iov_count,
-+		const struct iovec *remote_iov, unsigned long remote_iov_count,
-+		unsigned long flags, ssize_t *out) {
-+	auto ret = do_syscall(SYS_process_vm_writev, pid, local_iov, local_iov_count,
-+			remote_iov, remote_iov_count, flags);
-+	if(int e = sc_error(ret); e)
-+		return e;
-+	*out = sc_int_result<ssize_t>(ret);
-+	return 0;
-+}
-+
- #endif // __MLIBC_POSIX_OPTION
- 
- #if __MLIBC_LINUX_OPTION
-@@ -1695,6 +1731,20 @@
+@@ -1855,6 +1867,20 @@ int sys_ppoll(struct pollfd *fds, nfds_t count, const struct timespec *ts, const
  	return 0;
  }
  
@@ -2347,7 +2155,7 @@ diff -urN --no-dereference mlibc-clean/sysdeps/linux/generic/sysdeps.cpp mlibc-w
  #endif // __MLIBC_LINUX_OPTION
  
  int sys_times(struct tms *tms, clock_t *out) {
-@@ -1896,6 +1946,14 @@
+@@ -2056,6 +2082,14 @@ int sys_readlink(const char *path, void *buf, size_t bufsiz, ssize_t *len) {
  	return 0;
  }
  

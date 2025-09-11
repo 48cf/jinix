@@ -3,17 +3,17 @@
 name=mlibc
 skip_pkg_check=yes
 version=0.0git
-revision=39
+revision=40
 git_url="https://github.com/managarm/mlibc.git"
-commit=1183d85f914f3c7cea56961edbf472b49b22d92b
+commit=dd816ada10a41597cb10ad82002b142258982e1f
 imagedeps="build-essential"
 hostdeps="gcc pkg-config"
 deps="linux-headers mlibc-headers"
 
 early_prepare() {
-    sed -i 's/^revision = .*/revision = 10c37771247545fe5afb4edc27edc39be47d9e56/g' subprojects/freestnd-c-hdrs.wrap
-    sed -i 's/^revision = .*/revision = 6703c46226d574b29cf262b1a50f4a5ace0d53d0/g' subprojects/freestnd-cxx-hdrs.wrap
-    sed -i 's/^revision = .*/revision = 5304639c1c9fd3713fd759453b0415b968dcaa06/g' subprojects/frigg.wrap
+    sed -i 's/^revision = .*/revision = d33711241b46ecb8f2ad33927fcefdcb3ac0162e/g' subprojects/freestnd-c-hdrs.wrap
+    sed -i 's/^revision = .*/revision = a6b351e0ab3e74e5789b01fa1447e4cd62373da7/g' subprojects/freestnd-cxx-hdrs.wrap
+    sed -i 's/^revision = .*/revision = f44b5e821c7d83fbe5189850045f262d544acd8b/g' subprojects/frigg.wrap
 
     meson subprojects download
 
