@@ -27,6 +27,7 @@ configure() {
         --enable-plugins \
         --enable-relro \
         --enable-threads \
+        --disable-gprofng \
         --disable-werror \
         --with-pic \
         --with-system-zlib
