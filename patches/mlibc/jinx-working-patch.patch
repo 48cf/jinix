@@ -1338,23 +1338,13 @@ index fec4bc5..753e643 100644
      - "VMIN"
      - "VTIME"
 diff --git mlibc-clean/scripts/rust-libc-header.rs mlibc-workdir/scripts/rust-libc-header.rs
-index 97c8d6c..cc73167 100644
+index 97c8d6c..a06b735 100644
 --- mlibc-clean/scripts/rust-libc-header.rs
 +++ mlibc-workdir/scripts/rust-libc-header.rs
-@@ -3,16 +3,71 @@
+@@ -3,16 +3,61 @@
  
  use crate::prelude::*;
  
-+cfg_if! {
-+    if #[cfg(doc)] {
-+        // Used in `linux::arch` to define ioctl constants.
-+        pub(crate) type Ioctl = c_int;
-+    } else {
-+        #[doc(hidden)]
-+        pub type Ioctl = c_int;
-+    }
-+}
-+
 +pub type __sc_word_t = c_long;
 +
 +extern "C" {
@@ -1418,7 +1408,7 @@ index 97c8d6c..cc73167 100644
  pub type Ioctl = c_ulong;
  pub type pthread_t = *mut c_void;
  
-@@ -24,85 +79,13 @@ pub type __s32 = c_int;
+@@ -24,85 +69,13 @@ pub type __s32 = c_int;
  pub type __u64 = c_ulonglong;
  pub type __s64 = c_longlong;
  
@@ -1511,7 +1501,7 @@ index 97c8d6c..cc73167 100644
  
  pub const PTHREAD_MUTEX_INITIALIZER: pthread_mutex_t = pthread_mutex_t {
      size: [0; 16],
-@@ -114,69 +97,83 @@ pub const PTHREAD_RWLOCK_INITIALIZER: pthread_rwlock_t = pthread_rwlock_t {
+@@ -114,69 +87,83 @@ pub const PTHREAD_RWLOCK_INITIALIZER: pthread_rwlock_t = pthread_rwlock_t {
      size: [0; 12],
  };
  
@@ -1647,7 +1637,7 @@ index 97c8d6c..cc73167 100644
      }
  
      pub unsafe fn si_addr(&self) -> *mut c_void {
-@@ -189,79 +186,384 @@ impl siginfo_t {
+@@ -189,79 +176,384 @@ impl siginfo_t {
          }
          (*(self as *const siginfo_t as *const siginfo_sigfault)).si_addr
      }

@@ -20,11 +20,24 @@ case "${JINX_ARCH}" in
         ;;
 esac
 
-CARGO_HOME="${JINX_CACHE_DIR}/cargo-home"
+CARGO_HOME="${build_dir}/cargo-home"
 
 if [ "${base_dir}/build-support/cargo-config.toml" -nt "${CARGO_HOME}/config.toml" ]; then
     mkdir -p "${CARGO_HOME}"
-    cp -rpv "${base_dir}/build-support/cargo-config.toml" "${CARGO_HOME}/config.toml"
+
+    make_temp
+    config_tmp="$tmp"
+
+        base_dir="${base_dir}" \
+        build_dir="${build_dir}" \
+        JINX_ARCH="${JINX_ARCH}" \
+    envsubst '${base_dir} ${build_dir} ${JINX_ARCH}' \
+        <"${base_dir}/build-support/cargo-config.toml" >"$config_tmp"
+
+    cat "$config_tmp"
+
+    touch -r "${base_dir}/build-support/cargo-config.toml" "$config_tmp"
+    mv -f "$config_tmp" "${CARGO_HOME}/config.toml"
 fi
 
 cargo_inject_patches() {

@@ -1,5 +1,7 @@
 #! /bin/sh
 
+_tools="rustc std cargo clippy rustfmt"
+
 name=rust
 from_source=rust
 revision=1
@@ -13,7 +15,7 @@ allow_network=yes
 
 configure() {
     cat <<EOF > config.toml
-change-id = 102579
+change-id = 142379
 
 [llvm]
 targets = "X86"
@@ -23,12 +25,6 @@ download-ci-llvm = false
 target = ["${JINX_ARCH}-unknown-linux-mlibc", "x86_64-unknown-linux-gnu"]
 build-dir = "${build_dir}/host-builds/rust"
 docs = false
-tools = [
-  "cargo",
-  "clippy",
-  "rustdoc",
-  "rustfmt",
-]
 
 [install]
 prefix = "${prefix}"
@@ -52,14 +48,14 @@ EOF
 }
 
 build() {
-        CARGO_HOME=./cargo-home \
+        CARGO_HOME="${build_dir}/host-builds/rust/cargo-home" \
         BOOTSTRAP_SKIP_TARGET_SANITY=1 \
-    python3 ${source_dir}/x.py build --stage 2 -j${parallelism}
+    python3 ${source_dir}/x.py build ${_tools} --stage 2 -j${parallelism}
 }
 
 package() {
-        CARGO_HOME=./cargo-home \
+        CARGO_HOME="${build_dir}/host-builds/rust/cargo-home" \
         BOOTSTRAP_SKIP_TARGET_SANITY=1 \
         DESTDIR="${dest_dir}" \
-    python3 ${source_dir}/x.py install -j${parallelism}
+    python3 ${source_dir}/x.py install ${_tools} -j${parallelism}
 }
