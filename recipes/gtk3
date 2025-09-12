@@ -9,8 +9,8 @@ git_url="https://gitlab.gnome.org/GNOME/gtk.git"
 commit=93f05958bd683cb573236bd2a4cede68160595ca
 imagedeps="build-essential patchelf libwayland-bin libgdk-pixbuf2.0-bin"
 hostdeps="gcc pkg-config gobject-introspection glib2 vala"
-# Missing: printing and colord
-deps="core-libs at-spi2-core cairo glib2 gdk-pixbuf iso-codes libx11 libxext libxcb libxcomposite libxrender libxrandr libxfixes libxdamage libxinerama libxslt pango fribidi libepoxy libxkbcommon fontconfig freetype2 libxi harfbuzz libxcursor gsettings-desktop-schemas dbus wayland-protocols sassc tinysparql libcloudproviders libavif libjxl webp-pixbuf-loader librsvg"
+# Missing: printing
+deps="core-libs at-spi2-core cairo colord glib2 gdk-pixbuf iso-codes libx11 libxext libxcb libxcomposite libxrender libxrandr libxfixes libxdamage libxinerama libxslt pango fribidi libepoxy libxkbcommon fontconfig freetype2 libxi harfbuzz libxcursor gsettings-desktop-schemas dbus wayland-protocols sassc tinysparql libcloudproviders libavif libjxl webp-pixbuf-loader librsvg"
 
 configure() {
     meson_configure \

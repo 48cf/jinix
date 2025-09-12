@@ -8,8 +8,8 @@ tarball_url="https://download.gnome.org/sources/gtk/4.18/gtk-${version}.tar.xz"
 tarball_blake2b="f911615ae563563c82e8b122bb5b0b1002e5b7933e473a9eee090114f91644fc2e738ddc72665d03556c099366715e8f884fdb0be71e89bd525e95f5456d8ab6"
 imagedeps="build-essential patchelf libwayland-bin libgdk-pixbuf2.0-bin glslc"
 hostdeps="gcc pkg-config gobject-introspection glib2 vala"
-# Missing: printing and colord
-deps="core-libs fribidi gdk-pixbuf graphene iso-codes libepoxy libxkbcommon pango wayland-protocols gstreamer-plugins-bad gstreamer-plugins-good hicolor-icon-theme librsvg libcloudproviders sassc tinysparql"
+# Missing: printing
+deps="core-libs colord fribidi gdk-pixbuf graphene iso-codes libepoxy libxkbcommon pango wayland-protocols gstreamer-plugins-bad gstreamer-plugins-good hicolor-icon-theme librsvg libcloudproviders sassc tinysparql"
 
 # TODO: Vulkan not configuring
 configure() {

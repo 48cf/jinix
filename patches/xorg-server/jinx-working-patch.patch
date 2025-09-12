@@ -1,0 +1,31 @@
+diff --git xorg-server-clean/configure xorg-server-workdir/configure
+index a20b08a..401b499 100755
+--- xorg-server-clean/configure
++++ xorg-server-workdir/configure
+@@ -30570,7 +30570,7 @@ printf "%s\n" "#define SHAPE 1" >>confdefs.h
+ 
+ 
+ if test "x$XKBPATH" = "xauto"; then
+-    XKBPATH=$(pkg-config --variable datadir xkbcomp || echo ${datadir})/X11/xkb
++    XKBPATH=$($PKG_CONFIG --variable datadir xkbcomp || echo ${datadir})/X11/xkb
+ fi
+ 
+ 
+@@ -30600,7 +30600,7 @@ fi
+ 
+ 
+ if test "x$XKB_BIN_DIRECTORY" = "xauto"; then
+-    XKB_BIN_DIRECTORY=$(pkg-config --variable bindir xkbcomp)
++    XKB_BIN_DIRECTORY=$($PKG_CONFIG --variable bindir xkbcomp)
+     if test -z $XKB_BIN_DIRECTORY; then
+         XKB_BIN_DIRECTORY="$bindir"
+     fi
+@@ -33762,7 +33764,7 @@ else
+ printf "%s\n" "yes" >&6; }
+ 
+ fi
+-		KHRONOS_SPEC_DIR=`pkg-config khronos-opengl-registry --variable=specdir`
++		KHRONOS_SPEC_DIR=`$PKG_CONFIG khronos-opengl-registry --variable=specdir`
+            fi
+ 
+ 	fi

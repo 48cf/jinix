@@ -7,7 +7,7 @@ tarball_url="https://download.gnome.org/sources/libnotify/0.8/libnotify-${versio
 tarball_blake2b="5598a3539deb9a08bdb03f4cad5efb1610f07c48fa6029657bcdbedb6a73966512fcc313d038a4f26c762fc0e26cb3e6c3aa9caa3e59f57fccf2f51adced6773"
 imagedeps="build-essential patchelf docbook-xsl-ns"
 hostdeps="gcc pkg-config glib2 gobject-introspection"
-deps="core-libs gtk3"
+deps="core-libs glib2 gtk3"
 
 configure() {
     meson_configure \

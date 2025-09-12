@@ -11,10 +11,6 @@ hostdeps="gcc pkg-config"
 deps="linux-headers mlibc-headers"
 
 early_prepare() {
-    sed -i 's/^revision = .*/revision = d33711241b46ecb8f2ad33927fcefdcb3ac0162e/g' subprojects/freestnd-c-hdrs.wrap
-    sed -i 's/^revision = .*/revision = a6b351e0ab3e74e5789b01fa1447e4cd62373da7/g' subprojects/freestnd-cxx-hdrs.wrap
-    sed -i 's/^revision = .*/revision = f44b5e821c7d83fbe5189850045f262d544acd8b/g' subprojects/frigg.wrap
-
     meson subprojects download
 
     curl -Lo libgcc-x86_64.a https://github.com/osdev0/libgcc-binaries/releases/download/2025-08-21/libgcc-x86_64.a
