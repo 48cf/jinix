@@ -93,7 +93,7 @@ $SUDO mkdir -p mount_dir/boot/EFI/BOOT
 $SUDO cp host-pkgs/limine/usr/local/share/limine/BOOTX64.EFI mount_dir/boot/EFI/BOOT/
 $SUDO cp host-pkgs/limine/usr/local/share/limine/BOOTIA32.EFI mount_dir/boot/EFI/BOOT/
 
-$SUDO sudo cp ./build-support/limine.conf mount_dir/boot/
+$SUDO sudo cp "${source_dir}/build-support/limine.conf" mount_dir/boot/
 
 sync
 $SUDO umount mount_dir/boot
