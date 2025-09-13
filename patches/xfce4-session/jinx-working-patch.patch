@@ -1,7 +1,88 @@
-diff -urN --no-dereference xfce4-session-clean/xfce4-session/meson.build xfce4-session-workdir/xfce4-session/meson.build
+diff --git xfce4-session-clean/meson.build xfce4-session-workdir/meson.build
+index 4464bc2..45b557e 100644
+--- xfce4-session-clean/meson.build
++++ xfce4-session-workdir/meson.build
+@@ -274,31 +274,31 @@ xfce_revision_h = vcs_tag(
+ )
+ 
+ if enable_x11
+-  i18n.merge_file(
+-    input: 'xfce.desktop.in',
+-    output: 'xfce.desktop',
+-    po_dir: 'po',
+-    type: 'desktop',
+-    install: true,
+-    install_dir: xsession_prefix / get_option('datadir') / 'xsessions',
+-  )
++  # i18n.merge_file(
++  #   input: 'xfce.desktop.in',
++  #   output: 'xfce.desktop',
++  #   po_dir: 'po',
++  #   type: 'desktop',
++  #   install: true,
++  #   install_dir: xsession_prefix / get_option('datadir') / 'xsessions',
++  # )
+ endif
+ 
+ if enable_wayland
+-  i18n.merge_file(
+-    input: 'xfce-wayland.desktop.in',
+-    output: 'xfce-wayland.desktop',
+-    po_dir: 'po',
+-    type: 'desktop',
+-    install: true,
+-    install_dir: wayland_session_prefix / get_option('datadir') / 'wayland-sessions',
+-  )
++  # i18n.merge_file(
++  #   input: 'xfce-wayland.desktop.in',
++  #   output: 'xfce-wayland.desktop',
++  #   po_dir: 'po',
++  #   type: 'desktop',
++  #   install: true,
++  #   install_dir: wayland_session_prefix / get_option('datadir') / 'wayland-sessions',
++  # )
+ endif
+ 
+ subdir('icons')
+ subdir('labwc')
+ subdir('libxfsm')
+-subdir('po')
++# subdir('po')
+ subdir('scripts')
+ subdir('settings')
+ subdir('xfce4-session')
+diff --git xfce4-session-clean/settings/meson.build xfce4-session-workdir/settings/meson.build
+index cd66e62..4d1b32e 100644
+--- xfce4-session-clean/settings/meson.build
++++ xfce4-session-workdir/settings/meson.build
+@@ -63,14 +63,14 @@ executable(
+   install_dir: get_option('prefix') / get_option('bindir'),
+ )
+ 
+-i18n.merge_file(
+-  input: 'xfce-session-settings.desktop.in',
+-  output: 'xfce-session-settings.desktop',
+-  po_dir: '..' / 'po',
+-  type: 'desktop',
+-  install: true,
+-  install_dir: get_option('prefix') / get_option('datadir') / 'applications',
+-)
++# i18n.merge_file(
++#   input: 'xfce-session-settings.desktop.in',
++#   output: 'xfce-session-settings.desktop',
++#   po_dir: '..' / 'po',
++#   type: 'desktop',
++#   install: true,
++#   install_dir: get_option('prefix') / get_option('datadir') / 'applications',
++# )
+ 
+ install_data(
+   'xfce4-session.xml',
+diff --git xfce4-session-clean/xfce4-session/meson.build xfce4-session-workdir/xfce4-session/meson.build
+index 56a297f..6d1830a 100644
 --- xfce4-session-clean/xfce4-session/meson.build
 +++ xfce4-session-workdir/xfce4-session/meson.build
-@@ -89,7 +89,7 @@
+@@ -89,7 +89,7 @@ session_sources += custom_target(
    'xfsm-chooser-icon.h',
    input: 'xfsm-chooser-icon.png',
    output: 'xfsm-chooser-icon.h',
@@ -10,7 +91,48 @@ diff -urN --no-dereference xfce4-session-clean/xfce4-session/meson.build xfce4-s
    capture: true,
  )
  
-diff -urN --no-dereference xfce4-session-clean/xfce4-session/xfsm-manager.c xfce4-session-workdir/xfce4-session/xfsm-manager.c
+@@ -123,23 +123,23 @@ executable(
+ )
+ 
+ if polkit.found()
+-  policy_in = configure_file(
+-    configuration: configuration_data({
+-      'HELPER_PATH_PREFIX': helper_path_prefix,
+-    }),
+-    input: 'org.xfce.session.policy.in.in',
+-    output: 'org.xfce.session.policy.in',
+-    install: false,
+-  ) 
++  # policy_in = configure_file(
++  #   configuration: configuration_data({
++  #     'HELPER_PATH_PREFIX': helper_path_prefix,
++  #   }),
++  #   input: 'org.xfce.session.policy.in.in',
++  #   output: 'org.xfce.session.policy.in',
++  #   install: false,
++  # ) 
+ 
+-  i18n.merge_file(
+-    input: policy_in,
+-    output: 'org.xfce.session.policy',
+-    po_dir: '..' / 'po',
+-    type: 'xml',
+-    install: true,
+-    install_dir: get_option('prefix') / get_option('datadir') / 'polkit-1' / 'actions',
+-  )
++  # i18n.merge_file(
++  #   input: policy_in,
++  #   output: 'org.xfce.session.policy',
++  #   po_dir: '..' / 'po',
++  #   type: 'xml',
++  #   install: true,
++  #   install_dir: get_option('prefix') / get_option('datadir') / 'polkit-1' / 'actions',
++  # )
+ endif
+ 
+ install_data(
+diff --git xfce4-session-clean/xfce4-session/xfsm-manager.c xfce4-session-workdir/xfce4-session/xfsm-manager.c
+index f3082ae..d574aa4 100644
 --- xfce4-session-clean/xfce4-session/xfsm-manager.c
 +++ xfce4-session-workdir/xfce4-session/xfsm-manager.c
 @@ -44,6 +44,7 @@
@@ -21,3 +143,29 @@ diff -urN --no-dereference xfce4-session-clean/xfce4-session/xfsm-manager.c xfce
  #include <gdk-pixbuf/gdk-pixdata.h>
  #include <gio/gio.h>
  #include <gtk/gtk.h>
+diff --git xfce4-session-clean/xfce4-session-logout/meson.build xfce4-session-workdir/xfce4-session-logout/meson.build
+index 80798e2..c26f22e 100644
+--- xfce4-session-clean/xfce4-session-logout/meson.build
++++ xfce4-session-workdir/xfce4-session-logout/meson.build
+@@ -20,13 +20,13 @@ executable(
+   install_dir: get_option('prefix') / get_option('bindir'),
+ )
+ 
+-i18n.merge_file(
+-  input: 'xfce4-session-logout.desktop.in',
+-  output: 'xfce4-session-logout.desktop',
+-  po_dir: '..' / 'po',
+-  type: 'desktop',
+-  install: true,
+-  install_dir: get_option('prefix') / get_option('datadir') / 'applications',
+-)
++# i18n.merge_file(
++#   input: 'xfce4-session-logout.desktop.in',
++#   output: 'xfce4-session-logout.desktop',
++#   po_dir: '..' / 'po',
++#   type: 'desktop',
++#   install: true,
++#   install_dir: get_option('prefix') / get_option('datadir') / 'applications',
++# )
+ 
+ install_man('xfce4-session-logout.1')
